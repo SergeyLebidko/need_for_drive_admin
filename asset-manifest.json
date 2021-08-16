@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/need_for_drive_admin/static/css/main.b5a5e006.chunk.css",
+    "main.js": "/need_for_drive_admin/static/js/main.954630bf.chunk.js",
+    "main.js.map": "/need_for_drive_admin/static/js/main.954630bf.chunk.js.map",
+    "runtime-main.js": "/need_for_drive_admin/static/js/runtime-main.fe2955cb.js",
+    "runtime-main.js.map": "/need_for_drive_admin/static/js/runtime-main.fe2955cb.js.map",
+    "static/js/2.97c8e80f.chunk.js": "/need_for_drive_admin/static/js/2.97c8e80f.chunk.js",
+    "static/js/2.97c8e80f.chunk.js.map": "/need_for_drive_admin/static/js/2.97c8e80f.chunk.js.map",
+    "index.html": "/need_for_drive_admin/index.html",
+    "static/css/main.b5a5e006.chunk.css.map": "/need_for_drive_admin/static/css/main.b5a5e006.chunk.css.map",
+    "static/js/2.97c8e80f.chunk.js.LICENSE.txt": "/need_for_drive_admin/static/js/2.97c8e80f.chunk.js.LICENSE.txt",
+    "static/media/index.scss": "/need_for_drive_admin/static/media/Roboto-Regular.a8d6ac03.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.fe2955cb.js",
+    "static/js/2.97c8e80f.chunk.js",
+    "static/css/main.b5a5e006.chunk.css",
+    "static/js/main.954630bf.chunk.js"
+  ]
+}
