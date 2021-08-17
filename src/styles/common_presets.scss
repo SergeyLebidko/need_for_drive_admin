@@ -1,0 +1,30 @@
+@import './vars';
+
+.text_field {
+  padding: 8px 15px;
+  outline: none;
+  border: 1px solid $gray-light;
+  border-radius: $small-radius;
+  font-size: 1em;
+}
+
+.button {
+  border: none;
+  border-radius: $small-radius;
+  color: $white;
+  cursor: pointer;
+  font-size: 1em;
+  padding: $step ($step * 5);
+}
+
+.button_blue {
+  background-color: $blue;
+
+  &:hover {
+    background-color: $blue-light;
+  }
+
+  &:active {
+    background-color: $blue-high-light;
+  }
+}

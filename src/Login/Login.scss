@@ -1,13 +1,14 @@
 @import '../styles/vars';
+@import '../styles/common_presets';
 
 .login {
-  padding: $step;
+  padding: $step * 2;
 
   &__logo_block {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: ($step * 20) auto 0;
+    margin: ($step * 18) auto 0;
   }
 
   &__logo_caption {
@@ -29,5 +30,30 @@
     margin-top: $step;
     margin-bottom: $step * 6;
     text-align: center;
+  }
+
+  &__post, &__password {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      margin-bottom: $step;
+    }
+  }
+
+  &__password {
+    margin-top: $step * 4;
+  }
+
+  &__control_block {
+    margin-top: $step * 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    a {
+      text-decoration: none;
+      color: $blue;
+    }
   }
 }
