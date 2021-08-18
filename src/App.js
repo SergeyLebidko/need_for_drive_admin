@@ -2,6 +2,7 @@ import React from 'react';
 import {HashRouter, Switch, Route, Redirect} from 'react-router-dom';
 import Login from './Login/Login';
 import Admin from './Admin/Admin';
+import NoMatch from './NoMatch/NoMatch';
 
 function App() {
     // TODO Для тестирования верстки сразу же переключаем пользователя на страницу логина. В будущем - пересмотреть поведение
@@ -13,6 +14,7 @@ function App() {
                 </Route>
                 <Route path="/login" component={Login}/>
                 <Route path="/admin" component={Admin}/>
+                <Route path="*" component={NoMatch}/>
             </Switch>
         </HashRouter>
     );

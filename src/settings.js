@@ -18,21 +18,21 @@ export const MENU_ITEMS = [
     {
         title: 'Элемент 3',
         iconComponent: <MenuItemIcon/>,
-        href: ''
+        href: 'element3'
     },
     {
         title: 'Элемент 4',
         iconComponent: <MenuItemIcon/>,
-        href: ''
+        href: 'element4'
     },
     {
         title: 'Элемент 5',
         iconComponent: <MenuItemIcon/>,
-        href: ''
+        href: 'element5'
     },
     {
         title: 'Элемент 6',
         iconComponent: <MenuItemIcon/>,
-        href: ''
+        href: 'element6'
     }
 ];
