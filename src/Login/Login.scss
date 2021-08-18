@@ -1,19 +1,13 @@
 @import '../styles/vars';
 @import '../styles/common_presets';
+@import '../common_components/BrandStamp/BrandStamp';
 
 .login {
   padding: $step * 2;
 
-  &__logo_block {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: ($step * 18) auto 0;
-  }
-
-  &__logo_caption {
-    font-size: 2em;
-    margin-left: $step * 2;
+  .brand_stamp {
+    margin: $step * 15 auto 0;
+    max-width: $step * 60;
   }
 
   &__form_block {

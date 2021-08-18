@@ -1,15 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {ReactComponent as Logo} from '../content/images/logo.svg';
+import BrandStamp, {LARGE_STAMP} from '../common_components/BrandStamp/BrandStamp';
 import './Login.scss';
 
 function Login(){
     return (
         <div className="login">
-            <header className="login__logo_block">
-                <Logo/>
-                <h1 className="login__logo_caption">Need for drive</h1>
-            </header>
+            <BrandStamp size={LARGE_STAMP}/>
             <main className="login__form_block">
                 <h1 className="login__form_caption">Вход</h1>
                 <div className="login__post">
