@@ -1,6 +1,7 @@
 @import '../styles/vars';
 @import '../styles/common_presets';
 @import '../common_components/BrandStamp/BrandStamp';
+@import '../common_components/TextField/TextField';
 
 .login {
   padding: $step * 2;
@@ -8,6 +9,10 @@
   .brand_stamp {
     margin: $step * 15 auto 0;
     max-width: $step * 60;
+  }
+
+  .text_field + .text_field {
+    margin-top: $step * 4;
   }
 
   &__form_block {
@@ -24,19 +29,6 @@
     margin-top: $step;
     margin-bottom: $step * 6;
     text-align: center;
-  }
-
-  &__post, &__password {
-    display: flex;
-    flex-direction: column;
-
-    label {
-      margin-bottom: $step;
-    }
-  }
-
-  &__password {
-    margin-top: $step * 4;
   }
 
   &__control_block {

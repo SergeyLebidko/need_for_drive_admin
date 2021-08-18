@@ -1,0 +1,36 @@
+@import '../../styles/vars';
+
+.text_field {
+  display: flex;
+  flex-direction: column;
+
+  &__caption {
+    margin-bottom: $step;
+  }
+
+  &__input_block {
+    position: relative;
+
+    input {
+      width: 100%;
+    }
+
+    svg {
+      width: 1.8em;
+      height: 1.8em;
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+
+      path {
+        fill: $gray;
+      }
+    }
+  }
+}
+
+.shifted_input {
+  padding-right: 2.5em;
+}
