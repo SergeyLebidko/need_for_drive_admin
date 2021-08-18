@@ -4,14 +4,12 @@ import AdminHeader from '../AdminHeader/AdminHeader';
 import AdminContent from '../AdminContent/AdminContent';
 import './Admin.scss';
 
-function Admin(){
+function Admin() {
     return (
         <>
             <Menu/>
-            <section className="admin__work_section">
-                <AdminHeader/>
-                <AdminContent/>
-            </section>
+            <AdminHeader/>
+            <AdminContent/>
         </>
     )
 }

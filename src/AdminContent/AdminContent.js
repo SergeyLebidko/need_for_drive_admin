@@ -3,7 +3,7 @@ import './AdminContent.scss';
 
 function AdminContent() {
     return (
-        <main>
+        <main className="admin_content">
             Содержимое страницы
         </main>
     )
