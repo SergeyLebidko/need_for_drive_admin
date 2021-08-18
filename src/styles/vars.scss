@@ -18,3 +18,12 @@ $small-radius: 4px;
 
 // Пресет теней
 $main-shadow: 0 1px 0 rgba(90, 97, 105, 0.11), 0 2px 4px rgba(90, 97, 105, 0.12), 0 5px 5px rgba(90, 97, 105, 0.06), 0 3.5px 35px rgba(90, 97, 105, 0.1);
+
+// Контрольные точки для медиазапросов
+$mobile-start: 320px;
+$mobile-end: 767px;
+
+$tablet-start: 768px;
+$tablet-end: 1023px;
+
+$desktop-start: 1024px;
