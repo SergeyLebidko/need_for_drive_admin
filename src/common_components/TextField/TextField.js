@@ -23,7 +23,7 @@ function TextField({caption, fieldType}) {
             <label className="text_field__caption">{caption}</label>
             <div className="text_field__input_block">
                 <input type={inputType} className={inputClasses}/>
-                {fieldType === PASSWORD ? ICON_SELECTOR[inputType] : ''}
+                {fieldType === PASSWORD && ICON_SELECTOR[inputType]}
             </div>
         </div>
     )
