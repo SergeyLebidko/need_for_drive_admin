@@ -1,11 +1,7 @@
 @import '../styles/vars';
 
-.menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: $step * 25;
+.admin_header {
+  height: $step * 8;
   background-color: $white;
   box-shadow: $main-shadow;
 }

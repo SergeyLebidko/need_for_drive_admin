@@ -4,9 +4,9 @@ import './Menu.scss';
 
 function Menu(){
     return (
-        <div className="menu">
+        <section className="menu">
             <BrandStamp size={SMALL_STAMP}/>
-        </div>
+        </section>
     )
 }
 
