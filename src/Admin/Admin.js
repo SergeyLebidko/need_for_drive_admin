@@ -1,10 +1,11 @@
 import React from 'react';
+import Menu from '../Menu/Menu';
 import './Admin.scss';
 
 function Admin(){
     return (
         <div>
-            Здесь будет панель администратора
+            <Menu/>
         </div>
     )
 }
