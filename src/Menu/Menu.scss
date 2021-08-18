@@ -8,4 +8,11 @@
   width: $step * 25;
   background-color: $white;
   box-shadow: $main-shadow;
+
+  &__header {
+    height: $step * 8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
