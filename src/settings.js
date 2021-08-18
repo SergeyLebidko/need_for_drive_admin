@@ -7,26 +7,32 @@ import {ReactComponent as MenuItemIcon} from './content/images/menu_item_icon.sv
 export const MENU_ITEMS = [
     {
         title: 'Заказы',
-        iconComponent: <OrderListIcon/>
+        iconComponent: <OrderListIcon/>,
+        href: 'orders'
     },
     {
         title: 'Автомобили',
-        iconComponent: <CarListIcon/>
+        iconComponent: <CarListIcon/>,
+        href: 'cars'
     },
     {
         title: 'Элемент 3',
-        iconComponent: <MenuItemIcon/>
+        iconComponent: <MenuItemIcon/>,
+        href: ''
     },
     {
         title: 'Элемент 4',
-        iconComponent: <MenuItemIcon/>
+        iconComponent: <MenuItemIcon/>,
+        href: ''
     },
     {
         title: 'Элемент 5',
-        iconComponent: <MenuItemIcon/>
+        iconComponent: <MenuItemIcon/>,
+        href: ''
     },
     {
         title: 'Элемент 6',
-        iconComponent: <MenuItemIcon/>
+        iconComponent: <MenuItemIcon/>,
+        href: ''
     }
 ];
