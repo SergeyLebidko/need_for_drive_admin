@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {ReactComponent as Show} from '../../content/images/show.svg';
 import {ReactComponent as Hide} from '../../content/images/hide.svg';
+import {getRandomString} from '../../utils/common_utils';
 import './TextField.scss';
 
 export const TEXT = 'text';
@@ -24,11 +25,19 @@ function TextField({label, fieldType, value, handleChangeValue, errorText}) {
         }
     );
 
+    const inputId = getRandomString();
+
     return (
         <div className="text_field">
-            <label className="text_field__label">{label}</label>
+            <label htmlFor={inputId} className="text_field__label">{label}</label>
             <div className="text_field__input_block">
-                <input type={inputType} className={inputClasses} value={value} onChange={handleChangeValue}/>
+                <input
+                    type={inputType}
+                    className={inputClasses}
+                    value={value}
+                    onChange={handleChangeValue}
+                    id={inputId}
+                />
                 {fieldType === PASSWORD && ICON_SELECTOR[inputType]}
                 {errorText && <span className="text_field__error_text">{errorText}</span>}
             </div>
