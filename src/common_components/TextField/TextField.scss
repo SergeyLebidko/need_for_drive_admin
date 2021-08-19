@@ -27,6 +27,10 @@
       path {
         fill: $gray;
       }
+
+      &:hover path {
+        fill: $blue;
+      }
     }
   }
 

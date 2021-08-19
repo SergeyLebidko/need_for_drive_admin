@@ -6,6 +6,8 @@
   padding-left: $step * 6;
   background-color: $white;
   box-shadow: $main-shadow;
+  display: flex;
+  align-items: center;
   transition: all 200ms;
 }
 

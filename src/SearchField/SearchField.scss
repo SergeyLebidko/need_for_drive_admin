@@ -1,0 +1,55 @@
+@import '../styles/vars';
+
+.search_field {
+  display: none;
+  align-items: center;
+  padding-left: $step * 2;
+
+  svg {
+    cursor: pointer;
+    transition: all 200ms;
+
+    path {
+      fill: $gray;
+    }
+
+    &:hover path {
+      fill: $blue;
+    }
+  }
+
+  svg:last-child {
+    transform: scale(0.7);
+  }
+
+  input {
+    padding: $step ($step * 2);
+    outline: none;
+    border: none;
+    font-size: 1em;
+  }
+}
+
+@media (min-width: $tablet-start) {
+  .search_field {
+    display: flex;
+  }
+}
+
+@media (min-width: $tablet-start) and (max-width: $tablet-end) {
+  .search_field {
+    svg {
+      width: 1.2em;
+      height: 1.2em;
+    }
+  }
+}
+
+@media (min-width: $desktop-start) {
+  .search_field {
+    svg {
+      width: 1.7em;
+      height: 1.7em;
+    }
+  }
+}
