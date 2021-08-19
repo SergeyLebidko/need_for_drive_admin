@@ -1,13 +1,10 @@
 import React from 'react';
 import './AdminContent.scss';
 
-// TODO Удалить. Нужен только для тестирования
-import NoMatch from "../NoMatch/NoMatch";
-
 function AdminContent() {
     return (
         <main className="admin_content">
-            <NoMatch/>
+            Здесь будет контент (страницы работы со списками и объектами)
         </main>
     )
 }
