@@ -8,7 +8,7 @@ import './TextField.scss';
 export const TEXT = 'text';
 export const PASSWORD = 'password';
 
-function TextField({caption, fieldType}) {
+function TextField({label, fieldType, value, handleChangeValue, errorText}) {
     let [inputType, setInputType] = useState(fieldType);
 
     const ICON_SELECTOR = {
@@ -16,22 +16,32 @@ function TextField({caption, fieldType}) {
         [PASSWORD]: <Show onClick={() => setInputType(TEXT)}/>
     }
 
-    const inputClasses = classNames('text_input', {'shifted_input': fieldType === PASSWORD});
+    const inputClasses = classNames(
+        'text_input',
+        {
+            'shifted_text_input': fieldType === PASSWORD,
+            'error_text_input': !!errorText
+        }
+    );
 
     return (
         <div className="text_field">
-            <label className="text_field__caption">{caption}</label>
+            <label className="text_field__label">{label}</label>
             <div className="text_field__input_block">
-                <input type={inputType} className={inputClasses}/>
+                <input type={inputType} className={inputClasses} value={value} onChange={handleChangeValue}/>
                 {fieldType === PASSWORD && ICON_SELECTOR[inputType]}
+                {errorText && <span className="text_field__error_text">{errorText}</span>}
             </div>
         </div>
     )
 }
 
 TextField.propTypes = {
-    caption: PropTypes.string,
-    fieldType: PropTypes.string
+    label: PropTypes.string,
+    fieldType: PropTypes.string,
+    value: PropTypes.string,
+    handleChangeValue: PropTypes.func,
+    errorText: PropTypes.string
 }
 
 export default TextField;
