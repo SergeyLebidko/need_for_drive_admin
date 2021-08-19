@@ -7,10 +7,12 @@
 
   svg {
     cursor: pointer;
-    transition: all 200ms;
+    width: 1.7em;
+    height: 1.7em;
 
     path {
       fill: $gray;
+      transition: all 200ms;
     }
 
     &:hover path {
@@ -22,7 +24,7 @@
     transform: scale(0.7);
   }
 
-  input {
+  &__search_value {
     padding: $step ($step * 2);
     outline: none;
     border: none;
@@ -33,23 +35,5 @@
 @media (min-width: $tablet-start) {
   .search_field {
     display: flex;
-  }
-}
-
-@media (min-width: $tablet-start) and (max-width: $tablet-end) {
-  .search_field {
-    svg {
-      width: 1.2em;
-      height: 1.2em;
-    }
-  }
-}
-
-@media (min-width: $desktop-start) {
-  .search_field {
-    svg {
-      width: 1.7em;
-      height: 1.7em;
-    }
   }
 }

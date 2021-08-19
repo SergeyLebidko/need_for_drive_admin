@@ -28,7 +28,13 @@ function SearchField() {
     return (
         <div className="search_field">
             <FindIcon onClick={handleIconClick}/>
-            <input placeholder="Поиск..." ref={inputField} value={inputValue} onChange={handleChangeInput}/>
+            <input
+                className="search_field__search_value"
+                placeholder="Поиск..."
+                ref={inputField}
+                value={inputValue}
+                onChange={handleChangeInput}
+            />
             {hasRemoveIcon && <RemoveIcon onClick={handleRemoveClick}/>}
         </div>
     );

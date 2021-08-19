@@ -13,8 +13,11 @@
   svg {
     width: 1em;
     height: 1em;
-    transition: all 200ms;
     cursor: pointer;
+
+    path {
+      transition: all 200ms;
+    }
 
     &:hover path {
       fill: $blue;
@@ -39,25 +42,7 @@
   }
 }
 
-@media (min-width: $tablet-start) and (max-width: $tablet-end) {
-  .notification {
-    padding-left: $step * 3;
-    padding-right: $step * 3;
-
-    svg {
-      width: 1.3em;
-      height: 1.3em;
-    }
-
-    &__count {
-      font-size: 0.7em;
-      width: 1.7em;
-      height: 1.7em;
-    }
-  }
-}
-
-@media (min-width: $desktop-start) {
+@media (min-width: $tablet-start) {
   .notification {
     padding-left: $step * 3;
     padding-right: $step * 3;
