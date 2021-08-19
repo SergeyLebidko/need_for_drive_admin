@@ -21,17 +21,17 @@ export const MENU_ITEMS = [
         href: 'element3'
     },
     {
-        title: 'Статусы заказов',
+        title: 'Элемент 4',
         iconComponent: <MenuItemIcon/>,
         href: 'element4'
     },
     {
-        title: 'Местоположения',
+        title: 'Элемент 5',
         iconComponent: <MenuItemIcon/>,
         href: 'element5'
     },
     {
-        title: 'Категории машин',
+        title: 'Элемент 6',
         iconComponent: <MenuItemIcon/>,
         href: 'element6'
     }

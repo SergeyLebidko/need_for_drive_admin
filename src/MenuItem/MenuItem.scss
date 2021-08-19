@@ -1,7 +1,6 @@
 @import '../styles/vars';
 
 .menu_item {
-  position: relative;
   border-bottom: 1px solid $menu-separator;
 
   a {
@@ -11,12 +10,11 @@
     padding: ($step * 2) 0 ($step * 2) ($step * 4);
     text-decoration: none;
     transition: all 200ms;
-    text-indent: 0;
 
     svg {
       margin-right: $step * 2;
-      width: 1em;
-      height: 1em;
+      width: 0.8em;
+      height: 0.8em;
 
       path {
         transition: all 200ms;
@@ -36,7 +34,6 @@
 .active_link {
   background-color: $menu-selection-background;
   color: $blue;
-  text-indent: -4px;
 
   svg path {
     fill: $blue;
