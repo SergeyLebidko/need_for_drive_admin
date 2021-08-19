@@ -11,19 +11,8 @@
 
 @media (min-width: $tablet-start) {
   .admin_header {
+    margin-left: $step * 28;
     height: $step * 8;
     padding-left: 0;
-  }
-}
-
-@media (min-width: $tablet-start) and (max-width: $tablet-end) {
-  .admin_header {
-    margin-left: $step * 25;
-  }
-}
-
-@media (min-width: $desktop-start) {
-  .admin_header {
-    margin-left: $step * 30;
   }
 }

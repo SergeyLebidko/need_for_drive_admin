@@ -43,6 +43,7 @@
   .menu {
     height: 100%;
     box-shadow: $main-shadow;
+    width: $step * 28;
 
     .menu_button {
       display: none;
@@ -56,17 +57,5 @@
       height: $step * 8;
       padding-left: $step * 4;
     }
-  }
-}
-
-@media (min-width: $tablet-start) and (max-width: $tablet-end) {
-  .menu {
-    width: $step * 25;
-  }
-}
-
-@media (min-width: $desktop-start) {
-  .menu {
-    width: $step * 30;
   }
 }
