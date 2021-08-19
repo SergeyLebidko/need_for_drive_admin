@@ -1,4 +1,5 @@
 @import '../styles/vars';
+@import '../Notification/Notification';
 
 .admin_header {
   height: $step * 6;
@@ -9,6 +10,11 @@
   display: flex;
   align-items: center;
   transition: all 200ms;
+
+  .notification {
+    align-self: stretch;
+    margin-left: auto;
+  }
 }
 
 @media (min-width: $tablet-start) {
