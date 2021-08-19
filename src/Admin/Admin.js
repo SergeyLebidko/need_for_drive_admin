@@ -5,7 +5,6 @@ import AdminContent from '../AdminContent/AdminContent';
 import {useDispatch} from 'react-redux';
 import {MENU_ITEMS} from '../settings';
 import {setMenuItems} from '../store/actionCreators';
-import './Admin.scss';
 
 function Admin() {
     const dispatch = useDispatch();
