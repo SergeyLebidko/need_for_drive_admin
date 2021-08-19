@@ -1,15 +1,24 @@
 @import '../styles/vars';
+@import '../MenuButton/MenuButton';
+@import '../common_components/BrandStamp/BrandStamp';
 
 .menu {
   position: fixed;
   top: 0;
   left: 0;
-  height: $step * 6;
-  width: $step * 6;
   background-color: $white;
   box-shadow: none;
   overflow: hidden;
-  transition: all 300ms;
+  transition: all 200ms;
+  z-index: 100;
+
+  .menu_button {
+    display: flex;
+  }
+
+  .brand_stamp {
+    display: none;
+  }
 
   &__header {
     height: $step * 8;
@@ -19,18 +28,39 @@
   }
 }
 
-@media (min-width: $tablet-start) and (max-width: $tablet-end) {
+.closed_menu {
+  height: $step * 6;
+  width: $step * 6;
+}
+
+.opened_menu {
+  height: 100%;
+  width: 100%;
+}
+
+@media (min-width: $tablet-start) {
   .menu {
     height: 100%;
-    width: $step * 25;
     box-shadow: $main-shadow;
+
+    .menu_button {
+      display: none;
+    }
+
+    .brand_stamp {
+      display: flex;
+    }
+  }
+}
+
+@media (min-width: $tablet-start) and (max-width: $tablet-end) {
+  .menu {
+    width: $step * 25;
   }
 }
 
 @media (min-width: $desktop-start) {
   .menu {
-    height: 100%;
     width: $step * 30;
-    box-shadow: $main-shadow;
   }
 }
