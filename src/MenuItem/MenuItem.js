@@ -6,9 +6,10 @@ import './MenuItem.scss';
 function MenuItem({item}) {
     const {title, iconComponent, href} = item;
     return (
-        <li>
-            {iconComponent}
-            <NavLink to={`/admin/${href}`}>{title}</NavLink>
+        <li className="menu_item">
+            <NavLink to={`/admin/${href}`} activeClassName="active_link">
+                {iconComponent}{title}
+            </NavLink>
         </li>
     )
 }

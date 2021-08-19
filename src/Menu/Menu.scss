@@ -23,8 +23,9 @@
   &__header {
     height: $step * 6;
     display: flex;
-    justify-content: flex-start;
     align-items: center;
+    border-bottom: none;
+    padding-left: 0;
   }
 }
 
@@ -53,7 +54,7 @@
 
     &__header {
       height: $step * 8;
-      justify-content: center;
+      padding-left: $step * 4;
     }
   }
 }

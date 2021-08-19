@@ -7,7 +7,7 @@ import './MenuItems.scss';
 function MenuItems() {
     const items = useSelector(getMenuItems);
     return (
-        <ul>
+        <ul className="menu_items">
             {items.map(item => <MenuItem key={item.href} item={item}/>)}
         </ul>
     )

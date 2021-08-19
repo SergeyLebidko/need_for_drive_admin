@@ -1,1 +1,54 @@
 @import '../styles/vars';
+
+.menu_item {
+  position: relative;
+  border-bottom: 1px solid $menu-separator;
+
+  a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: ($step * 2) 0 ($step * 2) ($step * 4);
+    text-decoration: none;
+    transition: all 200ms;
+    text-indent: 0;
+
+    svg {
+      margin-right: $step * 2;
+      width: 1em;
+      height: 1em;
+
+      path {
+        transition: all 200ms;
+      }
+    }
+
+    &:hover {
+      color: $blue;
+
+      svg path {
+        fill: $blue;
+      }
+    }
+  }
+}
+
+.active_link {
+  background-color: $menu-selection-background;
+  color: $blue;
+  text-indent: -4px;
+
+  svg path {
+    fill: $blue;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: $blue;
+  }
+}
