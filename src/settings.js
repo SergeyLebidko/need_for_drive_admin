@@ -34,5 +34,20 @@ export const MENU_ITEMS = [
         title: 'Элемент 6',
         iconComponent: <MenuItemIcon/>,
         href: 'element6'
+    },
+    {
+        title: 'Элемент 7',
+        iconComponent: <MenuItemIcon/>,
+        href: 'element7'
+    },
+    {
+        title: 'Элемент 8',
+        iconComponent: <MenuItemIcon/>,
+        href: 'element8'
+    },
+    {
+        title: 'Элемент 9',
+        iconComponent: <MenuItemIcon/>,
+        href: 'element9'
     }
 ];
