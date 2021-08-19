@@ -1,5 +1,6 @@
 @import '../styles/vars';
 @import '../Notification/Notification';
+@import '../UserPane/UserPane';
 
 .admin_header {
   height: $step * 6;
@@ -14,6 +15,10 @@
   .notification {
     align-self: stretch;
     margin-left: auto;
+  }
+
+  .user_pane {
+    align-self: stretch;
   }
 }
 
