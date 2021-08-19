@@ -2,5 +2,18 @@
 
 .admin_content {
   position: relative;
-  margin-left: $step * 30;
+  margin-left: $step * 6;
+  transition: all 300ms;
+}
+
+@media (min-width: $tablet-start) and (max-width: $tablet-end) {
+  .admin_content {
+    margin-left: $step * 25;
+  }
+}
+
+@media (min-width: $desktop-start) {
+  .admin_content {
+    margin-left: $step * 30;
+  }
 }
