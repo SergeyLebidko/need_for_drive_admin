@@ -2,5 +2,47 @@
 
 .menu_button {
   cursor: pointer;
+  width: $step * 6;
+  height: $step * 6;
+  position: relative;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 200ms;
+  }
+}
+
+.button_closed_menu {
+  img:nth-child(1) {
+    transform: scale(0.6) rotate(0);
+  }
+
+  img:nth-child(2) {
+    transform: scale(0.6) rotate(0);
+  }
+
+  img:nth-child(3) {
+    transform: scale(0.6) rotate(0);
+    opacity: 1;
+  }
+}
+
+.button_opened_menu {
+  img:nth-child(1) {
+    transform: scale(0.6) rotate(45deg);
+  }
+
+  img:nth-child(2) {
+    transform: scale(0.6) rotate(-45deg);
+  }
+
+  img:nth-child(3) {
+    transform: scale(0.6) rotate(45deg);
+    opacity: 0;
+  }
 }
 

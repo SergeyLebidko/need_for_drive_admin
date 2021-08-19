@@ -15,7 +15,7 @@ function Menu() {
     return (
         <nav className={menuClasses}>
             <header className="menu__header">
-                <MenuButton handleClick={handleMenuButtonClick}/>
+                <MenuButton hasOpened={hasOpened} handleClick={handleMenuButtonClick}/>
                 <BrandStamp size={SMALL_STAMP}/>
             </header>
             <MenuItems/>

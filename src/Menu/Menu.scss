@@ -21,9 +21,9 @@
   }
 
   &__header {
-    height: $step * 8;
+    height: $step * 6;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
   }
 }
@@ -49,6 +49,11 @@
 
     .brand_stamp {
       display: flex;
+    }
+
+    &__header {
+      height: $step * 8;
+      justify-content: center;
     }
   }
 }
