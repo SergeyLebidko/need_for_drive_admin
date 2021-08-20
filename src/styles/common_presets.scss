@@ -38,3 +38,15 @@
     background-color: $blue-high-light;
   }
 }
+
+.button_green {
+  background-color: $green;
+
+  &:hover {
+    background-color: $green-light;
+  }
+
+  &:active {
+    background-color: $green-high-light;
+  }
+}

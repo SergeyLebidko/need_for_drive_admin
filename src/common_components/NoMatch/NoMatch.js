@@ -1,13 +1,17 @@
 import React from 'react';
-import {useLocation} from 'react-router-dom';
+import {useLocation, useHistory} from 'react-router-dom';
 import './NoMatch.scss';
 
 function NoMatch() {
     const location = useLocation();
+    const history = useHistory();
 
     return (
         <div className="no_match">
-            Страница {location.pathname} не найдена
+            <div className="no_match__content">
+                <h1 className="no_match__caption">Страница {location.pathname} не найдена...</h1>
+                <button className="button button_green" onClick={() => history.goBack()}>Назад</button>
+            </div>
         </div>
     )
 }
