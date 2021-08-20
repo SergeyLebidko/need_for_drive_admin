@@ -2,7 +2,7 @@ import React from 'react';
 import {HashRouter, Switch, Route, Redirect} from 'react-router-dom';
 import Login from './Login/Login';
 import Admin from './Admin/Admin';
-import NoMatch from './NoMatch/NoMatch';
+import NoMatch from './common_components/NoMatch/NoMatch';
 
 function App() {
     // TODO Для тестирования верстки сразу же переключаем пользователя на страницу логина. В будущем - пересмотреть поведение

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ReactComponent as NotificationIcon} from '../content/images/notification.svg';
+import {ReactComponent as NotificationIcon} from '../../../content/images/notification.svg';
 import './Notification.scss';
 
 function Notification() {

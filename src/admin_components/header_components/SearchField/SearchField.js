@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react';
-import {ReactComponent as FindIcon} from '../content/images/find.svg';
-import {ReactComponent as RemoveIcon} from '../content/images/remove.svg';
+import {ReactComponent as FindIcon} from '../../../content/images/find.svg';
+import {ReactComponent as RemoveIcon} from '../../../content/images/remove.svg';
 import './SearchField.scss'
 
 function SearchField() {

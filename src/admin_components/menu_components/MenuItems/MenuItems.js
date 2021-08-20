@@ -1,7 +1,7 @@
 import React from 'react';
 import MenuItem from '../MenuItem/MenuItem';
 import {useSelector} from 'react-redux';
-import {getMenuItems} from '../store/selectors';
+import {getMenuItems} from '../../../store/selectors';
 import './MenuItems.scss';
 
 function MenuItems() {

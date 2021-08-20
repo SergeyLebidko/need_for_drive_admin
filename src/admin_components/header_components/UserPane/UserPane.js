@@ -1,8 +1,8 @@
 import React, {useState, useRef} from 'react';
 import classNames from 'classnames';
 import {Link} from 'react-router-dom';
-import {ReactComponent as DownArrow} from '../content/images/down.svg';
-import userPicture from '../content/images/user.jpeg';
+import {ReactComponent as DownArrow} from '../../../content/images/down.svg';
+import userPicture from '../../../content/images/user.jpeg';
 import './UserPane.scss';
 
 function UserPane() {

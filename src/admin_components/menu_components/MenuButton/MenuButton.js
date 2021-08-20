@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import oneLine from '../content/images/one_line.svg';
-import twoLines from '../content/images/two_lines.svg';
+import oneLine from '../../../content/images/one_line.svg';
+import twoLines from '../../../content/images/two_lines.svg';
 import './MenuButton.scss';
 
 function MenuButton({hasOpened, handleClick}) {

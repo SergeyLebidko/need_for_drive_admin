@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import classNames from 'classnames';
 import MenuItems from '../MenuItems/MenuItems';
-import BrandStamp, {SMALL_STAMP} from '../common_components/BrandStamp/BrandStamp';
+import BrandStamp, {SMALL_STAMP} from '../../../common_components/BrandStamp/BrandStamp';
 import MenuButton from '../MenuButton/MenuButton';
 import './Menu.scss';
 
