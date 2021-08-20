@@ -1,2 +1,0 @@
-(this.webpackJsonpneed_for_drive_admin=this.webpackJsonpneed_for_drive_admin||[]).push([[0],{10:function(e,n,r){"use strict";r.r(n);r(0);var d=r(3),i=r.n(d),t=r(1);var o=function(){return Object(t.jsx)("div",{children:"\u0417\u0434\u0435\u0441\u044c \u0431\u0443\u0434\u0435\u0442 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435 Need for drive admin"})};r(9);i.a.render(Object(t.jsx)(o,{}),document.getElementById("root"))},9:function(e,n,r){}},[[10,1,2]]]);
-//# sourceMappingURL=main.954630bf.chunk.js.map
