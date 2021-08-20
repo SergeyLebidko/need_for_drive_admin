@@ -13,6 +13,11 @@
     object-fit: cover;
     border-radius: 50%;
     margin-right: $step * 2;
+    cursor: pointer;
+  }
+
+  &__name {
+    cursor: pointer;
   }
 
   svg {

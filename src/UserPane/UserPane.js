@@ -9,7 +9,7 @@ function UserPane() {
     let [hasPopup, setHasPopup] = useState(false);
     let popupTimer = useRef(null);
 
-    const handleArrowClick = () => setHasPopup(oldVal => !oldVal);
+    const handleElementClick = () => setHasPopup(oldVal => !oldVal);
 
     const handlePaneLeave = () => {
         if (!hasPopup) return;
@@ -22,9 +22,9 @@ function UserPane() {
 
     return (
         <div className="user_pane" onMouseOver={handlePaneOver} onMouseLeave={handlePaneLeave}>
-            <img src={userPicture} className="user_pane__photo" alt="Пользователь"/>
-            <span>Admin</span>
-            <DownArrow onClick={handleArrowClick}/>
+            <img src={userPicture} className="user_pane__photo" alt="Пользователь" onClick={handleElementClick}/>
+            <span className="user_pane__name" onClick={handleElementClick}>Admin</span>
+            <DownArrow onClick={handleElementClick}/>
             <div className={popupClasses}>
                 <Link to="/">Выход</Link>
             </div>
