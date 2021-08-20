@@ -12,6 +12,8 @@ function Admin() {
         dispatch(setMenuItems(MENU_ITEMS));
     }, [dispatch]);
 
+    // TODO Добавить проверку наличия учетных данных при монтировании компонента
+
     return (
         <>
             <Menu/>
