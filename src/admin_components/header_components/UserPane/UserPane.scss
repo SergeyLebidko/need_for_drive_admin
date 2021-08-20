@@ -37,15 +37,15 @@
   }
 
   &__popup {
+    display: none;
     position: absolute;
     left: 0;
     top: calc(100% + 5px);
     width: 100%;
     background-color: $white;
     cursor: pointer;
-    display: none;
-    transition: all 2000ms;
     box-shadow: $main-shadow;
+    transition: all 2000ms;
     z-index: 10;
 
     a {
