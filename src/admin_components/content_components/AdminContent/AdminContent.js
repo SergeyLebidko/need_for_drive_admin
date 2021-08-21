@@ -7,9 +7,11 @@ import './AdminContent.scss';
 function AdminContent() {
     const match = useRouteMatch();
 
+    // Учитываем, что если не выбран ни один пункт меню, то внутри области контента не должен отображаться ни один компонент
     return (
         <main className="admin_content">
             <Switch>
+                <Route exact path={match.path} component={null}/>
                 <Route path={`${match.path}/orders`} component={OrderList}/>
                 <Route path="*" component={NoMatch}/>
             </Switch>
