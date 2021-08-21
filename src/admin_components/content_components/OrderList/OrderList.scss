@@ -6,4 +6,19 @@
   left: 0;
   width: 100%;
   height: 100%;
+  overflow: auto;
+  padding: $step;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $gray-light;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: $gray;
+  }
 }
