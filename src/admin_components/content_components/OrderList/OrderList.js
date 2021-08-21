@@ -38,7 +38,7 @@ function OrderList() {
                         :
                         <>
                             <h1 className="order_list__caption">Заказы</h1>
-                            <div>
+                            <div className="order_list__content">
                                 <div>
                                     Здесь будут фильтры
                                 </div>
