@@ -1,5 +1,44 @@
 @import '../../../styles/vars';
 
 .admin_footer {
+  background-color: $white;
+  box-shadow: $main-shadow;
+  height: $step * 6;
+  padding: 0 $step;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  transition: all 200ms;
 
+  a {
+    text-decoration: none;
+    color: $blue;
+    font-size: 0.7em;
+  }
+
+  a + a {
+    margin-left: $step;
+  }
+
+  span {
+    margin-left: auto;
+    color: $gray;
+    font-weight: bold;
+    font-size: 0.7em;
+  }
+}
+
+@media (min-width: $tablet-start) {
+  .admin_footer {
+    padding: 0 $step * 2;
+    height: $step * 8;
+
+    a, span {
+      font-size: 1em;
+    }
+
+    a + a {
+      margin-left: $step * 2;
+    }
+  }
 }

@@ -1,10 +1,13 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import './AdminFooter.scss';
 
 function AdminFooter(){
     return (
         <footer className="admin_footer">
-            Нижняя часть страницы
+            <Link to="/admin">Главная страница</Link>
+            <a href="https://hproger.ru/need_for_drive/">Сервис</a>
+            <span>Copyright	&#169; 2021 Simbirsoft</span>
         </footer>
     );
 }
