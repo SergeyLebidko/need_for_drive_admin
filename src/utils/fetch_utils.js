@@ -4,6 +4,10 @@ import {DEFAULT_REQUEST_HEADERS, ORDER_URL} from '../urls';
 async function executeFetch(url, options = {}) {
     let {headers} = options;
     headers = headers ? {...headers, ...DEFAULT_REQUEST_HEADERS} : DEFAULT_REQUEST_HEADERS;
+
+    // TODO При реализации авторизации создать код подстановки токена пользователя. Сейчас использую временный токен из Insomnia
+    headers = {...headers, 'Authorization': 'Bearer 2bbd3778ab116f192d9a5c0c02cd47e433159393'};
+
     const _options = {...options, headers};
 
     let response;

@@ -26,9 +26,12 @@ export function setFrame(frame) {
 
 // Создатель действия для загрузки списка заказов
 export function loadOrderList(page) {
-    return async dispatch => {
+    return async (dispatch, getState) => {
         const _page = getCorrectPage(page);
         const {count, data} = await fetchOrderList(_page);
         dispatch(setFrame({count, data, page: _page}));
+
+        // TODO Тестовый вывод. Удалить
+        console.log('Загружено', getState().frame);
     }
 }
