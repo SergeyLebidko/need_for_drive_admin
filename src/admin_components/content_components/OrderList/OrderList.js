@@ -1,10 +1,11 @@
 import React from 'react';
+import Preloader from '../../../common_components/Preloader/Preloader';
 import './OrderList.scss';
 
-function OrderList(){
+function OrderList() {
     return (
         <div>
-            Здесь будет список заказов
+            <Preloader/>
         </div>
     );
 }
