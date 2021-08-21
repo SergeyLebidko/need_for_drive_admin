@@ -4,7 +4,6 @@
 
 .admin_header {
   height: $step * 6;
-  margin-left: 0;
   padding-left: $step * 6;
   background-color: $white;
   box-shadow: $main-shadow;
@@ -24,7 +23,6 @@
 
 @media (min-width: $tablet-start) {
   .admin_header {
-    margin-left: $step * 28;
     height: $step * 8;
     padding-left: 0;
   }
