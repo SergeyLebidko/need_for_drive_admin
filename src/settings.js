@@ -52,5 +52,10 @@ export const MENU_ITEMS = [
         title: 'Элемент 9',
         iconComponent: <MenuItemIcon/>,
         href: 'element9'
+    },
+    {
+        title: 'Пример ошибки',
+        iconComponent: <MenuItemIcon/>,
+        href: 'error'
     }
 ];
