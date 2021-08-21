@@ -2,7 +2,7 @@
 @import '../admin_components/content_components/AdminContent/AdminContent';
 
 .work_section {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
@@ -16,7 +16,7 @@
   }
 }
 
-@media (min-width: $tablet-start) {
+@media (min-width: $desktop-start) {
   .work_section {
     left: $step * 28;
   }

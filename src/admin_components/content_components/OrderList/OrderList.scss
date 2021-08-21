@@ -21,4 +21,20 @@
   &:hover::-webkit-scrollbar-thumb {
     background-color: $gray;
   }
+
+  &__caption {
+    font-size: 1.5em;
+    margin-bottom: $step;
+  }
+}
+
+@media (min-width: $tablet-start) {
+  .order_list {
+    padding: $step * 4;
+
+    &__caption {
+      font-size: 2.5em;
+      margin-bottom: $step * 4;
+    }
+  }
 }

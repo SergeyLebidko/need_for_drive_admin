@@ -12,7 +12,9 @@ function OrderList() {
     let [done, setDone] = useState(false);
     let [error, setError] = useState(null);
 
-    const {data: items} = useSelector(getFrame);
+    const frame = useSelector(getFrame);
+    let items;
+    if (frame) items = frame.data;
 
     const location = useLocation();
     const dispatch = useDispatch();
@@ -29,13 +31,13 @@ function OrderList() {
     }, []);
 
     return (
-        <div>
+        <div className="order_list">
             {done ?
                 (error ?
                         <ErrorPane error={error}/>
                         :
                         <>
-                            <h1>Заказы</h1>
+                            <h1 className="order_list__caption">Заказы</h1>
                             <div>
                                 <div>
                                     Здесь будут фильтры
