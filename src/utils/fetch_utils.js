@@ -20,13 +20,6 @@ async function executeFetch(url, options = {}) {
     return await response.json();
 }
 
-function createFullUrl(baseUrl, filters) {
-    let url = `${baseUrl}/?limit=${LIMIT}`;
-    const {page} = filters;
-    url += `&page=${page}`
-    return url;
-}
-
-export async function fetchOrderList(filters = {}) {
-    return await executeFetch(createFullUrl(ORDER_URL, filters));
+export async function fetchOrderList(page) {
+    return await executeFetch(`${ORDER_URL}/?limit=${LIMIT}&page=${page}`);
 }

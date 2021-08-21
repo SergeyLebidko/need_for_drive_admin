@@ -28,7 +28,7 @@ export function setFrame(frame) {
 export function loadOrderList(page) {
     return async dispatch => {
         const _page = getCorrectPage(page);
-        const {count, data} = await fetchOrderList();
+        const {count, data} = await fetchOrderList(_page);
         dispatch(setFrame({count, data, page: _page}));
     }
 }
