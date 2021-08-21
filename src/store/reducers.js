@@ -8,3 +8,12 @@ export function menuItems(state = [], action) {
             return state;
     }
 }
+
+export function frame(state = null, action) {
+    switch (action.type) {
+        case act.SET_FRAME:
+            return action.frame;
+        default:
+            return state;
+    }
+}

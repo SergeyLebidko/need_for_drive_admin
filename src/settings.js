@@ -3,6 +3,9 @@ import {ReactComponent as CarListIcon} from './content/images/car_list_icon.svg'
 import {ReactComponent as OrderListIcon} from './content/images/order_list_icon.svg';
 import {ReactComponent as MenuItemIcon} from './content/images/menu_item_icon.svg';
 
+// Размер страницы данных
+export const LIMIT = 10;
+
 // TODO При реализации функциональности дополнить список пунктами меню для переходов на уже реализованные компоненты
 export const MENU_ITEMS = [
     {
