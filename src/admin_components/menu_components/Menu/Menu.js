@@ -11,6 +11,7 @@ function Menu() {
     const menuClasses = classNames('menu', {'opened_menu': hasOpened, 'closed_menu': !hasOpened});
 
     const handleMenuButtonClick = () => setHasOpened(oldVal => !oldVal);
+    const handleMenuItemClick = () => setHasOpened(false);
 
     return (
         <nav className={menuClasses}>
@@ -18,7 +19,7 @@ function Menu() {
                 <MenuButton hasOpened={hasOpened} handleClick={handleMenuButtonClick}/>
                 <BrandStamp size={SMALL_STAMP}/>
             </header>
-            <MenuItems/>
+            <MenuItems handleMenuItemClick={handleMenuItemClick}/>
         </nav>
     )
 }
