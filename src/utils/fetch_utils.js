@@ -14,16 +14,18 @@ async function executeFetch(url, options = {}) {
     try {
         response = await fetch(url, _options);
     } catch (err) {
-        return Promise.reject({httpStatus: '', httpText: err.message})
+        console.error({httpStatus: 0, httpText: err.message});
+        return Promise.reject({httpStatus: 0, httpText: err.message})
     }
 
     if (!response.ok) {
         const text = await response.text();
+        console.error({httpStatus: response.status, httpText: text});
         return Promise.reject({httpStatus: response.status, httpText: text});
     }
     return await response.json();
 }
 
 export async function fetchOrderList(page) {
-    return await executeFetch(`${ORDER_URL}/?limit=${LIMIT}&page=${page}`);
+    return await executeFetch(`${ORDER_URL}limit=${LIMIT}&page=${page}`);
 }
