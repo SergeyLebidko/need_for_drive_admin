@@ -1,5 +1,5 @@
 import {LIMIT} from '../settings';
-import {DEFAULT_REQUEST_HEADERS, ORDER_URL, STATUS_LIST_URL} from '../urls';
+import {DEFAULT_REQUEST_HEADERS, ORDER_URL, STATUS_LIST_URL, CAR_LIST_URL, CITY_LIST_URL} from '../urls';
 
 async function executeFetch(url, options = {}) {
     let {headers} = options;
@@ -30,4 +30,12 @@ export async function fetchOrderList(page) {
 
 export async function fetchStatusList() {
     return await executeFetch(STATUS_LIST_URL);
+}
+
+export async function fetchCarList() {
+    return await executeFetch(CAR_LIST_URL);
+}
+
+export async function fetchCityList() {
+    return await executeFetch(CITY_LIST_URL);
 }

@@ -1,6 +1,6 @@
 import * as act from './actions';
-import {fetchOrderList, fetchStatusList} from '../utils/fetch_utils';
-import {STATUS_LIST_CATALOG} from '../settings';
+import {fetchOrderList, fetchStatusList, fetchCarList, fetchCityList} from '../utils/fetch_utils';
+import {STATUS_LIST_CATALOG, CAR_LIST_CATALOG, CITY_LIST_CATALOG} from '../settings';
 
 // Функция возвращает корректный номер страницы
 function getCorrectPage(page) {
@@ -45,5 +45,13 @@ export function loadOrderList(page) {
         // Загружаем справочник со статусами заказов
         const statusList = await fetchStatusList();
         dispatch(setCatalog(STATUS_LIST_CATALOG, statusList.data));
+
+        // Загружаем список авто (как справочник моделей)
+        const carList = await fetchCarList();
+        dispatch(setCatalog(CAR_LIST_CATALOG, carList.data));
+
+        // Загружаем список городов
+        const cityList = await fetchCityList();
+        dispatch(setCatalog(CITY_LIST_CATALOG, cityList.data));
     }
 }

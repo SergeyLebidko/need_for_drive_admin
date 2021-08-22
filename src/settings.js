@@ -8,6 +8,8 @@ export const LIMIT = 10;
 
 // Имена каталогов
 export const STATUS_LIST_CATALOG = 'status_list_catalog';
+export const CAR_LIST_CATALOG = 'car_list_catalog';
+export const CITY_LIST_CATALOG = 'city_list_catalog';
 
 // TODO При реализации функциональности дополнить список пунктами меню для переходов на уже реализованные компоненты
 export const MENU_ITEMS = [
