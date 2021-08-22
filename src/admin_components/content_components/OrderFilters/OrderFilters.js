@@ -3,7 +3,7 @@ import './OrderFilters.scss';
 
 function OrderFilters(){
     return (
-        <div>
+        <div className="order_filters">
             Здесь будут фильтры для списка заказов
         </div>
     );

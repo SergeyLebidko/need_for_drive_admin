@@ -1,1 +1,6 @@
 @import '../../../styles/vars';
+
+.order_filters {
+  padding: $step * 2;
+  border-bottom: 1px solid $separator-color;
+}

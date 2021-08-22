@@ -1,1 +1,6 @@
 @import '../../styles/vars';
+
+.paginator {
+  padding: $step * 2;
+  border-top: 1px solid $separator-color;
+}

@@ -1,7 +1,7 @@
 @import '../../../styles/vars';
 
 .menu_item {
-  border-bottom: 1px solid $menu-separator;
+  border-bottom: 1px solid $separator-color;
 
   a {
     position: relative;
@@ -32,7 +32,7 @@
 }
 
 .active_link {
-  background-color: $menu-selection-background;
+  background-color: $menu-selection-background-color;
   color: $blue;
 
   svg path {

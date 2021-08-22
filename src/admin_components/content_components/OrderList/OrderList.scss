@@ -1,13 +1,14 @@
 @import '../../../styles/vars';
+@import '../OrderCard/OrderCard';
 
 .order_list {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
+  right: 0;
+  bottom: 0;
   padding: $step * 2;
+  overflow: auto;
 
   &::-webkit-scrollbar {
     width: 7px;
@@ -31,6 +32,10 @@
     box-shadow: $main-shadow;
     background-color: $white;
     border-radius: $main-radius;
+  }
+
+  .order_card + .order_card {
+    border-top: 1px solid $separator-color;
   }
 }
 

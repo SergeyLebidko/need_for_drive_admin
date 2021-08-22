@@ -3,7 +3,7 @@ import './Paginator.scss';
 
 function Paginator(){
     return (
-        <div>
+        <div className="paginator">
             Здесь будет пагинатор
         </div>
     );

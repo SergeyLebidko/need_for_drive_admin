@@ -6,6 +6,7 @@ import Preloader from '../../../common_components/Preloader/Preloader';
 import ErrorPane from '../../../common_components/ErrorPane/ErrorPane';
 import OrderFilters from '../OrderFilters/OrderFilters';
 import Paginator from '../../../common_components/Paginator/Paginator';
+import OrderCard from '../OrderCard/OrderCard';
 import {loadOrderList} from '../../../store/actionCreators';
 import {getFrame} from '../../../store/selectors';
 import './OrderList.scss';
@@ -43,7 +44,7 @@ function OrderList() {
                             <div className="order_list__content">
                                 <OrderFilters/>
                                 <ul>
-                                    {items.map(item => <li key={item.id}>{item.id}</li>)}
+                                    {items.map(item => <OrderCard key={item.id} order={item}/>)}
                                 </ul>
                                 <Paginator/>
                             </div>

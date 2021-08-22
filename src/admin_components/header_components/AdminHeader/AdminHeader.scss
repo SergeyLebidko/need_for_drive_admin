@@ -7,6 +7,7 @@
   padding-left: $step * 6;
   background-color: $white;
   box-shadow: $main-shadow;
+  border-bottom: 1px solid $separator-color;
   display: flex;
   align-items: center;
   transition: all 200ms;
@@ -21,7 +22,7 @@
   }
 }
 
-@media (min-width: $tablet-start) and (max-width: $tablet-end){
+@media (min-width: $tablet-start) and (max-width: $tablet-end) {
   .admin_header {
     height: $step * 8;
     padding-left: $step * 8;
