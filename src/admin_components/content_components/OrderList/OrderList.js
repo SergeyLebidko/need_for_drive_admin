@@ -4,6 +4,8 @@ import {useDispatch} from 'react-redux';
 import {useSelector} from 'react-redux';
 import Preloader from '../../../common_components/Preloader/Preloader';
 import ErrorPane from '../../../common_components/ErrorPane/ErrorPane';
+import OrderFilters from '../OrderFilters/OrderFilters';
+import Paginator from '../../../common_components/Paginator/Paginator';
 import {loadOrderList} from '../../../store/actionCreators';
 import {getFrame} from '../../../store/selectors';
 import './OrderList.scss';
@@ -39,15 +41,11 @@ function OrderList() {
                         <>
                             <h1 className="order_list__caption">Заказы</h1>
                             <div className="order_list__content">
-                                <div>
-                                    Здесь будут фильтры
-                                </div>
+                                <OrderFilters/>
                                 <ul>
                                     {items.map(item => <li key={item.id}>{item.id}</li>)}
                                 </ul>
-                                <div>
-                                    Здесь будет пагинация
-                                </div>
+                                <Paginator/>
                             </div>
                         </>
                 )
