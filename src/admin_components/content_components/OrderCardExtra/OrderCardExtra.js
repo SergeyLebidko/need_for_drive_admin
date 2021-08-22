@@ -9,7 +9,7 @@ import './OrderCardExtra.scss';
 function OrderCardExtra({order}) {
     const statusList = useSelector(getCatalog(STATUS_LIST_CATALOG));
 
-    const {id, orderStatusId, carId, cityId, pointId, dateFrom, dateTo, color} = order;
+    const {id, orderStatusId, carId, cityId, pointId, dateFrom, dateTo, color, rateId} = order;
 
     const getStatusText = () => orderStatusId ? capitalize(statusList.find(status => orderStatusId.id === status.id).name) : 'не указан';
     const getModelName = () => carId ? carId.name : 'не указана';
@@ -18,6 +18,11 @@ function OrderCardExtra({order}) {
     const getDateFromString = () => dateFrom ? getFormattedDate(dateFrom) : 'дата начала не указана';
     const getDateToString = () => dateTo ? getFormattedDate(dateTo) : 'дата окончания не указана';
     const getColor = () => color ? capitalize(color) : 'не указан'
+    const getRate = () => {
+        if (!rateId) return 'не указан';
+        const {rateTypeId: {unit, name}, price} = rateId;
+        return `${capitalize(name)}. ${price} руб./${unit}`
+    }
 
     return (
         <li className="order_card_extra">
@@ -39,11 +44,16 @@ function OrderCardExtra({order}) {
                 <span className="order_card_extra__strong_text">{getPointAddress()}</span>
             </div>
             <div>
-                <span className="order_card_extra__normal_text">{getDateFromString()} - {getDateToString()}</span>
+                <span className="order_card_extra__normal_text">Срок аренды: </span>
+                <span className="order_card_extra__strong_text">{getDateFromString()} - {getDateToString()}</span>
             </div>
             <div>
                 <span className="order_card_extra__normal_text">Цвет: </span>
                 <span className="order_card_extra__strong_text">{getColor()}</span>
+            </div>
+            <div>
+                <span className="order_card_extra__normal_text">Выбранный тариф: </span>
+                <span className="order_card_extra__strong_text">{getRate()}</span>
             </div>
         </li>
     );
