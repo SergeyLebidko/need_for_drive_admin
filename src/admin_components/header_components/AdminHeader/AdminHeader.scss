@@ -21,7 +21,14 @@
   }
 }
 
-@media (min-width: $tablet-start) {
+@media (min-width: $tablet-start) and (max-width: $tablet-end){
+  .admin_header {
+    height: $step * 8;
+    padding-left: $step * 8;
+  }
+}
+
+@media (min-width: $desktop-start) {
   .admin_header {
     height: $step * 8;
     padding-left: 0;
