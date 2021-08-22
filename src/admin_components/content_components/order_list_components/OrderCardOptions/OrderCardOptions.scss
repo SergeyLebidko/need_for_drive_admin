@@ -1,5 +1,12 @@
 @import '../../../../styles/vars';
+@import '../../../../common_components/CheckBox/CheckBox';
 
 .order_card_options {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9em;
 
+  .check_box + .check_box {
+    margin-top: $step;
+  }
 }

@@ -25,7 +25,7 @@ function OrderCardExtra({order}) {
     }
 
     return (
-        <li className="order_card_extra">
+        <div className="order_card_extra">
             <div>
                 <span className="order_card_extra__normal_text">Заказ №: </span>
                 <span className="order_card_extra__strong_text">{id}</span>
@@ -52,10 +52,10 @@ function OrderCardExtra({order}) {
                 <span className="order_card_extra__strong_text">{getColor()}</span>
             </div>
             <div>
-                <span className="order_card_extra__normal_text">Выбранный тариф: </span>
+                <span className="order_card_extra__normal_text">Тариф: </span>
                 <span className="order_card_extra__strong_text">{getRate()}</span>
             </div>
-        </li>
+        </div>
     );
 }
 

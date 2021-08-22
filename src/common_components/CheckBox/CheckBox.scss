@@ -1,0 +1,59 @@
+@import '../../styles/vars';
+
+.check_box {
+  position: relative;
+  padding-left: 1.5em;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+    width: 1.1em;
+    height: 1.1em;
+    border-radius: 2px;
+  }
+
+  &::before {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    content: '';
+    width: 1em;
+    height: 1em;
+    background-image: url("../../content/images/checked.svg");
+    background-size: contain;
+    z-index: 1;
+  }
+}
+
+.unchecked_box {
+  &::after {
+    border: 1px solid $gray;
+    background-color: $white;
+  }
+
+  &::before {
+    opacity: 0;
+  }
+}
+
+.checked_box {
+  &::after {
+    border: 1px solid $blue;
+    background-color: $blue;
+  }
+
+  &::before {
+    opacity: 1;
+  }
+}
+
+.disabled_box {
+  color: $gray;
+
+  &::after {
+    border: 1px solid $gray;
+    background-color: $gray-light;
+  }
+}
