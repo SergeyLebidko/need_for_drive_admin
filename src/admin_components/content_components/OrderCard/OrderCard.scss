@@ -1,6 +1,7 @@
 @import '../../../styles/vars';
 @import '../OrderCardPhoto/OrderCardPhoto';
 @import '../OrderCardExtra/OrderCardExtra';
+@import '../OrderCardOptions/OrderCardOptions';
 
 .order_card {
   display: flex;
@@ -15,5 +16,9 @@
   .order_card_extra {
     margin-left: $step * 4;
     width: 25%;
+  }
+
+  .order_card_options {
+    width: 15%;
   }
 }
