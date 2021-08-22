@@ -1,0 +1,13 @@
+@import '../../../styles/vars';
+
+.admin_content {
+  position: relative;
+  margin-left: 0;
+  transition: all 200ms;
+}
+
+@media (min-width: $tablet-start) {
+  .admin_content {
+    margin-left: $step * 28;
+  }
+}

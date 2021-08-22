@@ -1,0 +1,30 @@
+@import '../../styles/vars';
+@import '../../styles/common_presets';
+
+.no_match {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: $step;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__caption {
+    color: $gray;
+    font-size: 2em;
+    text-align: center;
+  }
+
+  .button {
+    margin-top: $step * 3;
+    align-self: center;
+  }
+}

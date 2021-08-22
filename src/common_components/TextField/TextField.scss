@@ -1,0 +1,43 @@
+@import '../../styles/vars';
+
+.text_field {
+  display: flex;
+  flex-direction: column;
+
+  &__label {
+    margin-bottom: $step;
+  }
+
+  &__input_block {
+    position: relative;
+
+    input {
+      width: 100%;
+    }
+
+    svg {
+      width: 1.8em;
+      height: 1.8em;
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+
+      path {
+        fill: $gray;
+      }
+
+      &:hover path {
+        fill: $blue;
+      }
+    }
+  }
+
+  &__error_text {
+    color: $red;
+    position: absolute;
+    bottom: calc(-1em - 4px);
+    left: $step * 2;
+  }
+}

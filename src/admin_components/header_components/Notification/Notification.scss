@@ -1,0 +1,61 @@
+@import '../../../styles/vars';
+
+.notification {
+  position: relative;
+  padding-left: $step * 2;
+  padding-right: $step * 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 1px solid $gray-light;
+  border-right: 1px solid $gray-light;
+
+  svg {
+    width: 1em;
+    height: 1em;
+    cursor: pointer;
+
+    path {
+      transition: all 200ms;
+    }
+
+    &:hover path {
+      fill: $blue;
+    }
+  }
+
+  &__count {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: $white;
+    background-color: $red;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7em;
+    width: 1.5em;
+    height: 1.5em;
+    user-select: none;
+  }
+}
+
+@media (min-width: $tablet-start) {
+  .notification {
+    padding-left: $step * 3;
+    padding-right: $step * 3;
+
+    svg {
+      width: 1.9em;
+      height: 1.9em;
+    }
+
+    &__count {
+      font-size: 0.8em;
+      width: 1.9em;
+      height: 1.9em;
+    }
+  }
+}

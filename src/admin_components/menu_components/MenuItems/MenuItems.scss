@@ -1,0 +1,20 @@
+@import '../../../styles/vars';
+
+.menu_items {
+  max-height: 80vh;
+  overflow: auto;
+  border-top: 1px solid $menu-separator;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $gray-light;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: $gray;
+  }
+}
