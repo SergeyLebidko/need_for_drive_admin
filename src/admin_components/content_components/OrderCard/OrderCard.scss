@@ -1,4 +1,5 @@
 @import '../../../styles/vars';
+@import '../OrderCardPhoto/OrderCardPhoto';
 
 .order_card {
   display: flex;
@@ -6,20 +7,7 @@
   justify-content: flex-start;
   padding: $step * 2;
 
-  &__photo {
-    width: $step * 24;
-    object-fit: contain;
-  }
-
-  &__no_photo {
-    width: $step * 24;
-    height: $step * 14;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: $white;
-    background-color: $gray-light;
-    border: 1px solid $gray;
-    border-radius: $small-radius;
+  .order_card_photo {
+    width: 15%;
   }
 }
