@@ -1,5 +1,6 @@
 import * as act from './actions';
-import {fetchOrderList} from '../utils/fetch_utils';
+import {fetchOrderList, fetchStatusList} from '../utils/fetch_utils';
+import {STATUS_LIST_CATALOG} from '../settings';
 
 // Функция возвращает корректный номер страницы
 function getCorrectPage(page) {
@@ -36,8 +37,13 @@ export function setCatalog(catalogName, catalogData) {
 // Создатель действия для загрузки списка заказов
 export function loadOrderList(page) {
     return async dispatch => {
+        // Загружаем список заказов
         const _page = getCorrectPage(page);
-        const {count, data} = await fetchOrderList(_page);
-        dispatch(setFrame({count, data, page: _page}));
+        const orderList = await fetchOrderList(_page);
+        dispatch(setFrame({count: orderList.count, data: orderList.data, page: _page}));
+
+        // Загружаем справочник со статусами заказов
+        const statusList = await fetchStatusList();
+        dispatch(setCatalog(STATUS_LIST_CATALOG, statusList.data));
     }
 }

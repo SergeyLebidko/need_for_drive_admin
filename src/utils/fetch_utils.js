@@ -1,5 +1,5 @@
 import {LIMIT} from '../settings';
-import {DEFAULT_REQUEST_HEADERS, ORDER_URL} from '../urls';
+import {DEFAULT_REQUEST_HEADERS, ORDER_URL, STATUS_LIST_URL} from '../urls';
 
 async function executeFetch(url, options = {}) {
     let {headers} = options;
@@ -26,4 +26,8 @@ async function executeFetch(url, options = {}) {
 
 export async function fetchOrderList(page) {
     return await executeFetch(`${ORDER_URL}/?limit=${LIMIT}&page=${page}`);
+}
+
+export async function fetchStatusList() {
+    return await executeFetch(STATUS_LIST_URL);
 }

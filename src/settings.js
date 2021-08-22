@@ -6,6 +6,9 @@ import {ReactComponent as MenuItemIcon} from './content/images/menu_item_icon.sv
 // Размер страницы данных
 export const LIMIT = 10;
 
+// Имена каталогов
+export const STATUS_LIST_CATALOG = 'status_list_catalog';
+
 // TODO При реализации функциональности дополнить список пунктами меню для переходов на уже реализованные компоненты
 export const MENU_ITEMS = [
     {
