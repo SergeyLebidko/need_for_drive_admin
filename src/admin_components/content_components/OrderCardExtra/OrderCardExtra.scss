@@ -1,0 +1,15 @@
+@import '../../../styles/vars';
+
+.order_card_extra {
+  div + div {
+    margin-top: $step;
+  }
+
+  &__normal_text {
+    color: $gray;
+  }
+
+  &__strong_text {
+    color: $black;
+  }
+}

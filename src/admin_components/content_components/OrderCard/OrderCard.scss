@@ -1,5 +1,6 @@
 @import '../../../styles/vars';
 @import '../OrderCardPhoto/OrderCardPhoto';
+@import '../OrderCardExtra/OrderCardExtra';
 
 .order_card {
   display: flex;
@@ -9,5 +10,10 @@
 
   .order_card_photo {
     width: 15%;
+  }
+
+  .order_card_extra {
+    margin-left: $step * 2;
+    width: 25%;
   }
 }

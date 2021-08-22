@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import OrderCardPhoto from '../OrderCardPhoto/OrderCardPhoto';
+import OrderCardExtra from '../OrderCardExtra/OrderCardExtra';
 import './OrderCard.scss';
 
 function OrderCard({order}) {
@@ -8,6 +9,7 @@ function OrderCard({order}) {
     return (
         <li className="order_card">
             <OrderCardPhoto order={order}/>
+            <OrderCardExtra order={order}/>
         </li>
     );
 }
