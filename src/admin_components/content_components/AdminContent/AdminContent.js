@@ -1,6 +1,6 @@
 import React from 'react';
 import {Switch, Route, useRouteMatch} from 'react-router-dom';
-import OrderList from '../OrderList/OrderList';
+import OrderList from '../order_list_components/OrderList/OrderList';
 import NoMatch from '../../../common_components/NoMatch/NoMatch';
 import ErrorPane from '../../../common_components/ErrorPane/ErrorPane';
 import './AdminContent.scss';

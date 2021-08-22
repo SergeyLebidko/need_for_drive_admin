@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {useSelector} from 'react-redux';
-import {getFormattedDate, capitalize} from '../../../utils/common_utils';
-import {STATUS_LIST_CATALOG} from '../../../settings';
-import {getCatalog} from '../../../store/selectors';
+import {getFormattedDate, capitalize} from '../../../../utils/common_utils';
+import {STATUS_LIST_CATALOG} from '../../../../settings';
+import {getCatalog} from '../../../../store/selectors';
 import './OrderCardExtra.scss';
 
 function OrderCardExtra({order}) {

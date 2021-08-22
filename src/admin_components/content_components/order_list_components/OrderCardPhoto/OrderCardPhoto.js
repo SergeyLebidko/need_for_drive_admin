@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import {DOMEN} from '../../../urls';
+import {DOMEN} from '../../../../urls';
 import './OrderCardPhoto.scss';
 
 function OrderCardPhoto({order}) {
