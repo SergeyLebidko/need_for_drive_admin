@@ -24,6 +24,15 @@ export function setFrame(frame) {
     }
 }
 
+// Создатель действия для установки каталога
+export function setCatalog(catalogName, catalogData) {
+    return {
+        type: act.SET_CATALOG,
+        catalogName,
+        catalogData
+    }
+}
+
 // Создатель действия для загрузки списка заказов
 export function loadOrderList(page) {
     return async dispatch => {

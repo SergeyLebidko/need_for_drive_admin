@@ -17,3 +17,12 @@ export function frame(state = null, action) {
             return state;
     }
 }
+
+export function catalog(state = {}, action) {
+    switch (action.type){
+        case act.SET_CATALOG:
+            return {...state, [action.catalogName]: action.catalogData}
+        default:
+            return state;
+    }
+}
