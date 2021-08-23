@@ -37,13 +37,15 @@ function Paginator({baseLink}) {
         }
 
         if (pageNumber > firstPageNumber && pageNumber < (page - 1) && !hasFirstDot) {
-            linksContent.push(<span key={pageNumber}>...</span>);
+            params.set('page', '' + (page - 2));
+            linksContent.push(<Link key={pageNumber} to={`${baseLink}?${params}`}>...</Link>);
             hasFirstDot = true;
             continue;
         }
 
         if (pageNumber < lastPageNumber && pageNumber > (page + 1) && !hasSecondDot) {
-            linksContent.push(<span key={pageNumber}>...</span>);
+            params.set('page', '' + (page + 2));
+            linksContent.push(<Link key={pageNumber} to={`${baseLink}?${params}`}>...</Link>);
             hasSecondDot = true;
         }
     }
