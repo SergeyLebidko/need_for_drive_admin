@@ -24,6 +24,9 @@ function OrderList() {
 
     // При монтировании компонента - получаем с сервера список заказов
     useEffect(() => {
+        // Предотвращаем выполнение ненужных действий, если компонент размонтирован
+        if (location.pathname !== '/admin/orders') return;
+
         const page = new URLSearchParams(location.search).get('page');
         dispatch(loadOrderList(page))
             .then(() => setDone(true))
@@ -46,7 +49,7 @@ function OrderList() {
                                 <ul>
                                     {items.map(item => <OrderCard key={item.id} order={item}/>)}
                                 </ul>
-                                <Paginator baseLink="/admin/orders/"/>
+                                <Paginator/>
                             </div>
                         </>
                 )

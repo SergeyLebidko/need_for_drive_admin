@@ -1,12 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {Link, useLocation} from 'react-router-dom';
+import {Link, useLocation, useRouteMatch} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import {getFrame} from '../../store/selectors';
 import {LIMIT} from '../../settings';
 import './Paginator.scss';
 
-function Paginator({baseLink}) {
+function Paginator() {
+    let {url: baseLink} = useRouteMatch();
     const location = useLocation();
     const {page, count} = useSelector(getFrame);
 
@@ -60,10 +60,6 @@ function Paginator({baseLink}) {
             {linksContent}
         </div>
     );
-}
-
-Paginator.propTypes = {
-    baseLink: PropTypes.string
 }
 
 export default Paginator;
