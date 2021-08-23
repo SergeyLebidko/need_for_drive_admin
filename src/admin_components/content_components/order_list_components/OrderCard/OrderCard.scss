@@ -3,6 +3,7 @@
 @import '../OrderCardExtra/OrderCardExtra';
 @import '../OrderCardOptions/OrderCardOptions';
 @import '../OrderCardPrice/OrderCardPrice';
+@import '../OrderControlBlock/OrderControlBlock';
 
 .order_card {
   display: flex;
@@ -16,7 +17,7 @@
 
   .order_card_extra {
     margin-left: $step * 4;
-    width: 30%;
+    width: 40%;
   }
 
   .order_card_options {
@@ -25,5 +26,9 @@
 
   .order_card_price {
     width: 15%;
+  }
+
+  .order_control_block {
+    width: 10%;
   }
 }

@@ -1,0 +1,12 @@
+@import '../../../../styles/vars';
+@import '../../../../styles/common_presets';
+
+.order_control_block {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+
+  button {
+    margin-top: $step * 2;
+  }
+}

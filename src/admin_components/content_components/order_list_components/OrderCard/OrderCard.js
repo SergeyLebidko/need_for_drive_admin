@@ -4,6 +4,7 @@ import OrderCardPhoto from '../OrderCardPhoto/OrderCardPhoto';
 import OrderCardExtra from '../OrderCardExtra/OrderCardExtra';
 import OrderCardOptions from '../OrderCardOptions/OrderCardOptions';
 import OrderCardPrice from '../OrderCardPrice/OrderCardPrice';
+import OrderControlBlock from '../OrderControlBlock/OrderControlBlock';
 import './OrderCard.scss';
 
 function OrderCard({order}) {
@@ -13,6 +14,7 @@ function OrderCard({order}) {
             <OrderCardExtra order={order}/>
             <OrderCardOptions order={order}/>
             <OrderCardPrice order={order}/>
+            <OrderControlBlock/>
         </li>
     );
 }

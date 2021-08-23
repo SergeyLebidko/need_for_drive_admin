@@ -1,5 +1,6 @@
 @import './vars';
 
+// Стили для обычных кнопок
 .button {
   border: none;
   border-radius: $small-radius;
@@ -30,5 +31,34 @@
 
   &:active {
     background-color: $green-high-light;
+  }
+}
+
+// Стили для "тонких" кнопок
+.thin_button {
+  position: relative;
+  background-color: white;
+  outline: none;
+  border: 1px solid $gray-light;
+  border-radius: 4px;
+  padding: 7px 15px 7px 20px;
+  cursor: pointer;
+
+  &:hover {
+    color: $blue;
+  }
+}
+
+.thin_button_edit {
+  &::after {
+    content: '';
+    background-image: url("../content/images/edit_icon.svg");
+    background-repeat: no-repeat;
+    position: absolute;
+    top: calc(50% + 3px);
+    left: 10px;
+    transform: translateY(-50%);
+    width: 1em;
+    height: 1em;
   }
 }
