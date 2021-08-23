@@ -31,7 +31,7 @@ function OrderList() {
                 setDone(true);
                 setError(err);
             });
-    }, []);
+    }, [location]);
 
     return (
         <div className="order_list">
@@ -46,7 +46,7 @@ function OrderList() {
                                 <ul>
                                     {items.map(item => <OrderCard key={item.id} order={item}/>)}
                                 </ul>
-                                <Paginator/>
+                                <Paginator baseLink="/admin/orders/"/>
                             </div>
                         </>
                 )

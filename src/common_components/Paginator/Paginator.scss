@@ -3,4 +3,7 @@
 .paginator {
   padding: $step * 2;
   border-top: 1px solid $separator-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -5,8 +5,9 @@ async function executeFetch(url, options = {}) {
     let {headers} = options;
     headers = headers ? {...headers, ...DEFAULT_REQUEST_HEADERS} : DEFAULT_REQUEST_HEADERS;
 
-    // TODO При реализации авторизации создать код подстановки токена пользователя. Сейчас использую временный токен из Insomnia
-    headers = {...headers, 'Authorization': 'Bearer 217476e1aa3c3393f1994107b2eaa65004d5f0cd'};
+    // TODO При реализации авторизации создать код подстановки токена пользователя.
+    // Сейчас временно использую access-токен полученный с помощью из Insomnia
+    headers = {...headers, 'Authorization': 'Bearer c506dd9149fed245590605562ba263cae2b131e4'};
 
     const _options = {...options, headers};
 
