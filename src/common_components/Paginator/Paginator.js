@@ -26,7 +26,7 @@ function Paginator({baseLink}) {
 
     for (let pageNumber = 0; pageNumber <= lastPageNumber; pageNumber++) {
         if (pageNumber === page) {
-            linksContent.push(<span key={pageNumber}>[{pageNumber + 1}]</span>);
+            linksContent.push(<span key={pageNumber}>{pageNumber + 1}</span>);
             continue;
         }
 

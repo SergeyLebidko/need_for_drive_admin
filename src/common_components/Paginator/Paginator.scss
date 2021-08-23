@@ -6,4 +6,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  a + a, span + a, a + span {
+    margin-left: $step;
+  }
+
+  a {
+    text-decoration: none;
+    color: $blue;
+    font-size: 1.2em;
+  }
+
+  span {
+    font-size: 1.2em;
+    background-color: $blue;
+    color: white;
+    padding: 0 8px;
+    border-radius: 15px;
+  }
 }
