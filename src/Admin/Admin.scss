@@ -16,7 +16,7 @@
   }
 }
 
-@media (min-width: $desktop-start) {
+@media (min-width: $desktop-min-start) {
   .work_section {
     left: $step * 28;
   }

@@ -7,28 +7,113 @@
 
 .order_card {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
   justify-content: flex-start;
   padding: $step * 2;
 
-  .order_card_photo {
-    width: 20%;
+  &__first_block {
+    display: flex;
+    flex-direction: column;
+
+    .order_card_photo {
+      width: 100%;
+    }
+
+    .order_card_extra {
+      margin: ($step * 2) 0 ($step * 4);
+      width: 100%;
+    }
   }
 
-  .order_card_extra {
-    margin-left: $step * 4;
-    width: 40%;
-  }
+  &__second_block {
+    display: flex;
+    flex-direction: column;
 
-  .order_card_options {
-    width: 15%;
-  }
+    .order_card_options {
+      width: 100%;
+    }
 
-  .order_card_price {
-    width: 15%;
-  }
+    .order_card_price {
+      width: 100%;
+    }
 
-  .order_control_block {
-    width: 10%;
+    .order_control_block {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+
+@media (min-width: $tablet-start) and (max-width: $desktop-min-end) {
+  .order_card {
+    &__first_block {
+      flex-direction: row;
+      margin-bottom: $step * 4;
+
+      .order_card_photo {
+        flex: 1;
+      }
+
+      .order_card_extra {
+        margin: 0 0 0 ($step * 4);
+        flex: 1;
+      }
+    }
+
+    &__second_block {
+      flex-direction: row;
+
+      .order_card_options {
+        flex: 1;
+      }
+
+      .order_card_price {
+        flex: 1;
+      }
+
+      .order_control_block {
+        flex: 1;
+        justify-content: flex-end;
+      }
+    }
+  }
+}
+
+@media (min-width: $desktop-start){
+  .order_card {
+    flex-direction: row;
+
+    &__first_block {
+      flex-direction: row;
+      flex: 1;
+
+      .order_card_photo {
+        flex: 1;
+      }
+
+      .order_card_extra {
+        flex: 1;
+        margin-left: $step * 3;
+      }
+    }
+
+    &__second_block {
+      flex-direction: row;
+      flex: 1;
+
+      .order_card_options {
+        flex: 1;
+      }
+
+      .order_card_price {
+        flex: 1;
+      }
+
+      .order_control_block {
+        flex: 1;
+        justify-content: flex-end;
+      }
+    }
   }
 }

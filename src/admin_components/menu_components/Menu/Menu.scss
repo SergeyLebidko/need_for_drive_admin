@@ -46,7 +46,7 @@
   }
 }
 
-@media (min-width: $desktop-start) {
+@media (min-width: $desktop-min-start) {
   .menu {
     height: 100%;
     box-shadow: $main-shadow;

@@ -43,7 +43,7 @@ function OrderCardExtra({order}) {
                 <span className="order_card_extra__strong_text">{getCityName()}, </span>
                 <span className="order_card_extra__strong_text">{getPointAddress()}</span>
             </div>
-            <div>
+            <div className="order_card_extra__dates_block">
                 <span className="order_card_extra__normal_text">Срок аренды: </span>
                 <span className="order_card_extra__strong_text">{getDateFromString()} - {getDateToString()}</span>
             </div>

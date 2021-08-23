@@ -10,11 +10,15 @@ import './OrderCard.scss';
 function OrderCard({order}) {
     return (
         <li className="order_card">
-            <OrderCardPhoto order={order}/>
-            <OrderCardExtra order={order}/>
-            <OrderCardOptions order={order}/>
-            <OrderCardPrice order={order}/>
-            <OrderControlBlock/>
+            <div className="order_card__first_block">
+                <OrderCardPhoto order={order}/>
+                <OrderCardExtra order={order}/>
+            </div>
+            <div className="order_card__second_block">
+                <OrderCardOptions order={order}/>
+                <OrderCardPrice order={order}/>
+                <OrderControlBlock/>
+            </div>
         </li>
     );
 }

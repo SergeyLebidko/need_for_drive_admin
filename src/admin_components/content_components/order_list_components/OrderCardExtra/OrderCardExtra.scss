@@ -14,4 +14,9 @@
   &__strong_text {
     color: $black;
   }
+
+  &__dates_block {
+    display: flex;
+    flex-direction: column;
+  }
 }
