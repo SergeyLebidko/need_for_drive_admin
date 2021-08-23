@@ -38,7 +38,7 @@ function OrderCardExtra({order}) {
                 <span className="order_card_extra__normal_text">Модель: </span>
                 <span className="order_card_extra__strong_text">{getModelName()}</span>
             </div>
-            <div>
+            <div className="order_card_extra__place_block">
                 <span className="order_card_extra__normal_text">Адрес: </span>
                 <span className="order_card_extra__strong_text">{getCityName()}, </span>
                 <span className="order_card_extra__strong_text">{getPointAddress()}</span>

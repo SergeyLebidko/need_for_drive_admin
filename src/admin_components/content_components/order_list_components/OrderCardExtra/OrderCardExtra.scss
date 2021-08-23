@@ -1,7 +1,6 @@
 @import '../../../../styles/vars';
 
 .order_card_extra {
-  font-size: 0.9em;
 
   div + div {
     margin-top: $step;
@@ -15,8 +14,16 @@
     color: $black;
   }
 
-  &__dates_block {
+  &__place_block, &__dates_block {
     display: flex;
     flex-direction: column;
+  }
+}
+
+@media (min-width: $desktop-start) {
+  .order_card_extra {
+    &__place_block, &__dates_block {
+      display: block;
+    }
   }
 }
