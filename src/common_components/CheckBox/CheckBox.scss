@@ -2,25 +2,26 @@
 
 .check_box {
   position: relative;
-  padding-left: 1.5em;
+  padding-left: 25px;
+  cursor: pointer;
 
   &::after {
     position: absolute;
-    top: 0;
+    top: -3px;
     left: 0;
     content: '';
-    width: 1.1em;
-    height: 1.1em;
+    width: 18px;
+    height: 18px;
     border-radius: 2px;
   }
 
   &::before {
     position: absolute;
-    top: 2px;
+    top: -1px;
     left: 2px;
     content: '';
-    width: 1em;
-    height: 1em;
+    width: 16px;
+    height: 16px;
     background-image: url("../../content/images/checked.svg");
     background-size: contain;
     z-index: 1;
