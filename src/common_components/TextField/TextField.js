@@ -18,7 +18,7 @@ function TextField({label, fieldType, value, handleChangeValue, errorText}) {
     }
 
     const inputClasses = classNames(
-        'text_input',
+        'text_field__text_input',
         {
             'shifted_text_input': fieldType === PASSWORD,
             'error_text_input': !!errorText

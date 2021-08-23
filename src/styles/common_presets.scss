@@ -1,23 +1,5 @@
 @import './vars';
 
-.text_input {
-  padding: $step ($step * 2);
-  outline: none;
-  border: 1px solid $gray-light;
-  border-radius: $small-radius;
-  font-size: 1em;
-}
-
-.shifted_text_input {
-  padding-right: 2.5em;
-}
-
-.error_text_input {
-  border: 0.5px solid $red;
-  box-shadow: $error_shadow;
-}
-
-
 .button {
   border: none;
   border-radius: $small-radius;
