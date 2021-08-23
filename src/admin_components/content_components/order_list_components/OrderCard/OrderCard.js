@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import OrderCardPhoto from '../OrderCardPhoto/OrderCardPhoto';
 import OrderCardExtra from '../OrderCardExtra/OrderCardExtra';
 import OrderCardOptions from '../OrderCardOptions/OrderCardOptions';
+import OrderCardPrice from '../OrderCardPrice/OrderCardPrice';
 import './OrderCard.scss';
 
 function OrderCard({order}) {
@@ -11,6 +12,7 @@ function OrderCard({order}) {
             <OrderCardPhoto order={order}/>
             <OrderCardExtra order={order}/>
             <OrderCardOptions order={order}/>
+            <OrderCardPrice order={order}/>
         </li>
     );
 }

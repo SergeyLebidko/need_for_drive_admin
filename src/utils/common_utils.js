@@ -31,3 +31,7 @@ export function getFormattedDate(timestamp) {
 export function capitalize(str) {
     return str[0].toUpperCase() + str.slice(1).toLowerCase();
 }
+
+export function getFormattedPrice(price) {
+    return new Intl.NumberFormat('ru-RU').format(price);
+}

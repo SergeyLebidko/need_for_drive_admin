@@ -1,0 +1,16 @@
+@import '../../../../styles/vars';
+
+.order_card_price{
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  &__price {
+    margin-top: $step * 2;
+    font-size: 1.8em;
+  }
+
+  &__empty_price {
+    font-size: 0.9em;
+  }
+}
