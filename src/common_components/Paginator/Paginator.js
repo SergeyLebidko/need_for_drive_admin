@@ -2,7 +2,7 @@ import React from 'react';
 import {Link, useLocation, useRouteMatch} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import {getFrame} from '../../store/selectors';
-import {LIMIT} from '../../settings';
+import {LIMIT, PAGE_FILTER_NAME} from '../../settings';
 import './Paginator.scss';
 
 function Paginator() {
@@ -20,7 +20,7 @@ function Paginator() {
 
     const linksContent = [];
     if (page > 0) {
-        params.set('page', '' + (page - 1));
+        params.set(PAGE_FILTER_NAME, '' + (page - 1));
         linksContent.push(<Link key="to_next_page" to={`${baseLink}?${params}`}>&laquo;</Link>);
     }
 
@@ -31,27 +31,27 @@ function Paginator() {
         }
 
         if ((pageNumber === firstPageNumber) || (pageNumber === lastPageNumber) || (pageNumber === (page - 1)) || (pageNumber === (page + 1))) {
-            params.set('page', '' + pageNumber);
+            params.set(PAGE_FILTER_NAME, '' + pageNumber);
             linksContent.push(<Link key={pageNumber} to={`${baseLink}?${params}`}>{pageNumber + 1}</Link>);
             continue;
         }
 
         if (pageNumber > firstPageNumber && pageNumber < (page - 1) && !hasFirstDot) {
-            params.set('page', '' + (page - 2));
+            params.set(PAGE_FILTER_NAME, '' + (page - 2));
             linksContent.push(<Link key={pageNumber} to={`${baseLink}?${params}`}>...</Link>);
             hasFirstDot = true;
             continue;
         }
 
         if (pageNumber < lastPageNumber && pageNumber > (page + 1) && !hasSecondDot) {
-            params.set('page', '' + (page + 2));
+            params.set(PAGE_FILTER_NAME, '' + (page + 2));
             linksContent.push(<Link key={pageNumber} to={`${baseLink}?${params}`}>...</Link>);
             hasSecondDot = true;
         }
     }
 
     if (page < lastPageNumber) {
-        params.set('page', '' + (page + 1));
+        params.set(PAGE_FILTER_NAME, '' + (page + 1));
         linksContent.push(<Link key="to_prev_page" to={`${baseLink}?${params}`}>&raquo;</Link>);
     }
 

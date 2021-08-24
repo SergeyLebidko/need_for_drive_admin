@@ -21,6 +21,7 @@ export const BEGIN_WEEK = 'begin_week';
 export const BEGIN_MONTH = 'begin_month';
 
 // Названия фильтров
+export const PAGE_FILTER_NAME = 'page';
 export const DATE_FILTER_NAME = 'date';
 export const CAR_FILTER_NAME = 'carId';
 export const CITY_FILTER_NAME = 'cityId';
