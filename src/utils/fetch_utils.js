@@ -89,17 +89,8 @@ export async function fetchOrderList(page, date, car, city, status) {
     if (date) {
         const dateFrom = prepareDateRange(date);
         if (dateFrom) params.set(`${DATE_FROM_FILTER_NAME}[$gt]`, dateFrom);
-
-        console.log('Дата от: ', new Date(dateFrom));
     }
-
-    const url = `${ORDER_URL}/?${params}`;
-
-    // TODO Тестовый вывод
-    console.log('date for fetch', date);
-    console.log('URL for fetch', url);
-
-    return await executeFetch(url);
+    return await executeFetch(`${ORDER_URL}/?${params}`);
 }
 
 export async function fetchStatusList() {

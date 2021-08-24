@@ -25,7 +25,7 @@ export function getRandomString(size = 16) {
 
 export function getFormattedDate(timestamp) {
     const [year, mon, day, hour, min] = extractDateParts(new Date(timestamp));
-    return `${format(day)}.${format(mon)}.${year} ${format(hour)}:${format(min)}`;
+    return `${format(day)}.${format(mon + 1)}.${year} ${format(hour)}:${format(min)}`;
 }
 
 export function capitalize(str) {

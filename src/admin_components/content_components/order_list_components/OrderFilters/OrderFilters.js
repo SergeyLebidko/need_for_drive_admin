@@ -16,7 +16,8 @@ import {
     DATE_FROM_FILTER_NAME,
     CAR_FILTER_NAME,
     CITY_FILTER_NAME,
-    STATUS_FILTER_NAME
+    STATUS_FILTER_NAME,
+    PAGE_FILTER_NAME
 } from '../../../../settings';
 import {
     ADMIN_APP_URL, ORDER_LIST_APP_URL
@@ -71,6 +72,9 @@ function OrderFilters() {
     // Обработчик применения фильтров
     const handleApplyFilters = () => {
         const params = new URLSearchParams(location.search);
+
+        // При изменении любого фильтра - начинаем с первой страницы
+        params.set(PAGE_FILTER_NAME, '0');
 
         if (selectedDate === NO_FILTER_VALUE) {
             params.delete(DATE_FROM_FILTER_NAME);
