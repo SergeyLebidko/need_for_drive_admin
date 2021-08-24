@@ -1,12 +1,20 @@
 @import '../../styles/vars';
 
 .selector {
-  font-size: 1.5em;
   appearance: none;
+  position: relative;
+  border: 1px solid $gray-light;
+  border-radius: $small-radius;
+  background-color: blue;
+  padding: $step ($step * 2);
+  outline: none;
+  color: $gray;
+  background-image: url('../../content/images/checked.svg');
+  background-repeat: no-repeat;
+  background-position: right center;
 
   option {
-    color: $white;
-    background-color: gray;
-    font-size: 1.5em;
+    font-size: 1em;
+    color: $gray;
   }
 }
