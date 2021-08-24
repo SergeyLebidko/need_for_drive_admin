@@ -29,6 +29,7 @@ export const CITY_FILTER_NAME = 'cityId';
 export const STATUS_FILTER_NAME = 'orderStatusId';
 
 // TODO При реализации функциональности дополнить список пунктами меню для переходов на уже реализованные компоненты
+// TODO Удалить данные для тестирования верстки
 export const MENU_ITEMS = [
     {
         title: 'Заказы',

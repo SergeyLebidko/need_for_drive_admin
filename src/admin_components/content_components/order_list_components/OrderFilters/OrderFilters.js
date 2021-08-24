@@ -45,7 +45,7 @@ function OrderFilters() {
         {name: 'С начала текущей недели', value: BEGIN_WEEK},
         {name: 'За неделю', value: PER_WEEK},
         {name: 'С начала текущего месяца', value: BEGIN_MONTH},
-        {name: 'За месяц', value: PER_MONTH},
+        {name: 'За месяц (30 дней)', value: PER_MONTH},
     ];
 
     const handleDateSelect = value => setSelectedDate(value);

@@ -1,4 +1,8 @@
-function extractDateParts(date) {
+function format(value) {
+    return ('0' + value).slice(-2);
+}
+
+export function extractDateParts(date) {
     return [
         date.getFullYear(),
         date.getMonth(),
@@ -8,10 +12,6 @@ function extractDateParts(date) {
         date.getSeconds(),
         date.getMilliseconds()
     ];
-}
-
-function format(value) {
-    return ('0' + value).slice(-2);
 }
 
 export function getRandomString(size = 16) {

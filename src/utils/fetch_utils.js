@@ -14,11 +14,40 @@ import {
     BEGIN_MONTH
 } from '../settings';
 import {DEFAULT_REQUEST_HEADERS, ORDER_URL, STATUS_LIST_URL, CAR_LIST_URL, CITY_LIST_URL} from '../urls';
+import {extractDateParts} from './common_utils';
 
 function prepareDateRange(dateFilterValue) {
-    switch (dateFilterValue) {
-        case :
+    const msInSec = 1000;
+    const msInMin = msInSec * 60;
+    const msInHour = msInMin * 60;
+    const msInDay = msInHour * 24;
+    const msInWeek = msInDay * 7;
+    const msInMonth = msInDay * 30;
 
+    const now = Date.now();
+    switch (dateFilterValue) {
+        case PER_DAY:
+            return now - msInDay;
+        case PER_WEEK:
+            return now - msInWeek;
+        case PER_MONTH:
+            return now - msInMonth;
+        case BEGIN_DAY: {
+            const [year, mon, day] = extractDateParts(new Date(now));
+            return +(new Date(year, mon, day));
+        }
+        case BEGIN_WEEK: {
+            const _now = new Date(now);
+            const [, , , hour, min, sec, ms] = extractDateParts(_now);
+
+            // Учитываем, что в js неделя начинается с воскресения, а в РФ - с понедельника :)
+            const numberDay = _now.getDay() ? _now.getDay() - 1 : 6;
+            return now - ((numberDay * msInDay) + (hour * msInHour) + (min * msInMin) + (sec * msInSec) + ms);
+        }
+        case BEGIN_MONTH: {
+            const [year, mon] = extractDateParts(new Date(now));
+            return +(new Date(year, mon));
+        }
         default:
             return null;
     }
@@ -30,7 +59,7 @@ async function executeFetch(url, options = {}) {
 
     // TODO При реализации авторизации создать код подстановки токена пользователя.
     // Сейчас временно использую access-токен полученный с помощью из Insomnia
-    headers = {...headers, 'Authorization': 'Bearer c506dd9149fed245590605562ba263cae2b131e4'};
+    headers = {...headers, 'Authorization': 'Bearer b8524cc83224df94606279ce4296beff6c6e948d'};
 
     const _options = {...options, headers};
 
@@ -60,6 +89,8 @@ export async function fetchOrderList(page, date, car, city, status) {
     if (date) {
         const dateFrom = prepareDateRange(date);
         if (dateFrom) params.set(`${DATE_FROM_FILTER_NAME}[$gt]`, dateFrom);
+
+        console.log('Дата от: ', new Date(dateFrom));
     }
 
     const url = `${ORDER_URL}/?${params}`;
