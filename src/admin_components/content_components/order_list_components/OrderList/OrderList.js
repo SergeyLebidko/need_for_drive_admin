@@ -42,6 +42,8 @@ function OrderList() {
         const city = params.get(CITY_FILTER_NAME);
         const status = params.get(STATUS_FILTER_NAME);
 
+        setDone(false);
+        setError(null);
         dispatch(loadOrderList(page, date, car, city, status))
             .then(() => setDone(true))
             .catch(err => {
