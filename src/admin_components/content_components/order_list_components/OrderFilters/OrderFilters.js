@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {useLocation, useHistory} from 'react-router-dom';
 import Selector from '../../../../common_components/Selector/Selector';
@@ -29,21 +29,28 @@ function OrderFilters() {
     const location = useLocation();
     const history = useHistory();
 
-    // Учитываем, что при вводе в адресную строку готового URL в нём уже могут быть фильтры, которые надо учесть
-    const searchParams = new URLSearchParams(location.search);
-    const defaultDate = searchParams.get(DATE_FROM_FILTER_NAME);
-    const defaultCar = searchParams.get(CAR_FILTER_NAME);
-    const defaultCity = searchParams.get(CITY_FILTER_NAME);
-    const defaultStatus = searchParams.get(STATUS_FILTER_NAME);
-
-    let [selectedDate, setSelectedDate] = useState(defaultDate ? defaultDate : NO_FILTER_VALUE);
-    let [selectedCar, setSelectedCar] = useState(defaultCar ? defaultCar : NO_FILTER_VALUE);
-    let [selectedCity, setSelectedCity] = useState(defaultCity ? defaultCity : NO_FILTER_VALUE);
-    let [selectedStatus, setSelectedStatus] = useState(defaultStatus ? defaultStatus : NO_FILTER_VALUE);
+    let [selectedDate, setSelectedDate] = useState(NO_FILTER_VALUE);
+    let [selectedCar, setSelectedCar] = useState(NO_FILTER_VALUE);
+    let [selectedCity, setSelectedCity] = useState(NO_FILTER_VALUE);
+    let [selectedStatus, setSelectedStatus] = useState(NO_FILTER_VALUE);
 
     const carList = useSelector(getCatalog(CAR_LIST_CATALOG));
     const cityList = useSelector(getCatalog(CITY_LIST_CATALOG));
     const statusList = useSelector(getCatalog(STATUS_LIST_CATALOG));
+
+    // При монтировании учитываем, что при вводе в адресную строку готового URL в нём уже могут быть фильтры, которые надо учесть
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        const defaultDate = searchParams.get(DATE_FROM_FILTER_NAME);
+        const defaultCar = searchParams.get(CAR_FILTER_NAME);
+        const defaultCity = searchParams.get(CITY_FILTER_NAME);
+        const defaultStatus = searchParams.get(STATUS_FILTER_NAME);
+
+        setSelectedDate(defaultDate ? defaultDate : NO_FILTER_VALUE);
+        setSelectedCar(defaultCar ? defaultCar : NO_FILTER_VALUE);
+        setSelectedCity(defaultCity ? defaultCity : NO_FILTER_VALUE);
+        setSelectedStatus(defaultStatus ? defaultStatus : NO_FILTER_VALUE);
+    }, []);
 
     // Готовим данные для селектора времени
     const dateSelectorItems = [
