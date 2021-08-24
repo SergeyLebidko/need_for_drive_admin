@@ -34,6 +34,18 @@
   }
 }
 
+.button_red {
+  background-color: $red;
+
+  &:hover {
+    background-color: $red-light;
+  }
+
+  &:active {
+    background-color: $red-high-light;
+  }
+}
+
 // Стили для "тонких" кнопок
 .thin_button {
   position: relative;
