@@ -60,10 +60,14 @@ function OrderList() {
                             <h1 className="order_list__caption">Заказы</h1>
                             <div className="order_list__content">
                                 <OrderFilters/>
-                                <ul>
-                                    {items.map(item => <OrderCard key={item.id} order={item}/>)}
-                                </ul>
-                                <Paginator/>
+                                {items.length > 0 &&
+                                <>
+                                    <ul>
+                                        {items.map(item => <OrderCard key={item.id} order={item}/>)}
+                                    </ul>
+                                    <Paginator/>
+                                </>
+                                }
                             </div>
                         </>
                 )
