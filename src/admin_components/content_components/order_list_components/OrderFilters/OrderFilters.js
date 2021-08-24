@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
+import {useLocation, useHistory} from 'react-router-dom';
 import Selector from '../../../../common_components/Selector/Selector';
 import {
     NO_FILTER_VALUE,
@@ -11,8 +12,15 @@ import {
     BEGIN_WEEK,
     CAR_LIST_CATALOG,
     CITY_LIST_CATALOG,
-    STATUS_LIST_CATALOG
+    STATUS_LIST_CATALOG,
+    DATE_FILTER_NAME,
+    CAR_FILTER_NAME,
+    CITY_FILTER_NAME,
+    STATUS_FILTER_NAME
 } from '../../../../settings';
+import {
+    ADMIN_APP_URL, ORDER_LIST_APP_URL
+} from '../../../../urls';
 import {getCatalog} from '../../../../store/selectors';
 import './OrderFilters.scss';
 
@@ -25,6 +33,9 @@ function OrderFilters() {
     const carList = useSelector(getCatalog(CAR_LIST_CATALOG));
     const cityList = useSelector(getCatalog(CITY_LIST_CATALOG));
     const statusList = useSelector(getCatalog(STATUS_LIST_CATALOG));
+
+    const location = useLocation();
+    const history = useHistory();
 
     // Готовим данные для селектора времени
     const dateSelectorItems = [
@@ -57,11 +68,33 @@ function OrderFilters() {
 
     const handleStatusSelect = value => setSelectedStatus(value);
 
-    // TODO Удалить тестовые выводы в консоль
-    console.log(selectedDate);
-    console.log(selectedCar);
-    console.log(selectedCity);
-    console.log(selectedStatus);
+    // Обработчик применения фильтров
+    const handleApplyFilters = () => {
+        const params = new URLSearchParams(location.search);
+
+        if (selectedDate === NO_FILTER_VALUE) {
+            params.delete(DATE_FILTER_NAME);
+        } else {
+            params.set(DATE_FILTER_NAME, selectedDate);
+        }
+        if (selectedCar === NO_FILTER_VALUE) {
+            params.delete(CAR_FILTER_NAME);
+        } else {
+            params.set(CAR_FILTER_NAME, selectedCar);
+        }
+        if (selectedCity === NO_FILTER_VALUE) {
+            params.delete(CITY_FILTER_NAME);
+        } else {
+            params.set(CITY_FILTER_NAME, selectedCity);
+        }
+        if (selectedStatus === NO_FILTER_VALUE) {
+            params.delete(STATUS_FILTER_NAME);
+        } else {
+            params.set(STATUS_FILTER_NAME, selectedStatus);
+        }
+
+        history.push(`/${ADMIN_APP_URL}/${ORDER_LIST_APP_URL}/?${params}`);
+    }
 
     return (
         <div className="order_filters">
@@ -73,7 +106,7 @@ function OrderFilters() {
             </div>
             <div className="order_filters__control_block">
                 <button className="button button_red">Сброс</button>
-                <button className="button button_blue">Применить</button>
+                <button className="button button_blue" onClick={handleApplyFilters}>Применить</button>
             </div>
         </div>
     );
