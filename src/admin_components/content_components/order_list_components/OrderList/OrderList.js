@@ -45,8 +45,8 @@ function OrderList() {
         dispatch(loadOrderList(page, date, car, city, status))
             .then(() => setDone(true))
             .catch(err => {
-                setDone(true);
                 setError(err);
+                setDone(true);
             });
     }, [location]);
 
@@ -60,7 +60,7 @@ function OrderList() {
                             <h1 className="order_list__caption">Заказы</h1>
                             <div className="order_list__content">
                                 <OrderFilters/>
-                                {items.length > 0 &&
+                                {items && items.length > 0 &&
                                 <>
                                     <ul>
                                         {items.map(item => <OrderCard key={item.id} order={item}/>)}

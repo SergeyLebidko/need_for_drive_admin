@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Selector.scss';
 
-function Selector({items, defaultItem, handleSelect}) {
+function Selector({items, value, handleSelect}) {
     const handleChange = event => handleSelect(event.target.value);
 
-    // TODO Удалить тернарный оператор из defaultValue
     return (
-        <select onChange={handleChange} defaultValue={defaultItem ? defaultItem.value : null} className="selector">
+        <select onChange={handleChange} value={value} className="selector">
             {items.map(
                 item =>
                     <option key={item.value} value={item.value}>
@@ -20,7 +19,7 @@ function Selector({items, defaultItem, handleSelect}) {
 
 Selector.propTypes = {
     items: PropTypes.array,
-    defaultItem: PropTypes.object,
+    value: PropTypes.string,
     handleSelect: PropTypes.func
 }
 

@@ -26,17 +26,24 @@ import {getCatalog} from '../../../../store/selectors';
 import './OrderFilters.scss';
 
 function OrderFilters() {
-    let [selectedDate, setSelectedDate] = useState(NO_FILTER_VALUE);
-    let [selectedCar, setSelectedCar] = useState(NO_FILTER_VALUE);
-    let [selectedCity, setSelectedCity] = useState(NO_FILTER_VALUE);
-    let [selectedStatus, setSelectedStatus] = useState(NO_FILTER_VALUE);
+    const location = useLocation();
+    const history = useHistory();
+
+    // Учитываем, что при вводе в адресную строку готового URL в нём уже могут быть фильтры, которые надо учесть
+    const searchParams = new URLSearchParams(location.search);
+    const defaultDate = searchParams.get(DATE_FROM_FILTER_NAME);
+    const defaultCar = searchParams.get(CAR_FILTER_NAME);
+    const defaultCity = searchParams.get(CITY_FILTER_NAME);
+    const defaultStatus = searchParams.get(STATUS_FILTER_NAME);
+
+    let [selectedDate, setSelectedDate] = useState(defaultDate ? defaultDate : NO_FILTER_VALUE);
+    let [selectedCar, setSelectedCar] = useState(defaultCar ? defaultCar : NO_FILTER_VALUE);
+    let [selectedCity, setSelectedCity] = useState(defaultCity ? defaultCity : NO_FILTER_VALUE);
+    let [selectedStatus, setSelectedStatus] = useState(defaultStatus ? defaultStatus : NO_FILTER_VALUE);
 
     const carList = useSelector(getCatalog(CAR_LIST_CATALOG));
     const cityList = useSelector(getCatalog(CITY_LIST_CATALOG));
     const statusList = useSelector(getCatalog(STATUS_LIST_CATALOG));
-
-    const location = useLocation();
-    const history = useHistory();
 
     // Готовим данные для селектора времени
     const dateSelectorItems = [
@@ -102,16 +109,20 @@ function OrderFilters() {
 
     // Обработчик сброса фильтров
     const handleResetFilters = () => {
+        setSelectedDate(NO_FILTER_VALUE);
+        setSelectedCar(NO_FILTER_VALUE);
+        setSelectedCity(NO_FILTER_VALUE);
+        setSelectedStatus(NO_FILTER_VALUE);
         history.push(`/${ADMIN_APP_URL}/${ORDER_LIST_APP_URL}/?${PAGE_FILTER_NAME}=0`);
     }
 
     return (
         <div className="order_filters">
             <div className="order_filters__selectors_block">
-                <Selector items={dateSelectorItems} handleSelect={handleDateSelect}/>
-                <Selector items={carSelectorItems} handleSelect={handleCarSelect}/>
-                <Selector items={citySelectorItems} handleSelect={handleCitySelect}/>
-                <Selector items={statusSelectorItems} handleSelect={handleStatusSelect}/>
+                <Selector items={dateSelectorItems} handleSelect={handleDateSelect} value={selectedDate}/>
+                <Selector items={carSelectorItems} handleSelect={handleCarSelect} value={selectedCar}/>
+                <Selector items={citySelectorItems} handleSelect={handleCitySelect} value={selectedCity}/>
+                <Selector items={statusSelectorItems} handleSelect={handleStatusSelect} value={selectedStatus}/>
             </div>
             <div className="order_filters__control_block">
                 <button className="button button_red" onClick={handleResetFilters}>Сброс</button>
