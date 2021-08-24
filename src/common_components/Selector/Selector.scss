@@ -1,0 +1,12 @@
+@import '../../styles/vars';
+
+.selector {
+  font-size: 1.5em;
+  appearance: none;
+
+  option {
+    color: $white;
+    background-color: gray;
+    font-size: 1.5em;
+  }
+}
