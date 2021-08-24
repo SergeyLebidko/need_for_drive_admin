@@ -1,11 +1,33 @@
 @import '../../../../styles/vars';
+@import '../../../../styles/common_presets';
 @import '../../../../common_components/Selector/Selector';
 
 .order_filters {
   padding: $step * 2;
   border-bottom: 1px solid $separator-color;
+  display: flex;
+  flex-wrap: wrap;
 
   .selector + .selector {
     margin-left: $step;
+  }
+
+  .button {
+    width: 10em;
+  }
+
+  .button + .button {
+    margin-left: $step;
+  }
+
+  &__selectors_block {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__control_block {
+    margin-left: auto;
+    display: flex;
+    flex-wrap: wrap;
   }
 }

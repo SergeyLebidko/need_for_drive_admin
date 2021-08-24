@@ -41,7 +41,7 @@ function OrderFilters() {
 
     // Готовим данные для селектора моделей авто
     const carSelectorItems = [{name: 'Все модели', value: NO_FILTER_VALUE}];
-    for (let {id, name} of carList)carSelectorItems.push({name, value: id});
+    for (let {id, name} of carList) carSelectorItems.push({name, value: id});
 
     const handleCarSelect = value => setSelectedCar(value);
 
@@ -65,10 +65,16 @@ function OrderFilters() {
 
     return (
         <div className="order_filters">
-            <Selector items={dateSelectorItems} handleSelect={handleDateSelect}/>
-            <Selector items={carSelectorItems} handleSelect={handleCarSelect}/>
-            <Selector items={citySelectorItems} handleSelect={handleCitySelect}/>
-            <Selector items={statusSelectorItems} handleSelect={handleStatusSelect}/>
+            <div className="order_filters__selectors_block">
+                <Selector items={dateSelectorItems} handleSelect={handleDateSelect}/>
+                <Selector items={carSelectorItems} handleSelect={handleCarSelect}/>
+                <Selector items={citySelectorItems} handleSelect={handleCitySelect}/>
+                <Selector items={statusSelectorItems} handleSelect={handleStatusSelect}/>
+            </div>
+            <div className="order_filters__control_block">
+                <button className="button button_red">Сброс</button>
+                <button className="button button_blue">Применить</button>
+            </div>
         </div>
     );
 }
