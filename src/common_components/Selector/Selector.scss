@@ -5,13 +5,13 @@
   position: relative;
   border: 1px solid $gray-light;
   border-radius: $small-radius;
-  background-color: blue;
-  padding: $step ($step * 2);
+  background-color: $white;
+  padding: $step ($step * 4) $step ($step * 2);
   outline: none;
   color: $gray;
-  background-image: url('../../content/images/checked.svg');
+  background-image: url('../../content/images/selector.svg');
   background-repeat: no-repeat;
-  background-position: right center;
+  background-position: 90% 50%;
 
   option {
     font-size: 1em;
