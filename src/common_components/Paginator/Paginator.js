@@ -13,7 +13,7 @@ function Paginator() {
     const params = new URLSearchParams(location.search);
 
     const firstPageNumber = 0;
-    const lastPageNumber = Math.floor(count / LIMIT);
+    const lastPageNumber = count % LIMIT ? Math.floor(count / LIMIT) : Math.floor(count / LIMIT) - 1;
 
     let hasFirstDot = false;
     let hasSecondDot = false;
