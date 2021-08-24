@@ -6,10 +6,19 @@ import {ReactComponent as MenuItemIcon} from './content/images/menu_item_icon.sv
 // Размер страницы данных
 export const LIMIT = 10;
 
-// Имена каталогов
+// Имена каталогов со справочной информацией
 export const STATUS_LIST_CATALOG = 'status_list_catalog';
 export const CAR_LIST_CATALOG = 'car_list_catalog';
 export const CITY_LIST_CATALOG = 'city_list_catalog';
+
+// Пресеты для фильтров по времени
+export const NO_FILTER_VALUE = 'no_filter_value';
+export const PER_DAY = 'per_day';
+export const PER_WEEK = 'per_week';
+export const PER_MONTH = 'per_month';
+export const BEGIN_DAY = 'begin_day';
+export const BEGIN_WEEK = 'begin_week';
+export const BEGIN_MONTH = 'begin_month';
 
 // TODO При реализации функциональности дополнить список пунктами меню для переходов на уже реализованные компоненты
 export const MENU_ITEMS = [
