@@ -9,6 +9,7 @@ import Paginator from '../../../../common_components/Paginator/Paginator';
 import OrderCard from '../OrderCard/OrderCard';
 import {loadOrderList} from '../../../../store/actionCreators';
 import {getFrame} from '../../../../store/selectors';
+import {ADMIN_APP_URL, ORDER_LIST_APP_URL} from '../../../../urls';
 import './OrderList.scss';
 
 function OrderList() {
@@ -25,7 +26,7 @@ function OrderList() {
     // При монтировании компонента - получаем с сервера список заказов
     useEffect(() => {
         // Предотвращаем выполнение ненужных действий, если компонент размонтирован
-        if (location.pathname !== '/admin/orders') return;
+        if (location.pathname !== `/${ADMIN_APP_URL}/${ORDER_LIST_APP_URL}`) return;
 
         const page = new URLSearchParams(location.search).get('page');
         dispatch(loadOrderList(page))
