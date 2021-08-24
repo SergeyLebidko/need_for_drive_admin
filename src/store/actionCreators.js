@@ -35,11 +35,11 @@ export function setCatalog(catalogName, catalogData) {
 }
 
 // Создатель действия для загрузки списка заказов
-export function loadOrderList(page) {
+export function loadOrderList(page, date, car, city, status) {
     return async (dispatch, getState) => {
         // Загружаем список заказов
         const _page = getCorrectPage(page);
-        const orderList = await fetchOrderList(_page);
+        const orderList = await fetchOrderList(_page, date, car, city, status);
         dispatch(setFrame({count: orderList.count, data: orderList.data, page: _page}));
 
 

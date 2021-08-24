@@ -1,4 +1,11 @@
-import {LIMIT} from '../settings';
+import {
+    LIMIT,
+    LIMIT_FILTER_NAME,
+    PAGE_FILTER_NAME,
+    CAR_FILTER_NAME,
+    CITY_FILTER_NAME,
+    STATUS_FILTER_NAME
+} from '../settings';
 import {DEFAULT_REQUEST_HEADERS, ORDER_URL, STATUS_LIST_URL, CAR_LIST_URL, CITY_LIST_URL} from '../urls';
 
 async function executeFetch(url, options = {}) {
@@ -25,8 +32,23 @@ async function executeFetch(url, options = {}) {
     return await response.json();
 }
 
-export async function fetchOrderList(page) {
-    return await executeFetch(`${ORDER_URL}/?limit=${LIMIT}&page=${page}`);
+export async function fetchOrderList(page, date, car, city, status) {
+    const params = new URLSearchParams();
+
+    params.set(LIMIT_FILTER_NAME, '' + LIMIT);
+    params.set(PAGE_FILTER_NAME, '' + page);
+
+    if (car) params.set(CAR_FILTER_NAME, '' + car);
+    if (city) params.set(CITY_FILTER_NAME, '' + city);
+    if (status) params.set(STATUS_FILTER_NAME, '' + status);
+
+    const url = `${ORDER_URL}/?${params}`;
+
+    // TODO Тестовый вывод
+    console.log('date for fetch', date);
+    console.log('URL for fetch', url);
+
+    return await executeFetch(url);
 }
 
 export async function fetchStatusList() {

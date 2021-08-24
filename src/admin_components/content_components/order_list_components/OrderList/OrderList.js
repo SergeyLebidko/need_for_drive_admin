@@ -10,7 +10,13 @@ import OrderCard from '../OrderCard/OrderCard';
 import {loadOrderList} from '../../../../store/actionCreators';
 import {getFrame} from '../../../../store/selectors';
 import {ADMIN_APP_URL, ORDER_LIST_APP_URL} from '../../../../urls';
-import {PAGE_FILTER_NAME} from '../../../../settings';
+import {
+    PAGE_FILTER_NAME,
+    DATE_FILTER_NAME,
+    CAR_FILTER_NAME,
+    CITY_FILTER_NAME,
+    STATUS_FILTER_NAME
+} from '../../../../settings';
 import './OrderList.scss';
 
 function OrderList() {
@@ -31,7 +37,12 @@ function OrderList() {
 
         const params = new URLSearchParams(location.search);
         const page = params.get(PAGE_FILTER_NAME);
-        dispatch(loadOrderList(page))
+        const date = params.get(DATE_FILTER_NAME);
+        const car = params.get(CAR_FILTER_NAME);
+        const city = params.get(CITY_FILTER_NAME);
+        const status = params.get(STATUS_FILTER_NAME);
+
+        dispatch(loadOrderList(page, date, car, city, status))
             .then(() => setDone(true))
             .catch(err => {
                 setDone(true);
