@@ -1,6 +1,11 @@
 @import '../../../../styles/vars';
+@import '../../../../common_components/Selector/Selector';
 
 .order_filters {
   padding: $step * 2;
   border-bottom: 1px solid $separator-color;
+
+  .selector + .selector {
+    margin-left: $step;
+  }
 }
