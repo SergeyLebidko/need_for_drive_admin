@@ -9,7 +9,8 @@ import {
     BEGIN_DAY,
     BEGIN_MONTH,
     BEGIN_WEEK,
-    CAR_LIST_CATALOG
+    CAR_LIST_CATALOG,
+    CITY_LIST_CATALOG
 } from '../../../../settings';
 import {getCatalog} from '../../../../store/selectors';
 import './OrderFilters.scss';
@@ -17,8 +18,10 @@ import './OrderFilters.scss';
 function OrderFilters() {
     let [selectedDateValue, setSelectedDateValue] = useState(NO_FILTER_VALUE);
     let [selectedCarValue, setSelectedCarValue] = useState(NO_FILTER_VALUE);
+    let [selectedCityValue, setSelectedCityValue] = useState(NO_FILTER_VALUE);
 
     const carList = useSelector(getCatalog(CAR_LIST_CATALOG));
+    const cityList = useSelector(getCatalog(CITY_LIST_CATALOG));
 
     // Готовим данные для селектора времени
     const dateSelectorItems = [
@@ -39,14 +42,22 @@ function OrderFilters() {
 
     const handleCarSelect = value => setSelectedCarValue(value);
 
+    // Готовим данные для селектора городов
+    const citySelectorItems = [{name: 'Любой город', value: NO_FILTER_VALUE}];
+    for (let {id, name} of cityList) citySelectorItems.push({name, value: id});
+
+    const handleCitySelector = value => setSelectedCityValue(value);
+
     // TODO Удалить тестовые выводы в консоль
     console.log(selectedDateValue);
     console.log(selectedCarValue);
+    console.log(selectedCityValue);
 
     return (
         <div className="order_filters">
             <Selector items={dateSelectorItems} handleSelect={handleDateSelect}/>
             <Selector items={carSelectorItems} handleSelect={handleCarSelect}/>
+            <Selector items={citySelectorItems} handleSelect={handleCitySelector}/>
         </div>
     );
 }
