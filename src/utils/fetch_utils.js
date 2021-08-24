@@ -27,14 +27,14 @@ function prepareDateRange(dateFilterValue) {
     const now = Date.now();
     switch (dateFilterValue) {
         case PER_DAY:
-            return now - msInDay;
+            return [now - msInDay, now];
         case PER_WEEK:
-            return now - msInWeek;
+            return [now - msInWeek, now];
         case PER_MONTH:
-            return now - msInMonth;
+            return [now - msInMonth, now];
         case BEGIN_DAY: {
             const [year, mon, day] = extractDateParts(new Date(now));
-            return +(new Date(year, mon, day));
+            return [+(new Date(year, mon, day)), null];
         }
         case BEGIN_WEEK: {
             const _now = new Date(now);
@@ -42,14 +42,14 @@ function prepareDateRange(dateFilterValue) {
 
             // Учитываем, что в js неделя начинается с воскресения, а в РФ - с понедельника :)
             const numberDay = _now.getDay() ? _now.getDay() - 1 : 6;
-            return now - ((numberDay * msInDay) + (hour * msInHour) + (min * msInMin) + (sec * msInSec) + ms);
+            return [now - ((numberDay * msInDay) + (hour * msInHour) + (min * msInMin) + (sec * msInSec) + ms), null];
         }
         case BEGIN_MONTH: {
             const [year, mon] = extractDateParts(new Date(now));
-            return +(new Date(year, mon));
+            return [+(new Date(year, mon)), null];
         }
         default:
-            return null;
+            return [null, null];
     }
 }
 
@@ -87,8 +87,9 @@ export async function fetchOrderList(page, date, car, city, status) {
     if (city) params.set(CITY_FILTER_NAME, '' + city);
     if (status) params.set(STATUS_FILTER_NAME, '' + status);
     if (date) {
-        const dateFrom = prepareDateRange(date);
+        const [dateFrom, dateTo] = prepareDateRange(date);
         if (dateFrom) params.set(`${DATE_FROM_FILTER_NAME}[$gt]`, dateFrom);
+        if (dateTo) params.set(`${DATE_FROM_FILTER_NAME}[$lt]`, dateTo);
     }
     return await executeFetch(`${ORDER_URL}/?${params}`);
 }

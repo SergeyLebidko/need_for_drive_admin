@@ -42,11 +42,11 @@ function OrderFilters() {
     const dateSelectorItems = [
         {name: 'За все время', value: NO_FILTER_VALUE},
         {name: 'С начала текущего дня', value: BEGIN_DAY},
-        {name: 'За сутки', value: PER_DAY},
+        {name: 'За прошедшие сутки', value: PER_DAY},
         {name: 'С начала текущей недели', value: BEGIN_WEEK},
-        {name: 'За неделю', value: PER_WEEK},
+        {name: 'За прошедшую неделю (7 суток)', value: PER_WEEK},
         {name: 'С начала текущего месяца', value: BEGIN_MONTH},
-        {name: 'За месяц (30 дней)', value: PER_MONTH},
+        {name: 'За прошедший месяц (30 суток)', value: PER_MONTH},
     ];
 
     const handleDateSelect = value => setSelectedDate(value);
@@ -100,6 +100,11 @@ function OrderFilters() {
         history.push(`/${ADMIN_APP_URL}/${ORDER_LIST_APP_URL}/?${params}`);
     }
 
+    // Обработчик сброса фильтров
+    const handleResetFilters = () => {
+        history.push(`/${ADMIN_APP_URL}/${ORDER_LIST_APP_URL}/?${PAGE_FILTER_NAME}=0`);
+    }
+
     return (
         <div className="order_filters">
             <div className="order_filters__selectors_block">
@@ -109,7 +114,7 @@ function OrderFilters() {
                 <Selector items={statusSelectorItems} handleSelect={handleStatusSelect}/>
             </div>
             <div className="order_filters__control_block">
-                <button className="button button_red">Сброс</button>
+                <button className="button button_red" onClick={handleResetFilters}>Сброс</button>
                 <button className="button button_blue" onClick={handleApplyFilters}>Применить</button>
             </div>
         </div>
