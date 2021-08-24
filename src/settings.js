@@ -20,10 +20,10 @@ export const BEGIN_DAY = 'begin_day';
 export const BEGIN_WEEK = 'begin_week';
 export const BEGIN_MONTH = 'begin_month';
 
-// Названия фильтров (все, за исключением фильтра дат, используются и в адресах страниц сайта и в сетевых запросах на бэк)
+// Названия фильтров
 export const LIMIT_FILTER_NAME = 'limit';
 export const PAGE_FILTER_NAME = 'page';
-export const DATE_FILTER_NAME = 'date';
+export const DATE_FROM_FILTER_NAME = 'dateFrom';
 export const CAR_FILTER_NAME = 'carId';
 export const CITY_FILTER_NAME = 'cityId';
 export const STATUS_FILTER_NAME = 'orderStatusId';

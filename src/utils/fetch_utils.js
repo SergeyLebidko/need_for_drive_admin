@@ -1,16 +1,27 @@
 import {
     LIMIT,
     LIMIT_FILTER_NAME,
-    DATE_FILTER_NAME,
+    DATE_FROM_FILTER_NAME,
     PAGE_FILTER_NAME,
     CAR_FILTER_NAME,
     CITY_FILTER_NAME,
-    STATUS_FILTER_NAME
+    STATUS_FILTER_NAME,
+    PER_DAY,
+    PER_WEEK,
+    PER_MONTH,
+    BEGIN_DAY,
+    BEGIN_WEEK,
+    BEGIN_MONTH
 } from '../settings';
 import {DEFAULT_REQUEST_HEADERS, ORDER_URL, STATUS_LIST_URL, CAR_LIST_URL, CITY_LIST_URL} from '../urls';
 
-function prepareDateRange(dateFilterValue){
+function prepareDateRange(dateFilterValue) {
+    switch (dateFilterValue) {
+        case :
 
+        default:
+            return null;
+    }
 }
 
 async function executeFetch(url, options = {}) {
@@ -46,6 +57,10 @@ export async function fetchOrderList(page, date, car, city, status) {
     if (car) params.set(CAR_FILTER_NAME, '' + car);
     if (city) params.set(CITY_FILTER_NAME, '' + city);
     if (status) params.set(STATUS_FILTER_NAME, '' + status);
+    if (date) {
+        const dateFrom = prepareDateRange(date);
+        if (dateFrom) params.set(`${DATE_FROM_FILTER_NAME}[$gt]`, dateFrom);
+    }
 
     const url = `${ORDER_URL}/?${params}`;
 

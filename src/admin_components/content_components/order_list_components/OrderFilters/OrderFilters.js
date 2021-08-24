@@ -13,7 +13,7 @@ import {
     CAR_LIST_CATALOG,
     CITY_LIST_CATALOG,
     STATUS_LIST_CATALOG,
-    DATE_FILTER_NAME,
+    DATE_FROM_FILTER_NAME,
     CAR_FILTER_NAME,
     CITY_FILTER_NAME,
     STATUS_FILTER_NAME
@@ -73,9 +73,9 @@ function OrderFilters() {
         const params = new URLSearchParams(location.search);
 
         if (selectedDate === NO_FILTER_VALUE) {
-            params.delete(DATE_FILTER_NAME);
+            params.delete(DATE_FROM_FILTER_NAME);
         } else {
-            params.set(DATE_FILTER_NAME, selectedDate);
+            params.set(DATE_FROM_FILTER_NAME, selectedDate);
         }
         if (selectedCar === NO_FILTER_VALUE) {
             params.delete(CAR_FILTER_NAME);

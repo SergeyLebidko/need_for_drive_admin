@@ -12,7 +12,7 @@ import {getFrame} from '../../../../store/selectors';
 import {ADMIN_APP_URL, ORDER_LIST_APP_URL} from '../../../../urls';
 import {
     PAGE_FILTER_NAME,
-    DATE_FILTER_NAME,
+    DATE_FROM_FILTER_NAME,
     CAR_FILTER_NAME,
     CITY_FILTER_NAME,
     STATUS_FILTER_NAME
@@ -37,7 +37,7 @@ function OrderList() {
 
         const params = new URLSearchParams(location.search);
         const page = params.get(PAGE_FILTER_NAME);
-        const date = params.get(DATE_FILTER_NAME);
+        const date = params.get(DATE_FROM_FILTER_NAME);
         const car = params.get(CAR_FILTER_NAME);
         const city = params.get(CITY_FILTER_NAME);
         const status = params.get(STATUS_FILTER_NAME);
