@@ -1,12 +1,17 @@
 import {
     LIMIT,
     LIMIT_FILTER_NAME,
+    DATE_FILTER_NAME,
     PAGE_FILTER_NAME,
     CAR_FILTER_NAME,
     CITY_FILTER_NAME,
     STATUS_FILTER_NAME
 } from '../settings';
 import {DEFAULT_REQUEST_HEADERS, ORDER_URL, STATUS_LIST_URL, CAR_LIST_URL, CITY_LIST_URL} from '../urls';
+
+function prepareDateRange(dateFilterValue){
+
+}
 
 async function executeFetch(url, options = {}) {
     let {headers} = options;
