@@ -1,14 +1,18 @@
 import React, {useState, useRef} from 'react';
 import classNames from 'classnames';
 import {useSelector} from 'react-redux';
+import {useHistory} from 'react-router-dom';
 import {ReactComponent as DownArrow} from '../../../content/images/down.svg';
 import userPicture from '../../../content/images/user.jpeg';
 import {getUsername} from '../../../store/selectors';
+import {logout} from '../../../utils/fetch_utils';
+import {LOGIN_APP_URL} from '../../../urls';
 import './UserPane.scss';
 
 function UserPane() {
     let [hasPopup, setHasPopup] = useState(false);
     const username = useSelector(getUsername);
+    const history = useHistory();
     const popupTimer = useRef(null);
 
     const handleElementClick = () => setHasPopup(oldVal => !oldVal);
@@ -20,6 +24,13 @@ function UserPane() {
 
     const handlePaneOver = () => clearTimeout(popupTimer.current);
 
+    const handleLogoutClick = () => {
+        logout().then(() => {
+            console.log('Сработало');
+            history.push(`/${LOGIN_APP_URL}`)
+        });
+    }
+
     const popupClasses = classNames('user_pane__popup', {'visible_popup': hasPopup});
 
     return (
@@ -28,7 +39,7 @@ function UserPane() {
             <span className="user_pane__name" onClick={handleElementClick}>{username}</span>
             <DownArrow onClick={handleElementClick}/>
             <div className={popupClasses}>
-                <span>Выход</span>
+                <span onClick={handleLogoutClick}>Выход</span>
             </div>
         </div>
     );

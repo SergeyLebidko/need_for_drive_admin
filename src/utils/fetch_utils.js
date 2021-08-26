@@ -19,8 +19,8 @@ import {
     STATUS_URL,
     CAR_URL,
     CITY_URL,
-    AUTHORIZATION_URL,
-    CHECK_URL
+    LOGIN_URL,
+    CHECK_URL, LOGOUT_URL
 } from '../urls';
 import {extractDateParts, getRandomString} from './common_utils';
 import utf8 from 'utf8';
@@ -77,7 +77,11 @@ function getAuthorizationData() {
     return {basic, accessToken, refreshToken};
 }
 
-function getAuthorizationHeaders(){
+function removeAuthorizationData() {
+    cookie.remove(['basic', 'access_token', 'refresh_token']);
+}
+
+function getAuthorizationHeaders() {
     const {accessToken} = getAuthorizationData();
     return {headers: {'Authorization': `Bearer ${accessToken}`}};
 }
@@ -99,6 +103,7 @@ async function executeFetch(url, options = {}) {
         const text = await response.text();
         return Promise.reject({httpStatus: response.status, httpText: text});
     }
+    if (response.status === 204) return;
     return await response.json();
 }
 
@@ -116,7 +121,7 @@ export async function login(loginValue, passwordValue) {
         method: 'POST'
     }
 
-    const {access_token: accessToken, refresh_token: refreshToken} = await executeFetch(AUTHORIZATION_URL, options);
+    const {access_token: accessToken, refresh_token: refreshToken} = await executeFetch(LOGIN_URL, options);
     setAuthorizationData(basic, accessToken, refreshToken);
 }
 
@@ -136,6 +141,12 @@ export async function checkAuthorization() {
         if (err.httpStatus === 401) return null;
         throw err
     }
+}
+
+export async function logout() {
+    const options = {method: 'POST', ...getAuthorizationHeaders()};
+    await executeFetch(LOGOUT_URL, options);
+    removeAuthorizationData();
 }
 
 export async function fetchOrderList(page, date, car, city, status) {
