@@ -59,7 +59,7 @@ async function executeFetch(url, options = {}) {
 
     // TODO При реализации авторизации создать код подстановки токена пользователя.
     // Сейчас временно использую access-токен полученный с помощью из Insomnia
-    headers = {...headers, 'Authorization': 'Bearer b8524cc83224df94606279ce4296beff6c6e948d'};
+    headers = {...headers, 'Authorization': 'Bearer de45548d78add84919b333d27412d16810a19859'};
 
     const _options = {...options, headers};
 
