@@ -34,6 +34,14 @@ export function setCatalog(catalogName, catalogData) {
     }
 }
 
+// Создатель действия для сохранения полученного от бэка имени пользователя
+export function setUsername(username){
+    return {
+        type: act.SET_USERNAME,
+        username
+    }
+}
+
 // Создатель действия для загрузки списка заказов
 export function loadOrderList(page, date, car, city, status) {
     return async (dispatch, getState) => {

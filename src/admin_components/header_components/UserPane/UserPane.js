@@ -1,12 +1,15 @@
 import React, {useState, useRef} from 'react';
 import classNames from 'classnames';
+import {useSelector} from 'react-redux';
 import {ReactComponent as DownArrow} from '../../../content/images/down.svg';
 import userPicture from '../../../content/images/user.jpeg';
+import {getUsername} from '../../../store/selectors';
 import './UserPane.scss';
 
 function UserPane() {
     let [hasPopup, setHasPopup] = useState(false);
-    let popupTimer = useRef(null);
+    const username = useSelector(getUsername);
+    const popupTimer = useRef(null);
 
     const handleElementClick = () => setHasPopup(oldVal => !oldVal);
 
@@ -22,7 +25,7 @@ function UserPane() {
     return (
         <div className="user_pane" onMouseOver={handlePaneOver} onMouseLeave={handlePaneLeave}>
             <img src={userPicture} className="user_pane__photo" alt="Пользователь" onClick={handleElementClick}/>
-            <span className="user_pane__name" onClick={handleElementClick}>Admin</span>
+            <span className="user_pane__name" onClick={handleElementClick}>{username}</span>
             <DownArrow onClick={handleElementClick}/>
             <div className={popupClasses}>
                 <span>Выход</span>

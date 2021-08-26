@@ -19,9 +19,18 @@ export function frame(state = null, action) {
 }
 
 export function catalog(state = {}, action) {
-    switch (action.type){
+    switch (action.type) {
         case act.SET_CATALOG:
             return {...state, [action.catalogName]: action.catalogData}
+        default:
+            return state;
+    }
+}
+
+export function username(state = null, action) {
+    switch (action.type) {
+        case act.SET_USERNAME:
+            return action.username;
         default:
             return state;
     }

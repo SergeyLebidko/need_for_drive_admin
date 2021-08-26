@@ -10,7 +10,7 @@ import {useDispatch} from 'react-redux';
 import {LOGIN_APP_URL} from '../urls';
 import {MENU_ITEMS} from '../settings';
 import {checkAuthorization} from '../utils/fetch_utils';
-import {setMenuItems} from '../store/actionCreators';
+import {setMenuItems, setUsername} from '../store/actionCreators';
 import './Admin.scss';
 
 function Admin() {
@@ -29,6 +29,7 @@ function Admin() {
                     return;
                 }
                 dispatch(setMenuItems(MENU_ITEMS));
+                dispatch(setUsername(username));
                 setHasAuthProcess(false);
             })
             .catch(err => {
