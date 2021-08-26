@@ -4,8 +4,10 @@ import BrandStamp, {LARGE_STAMP} from '../common_components/BrandStamp/BrandStam
 import TextField, {TEXT, PASSWORD} from '../common_components/TextField/TextField';
 import {login} from '../utils/fetch_utils';
 import './Login.scss';
+import Preloader from "../common_components/Preloader/Preloader";
 
 function Login() {
+    let [hasLoginProcess, setHasLoginProcess] = useState(false);
     let [loginValue, setLoginValue] = useState('');
     let [passwordValue, setPasswordValue] = useState('');
     let [loginErrorText, setLoginErrorText] = useState(null);
@@ -24,19 +26,29 @@ function Login() {
         if (nextValue !== '' && !!passwordErrorText) setPasswordErrorText('');
     };
 
-    // TODO При реализации функциональности добавить код процедуры авторизации
     const handleLoginButtonClick = () => {
         const hasError = loginValue === '' || passwordValue === '';
         if (loginValue === '') setLoginErrorText('Обязательное поле');
         if (passwordValue === '') setPasswordErrorText('Обязательно поле');
         if (hasError) return;
 
+        setHasLoginProcess(true);
         login(loginValue, passwordValue)
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
+            .then(() => {
+                setHasLoginProcess(false);
+            })
+            .catch(err => {
+                if (err.httpStatus === 401) {
+                    setLoginErrorText('Возможно, не верный логин');
+                    setPasswordErrorText('Возможно, не верный пароль');
+                }
+                setHasLoginProcess(false);
+            });
 
         // history.push('/admin');
     };
+
+    if (hasLoginProcess) return <Preloader/>;
 
     return (
         <div className="login">
