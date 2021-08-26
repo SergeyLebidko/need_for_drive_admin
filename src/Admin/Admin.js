@@ -3,15 +3,15 @@ import Menu from '../admin_components/menu_components/Menu/Menu';
 import AdminHeader from '../admin_components/header_components/AdminHeader/AdminHeader';
 import AdminContent from '../admin_components/content_components/AdminContent/AdminContent';
 import AdminFooter from '../admin_components/footer_components/AdminFooter/AdminFooter';
-import {useDispatch} from 'react-redux';
-import {MENU_ITEMS} from '../settings';
-import {setMenuItems} from '../store/actionCreators';
 import Preloader from '../common_components/Preloader/Preloader';
-import {checkAuthorization} from '../utils/fetch_utils';
+import ErrorPane from '../common_components/ErrorPane/ErrorPane';
 import {useHistory} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
 import {LOGIN_APP_URL} from '../urls';
+import {MENU_ITEMS} from '../settings';
+import {checkAuthorization} from '../utils/fetch_utils';
+import {setMenuItems} from '../store/actionCreators';
 import './Admin.scss';
-import ErrorPane from "../common_components/ErrorPane/ErrorPane";
 
 function Admin() {
     const [hasAuthProcess, setHasAuthProcess] = useState(true);
@@ -20,12 +20,15 @@ function Admin() {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    // Проверяем наличие учетных данных и если они есть - готовим данные меню
     useEffect(() => {
-        dispatch(setMenuItems(MENU_ITEMS));
-
         checkAuthorization()
             .then(username => {
-                if (!username) goLogin();
+                if (!username) {
+                    goLogin();
+                    return;
+                }
+                dispatch(setMenuItems(MENU_ITEMS));
                 setHasAuthProcess(false);
             })
             .catch(err => {
