@@ -7,12 +7,11 @@ import {LOGIN_APP_URL, ADMIN_APP_URL} from './urls';
 import 'dotenv';
 
 function App() {
-    // TODO Для тестирования верстки сразу же переключаем пользователя на страницу логина. В будущем - пересмотреть поведение
     return (
         <HashRouter>
             <Switch>
                 <Route exact path="/">
-                    <Redirect to="/login"/>
+                    <Redirect to={`/${ADMIN_APP_URL}`}/>
                 </Route>
                 <Route path={`/${LOGIN_APP_URL}`} component={Login}/>
                 <Route path={`/${ADMIN_APP_URL}`} component={Admin}/>

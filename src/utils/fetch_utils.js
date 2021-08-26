@@ -16,10 +16,11 @@ import {
 import {
     DEFAULT_REQUEST_HEADERS,
     ORDER_URL,
-    STATUS_LIST_URL,
-    CAR_LIST_URL,
-    CITY_LIST_URL,
-    AUTHORIZATION_URL
+    STATUS_URL,
+    CAR_URL,
+    CITY_URL,
+    AUTHORIZATION_URL,
+    CHECK_URL
 } from '../urls';
 import {extractDateParts, getRandomString} from './common_utils';
 import utf8 from 'utf8';
@@ -69,6 +70,13 @@ function setAuthorizationData(basic, accessToken, refreshToken) {
     cookie.set('refresh_token', refreshToken);
 }
 
+function getAuthorizationData() {
+    const basic = cookie.get('basic');
+    const accessToken = cookie.get('access_token');
+    const refreshToken = cookie.get('refresh_token');
+    return {basic, accessToken, refreshToken};
+}
+
 async function executeFetch(url, options = {}) {
     let {headers} = options;
     headers = headers ? {...headers, ...DEFAULT_REQUEST_HEADERS} : DEFAULT_REQUEST_HEADERS;
@@ -89,23 +97,6 @@ async function executeFetch(url, options = {}) {
     return await response.json();
 }
 
-export async function fetchOrderList(page, date, car, city, status) {
-    const params = new URLSearchParams();
-
-    params.set(LIMIT_FILTER_NAME, '' + LIMIT);
-    params.set(PAGE_FILTER_NAME, '' + page);
-
-    if (car) params.set(CAR_FILTER_NAME, '' + car);
-    if (city) params.set(CITY_FILTER_NAME, '' + city);
-    if (status) params.set(STATUS_FILTER_NAME, '' + status);
-    if (date) {
-        const [dateFrom, dateTo] = prepareDateRange(date);
-        if (dateFrom) params.set(`${DATE_FROM_FILTER_NAME}[$gt]`, dateFrom);
-        if (dateTo) params.set(`${DATE_FROM_FILTER_NAME}[$lt]`, dateTo);
-    }
-    return await executeFetch(`${ORDER_URL}/?${params}`);
-}
-
 export async function login(loginValue, passwordValue) {
     const SALT_SIZE = 7;
     const basicUtf = utf8.encode(`${getRandomString(SALT_SIZE, true)}:${process.env.REACT_APP_SECRET}`);
@@ -124,14 +115,49 @@ export async function login(loginValue, passwordValue) {
     setAuthorizationData(basic, accessToken, refreshToken);
 }
 
+export async function checkAuthorization() {
+    const {basic, accessToken, refreshToken} = getAuthorizationData();
+    if (!basic || !accessToken || !refreshToken) return null;
+
+    const options = {
+        headers: {'Authorization': `Bearer ${accessToken}`},
+    }
+
+    let response;
+    try {
+        response = await executeFetch(CHECK_URL, options);
+        return response.username;
+    } catch (err) {
+        if (err.httpStatus === 401) return null;
+        throw err
+    }
+}
+
+export async function fetchOrderList(page, date, car, city, status) {
+    const params = new URLSearchParams();
+
+    params.set(LIMIT_FILTER_NAME, '' + LIMIT);
+    params.set(PAGE_FILTER_NAME, '' + page);
+
+    if (car) params.set(CAR_FILTER_NAME, '' + car);
+    if (city) params.set(CITY_FILTER_NAME, '' + city);
+    if (status) params.set(STATUS_FILTER_NAME, '' + status);
+    if (date) {
+        const [dateFrom, dateTo] = prepareDateRange(date);
+        if (dateFrom) params.set(`${DATE_FROM_FILTER_NAME}[$gt]`, dateFrom);
+        if (dateTo) params.set(`${DATE_FROM_FILTER_NAME}[$lt]`, dateTo);
+    }
+    return await executeFetch(`${ORDER_URL}/?${params}`);
+}
+
 export async function fetchStatusList() {
-    return await executeFetch(STATUS_LIST_URL);
+    return await executeFetch(STATUS_URL);
 }
 
 export async function fetchCarList() {
-    return await executeFetch(CAR_LIST_URL);
+    return await executeFetch(CAR_URL);
 }
 
 export async function fetchCityList() {
-    return await executeFetch(CITY_LIST_URL);
+    return await executeFetch(CITY_URL);
 }
