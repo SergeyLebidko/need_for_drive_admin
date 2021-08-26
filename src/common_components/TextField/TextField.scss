@@ -11,10 +11,6 @@
   &__input_block {
     position: relative;
 
-    input {
-      width: 100%;
-    }
-
     svg {
       width: 1.8em;
       height: 1.8em;
@@ -34,10 +30,28 @@
     }
   }
 
+  &__text_input {
+    width: 100%;
+    padding: $step ($step * 2);
+    outline: none;
+    border: 1px solid $gray-light;
+    border-radius: $small-radius;
+    font-size: 1em;
+  }
+
   &__error_text {
     color: $red;
     position: absolute;
     bottom: calc(-1em - 4px);
     left: $step * 2;
   }
+}
+
+.shifted_text_input {
+  padding-right: 2.5em;
+}
+
+.error_text_input {
+  border: 0.5px solid $red;
+  box-shadow: $error_shadow;
 }

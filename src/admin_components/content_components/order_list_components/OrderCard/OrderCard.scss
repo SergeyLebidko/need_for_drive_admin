@@ -1,0 +1,125 @@
+@import '../../../../styles/vars';
+@import '../OrderCardPhoto/OrderCardPhoto';
+@import '../OrderCardExtra/OrderCardExtra';
+@import '../OrderCardOptions/OrderCardOptions';
+@import '../OrderCardPrice/OrderCardPrice';
+@import '../OrderControlBlock/OrderControlBlock';
+
+.order_card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: $step * 2;
+
+  &__first_block {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 ($step * 4) 0;
+
+    .order_card_photo {
+      width: 100%;
+      margin: 0 0 ($step * 2) 0;
+    }
+
+    .order_card_extra {
+      width: 100%;
+    }
+  }
+
+  &__second_block {
+    display: flex;
+    flex-direction: column;
+
+    .order_card_options {
+      width: 100%;
+    }
+
+    .order_card_price {
+      width: 100%;
+      margin: ($step * 2) 0;
+    }
+
+    .order_control_block {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+
+@media (min-width: $tablet-start) and (max-width: $desktop-min-end) {
+  .order_card {
+    &__first_block {
+      flex-direction: row;
+      margin-bottom: $step * 4;
+
+      .order_card_photo {
+        flex: 1;
+      }
+
+      .order_card_extra {
+        margin: 0 0 0 ($step * 2);
+        flex: 1;
+        font-size: 0.9em;
+      }
+    }
+
+    &__second_block {
+      flex-direction: row;
+
+      .order_card_options {
+        flex: 1;
+      }
+
+      .order_card_price {
+        flex: 1;
+        margin: 0;
+      }
+
+      .order_control_block {
+        flex: 1;
+        justify-content: flex-end;
+      }
+    }
+  }
+}
+
+@media (min-width: $desktop-start){
+  .order_card {
+    flex-direction: row;
+
+    &__first_block {
+      flex-direction: row;
+      flex: 4;
+
+      .order_card_photo {
+        flex: 1;
+      }
+
+      .order_card_extra {
+        flex: 2;
+        margin-left: $step * 3;
+        font-size: 0.9em;
+      }
+    }
+
+    &__second_block {
+      flex-direction: row;
+      flex: 3;
+
+      .order_card_options {
+        flex: 1;
+      }
+
+      .order_card_price {
+        flex: 1;
+        margin: 0;
+      }
+
+      .order_control_block {
+        flex: 1;
+        justify-content: flex-end;
+      }
+    }
+  }
+}

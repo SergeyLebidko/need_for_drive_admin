@@ -1,0 +1,29 @@
+@import '../../../../styles/vars';
+
+.order_card_extra {
+
+  div + div {
+    margin-top: $step;
+  }
+
+  &__normal_text {
+    color: $gray;
+  }
+
+  &__strong_text {
+    color: $black;
+  }
+
+  &__place_block, &__dates_block {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (min-width: $desktop-start) {
+  .order_card_extra {
+    &__place_block, &__dates_block {
+      display: block;
+    }
+  }
+}

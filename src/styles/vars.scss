@@ -9,11 +9,13 @@ $blue-high-light: hsla(211, 100%, 70%, 1);
 $gray: hsla(0, 0%, 60%, 1);
 $gray-light: hsla(210, 23%, 79%, 1);
 $red: hsla(347, 78%, 43%, 1);
+$red-light: hsla(347, 78%, 53%, 1);
+$red-high-light: hsla(347, 78%, 63%, 1);
 $black: hsla(0, 0%, 7%, 1);
 $white: hsla(0, 0%, 100%, 1);
 
-$menu-separator:hsla(210, 23%, 90%, 1);
-$menu-selection-background: hsla(0, 0%, 98%, 1);
+$separator-color: hsla(210, 23%, 90%, 1);
+$menu-selection-background-color: hsla(0, 0%, 98%, 1);
 
 // Шаг сетки
 $step: 8px;
@@ -33,4 +35,7 @@ $mobile-end: 767px;
 $tablet-start: 768px;
 $tablet-end: 1023px;
 
-$desktop-start: 1024px;
+$desktop-min-start: 1024px;
+$desktop-min-end: 1439px;
+
+$desktop-start: 1440px;

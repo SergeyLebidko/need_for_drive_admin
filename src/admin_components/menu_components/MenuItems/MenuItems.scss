@@ -3,7 +3,7 @@
 .menu_items {
   max-height: 80vh;
   overflow: auto;
-  border-top: 1px solid $menu-separator;
+  border-top: 1px solid $separator-color;
 
   &::-webkit-scrollbar {
     width: 7px;

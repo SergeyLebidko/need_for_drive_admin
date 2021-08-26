@@ -24,7 +24,6 @@
     height: $step * 6;
     display: flex;
     align-items: center;
-    border-bottom: none;
     padding-left: 0;
   }
 }
@@ -41,6 +40,14 @@
 
 @media (min-width: $tablet-start) {
   .menu {
+    &__header {
+      height: $step * 8;
+    }
+  }
+}
+
+@media (min-width: $desktop-min-start) {
+  .menu {
     height: 100%;
     box-shadow: $main-shadow;
     width: $step * 28;
@@ -54,7 +61,6 @@
     }
 
     &__header {
-      height: $step * 8;
       padding-left: $step * 4;
     }
   }

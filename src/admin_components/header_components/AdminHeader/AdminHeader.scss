@@ -4,10 +4,10 @@
 
 .admin_header {
   height: $step * 6;
-  margin-left: 0;
   padding-left: $step * 6;
   background-color: $white;
   box-shadow: $main-shadow;
+  border-bottom: 1px solid $separator-color;
   display: flex;
   align-items: center;
   transition: all 200ms;
@@ -22,9 +22,15 @@
   }
 }
 
-@media (min-width: $tablet-start) {
+@media (min-width: $tablet-start) and (max-width: $tablet-end) {
   .admin_header {
-    margin-left: $step * 28;
+    height: $step * 8;
+    padding-left: $step * 8;
+  }
+}
+
+@media (min-width: $desktop-min-start) {
+  .admin_header {
     height: $step * 8;
     padding-left: 0;
   }

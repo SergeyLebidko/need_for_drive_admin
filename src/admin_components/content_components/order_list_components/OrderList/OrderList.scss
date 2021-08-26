@@ -1,0 +1,51 @@
+@import '../../../../styles/vars';
+@import '../OrderCard/OrderCard';
+
+.order_list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: $step * 2;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $gray-light;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: $gray;
+  }
+
+  &__caption {
+    font-size: 1.5em;
+    margin-bottom: $step * 2;
+  }
+
+  &__content {
+    box-shadow: $main-shadow;
+    background-color: $white;
+    border-radius: $main-radius;
+  }
+
+  .order_card + .order_card {
+    border-top: 1px solid $separator-color;
+  }
+}
+
+@media (min-width: $tablet-start) {
+  .order_list {
+    padding: $step * 4;
+
+    &__caption {
+      font-size: 2.5em;
+      margin-bottom: $step * 4;
+    }
+  }
+}

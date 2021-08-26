@@ -52,7 +52,7 @@
   }
 }
 
-@media (min-width: $desktop-start) {
+@media (min-width: $desktop-min-start) {
   .login {
     .brand_stamp {
       margin: $step * 16 auto 0;

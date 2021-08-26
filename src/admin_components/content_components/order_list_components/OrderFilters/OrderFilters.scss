@@ -1,0 +1,81 @@
+@import '../../../../styles/vars';
+@import '../../../../styles/common_presets';
+@import '../../../../common_components/Selector/Selector';
+
+.order_filters {
+  padding: $step * 2;
+  border-bottom: 1px solid $separator-color;
+  display: flex;
+  flex-direction: column;
+
+  .selector {
+    width: 100%;
+  }
+
+  .selector + .selector {
+    margin: $step 0 0 0;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .button + .button {
+    margin: $step 0 0 0;
+  }
+
+  &__selectors_block {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__control_block {
+    display: flex;
+    flex-direction: column;
+    margin: $step 0 0 0;
+  }
+}
+
+@media (min-width: $tablet-start) and (max-width: $desktop-min-end) {
+  .order_filters {
+    flex-direction: row;
+    justify-content: space-between;
+
+    &__control_block {
+      margin: 0;
+    }
+  }
+}
+
+@media (min-width: $desktop-start) {
+  .order_filters {
+    flex-direction: row;
+    justify-content: space-between;
+
+    .selector {
+      width: 13em;
+    }
+
+    .selector + .selector {
+      margin: 0 0 0 $step;
+    }
+
+    .button {
+      width: 12em;
+    }
+
+    .button + .button {
+      margin: 0 0 0 $step;
+    }
+
+    &__selectors_block {
+      flex-direction: row;
+    }
+
+    &__control_block {
+      flex-direction: row;
+      margin: 0;
+    }
+  }
+}
+
