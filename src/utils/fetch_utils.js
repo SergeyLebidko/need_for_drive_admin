@@ -24,6 +24,7 @@ import {
 import {extractDateParts, getRandomString} from './common_utils';
 import utf8 from 'utf8';
 import base64 from 'base-64';
+import cookie from 'cookie_js';
 
 function prepareDateRange(dateFilterValue) {
     const msInSec = 1000;
@@ -60,6 +61,12 @@ function prepareDateRange(dateFilterValue) {
         default:
             return [null, null];
     }
+}
+
+function setAuthorizationData(basic, accessToken, refreshToken) {
+    cookie.set('basic', basic);
+    cookie.set('access_token', accessToken);
+    cookie.set('refresh_token', refreshToken);
 }
 
 async function executeFetch(url, options = {}) {
@@ -102,18 +109,19 @@ export async function fetchOrderList(page, date, car, city, status) {
 export async function login(loginValue, passwordValue) {
     const SALT_SIZE = 7;
     const basicUtf = utf8.encode(`${getRandomString(SALT_SIZE, true)}:${process.env.REACT_APP_SECRET}`);
-    const basicAuthorization = base64.encode(basicUtf);
+    const basic = base64.encode(basicUtf);
 
     const options = {
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Basic ${basicAuthorization}`
+            'Authorization': `Basic ${basic}`
         },
         body: JSON.stringify({username: loginValue, password: passwordValue}),
         method: 'POST'
     }
 
-    return await executeFetch(AUTHORIZATION_URL, options);
+    const {access_token: accessToken, refresh_token: refreshToken} = await executeFetch(AUTHORIZATION_URL, options);
+    setAuthorizationData(basic, accessToken, refreshToken);
 }
 
 export async function fetchStatusList() {

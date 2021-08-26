@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import BrandStamp, {LARGE_STAMP} from '../common_components/BrandStamp/BrandStamp';
 import TextField, {TEXT, PASSWORD} from '../common_components/TextField/TextField';
 import {login} from '../utils/fetch_utils';
@@ -15,6 +15,8 @@ function Login() {
     let [passwordValue, setPasswordValue] = useState('');
     let [loginErrorText, setLoginErrorText] = useState(null);
     let [passwordErrorText, setPasswordErrorText] = useState(null);
+
+    const history = useHistory();
 
     const handleChangeLogin = event => {
         const nextValue = event.target.value;
@@ -42,12 +44,13 @@ function Login() {
                 history.push('/admin');
             })
             .catch(err => {
+                setHasLoginProcess(false);
                 if (err.httpStatus === 401) {
                     setLoginErrorText('Возможно, не верный логин');
                     setPasswordErrorText('Возможно, не верный пароль');
+                    return;
                 }
                 setLoginProcessError(err);
-                setHasLoginProcess(false);
             });
     };
 
