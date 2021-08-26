@@ -3,10 +3,16 @@ import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
 import './ErrorPane.scss';
 
-function ErrorPane({error}) {
+function ErrorPane({error, handleBackButtonClick}) {
     const history = useHistory();
 
-    const handleClick = () => history.goBack();
+    const handleClick = () => {
+        if (!handleBackButtonClick) {
+            history.goBack();
+            return;
+        }
+        handleBackButtonClick();
+    };
 
     return (
         <div className="error_pane">
@@ -20,11 +26,16 @@ function ErrorPane({error}) {
     );
 }
 
+ErrorPane.defaultProps = {
+    handleBackButtonClick: null
+}
+
 ErrorPane.propTypes = {
     error: PropTypes.shape({
         httpStatus: PropTypes.number,
         httpText: PropTypes.string
-    })
+    }),
+    handleBackButtonClick: PropTypes.func
 }
 
 export default ErrorPane;

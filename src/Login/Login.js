@@ -3,11 +3,14 @@ import {Link} from 'react-router-dom';
 import BrandStamp, {LARGE_STAMP} from '../common_components/BrandStamp/BrandStamp';
 import TextField, {TEXT, PASSWORD} from '../common_components/TextField/TextField';
 import {login} from '../utils/fetch_utils';
+import Preloader from '../common_components/Preloader/Preloader';
+import ErrorPane from '../common_components/ErrorPane/ErrorPane';
 import './Login.scss';
-import Preloader from "../common_components/Preloader/Preloader";
 
 function Login() {
     let [hasLoginProcess, setHasLoginProcess] = useState(false);
+    let [loginProcessError, setLoginProcessError] = useState(null);
+
     let [loginValue, setLoginValue] = useState('');
     let [passwordValue, setPasswordValue] = useState('');
     let [loginErrorText, setLoginErrorText] = useState(null);
@@ -36,19 +39,30 @@ function Login() {
         login(loginValue, passwordValue)
             .then(() => {
                 setHasLoginProcess(false);
+                history.push('/admin');
             })
             .catch(err => {
                 if (err.httpStatus === 401) {
                     setLoginErrorText('Возможно, не верный логин');
                     setPasswordErrorText('Возможно, не верный пароль');
                 }
+                setLoginProcessError(err);
                 setHasLoginProcess(false);
             });
-
-        // history.push('/admin');
     };
 
+    const clearFormData = () => {
+        setHasLoginProcess(false);
+        setLoginProcessError(null);
+        setLoginValue('');
+        setPasswordValue('');
+        setLoginErrorText(null);
+        setPasswordErrorText(null);
+    }
+
     if (hasLoginProcess) return <Preloader/>;
+
+    if (loginProcessError) return <ErrorPane error={loginProcessError} handleBackButtonClick={clearFormData}/>
 
     return (
         <div className="login">
