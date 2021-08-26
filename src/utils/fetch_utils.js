@@ -77,6 +77,11 @@ function getAuthorizationData() {
     return {basic, accessToken, refreshToken};
 }
 
+function getAuthorizationHeaders(){
+    const {accessToken} = getAuthorizationData();
+    return {headers: {'Authorization': `Bearer ${accessToken}`}};
+}
+
 async function executeFetch(url, options = {}) {
     let {headers} = options;
     headers = headers ? {...headers, ...DEFAULT_REQUEST_HEADERS} : DEFAULT_REQUEST_HEADERS;
@@ -147,7 +152,10 @@ export async function fetchOrderList(page, date, car, city, status) {
         if (dateFrom) params.set(`${DATE_FROM_FILTER_NAME}[$gt]`, dateFrom);
         if (dateTo) params.set(`${DATE_FROM_FILTER_NAME}[$lt]`, dateTo);
     }
-    return await executeFetch(`${ORDER_URL}/?${params}`);
+
+    const options = {...getAuthorizationHeaders()};
+
+    return await executeFetch(`${ORDER_URL}/?${params}`, options);
 }
 
 export async function fetchStatusList() {
