@@ -13,7 +13,14 @@ import {
     BEGIN_WEEK,
     BEGIN_MONTH
 } from '../settings';
-import {DEFAULT_REQUEST_HEADERS, ORDER_URL, STATUS_LIST_URL, CAR_LIST_URL, CITY_LIST_URL} from '../urls';
+import {
+    DEFAULT_REQUEST_HEADERS,
+    ORDER_URL,
+    STATUS_LIST_URL,
+    CAR_LIST_URL,
+    CITY_LIST_URL,
+    AUTHORIZATION_URL
+} from '../urls';
 import {extractDateParts, getRandomString} from './common_utils';
 import utf8 from 'utf8';
 import base64 from 'base-64';
@@ -59,10 +66,6 @@ async function executeFetch(url, options = {}) {
     let {headers} = options;
     headers = headers ? {...headers, ...DEFAULT_REQUEST_HEADERS} : DEFAULT_REQUEST_HEADERS;
 
-    // TODO При реализации авторизации создать код подстановки токена пользователя.
-    // Сейчас временно использую access-токен полученный с помощью из Insomnia
-    headers = {...headers, 'Authorization': 'Bearer de45548d78add84919b333d27412d16810a19859'};
-
     const _options = {...options, headers};
 
     let response;
@@ -96,12 +99,21 @@ export async function fetchOrderList(page, date, car, city, status) {
     return await executeFetch(`${ORDER_URL}/?${params}`);
 }
 
-export async function login() {
+export async function login(loginValue, passwordValue) {
     const SALT_SIZE = 7;
     const basicUtf = utf8.encode(`${getRandomString(SALT_SIZE, true)}:${process.env.REACT_APP_SECRET}`);
     const basicAuthorization = base64.encode(basicUtf);
 
-    return basicAuthorization;
+    const options = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Basic ${basicAuthorization}`
+        },
+        body: JSON.stringify({username: loginValue, password: passwordValue}),
+        method: 'POST'
+    }
+
+    return await executeFetch(AUTHORIZATION_URL, options);
 }
 
 export async function fetchStatusList() {

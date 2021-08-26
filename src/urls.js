@@ -14,6 +14,8 @@ export const RATE_LIST_URL = `${BASE}/rate`;
 export const STATUS_LIST_URL = `${BASE}/orderStatus`;
 export const ORDER_URL = `${BASE}/order`;
 
+export const AUTHORIZATION_URL = `${DOMEN}/api/auth/login`;
+
 // Адреса страниц приложения
 export const LOGIN_APP_URL = 'login'
 export const ADMIN_APP_URL = 'admin'

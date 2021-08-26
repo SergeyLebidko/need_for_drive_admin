@@ -31,7 +31,10 @@ function Login() {
         if (passwordValue === '') setPasswordErrorText('Обязательно поле');
         if (hasError) return;
 
-        login().then(res => console.log(res));
+        login(loginValue, passwordValue)
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
+
         // history.push('/admin');
     };
 
