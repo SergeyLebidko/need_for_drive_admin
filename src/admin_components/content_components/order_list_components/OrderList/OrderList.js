@@ -52,30 +52,24 @@ function OrderList() {
             });
     }, [location]);
 
+    if (!done) return <Preloader/>;
+
+    if (error) return <ErrorPane error={error}/>;
+
     return (
         <div className="order_list">
-            {done ?
-                (error ?
-                        <ErrorPane error={error}/>
-                        :
-                        <>
-                            <h1 className="order_list__caption">Заказы</h1>
-                            <div className="order_list__content">
-                                <OrderFilters/>
-                                {items && items.length > 0 &&
-                                <>
-                                    <ul>
-                                        {items.map(item => <OrderCard key={item.id} order={item}/>)}
-                                    </ul>
-                                    <Paginator/>
-                                </>
-                                }
-                            </div>
-                        </>
-                )
-                :
-                <Preloader/>
-            }
+            <h1 className="order_list__caption">Заказы</h1>
+            <div className="order_list__content">
+                <OrderFilters/>
+                {items && items.length > 0 &&
+                <>
+                    <ul>
+                        {items.map(item => <OrderCard key={item.id} order={item}/>)}
+                    </ul>
+                    <Paginator/>
+                </>
+                }
+            </div>
         </div>
     );
 }
