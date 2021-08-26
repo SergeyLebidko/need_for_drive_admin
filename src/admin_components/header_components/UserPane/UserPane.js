@@ -1,6 +1,5 @@
 import React, {useState, useRef} from 'react';
 import classNames from 'classnames';
-import {Link} from 'react-router-dom';
 import {ReactComponent as DownArrow} from '../../../content/images/down.svg';
 import userPicture from '../../../content/images/user.jpeg';
 import './UserPane.scss';
@@ -26,7 +25,7 @@ function UserPane() {
             <span className="user_pane__name" onClick={handleElementClick}>Admin</span>
             <DownArrow onClick={handleElementClick}/>
             <div className={popupClasses}>
-                <Link to="/">Выход</Link>
+                <span>Выход</span>
             </div>
         </div>
     );

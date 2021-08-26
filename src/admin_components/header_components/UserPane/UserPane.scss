@@ -48,7 +48,7 @@
     transition: all 2000ms;
     z-index: 10;
 
-    a {
+    span {
       display: block;
       padding: $step * 2 0;
       text-decoration: none;
@@ -56,7 +56,7 @@
     }
 
     &:hover {
-      a {
+      span {
         color: $blue;
       }
     }
@@ -78,7 +78,7 @@
     }
 
     &__popup {
-      a {
+      span {
         padding: $step * 3 0;
       }
     }
