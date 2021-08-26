@@ -14,7 +14,9 @@ import {
     BEGIN_MONTH
 } from '../settings';
 import {DEFAULT_REQUEST_HEADERS, ORDER_URL, STATUS_LIST_URL, CAR_LIST_URL, CITY_LIST_URL} from '../urls';
-import {extractDateParts} from './common_utils';
+import {extractDateParts, getRandomString} from './common_utils';
+import utf8 from 'utf8';
+import base64 from 'base-64';
 
 function prepareDateRange(dateFilterValue) {
     const msInSec = 1000;
@@ -92,6 +94,14 @@ export async function fetchOrderList(page, date, car, city, status) {
         if (dateTo) params.set(`${DATE_FROM_FILTER_NAME}[$lt]`, dateTo);
     }
     return await executeFetch(`${ORDER_URL}/?${params}`);
+}
+
+export async function login() {
+    const SALT_SIZE = 7;
+    const basicUtf = utf8.encode(`${getRandomString(SALT_SIZE, true)}:${process.env.REACT_APP_SECRET}`);
+    const basicAuthorization = base64.encode(basicUtf);
+
+    return basicAuthorization;
 }
 
 export async function fetchStatusList() {

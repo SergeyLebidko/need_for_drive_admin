@@ -14,11 +14,13 @@ export function extractDateParts(date) {
     ];
 }
 
-export function getRandomString(size = 16) {
-    const CHARS = 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm';
+export function getRandomString(size = 16, allowDigits = false) {
+    const ALPHABET_CHARS = 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm';
+    const DIGIT_CHARS = '0123456789';
+    const CHAR_SET = ALPHABET_CHARS + (allowDigits ? DIGIT_CHARS : '');
     const result = [];
     for (let index = 0; index < size; index++) {
-        result.push(CHARS[Math.floor(Math.random() * CHARS.length)]);
+        result.push(CHAR_SET[Math.floor(Math.random() * CHAR_SET.length)]);
     }
     return result.join('');
 }

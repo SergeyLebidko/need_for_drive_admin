@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import BrandStamp, {LARGE_STAMP} from '../common_components/BrandStamp/BrandStamp';
 import TextField, {TEXT, PASSWORD} from '../common_components/TextField/TextField';
+import {login} from '../utils/fetch_utils';
 import './Login.scss';
 
-function Login({history}) {
+function Login() {
     let [loginValue, setLoginValue] = useState('');
     let [passwordValue, setPasswordValue] = useState('');
     let [loginErrorText, setLoginErrorText] = useState(null);
@@ -30,7 +30,9 @@ function Login({history}) {
         if (loginValue === '') setLoginErrorText('Обязательное поле');
         if (passwordValue === '') setPasswordErrorText('Обязательно поле');
         if (hasError) return;
-        history.push('/admin');
+
+        login().then(res => console.log(res));
+        // history.push('/admin');
     };
 
     return (
@@ -61,10 +63,6 @@ function Login({history}) {
             </div>
         </div>
     )
-}
-
-Login.propTypes = {
-    history: PropTypes.object
 }
 
 export default Login;
