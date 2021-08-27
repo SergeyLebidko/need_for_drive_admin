@@ -74,7 +74,7 @@ function Login() {
             <div className="login__form_block">
                 <h1 className="login__form_caption">Вход</h1>
                 <TextField
-                    label="Почта"
+                    label="Логин"
                     fieldType={TEXT}
                     value={loginValue}
                     handleChangeValue={handleChangeLogin}

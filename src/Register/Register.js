@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import classNames from 'classnames';
 import BrandStamp, {LARGE_STAMP} from '../common_components/BrandStamp/BrandStamp';
 import TextField, {TEXT} from '../common_components/TextField/TextField';
 import {Link} from 'react-router-dom';
@@ -40,25 +41,36 @@ function Register() {
         }
     };
 
+    const loginWarningClasses = classNames('register__warning_caption', {'shifted_caption': !!loginErrorText});
+
     return (
         <div className="register">
             <BrandStamp size={LARGE_STAMP}/>
             <div className="register__form_block">
                 <h1 className="register__form_caption">Регистрация</h1>
                 <TextField
-                    label="Почта"
+                    label="Логин"
                     fieldType={TEXT}
                     value={loginValue}
                     handleChangeValue={handleChangeLogin}
                     errorText={loginErrorText}
                 />
+                <span className={loginWarningClasses}>
+                    Логин может содержать только английские буквы, цифры и знак подчеркивания.
+                    Логин не может начинаться с цифры.
+                </span>
                 <TextField
                     label="Пароль"
                     fieldType={TEXT}
                     value={passwordValue}
                 />
-                <span onClick={handleCreatePassword}>Создать новый пароль</span>
-                <div className="login__control_block">
+                <span className="register__warning_caption">
+                    Запишите или скопируйте созданный пароль и используйте его на странице входа.
+                </span>
+                <span className="register__create_password" onClick={handleCreatePassword}>
+                    Создать новый пароль
+                </span>
+                <div className="register__control_block">
                     <Link to={`/${LOGIN_APP_URL}`}>Выполнить вход</Link>
                     <button className="button button_blue" onClick={handleRegisterButtonClick}>
                         Зарегистрироваться
