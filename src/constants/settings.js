@@ -34,3 +34,8 @@ export const MENU_ITEMS = [
         href: 'orders'
     }
 ];
+
+// Наборы символов
+export const LETTER_CHARS = 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm';
+export const DIGIT_CHARS = '0123456789';
+export const ALL_CHARS = LETTER_CHARS + DIGIT_CHARS + '_';

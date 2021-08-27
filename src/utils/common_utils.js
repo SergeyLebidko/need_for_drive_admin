@@ -1,3 +1,5 @@
+import {LETTER_CHARS, DIGIT_CHARS} from '../constants/settings';
+
 function format(value) {
     return ('0' + value).slice(-2);
 }
@@ -15,9 +17,7 @@ export function extractDateParts(date) {
 }
 
 export function getRandomString(size = 16, allowDigits = false) {
-    const ALPHABET_CHARS = 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm';
-    const DIGIT_CHARS = '0123456789';
-    const CHAR_SET = ALPHABET_CHARS + (allowDigits ? DIGIT_CHARS : '');
+    const CHAR_SET = LETTER_CHARS + (allowDigits ? DIGIT_CHARS : '');
     const result = [];
     for (let index = 0; index < size; index++) {
         result.push(CHAR_SET[Math.floor(Math.random() * CHAR_SET.length)]);

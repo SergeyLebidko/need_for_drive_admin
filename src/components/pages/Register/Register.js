@@ -1,23 +1,20 @@
 import React, {useState} from 'react';
 import classNames from 'classnames';
 import {useHistory} from 'react-router-dom';
+import Preloader from '../../common/Preloader/Preloader';
+import ErrorPane from '../../common/ErrorPane/ErrorPane';
 import BrandStamp, {LARGE_STAMP} from '../../common/BrandStamp/BrandStamp';
 import TextField, {TEXT} from '../../common/TextField/TextField';
 import {Link} from 'react-router-dom';
 import {getRandomString} from '../../../utils/common_utils';
 import {register} from '../../../utils/fetch_utils';
 import {LOGIN_APP_URL} from '../../../constants/urls';
+import {ALL_CHARS, DIGIT_CHARS} from '../../../constants/settings';
 import './Register.scss';
-import Preloader from "../../common/Preloader/Preloader";
-import ErrorPane from "../../common/ErrorPane/ErrorPane";
-
-const LETTERS = 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm';
-const DIGITS = '0123456789';
-const AVAILABLE_CHARS = LETTERS + DIGITS + '_';
-
-const PASSWORD_SIZE = 10;
 
 function Register() {
+    const PASSWORD_SIZE = 10;
+
     const [loginValue, setLoginValue] = useState('');
     const [loginErrorText, setLoginErrorText] = useState(null);
 
@@ -32,9 +29,9 @@ function Register() {
         const nextValue = event.target.value;
 
         if (nextValue.length > 0) {
-            if (DIGITS.includes(nextValue[0])) return;
+            if (DIGIT_CHARS.includes(nextValue[0])) return;
             for (const char of nextValue) {
-                if (!AVAILABLE_CHARS.includes(char)) return;
+                if (!ALL_CHARS.includes(char)) return;
             }
         }
 
