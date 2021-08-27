@@ -5,6 +5,7 @@ import TextField, {TEXT, PASSWORD} from '../common_components/TextField/TextFiel
 import {login} from '../utils/fetch_utils';
 import Preloader from '../common_components/Preloader/Preloader';
 import ErrorPane from '../common_components/ErrorPane/ErrorPane';
+import {ADMIN_APP_URL} from '../urls';
 import './Login.scss';
 
 function Login() {
@@ -40,8 +41,8 @@ function Login() {
         setHasLoginProcess(true);
         login(loginValue, passwordValue)
             .then(() => {
+                history.push(`/${ADMIN_APP_URL}`);
                 setHasLoginProcess(false);
-                history.push('/admin');
             })
             .catch(err => {
                 setHasLoginProcess(false);
