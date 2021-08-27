@@ -12,7 +12,7 @@ import {
     BEGIN_DAY,
     BEGIN_WEEK,
     BEGIN_MONTH
-} from '../settings';
+} from '../constants/settings';
 import {
     DEFAULT_REQUEST_HEADERS,
     ORDER_URL,
@@ -21,7 +21,7 @@ import {
     CITY_URL,
     LOGIN_URL,
     CHECK_URL, LOGOUT_URL, REGISTER_URL
-} from '../urls';
+} from '../constants/urls';
 import {extractDateParts, getRandomString} from './common_utils';
 import utf8 from 'utf8';
 import base64 from 'base-64';

@@ -1,0 +1,94 @@
+@import '../../../styles/vars';
+@import '../../../styles/common_presets';
+@import '../../common/BrandStamp/BrandStamp';
+@import '../../common/TextField/TextField';
+
+.register {
+  padding: $step * 2;
+
+  .brand_stamp {
+    margin: $step * 4 auto 0;
+    max-width: $step * 60;
+  }
+
+  .text_field:nth-of-type(2) {
+    margin-top: $step * 4;
+  }
+
+  .button {
+    margin-top: $step * 2;
+  }
+
+  &__form_block {
+    background: $white;
+    box-shadow: $main-shadow;
+    border-radius: $main-radius;
+    margin: ($step * 4) auto 0;
+    max-width: $step * 60;
+    padding: $step * 2;
+  }
+
+  &__form_caption {
+    font-size: 1.5em;
+    margin-top: $step;
+    margin-bottom: $step * 4;
+    text-align: center;
+  }
+
+  &__warning_caption {
+    color: $gray;
+    font-size: 0.8em;
+    display: inline-block;
+  }
+
+  &__create_password {
+    display: inline-block;
+    color: $blue;
+    cursor: pointer;
+  }
+
+  &__control_block {
+    margin-top: $step * 4;
+    display: flex;
+    flex-direction: column;
+
+    a {
+      text-decoration: none;
+      color: $blue;
+    }
+  }
+}
+
+.shifted_caption {
+  margin-top: $step * 3;
+}
+
+@media (min-width: $tablet-start) {
+  .register {
+    .button {
+      margin-top: 0;
+    }
+
+    &__control_block {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}
+
+@media (min-width: $tablet-start) and (max-width: $tablet-end) {
+  .register {
+    .brand_stamp {
+      margin: $step * 8 auto 0;
+    }
+  }
+}
+
+@media (min-width: $desktop-min-start) {
+  .register {
+    .brand_stamp {
+      margin: $step * 16 auto 0;
+    }
+  }
+}
