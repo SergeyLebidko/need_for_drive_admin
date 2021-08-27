@@ -18,13 +18,13 @@ const AVAILABLE_CHARS = LETTERS + DIGITS + '_';
 const PASSWORD_SIZE = 10;
 
 function Register() {
-    let [loginValue, setLoginValue] = useState('');
-    let [loginErrorText, setLoginErrorText] = useState(null);
+    const [loginValue, setLoginValue] = useState('');
+    const [loginErrorText, setLoginErrorText] = useState(null);
 
-    let [passwordValue, setPasswordValue] = useState(getRandomString(PASSWORD_SIZE, true));
+    const [passwordValue, setPasswordValue] = useState(getRandomString(PASSWORD_SIZE, true));
 
-    let [registerProcess, setRegisterProcess] = useState(false);
-    let [registerError, setRegisterError] = useState(null);
+    const [registerProcess, setRegisterProcess] = useState(false);
+    const [registerError, setRegisterError] = useState(null);
 
     const history = useHistory();
 
@@ -33,7 +33,7 @@ function Register() {
 
         if (nextValue.length > 0) {
             if (DIGITS.includes(nextValue[0])) return;
-            for (let char of nextValue) {
+            for (const char of nextValue) {
                 if (!AVAILABLE_CHARS.includes(char)) return;
             }
         }

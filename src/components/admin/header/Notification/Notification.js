@@ -3,7 +3,7 @@ import {ReactComponent as NotificationIcon} from '../../../../content/images/not
 import './Notification.scss';
 
 function Notification() {
-    let [count, setCount] = useState(0);
+    const [count, setCount] = useState(0);
     const generateCount = () => Math.floor(Math.random() * 50) + 1;
 
     useEffect(() => setCount(generateCount()), []);

@@ -10,7 +10,7 @@ export const TEXT = 'text';
 export const PASSWORD = 'password';
 
 function TextField({label, fieldType, value, handleChangeValue, errorText}) {
-    let [inputType, setInputType] = useState(fieldType);
+    const [inputType, setInputType] = useState(fieldType);
 
     const ICON_SELECTOR = {
         [TEXT]: <Hide onClick={() => setInputType(PASSWORD)}/>,

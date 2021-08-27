@@ -29,10 +29,10 @@ function OrderFilters() {
     const location = useLocation();
     const history = useHistory();
 
-    let [selectedDate, setSelectedDate] = useState(NO_FILTER_VALUE);
-    let [selectedCar, setSelectedCar] = useState(NO_FILTER_VALUE);
-    let [selectedCity, setSelectedCity] = useState(NO_FILTER_VALUE);
-    let [selectedStatus, setSelectedStatus] = useState(NO_FILTER_VALUE);
+    const [selectedDate, setSelectedDate] = useState(NO_FILTER_VALUE);
+    const [selectedCar, setSelectedCar] = useState(NO_FILTER_VALUE);
+    const [selectedCity, setSelectedCity] = useState(NO_FILTER_VALUE);
+    const [selectedStatus, setSelectedStatus] = useState(NO_FILTER_VALUE);
 
     const carList = useSelector(getCatalog(CAR_LIST_CATALOG));
     const cityList = useSelector(getCatalog(CITY_LIST_CATALOG));
@@ -67,19 +67,19 @@ function OrderFilters() {
 
     // Готовим данные для селектора моделей авто
     const carSelectorItems = [{name: 'Все модели', value: NO_FILTER_VALUE}];
-    for (let {id, name} of carList) carSelectorItems.push({name, value: id});
+    for (const {id, name} of carList) carSelectorItems.push({name, value: id});
 
     const handleCarSelect = value => setSelectedCar(value);
 
     // Готовим данные для селектора городов
     const citySelectorItems = [{name: 'Любой город', value: NO_FILTER_VALUE}];
-    for (let {id, name} of cityList) citySelectorItems.push({name, value: id});
+    for (const {id, name} of cityList) citySelectorItems.push({name, value: id});
 
     const handleCitySelect = value => setSelectedCity(value);
 
     // Готовим данные для селектора по статусам заказов
     const statusSelectorItems = [{name: 'Любой статус', value: NO_FILTER_VALUE}];
-    for (let {id, name} of statusList) statusSelectorItems.push({name, value: id});
+    for (const {id, name} of statusList) statusSelectorItems.push({name, value: id});
 
     const handleStatusSelect = value => setSelectedStatus(value);
 

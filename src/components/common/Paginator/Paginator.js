@@ -6,7 +6,7 @@ import {LIMIT, PAGE_FILTER_NAME} from '../../../constants/settings';
 import './Paginator.scss';
 
 function Paginator() {
-    let {url: baseLink} = useRouteMatch();
+    const {url: baseLink} = useRouteMatch();
     const location = useLocation();
     const {page, count} = useSelector(getFrame);
 

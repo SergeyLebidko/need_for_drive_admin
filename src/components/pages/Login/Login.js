@@ -9,13 +9,13 @@ import {ADMIN_APP_URL, REGISTER_APP_URL} from '../../../constants/urls';
 import './Login.scss';
 
 function Login() {
-    let [hasLoginProcess, setHasLoginProcess] = useState(false);
-    let [loginProcessError, setLoginProcessError] = useState(null);
+    const [hasLoginProcess, setHasLoginProcess] = useState(false);
+    const [loginProcessError, setLoginProcessError] = useState(null);
 
-    let [loginValue, setLoginValue] = useState('');
-    let [passwordValue, setPasswordValue] = useState('');
-    let [loginErrorText, setLoginErrorText] = useState(null);
-    let [passwordErrorText, setPasswordErrorText] = useState(null);
+    const [loginValue, setLoginValue] = useState('');
+    const [passwordValue, setPasswordValue] = useState('');
+    const [loginErrorText, setLoginErrorText] = useState(null);
+    const [passwordErrorText, setPasswordErrorText] = useState(null);
 
     const history = useHistory();
 

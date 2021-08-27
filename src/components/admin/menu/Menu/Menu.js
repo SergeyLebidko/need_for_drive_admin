@@ -6,7 +6,7 @@ import MenuButton from '../MenuButton/MenuButton';
 import './Menu.scss';
 
 function Menu() {
-    let [hasOpened, setHasOpened] = useState(false);
+    const [hasOpened, setHasOpened] = useState(false);
 
     const menuClasses = classNames('menu', {'opened_menu': hasOpened, 'closed_menu': !hasOpened});
 

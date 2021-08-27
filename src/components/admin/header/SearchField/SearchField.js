@@ -4,8 +4,8 @@ import {ReactComponent as RemoveIcon} from '../../../../content/images/remove.sv
 import './SearchField.scss'
 
 function SearchField() {
-    let [inputValue, setInputValue] = useState('');
-    let [hasRemoveIcon, setHasRemoveIcon] = useState(false);
+    const [inputValue, setInputValue] = useState('');
+    const [hasRemoveIcon, setHasRemoveIcon] = useState(false);
     const inputField = useRef(null);
 
     const handleIconClick = () => inputField.current.focus();

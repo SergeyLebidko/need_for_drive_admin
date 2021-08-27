@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import './CheckBox.scss';
 
 function CheckBox({caption, defaultValue, handleChange, disabled}) {
-    let [value, setValue] = useState(defaultValue);
+    const [value, setValue] = useState(defaultValue);
 
     const clickHandler = () => {
         if (disabled || !handleChange) return;

@@ -10,7 +10,7 @@ import {LOGIN_APP_URL} from '../../../../constants/urls';
 import './UserPane.scss';
 
 function UserPane() {
-    let [hasPopup, setHasPopup] = useState(false);
+    const [hasPopup, setHasPopup] = useState(false);
     const username = useSelector(getUsername);
     const history = useHistory();
     const popupTimer = useRef(null);

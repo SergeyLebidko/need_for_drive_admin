@@ -20,8 +20,8 @@ import {
 import './OrderList.scss';
 
 function OrderList() {
-    let [done, setDone] = useState(false);
-    let [error, setError] = useState(null);
+    const [done, setDone] = useState(false);
+    const [error, setError] = useState(null);
 
     const frame = useSelector(getFrame);
     let items;
