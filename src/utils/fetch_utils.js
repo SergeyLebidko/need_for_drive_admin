@@ -20,7 +20,7 @@ import {
     CAR_URL,
     CITY_URL,
     LOGIN_URL,
-    CHECK_URL, LOGOUT_URL
+    CHECK_URL, LOGOUT_URL, REGISTER_URL
 } from '../urls';
 import {extractDateParts, getRandomString} from './common_utils';
 import utf8 from 'utf8';
@@ -125,6 +125,18 @@ export async function login(loginValue, passwordValue) {
 
     const {access_token: accessToken, refresh_token: refreshToken} = await executeFetch(LOGIN_URL, options);
     setAuthorizationData(accessToken, refreshToken);
+}
+
+export async function register(loginValue, passwordValue) {
+    const options = {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({username: loginValue, password: passwordValue}),
+        method: 'POST'
+    }
+
+    await executeFetch(REGISTER_URL, options);
 }
 
 export async function checkAuthorization() {

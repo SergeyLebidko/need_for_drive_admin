@@ -13,6 +13,7 @@ export const STATUS_URL = `${API_BASE}/orderStatus`;
 export const ORDER_URL = `${API_BASE}/order`;
 
 export const LOGIN_URL = `${AUTH_BASE}/login`;
+export const REGISTER_URL = `${AUTH_BASE}/register`;
 export const CHECK_URL = `${AUTH_BASE}/check`;
 export const LOGOUT_URL = `${AUTH_BASE}/logout`;
 

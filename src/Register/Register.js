@@ -1,11 +1,15 @@
 import React, {useState} from 'react';
 import classNames from 'classnames';
+import {useHistory} from 'react-router-dom';
 import BrandStamp, {LARGE_STAMP} from '../common_components/BrandStamp/BrandStamp';
 import TextField, {TEXT} from '../common_components/TextField/TextField';
 import {Link} from 'react-router-dom';
 import {getRandomString} from '../utils/common_utils';
+import {register} from '../utils/fetch_utils';
 import {LOGIN_APP_URL} from '../urls';
 import './Register.scss';
+import Preloader from "../common_components/Preloader/Preloader";
+import ErrorPane from "../common_components/ErrorPane/ErrorPane";
 
 const LETTERS = 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm';
 const DIGITS = '0123456789';
@@ -18,6 +22,11 @@ function Register() {
     let [loginErrorText, setLoginErrorText] = useState(null);
 
     let [passwordValue, setPasswordValue] = useState(getRandomString(PASSWORD_SIZE, true));
+
+    let [registerProcess, setRegisterProcess] = useState(false);
+    let [registerError, setRegisterError] = useState(null);
+
+    const history = useHistory();
 
     const handleChangeLogin = event => {
         const nextValue = event.target.value;
@@ -39,7 +48,29 @@ function Register() {
         if (loginValue === '') {
             setLoginErrorText('Обязательное поле');
         }
+
+        setRegisterProcess(true);
+        register(loginValue, passwordValue)
+            .then(() => {
+                setRegisterProcess(false);
+                history.push(`/${LOGIN_APP_URL}`);
+            })
+            .catch(err => {
+                setRegisterError(err);
+                setRegisterProcess(false);
+            });
     };
+
+    const clearFormData = () => {
+        setLoginValue('');
+        setLoginErrorText(null);
+        setRegisterProcess(false);
+        setRegisterError(null);
+    }
+
+    if (registerProcess) return <Preloader/>;
+
+    if (registerProcess) return <ErrorPane error={registerError} handleBackButtonClick={clearFormData}/>;
 
     const loginWarningClasses = classNames('register__warning_caption', {'shifted_caption': !!loginErrorText});
 
