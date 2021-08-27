@@ -59,9 +59,8 @@ function OrderCardExtra({order}) {
     );
 }
 
-OrderCardExtra.propTypes =
-    {
-        order: PropTypes.object
-    }
+OrderCardExtra.propTypes = {
+    order: PropTypes.object
+}
 
 export default OrderCardExtra;

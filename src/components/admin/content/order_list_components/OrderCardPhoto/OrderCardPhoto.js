@@ -1,40 +1,41 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {DOMEN} from '../../../../../constants/urls';
 import './OrderCardPhoto.scss';
 
 function OrderCardPhoto({order}) {
-    let [hasPhotoError, setHasPhotoError] = useState(false);
+    const [path, setPath] = useState(null);
 
-    const {carId} = order;
-    let photoPath;
-    if (carId) {
-        photoPath = carId.thumbnail.path;
-        photoPath = photoPath[0] === '/' ? `${DOMEN}${photoPath}` : photoPath;
-    }
+    useEffect(() => {
+        const {carId} = order;
+        let photoPath;
+        if (carId) {
+            photoPath = carId.thumbnail.path;
+            photoPath = photoPath[0] === '/' ? `${DOMEN}${photoPath}` : photoPath;
+            setPath(photoPath);
+        }
+    }, []);
+
+
+    if (path) return (
+        <div className="order_card_photo">
+            <img
+                src={path}
+                className="order_card_photo__image"
+                onError={() => setPath(null)}
+            />
+        </div>
+    );
 
     return (
-        <div className="order_card_photo">
-            {hasPhotoError ?
-                <div className="order_card_photo__error">Не удалось загрузить фото...</div>
-                :
-                (photoPath ?
-                        <img
-                            src={photoPath}
-                            className="order_card_photo__image"
-                            onError={() => setHasPhotoError(true)}
-                        />
-                        :
-                        <div className="order_card_photo__error">Нет фото...</div>
-                )
-            }
+        <div className="order_card_photo ">
+            <div className="order_card_photo__error">Нет фото...</div>
         </div>
     );
 }
 
-OrderCardPhoto.propTypes =
-    {
-        order: PropTypes.object
-    }
+OrderCardPhoto.propTypes = {
+    order: PropTypes.object
+}
 
 export default OrderCardPhoto;
