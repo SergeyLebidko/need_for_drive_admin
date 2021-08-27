@@ -26,7 +26,7 @@ export const CAR_FILTER_NAME = 'carId';
 export const CITY_FILTER_NAME = 'cityId';
 export const STATUS_FILTER_NAME = 'orderStatusId';
 
-// TODO При реализации функциональности дополнить список пунктами меню для переходов на уже реализованные компоненты
+// Список пунктов главного меню
 export const MENU_ITEMS = [
     {
         title: 'Заказы',

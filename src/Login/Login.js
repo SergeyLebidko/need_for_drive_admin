@@ -5,7 +5,7 @@ import TextField, {TEXT, PASSWORD} from '../common_components/TextField/TextFiel
 import {login} from '../utils/fetch_utils';
 import Preloader from '../common_components/Preloader/Preloader';
 import ErrorPane from '../common_components/ErrorPane/ErrorPane';
-import {ADMIN_APP_URL} from '../urls';
+import {ADMIN_APP_URL, REGISTER_APP_URL} from '../urls';
 import './Login.scss';
 
 function Login() {
@@ -88,7 +88,7 @@ function Login() {
                     errorText={passwordErrorText}
                 />
                 <div className="login__control_block">
-                    <Link to="/">Запросить доступ</Link>
+                    <Link to={`/${REGISTER_APP_URL}`}>Запросить доступ</Link>
                     <button className="button button_blue" onClick={handleLoginButtonClick}>
                         Войти
                     </button>

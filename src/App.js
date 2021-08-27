@@ -1,9 +1,10 @@
 import React from 'react';
 import {HashRouter, Switch, Route, Redirect} from 'react-router-dom';
 import Login from './Login/Login';
+import Register from './Register/Register';
 import Admin from './Admin/Admin';
 import NoMatch from './common_components/NoMatch/NoMatch';
-import {LOGIN_APP_URL, ADMIN_APP_URL} from './urls';
+import {LOGIN_APP_URL, ADMIN_APP_URL, REGISTER_APP_URL} from './urls';
 import 'dotenv';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
                     <Redirect to={`/${ADMIN_APP_URL}`}/>
                 </Route>
                 <Route path={`/${LOGIN_APP_URL}`} component={Login}/>
+                <Route path={`/${REGISTER_APP_URL}`} component={Register}/>
                 <Route path={`/${ADMIN_APP_URL}`} component={Admin}/>
                 <Route path="*" component={NoMatch}/>
             </Switch>
