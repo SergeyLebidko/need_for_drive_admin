@@ -47,6 +47,7 @@ function Register() {
     const handleRegisterButtonClick = () => {
         if (loginValue === '') {
             setLoginErrorText('Обязательное поле');
+            return;
         }
 
         setRegisterProcess(true);
@@ -70,7 +71,7 @@ function Register() {
 
     if (registerProcess) return <Preloader/>;
 
-    if (registerProcess) return <ErrorPane error={registerError} handleBackButtonClick={clearFormData}/>;
+    if (registerError) return <ErrorPane error={registerError} handleBackButtonClick={clearFormData}/>;
 
     const loginWarningClasses = classNames('register__warning_caption', {'shifted_caption': !!loginErrorText});
 
