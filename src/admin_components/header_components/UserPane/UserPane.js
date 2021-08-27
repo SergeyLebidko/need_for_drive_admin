@@ -25,10 +25,7 @@ function UserPane() {
     const handlePaneOver = () => clearTimeout(popupTimer.current);
 
     const handleLogoutClick = () => {
-        logout().then(() => {
-            console.log('Сработало');
-            history.push(`/${LOGIN_APP_URL}`)
-        });
+        logout().then(() => history.push(`/${LOGIN_APP_URL}`));
     }
 
     const popupClasses = classNames('user_pane__popup', {'visible_popup': hasPopup});
