@@ -27,6 +27,9 @@ import utf8 from 'utf8';
 import base64 from 'base-64';
 import cookie from 'cookie_js';
 
+const ACCESS_TOKEN = 'access_token';
+const REFRESH_TOKEN = 'refresh_token';
+
 function prepareDateRange(dateFilterValue) {
     const msInSec = 1000;
     const msInMin = msInSec * 60;
@@ -64,21 +67,19 @@ function prepareDateRange(dateFilterValue) {
     }
 }
 
-function setAuthorizationData(basic, accessToken, refreshToken) {
-    cookie.set('basic', basic);
-    cookie.set('access_token', accessToken);
-    cookie.set('refresh_token', refreshToken);
+function setAuthorizationData(accessToken, refreshToken) {
+    cookie.set(ACCESS_TOKEN, accessToken);
+    cookie.set(REFRESH_TOKEN, refreshToken);
 }
 
 function getAuthorizationData() {
-    const basic = cookie.get('basic');
-    const accessToken = cookie.get('access_token');
-    const refreshToken = cookie.get('refresh_token');
-    return {basic, accessToken, refreshToken};
+    const accessToken = cookie.get(ACCESS_TOKEN);
+    const refreshToken = cookie.get(REFRESH_TOKEN);
+    return {accessToken, refreshToken};
 }
 
 function removeAuthorizationData() {
-    cookie.remove(['basic', 'access_token', 'refresh_token']);
+    cookie.remove([ACCESS_TOKEN, REFRESH_TOKEN]);
 }
 
 function getAuthorizationHeaders() {
@@ -122,12 +123,12 @@ export async function login(loginValue, passwordValue) {
     }
 
     const {access_token: accessToken, refresh_token: refreshToken} = await executeFetch(LOGIN_URL, options);
-    setAuthorizationData(basic, accessToken, refreshToken);
+    setAuthorizationData(accessToken, refreshToken);
 }
 
 export async function checkAuthorization() {
-    const {basic, accessToken, refreshToken} = getAuthorizationData();
-    if (!basic || !accessToken || !refreshToken) return null;
+    const {accessToken, refreshToken} = getAuthorizationData();
+    if (!accessToken || !refreshToken) return null;
 
     const options = {
         headers: {'Authorization': `Bearer ${accessToken}`},
