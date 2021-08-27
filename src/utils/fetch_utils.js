@@ -104,6 +104,7 @@ async function executeFetch(url, options = {}) {
         const text = await response.text();
         return Promise.reject({httpStatus: response.status, httpText: text});
     }
+
     if (response.status === 204) return;
     return await response.json();
 }
@@ -146,8 +147,16 @@ export async function checkAuthorization() {
 
 export async function logout() {
     const options = {method: 'POST', ...getAuthorizationHeaders()};
-    await executeFetch(LOGOUT_URL, options);
+    let result = true;
+    try {
+        await executeFetch(LOGOUT_URL, options);
+    } catch (err) {
+        result = false;
+    }
+
+    // При любом варианте завершения сетевой операции - удаляем с машины пользователя токены
     removeAuthorizationData();
+    return result;
 }
 
 export async function fetchOrderList(page, date, car, city, status) {
