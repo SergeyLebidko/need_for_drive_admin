@@ -1,6 +1,6 @@
 import React from 'react';
 import {Switch, Route, useRouteMatch} from 'react-router-dom';
-import OrderList from '../order_list_components/OrderList/OrderList';
+import OrderList from '../order_list/OrderList/OrderList';
 import NoMatch from '../../../common/NoMatch/NoMatch';
 import {ORDER_LIST_APP_URL} from '../../../../constants/urls';
 import './AdminContent.scss';
