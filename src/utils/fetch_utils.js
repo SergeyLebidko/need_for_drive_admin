@@ -11,7 +11,10 @@ import {
     PER_MONTH,
     BEGIN_DAY,
     BEGIN_WEEK,
-    BEGIN_MONTH
+    BEGIN_MONTH,
+    SALT_SIZE,
+    ACCESS_TOKEN,
+    REFRESH_TOKEN
 } from '../constants/settings';
 import {
     DEFAULT_REQUEST_HEADERS,
@@ -20,15 +23,14 @@ import {
     CAR_URL,
     CITY_URL,
     LOGIN_URL,
-    CHECK_URL, LOGOUT_URL, REGISTER_URL
+    CHECK_URL,
+    LOGOUT_URL,
+    REGISTER_URL
 } from '../constants/urls';
 import {extractDateParts, getRandomString} from './common_utils';
 import utf8 from 'utf8';
 import base64 from 'base-64';
 import cookie from 'cookie_js';
-
-const ACCESS_TOKEN = 'access_token';
-const REFRESH_TOKEN = 'refresh_token';
 
 function prepareDateRange(dateFilterValue) {
     const msInSec = 1000;
@@ -110,7 +112,7 @@ async function executeFetch(url, options = {}) {
 }
 
 export async function login(loginValue, passwordValue) {
-    const SALT_SIZE = 7;
+
     const basicUtf = utf8.encode(`${getRandomString(SALT_SIZE, true)}:${process.env.REACT_APP_SECRET}`);
     const basic = base64.encode(basicUtf);
 

@@ -1,9 +1,12 @@
 import React from 'react';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import {getRandomString} from '../../../utils/common_utils';
-import 'ControlledPassowrdField.scss';
+import './ControlledPasswordField.scss';
 
-function ControlledPasswordField({label, value, handleChangeValue, errorText, hasShow}){
+function ControlledPasswordField({label, value, handleChangeValue, errorText, hasShow}) {
+    const inputClasses = classNames('text_input', {'text_input_error': !!errorText});
+
     const inputId = getRandomString();
 
     return (
@@ -11,12 +14,12 @@ function ControlledPasswordField({label, value, handleChangeValue, errorText, ha
             <label htmlFor={inputId}>{label}</label>
             <input
                 type={hasShow ? 'text' : 'password'}
-                className="text_input"
+                className={inputClasses}
                 value={value}
                 onChange={handleChangeValue}
                 id={inputId}
             />
-            {errorText && <span className="password_field__error_text">{errorText}</span>}
+            {errorText && <span className="controlled_password_field__error_text">{errorText}</span>}
         </div>
     );
 }

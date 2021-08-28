@@ -2,6 +2,7 @@
 @import '../../../styles/common_presets';
 @import '../../common/BrandStamp/BrandStamp';
 @import '../../common/TextField/TextField';
+@import '../../common/ControlledPasswordField/ControlledPasswordField';
 
 .register {
   padding: $step * 2;
@@ -11,8 +12,12 @@
     max-width: $step * 60;
   }
 
-  .text_field:nth-of-type(2) {
+  .text_field {
     margin-top: $step * 4;
+  }
+
+  .controlled_password_field {
+    margin-top: $step * 6;
   }
 
   .button {
@@ -38,11 +43,16 @@
   &__warning_caption {
     color: $gray;
     font-size: 0.8em;
+    margin-top: 4px;
     display: inline-block;
   }
 
-  &__create_password {
-    display: inline-block;
+  &__password_control_block {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__create_password, &__show_password_control {
     color: $blue;
     cursor: pointer;
   }
@@ -57,10 +67,6 @@
       color: $blue;
     }
   }
-}
-
-.shifted_caption {
-  margin-top: $step * 3;
 }
 
 @media (min-width: $tablet-start) {
