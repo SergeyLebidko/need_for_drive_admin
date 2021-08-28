@@ -5,10 +5,6 @@
   flex-direction: column;
   position: relative;
 
-  &__label {
-    margin-bottom: $step;
-  }
-
   &__error_text {
     color: $red;
     position: absolute;

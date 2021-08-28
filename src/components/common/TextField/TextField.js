@@ -11,7 +11,7 @@ function TextField({label, value, handleChangeValue, errorText}) {
 
     return (
         <div className="text_field">
-            <label htmlFor={inputId} className="text_field__label">{label}</label>
+            <label htmlFor={inputId}>{label}</label>
             <input
                 type="text"
                 className={inputClasses}
