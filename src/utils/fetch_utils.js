@@ -165,7 +165,10 @@ export async function refresh() {
         const {access_token: _accessToken} = await executeFetch(REFRESH_URL, options);
         cookie.set(ACCESS_TOKEN, _accessToken);
     } catch (err) {
-        cookie.remove([ACCESS_TOKEN, REFRESH_TOKEN, BASIC]);
+
+        // Предотвращаем удаление токенов в случае, если ошибка произошла по вине сети (например, нет соединения)
+        if (err.httpStatus !== '') cookie.remove([ACCESS_TOKEN, REFRESH_TOKEN, BASIC]);
+
         throw err;
     }
 }
