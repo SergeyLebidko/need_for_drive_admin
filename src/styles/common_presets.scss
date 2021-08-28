@@ -1,5 +1,27 @@
 @import './vars';
 
+// Стили для полей ввода
+.text_input, .password_input {
+  width: 100%;
+  outline: none;
+  border: 1px solid $gray-light;
+  border-radius: $small-radius;
+  font-size: 1em;
+}
+
+.text_input {
+  padding: $step ($step * 2);
+}
+
+.password_input {
+  padding: $step 2.5em $step ($step * 2);
+}
+
+.text_input_error, .password_input_error {
+  border: 0.5px solid $red;
+  box-shadow: $error_shadow;
+}
+
 // Стили для обычных кнопок
 .button {
   border: none;

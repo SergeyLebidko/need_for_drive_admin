@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import BrandStamp, {LARGE_STAMP} from '../../common/BrandStamp/BrandStamp';
-import TextField, {TEXT, PASSWORD} from '../../common/TextField/TextField';
-import {login} from '../../../utils/fetch_utils';
+import TextField from '../../common/TextField/TextField';
+import PasswordField from '../../common/PasswordField/PasswordField';
 import Preloader from '../../common/Preloader/Preloader';
 import ErrorPane from '../../common/ErrorPane/ErrorPane';
 import {ADMIN_APP_URL, REGISTER_APP_URL} from '../../../constants/urls';
+import {login} from '../../../utils/fetch_utils';
 import './Login.scss';
 
 function Login() {
@@ -75,14 +76,12 @@ function Login() {
                 <h1 className="login__form_caption">Вход</h1>
                 <TextField
                     label="Логин"
-                    fieldType={TEXT}
                     value={loginValue}
                     handleChangeValue={handleChangeLogin}
                     errorText={loginErrorText}
                 />
-                <TextField
+                <PasswordField
                     label="Пароль"
-                    fieldType={PASSWORD}
                     value={passwordValue}
                     handleChangeValue={handleChangePassword}
                     errorText={passwordErrorText}

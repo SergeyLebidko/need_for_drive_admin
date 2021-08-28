@@ -4,7 +4,7 @@ import {useHistory} from 'react-router-dom';
 import Preloader from '../../common/Preloader/Preloader';
 import ErrorPane from '../../common/ErrorPane/ErrorPane';
 import BrandStamp, {LARGE_STAMP} from '../../common/BrandStamp/BrandStamp';
-import TextField, {TEXT} from '../../common/TextField/TextField';
+import TextField from '../../common/TextField/TextField';
 import {Link} from 'react-router-dom';
 import {getRandomString} from '../../../utils/common_utils';
 import {register} from '../../../utils/fetch_utils';
@@ -79,7 +79,6 @@ function Register() {
                 <h1 className="register__form_caption">Регистрация</h1>
                 <TextField
                     label="Логин"
-                    fieldType={TEXT}
                     value={loginValue}
                     handleChangeValue={handleChangeLogin}
                     errorText={loginErrorText}
@@ -90,7 +89,6 @@ function Register() {
                 </span>
                 <TextField
                     label="Пароль"
-                    fieldType={TEXT}
                     value={passwordValue}
                 />
                 <span className="register__warning_caption">
