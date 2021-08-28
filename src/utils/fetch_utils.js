@@ -167,7 +167,7 @@ export async function refresh() {
     } catch (err) {
 
         // Предотвращаем удаление токенов в случае, если ошибка произошла по вине сети (например, нет соединения)
-        if (err.httpStatus !== '') cookie.remove([ACCESS_TOKEN, REFRESH_TOKEN, BASIC]);
+        if (err.httpStatus !== 0) cookie.remove([ACCESS_TOKEN, REFRESH_TOKEN, BASIC]);
 
         throw err;
     }
