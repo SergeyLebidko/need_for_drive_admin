@@ -175,8 +175,12 @@ export async function refresh() {
 
 export async function logout() {
     const options = {method: 'POST', ...getAuthorizationHeaders()};
-    await executeFetch(LOGOUT_URL, options);
 
+    try {
+        await executeFetch(LOGOUT_URL, options);
+    } catch (err) {
+        if (err.httpStatus !== 401) throw err;
+    }
     cookie.remove(ACCESS_TOKEN);
     cookie.remove(REFRESH_TOKEN);
     cookie.remove(BASIC);

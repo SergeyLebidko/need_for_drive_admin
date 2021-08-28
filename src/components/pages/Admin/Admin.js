@@ -25,18 +25,24 @@ function Admin() {
             let username;
             let checkCount = 0;
             try {
+                // Запрашиваем имя пользователя. Если нужно - обновляем access-токен
                 do {
                     if (checkCount === 1) await refresh();
                     username = await check();
                     checkCount++;
                 } while (!username && checkCount < 2);
+
+                // Если не произошло непредвиденных сетевых ошибок, действуем в зависимости от того, получено ли имя пользователя
                 if (username) {
                     dispatch(setUsername(username));
                     dispatch(setMenuItems(MENU_ITEMS));
                 } else {
                     goLogin();
+                    return;
                 }
+
             } catch (err) {
+                // Если произошла не ожидаемая ошибка - выводим компонент с сообщением о ней
                 setAuthProcessError(err);
             }
 
