@@ -14,7 +14,8 @@ import {
     BEGIN_MONTH,
     SALT_SIZE,
     ACCESS_TOKEN,
-    REFRESH_TOKEN
+    REFRESH_TOKEN,
+    BASIC
 } from '../constants/settings';
 import {
     DEFAULT_REQUEST_HEADERS,
@@ -24,6 +25,7 @@ import {
     CITY_URL,
     LOGIN_URL,
     CHECK_URL,
+    REFRESH_URL,
     LOGOUT_URL,
     REGISTER_URL
 } from '../constants/urls';
@@ -69,23 +71,8 @@ function prepareDateRange(dateFilterValue) {
     }
 }
 
-function setAuthorizationData(accessToken, refreshToken) {
-    cookie.set(ACCESS_TOKEN, accessToken);
-    cookie.set(REFRESH_TOKEN, refreshToken);
-}
-
-function getAuthorizationData() {
-    const accessToken = cookie.get(ACCESS_TOKEN);
-    const refreshToken = cookie.get(REFRESH_TOKEN);
-    return {accessToken, refreshToken};
-}
-
-function removeAuthorizationData() {
-    cookie.remove([ACCESS_TOKEN, REFRESH_TOKEN]);
-}
-
 function getAuthorizationHeaders() {
-    const {accessToken} = getAuthorizationData();
+    const accessToken = cookie.get(ACCESS_TOKEN);
     return {headers: {'Authorization': `Bearer ${accessToken}`}};
 }
 
@@ -112,7 +99,6 @@ async function executeFetch(url, options = {}) {
 }
 
 export async function login(loginValue, passwordValue) {
-
     const basicUtf = utf8.encode(`${getRandomString(SALT_SIZE, true)}:${process.env.REACT_APP_SECRET}`);
     const basic = base64.encode(basicUtf);
 
@@ -126,7 +112,9 @@ export async function login(loginValue, passwordValue) {
     }
 
     const {access_token: accessToken, refresh_token: refreshToken} = await executeFetch(LOGIN_URL, options);
-    setAuthorizationData(accessToken, refreshToken);
+    cookie.set(ACCESS_TOKEN, accessToken);
+    cookie.set(REFRESH_TOKEN, refreshToken);
+    cookie.set(BASIC, basic);
 }
 
 export async function register(loginValue, passwordValue) {
@@ -141,36 +129,54 @@ export async function register(loginValue, passwordValue) {
     await executeFetch(REGISTER_URL, options);
 }
 
-export async function checkAuthorization() {
-    const {accessToken, refreshToken} = getAuthorizationData();
-    if (!accessToken || !refreshToken) return null;
+export async function check() {
+    const accessToken = cookie.get(ACCESS_TOKEN);
+    if (!accessToken) return null;
 
-    const options = {
-        headers: {'Authorization': `Bearer ${accessToken}`},
-    }
+    const options = {headers: {'Authorization': `Bearer ${accessToken}`}};
 
-    let response;
     try {
-        response = await executeFetch(CHECK_URL, options);
+        const response = await executeFetch(CHECK_URL, options);
         return response.username;
     } catch (err) {
-        if (err.httpStatus === 401) return null;
-        throw err
+        if (err.httpStatus === 401) {
+            cookie.remove(ACCESS_TOKEN);
+            return null;
+        }
+        throw err;
+    }
+}
+
+export async function refresh() {
+    const basic = cookie.get(BASIC);
+    const refreshToken = cookie.get(REFRESH_TOKEN);
+    if (!basic || !refreshToken) return;
+
+    const options = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Basic ${basic}`
+        },
+        body: JSON.stringify({'refresh_token': refreshToken}),
+        method: 'POST'
+    }
+
+    try {
+        const {access_token: _accessToken} = await executeFetch(REFRESH_URL, options);
+        cookie.set(ACCESS_TOKEN, _accessToken);
+    } catch (err) {
+        cookie.remove([ACCESS_TOKEN, REFRESH_TOKEN, BASIC]);
+        throw err;
     }
 }
 
 export async function logout() {
     const options = {method: 'POST', ...getAuthorizationHeaders()};
-    let result = true;
-    try {
-        await executeFetch(LOGOUT_URL, options);
-    } catch (err) {
-        result = false;
-    }
+    await executeFetch(LOGOUT_URL, options);
 
-    // При любом варианте завершения сетевой операции - удаляем с машины пользователя токены
-    removeAuthorizationData();
-    return result;
+    cookie.remove(ACCESS_TOKEN);
+    cookie.remove(REFRESH_TOKEN);
+    cookie.remove(BASIC);
 }
 
 export async function fetchOrderList(page, date, car, city, status) {

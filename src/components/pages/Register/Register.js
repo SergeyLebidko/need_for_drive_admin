@@ -83,7 +83,6 @@ function Register() {
         setRegisterProcess(true);
         register(loginValue, passwordValue)
             .then(() => {
-                setRegisterProcess(false);
                 history.push(`/${LOGIN_APP_URL}`);
             })
             .catch(err => {
@@ -95,6 +94,9 @@ function Register() {
     const clearFormData = () => {
         setLoginValue('');
         setLoginErrorText(null);
+        setPasswordValue('');
+        setPasswordErrorText(null);
+        setHasShowPassword(false);
         setRegisterProcess(false);
         setRegisterError(null);
     }

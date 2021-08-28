@@ -9,7 +9,7 @@ import {useHistory} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {LOGIN_APP_URL} from '../../../constants/urls';
 import {MENU_ITEMS} from '../../../constants/settings';
-import {checkAuthorization} from '../../../utils/fetch_utils';
+import {check, refresh} from '../../../utils/fetch_utils';
 import {setMenuItems, setUsername} from '../../../store/actionCreators';
 import './Admin.scss';
 
@@ -20,22 +20,28 @@ function Admin() {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    // Проверяем наличие учетных данных и если они есть - готовим данные меню
     useEffect(() => {
-        checkAuthorization()
-            .then(username => {
-                if (!username) {
+        (async function () {
+            let username;
+            let checkCount = 0;
+            try {
+                do {
+                    if (checkCount === 1) await refresh();
+                    username = await check();
+                    checkCount++;
+                } while (!username || checkCount < 2);
+                if (username) {
+                    dispatch(setUsername(username));
+                    dispatch(setMenuItems(MENU_ITEMS));
+                } else {
                     goLogin();
-                    return;
                 }
-                dispatch(setMenuItems(MENU_ITEMS));
-                dispatch(setUsername(username));
-                setHasAuthProcess(false);
-            })
-            .catch(err => {
+            } catch (err) {
                 setAuthProcessError(err);
-                setHasAuthProcess(false);
-            });
+            }
+
+            setHasAuthProcess(false);
+        })();
     }, [dispatch]);
 
     const goLogin = () => history.push(`/${LOGIN_APP_URL}`);

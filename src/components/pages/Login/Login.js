@@ -45,7 +45,6 @@ function Login() {
         login(loginValue, passwordValue)
             .then(() => {
                 history.push(`/${ADMIN_APP_URL}`);
-                setHasLoginProcess(false);
             })
             .catch(err => {
                 setHasLoginProcess(false);
