@@ -29,7 +29,6 @@ function Admin() {
                     if (checkCount === 1) await refresh();
                     username = await check();
                     checkCount++;
-                    console.log(checkCount, username);
                 } while (!username && checkCount < 2);
                 if (username) {
                     dispatch(setUsername(username));
