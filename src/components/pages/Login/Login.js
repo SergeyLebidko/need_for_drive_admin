@@ -74,7 +74,7 @@ function Login() {
     return (
         <div className="login">
             <BrandStamp size={LARGE_STAMP}/>
-            <form className="login__form_block">
+            <form className="form">
                 <h1 className="login__form_caption">Вход</h1>
                 <TextField
                     label="Логин"

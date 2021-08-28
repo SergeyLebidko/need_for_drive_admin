@@ -106,7 +106,7 @@ function Register() {
     return (
         <div className="register">
             <BrandStamp size={LARGE_STAMP}/>
-            <form className="register__form_block">
+            <form className="form">
                 <h1 className="register__form_caption">Регистрация</h1>
                 <TextField
                     label="Логин"

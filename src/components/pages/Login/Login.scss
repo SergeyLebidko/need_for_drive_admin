@@ -16,15 +16,6 @@
     margin-top: $step * 6;
   }
 
-  &__form_block {
-    padding: $step * 2;
-    background: $white;
-    box-shadow: $main-shadow;
-    border-radius: $main-radius;
-    margin: ($step * 4) auto 0;
-    max-width: $step * 60;
-  }
-
   &__form_caption {
     font-size: 1.5em;
     margin-top: $step;
