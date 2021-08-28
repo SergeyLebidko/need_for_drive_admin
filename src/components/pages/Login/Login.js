@@ -33,7 +33,9 @@ function Login() {
         if (nextValue !== '' && !!passwordErrorText) setPasswordErrorText('');
     };
 
-    const handleLoginButtonClick = () => {
+    const handleLoginButtonClick = event => {
+        event.preventDefault();
+
         const hasError = loginValue === '' || passwordValue === '';
         if (loginValue === '') setLoginErrorText('Обязательное поле');
         if (passwordValue === '') setPasswordErrorText('Обязательно поле');
@@ -72,7 +74,7 @@ function Login() {
     return (
         <div className="login">
             <BrandStamp size={LARGE_STAMP}/>
-            <div className="login__form_block">
+            <form className="login__form_block">
                 <h1 className="login__form_caption">Вход</h1>
                 <TextField
                     label="Логин"
@@ -88,11 +90,11 @@ function Login() {
                 />
                 <div className="login__control_block">
                     <Link to={`/${REGISTER_APP_URL}`}>Запросить доступ</Link>
-                    <button className="button button_blue" onClick={handleLoginButtonClick}>
+                    <button type="submit" className="button button_blue" onClick={handleLoginButtonClick}>
                         Войти
                     </button>
                 </div>
-            </div>
+            </form>
         </div>
     )
 }
