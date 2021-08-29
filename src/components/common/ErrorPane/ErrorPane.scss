@@ -11,6 +11,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: $main-background;
 
   &__error_code {
     font-size: 5em;
@@ -35,4 +36,9 @@
   &__back_button {
     margin-top: $step * 3;
   }
+}
+
+.error_pane_fullscreen {
+  position: fixed;
+  z-index: 1000;
 }

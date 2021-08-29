@@ -62,7 +62,7 @@ function Admin() {
     return (
         <>
             {preloader && <Preloader/>}
-            {error && <ErrorPane error={error.description} handleBackButtonClick={error.handler}/>}
+            {error && <ErrorPane error={error.description} handleBackButtonClick={error.handler} fullscreen/>}
             {username &&
             <>
                 <Menu/>
