@@ -6,13 +6,7 @@ import twoLines from '../../../../content/images/two_lines.svg';
 import './MenuButton.scss';
 
 function MenuButton({hasOpened, handleClick}) {
-    const menuButtonClasses = classNames(
-        'menu_button',
-        {
-            'button_opened_menu': hasOpened,
-            'button_closed_menu': !hasOpened
-        }
-    );
+    const menuButtonClasses = classNames('menu_button', {'menu_button_opened': hasOpened});
 
     return (
         <div className={menuButtonClasses} onClick={handleClick}>
