@@ -36,3 +36,8 @@
     margin-top: $step * 3;
   }
 }
+
+.error_pane_fullscreen {
+  position: fixed;
+  z-index: 1000;
+}
