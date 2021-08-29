@@ -96,6 +96,21 @@ async function executeFetch(url, options = {}) {
     return await response.json();
 }
 
+async function executeFetchWithRefresh(func, url, options) {
+    let attempts = 0;
+    let response;
+    do {
+        if (attempts === 1) await refresh();
+        try {
+            response = await func(url, options);
+        } catch (err) {
+            if (err.httpStatus !== 401) throw err;
+        }
+        attempts++;
+    } while (!response && attempts < 2);
+    return response;
+}
+
 export async function login(loginValue, passwordValue) {
     const salt = getRandomString(SALT_SIZE, true);
     const basic = btoa(`${salt}:${process.env.REACT_APP_SECRET}`);
@@ -181,21 +196,6 @@ export async function logout() {
     localStorage.removeItem(SALT);
 }
 
-export async function executeFetchWithRefresh(url, options) {
-    let attempts = 0;
-    let response;
-    do {
-        if (attempts === 1) await refresh();
-        try {
-            response = await executeFetch(url, options);
-        } catch (err) {
-            if (err.httpStatus !== 401) throw err;
-        }
-        attempts++;
-    } while (!response && attempts < 2);
-    return response;
-}
-
 export async function fetchOrderList(page, date, car, city, status) {
     const params = new URLSearchParams();
 
@@ -213,7 +213,7 @@ export async function fetchOrderList(page, date, car, city, status) {
 
     const options = {...getAuthorizationHeaders()};
 
-    return await executeFetchWithRefresh(`${ORDER_URL}/?${params}`, options);
+    return await executeFetchWithRefresh(executeFetch, `${ORDER_URL}/?${params}`, options);
 }
 
 export async function fetchStatusList() {
@@ -226,4 +226,8 @@ export async function fetchCarList() {
 
 export async function fetchCityList() {
     return await executeFetch(CITY_URL);
+}
+
+export async function fetchUsername(){
+    return await executeFetchWithRefresh(check);
 }

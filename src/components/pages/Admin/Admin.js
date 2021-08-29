@@ -9,7 +9,7 @@ import {useHistory} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {LOGIN_APP_URL} from '../../../constants/urls';
 import {MENU_ITEMS} from '../../../constants/settings';
-import {check, refresh} from '../../../utils/fetch_utils';
+import {fetchUsername} from '../../../utils/fetch_utils';
 import {setMenuItems, setUsername, setError, setPreloader} from '../../../store/actionCreators';
 import {getUsername, getError, getPreloader} from '../../../store/selectors';
 import './Admin.scss';
@@ -26,17 +26,8 @@ function Admin() {
         setError(null);
         setPreloader(true);
         (async function () {
-            let username;
-            let checkCount = 0;
             try {
-                // Запрашиваем имя пользователя. Если нужно - обновляем access-токен
-                do {
-                    if (checkCount === 1) await refresh();
-                    username = await check();
-                    checkCount++;
-                } while (!username && checkCount < 2);
-
-                // Если не произошло непредвиденных сетевых ошибок, действуем в зависимости от того, получено ли имя пользователя
+                const username = await fetchUsername();
                 if (username) {
                     dispatch(setUsername(username));
                     dispatch(setMenuItems(MENU_ITEMS));
@@ -44,12 +35,9 @@ function Admin() {
                     goLogin();
                     return;
                 }
-
             } catch (err) {
-                // Если произошла не ожидаемая ошибка - выводим компонент с сообщением о ней
                 setError({description: err, handler: goLogin});
             }
-
             setPreloader(false);
         })();
     }, [dispatch]);
