@@ -43,10 +43,10 @@ export const ALL_CHARS = LETTER_CHARS + DIGIT_CHARS + '_';
 // Рекомендуемый размер пароля
 export const PASSWORD_SIZE = 10;
 
-// Длина "соли"
+// Параметры "соли"
+export const SALT = 'salt';
 export const SALT_SIZE = 7;
 
 // Наименования cookie для токенов
 export const ACCESS_TOKEN = 'access_token';
 export const REFRESH_TOKEN = 'refresh_token';
-export const BASIC = 'basic';

@@ -12,10 +12,10 @@ import {
     BEGIN_DAY,
     BEGIN_WEEK,
     BEGIN_MONTH,
+    SALT,
     SALT_SIZE,
     ACCESS_TOKEN,
-    REFRESH_TOKEN,
-    BASIC
+    REFRESH_TOKEN
 } from '../constants/settings';
 import {
     DEFAULT_REQUEST_HEADERS,
@@ -97,7 +97,8 @@ async function executeFetch(url, options = {}) {
 }
 
 export async function login(loginValue, passwordValue) {
-    const basic = btoa(`${getRandomString(SALT_SIZE, true)}:${process.env.REACT_APP_SECRET}`);
+    const salt = getRandomString(SALT_SIZE, true);
+    const basic = btoa(`${salt}:${process.env.REACT_APP_SECRET}`);
 
     const options = {
         headers: {
@@ -111,7 +112,7 @@ export async function login(loginValue, passwordValue) {
     const {access_token: accessToken, refresh_token: refreshToken} = await executeFetch(LOGIN_URL, options);
     cookie.set(ACCESS_TOKEN, accessToken);
     cookie.set(REFRESH_TOKEN, refreshToken);
-    cookie.set(BASIC, basic);
+    localStorage.setItem(SALT, salt);
 }
 
 export async function register(loginValue, passwordValue) {
@@ -142,10 +143,11 @@ export async function check() {
 }
 
 export async function refresh() {
-    const basic = cookie.get(BASIC);
+    const salt = localStorage.getItem(SALT);
     const refreshToken = cookie.get(REFRESH_TOKEN);
-    if (!basic || !refreshToken) return;
+    if (!salt || !refreshToken) return;
 
+    const basic = btoa(`${salt}:${process.env.REACT_APP_SECRET}`);
     const options = {
         headers: {
             'Content-Type': 'application/json',
@@ -161,7 +163,8 @@ export async function refresh() {
         cookie.set(REFRESH_TOKEN, _refreshToken);
     } catch (err) {
         if (err.httpStatus === 0) throw err;
-        cookie.remove([ACCESS_TOKEN, REFRESH_TOKEN, BASIC]);
+        cookie.remove([ACCESS_TOKEN, REFRESH_TOKEN]);
+        localStorage.removeItem(SALT);
     }
 }
 
@@ -175,7 +178,7 @@ export async function logout() {
     }
     cookie.remove(ACCESS_TOKEN);
     cookie.remove(REFRESH_TOKEN);
-    cookie.remove(BASIC);
+    localStorage.removeItem(SALT);
 }
 
 export async function fetchOrderList(page, date, car, city, status) {
