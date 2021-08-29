@@ -45,8 +45,8 @@ function OrderList() {
         setDone(false);
         setError(null);
         dispatch(loadOrderList(page, date, car, city, status))
-            .finally(() => setDone(true))
-            .catch(err => setError(err));
+            .catch(err => setError(err))
+            .finally(() => setDone(true));
     }, [location]);
 
     if (!done) return <Preloader/>;
