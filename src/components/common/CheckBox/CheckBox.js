@@ -12,7 +12,7 @@ function CheckBox({caption, defaultValue, handleChange, disabled}) {
         setValue(!value);
     }
 
-    const labelClasses = classNames('check_box', {'checked_box': value, 'unchecked_box': !value, 'disabled_box': disabled});
+    const labelClasses = classNames('check_box', {'checked_box': value, 'disabled_box': disabled});
 
     return (
         <label onClick={clickHandler} className={labelClasses}>

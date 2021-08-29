@@ -12,7 +12,9 @@
     content: '';
     width: 18px;
     height: 18px;
+    border: 1px solid $gray;
     border-radius: 2px;
+    background-color: $white;
   }
 
   &::before {
@@ -22,20 +24,10 @@
     content: '';
     width: 16px;
     height: 16px;
-    background-image: url("../../../content/images/checked.svg");
+    background-image: url('../../../content/images/checked.svg');
     background-size: contain;
-    z-index: 1;
-  }
-}
-
-.unchecked_box {
-  &::after {
-    border: 1px solid $gray;
-    background-color: $white;
-  }
-
-  &::before {
     opacity: 0;
+    z-index: 1;
   }
 }
 
