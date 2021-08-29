@@ -25,21 +25,17 @@ function Admin() {
     useEffect(() => {
         setError(null);
         setPreloader(true);
-        (async function () {
-            try {
-                const username = await fetchUsername();
+        fetchUsername()
+            .then(username => {
                 if (username) {
                     dispatch(setUsername(username));
                     dispatch(setMenuItems(MENU_ITEMS));
                 } else {
                     goLogin();
-                    return;
                 }
-            } catch (err) {
-                setError({description: err, handler: goLogin});
-            }
-            setPreloader(false);
-        })();
+            })
+            .catch(err => setError({description: err, handler: goLogin}))
+            .finally(() => setPreloader(false));
     }, [dispatch]);
 
     const goLogin = () => {
