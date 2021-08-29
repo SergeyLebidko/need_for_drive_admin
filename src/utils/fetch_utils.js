@@ -139,11 +139,8 @@ export async function check() {
         const response = await executeFetch(CHECK_URL, options);
         return response.username;
     } catch (err) {
-        if (err.httpStatus === 401) {
-            cookie.remove(ACCESS_TOKEN);
-            return null;
-        }
-        throw err;
+        if (err.httpStatus === 0) throw err;
+        cookie.remove(ACCESS_TOKEN);
     }
 }
 
@@ -162,14 +159,12 @@ export async function refresh() {
     }
 
     try {
-        const {access_token: _accessToken} = await executeFetch(REFRESH_URL, options);
+        const {access_token: _accessToken, refresh_token: _refreshToken} = await executeFetch(REFRESH_URL, options);
         cookie.set(ACCESS_TOKEN, _accessToken);
+        cookie.set(REFRESH_TOKEN, _refreshToken);
     } catch (err) {
-
-        // Предотвращаем удаление токенов в случае, если ошибка произошла по вине сети (например, нет соединения)
-        if (err.httpStatus !== 0) cookie.remove([ACCESS_TOKEN, REFRESH_TOKEN, BASIC]);
-
-        throw err;
+        if (err.httpStatus === 0) throw err;
+        cookie.remove([ACCESS_TOKEN, REFRESH_TOKEN, BASIC]);
     }
 }
 
@@ -179,7 +174,7 @@ export async function logout() {
     try {
         await executeFetch(LOGOUT_URL, options);
     } catch (err) {
-        if (err.httpStatus !== 401) throw err;
+        if (err.httpStatus === 0) throw err;
     }
     cookie.remove(ACCESS_TOKEN);
     cookie.remove(REFRESH_TOKEN);
