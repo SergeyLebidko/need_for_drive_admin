@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import {useHistory} from 'react-router-dom';
 import './ErrorPane.scss';
 
-function ErrorPane({error, handleBackButtonClick, hasFullscreen}) {
+function ErrorPane({error, handleBackButtonClick}) {
     const history = useHistory();
 
     const handleClick = () => {
@@ -15,10 +14,8 @@ function ErrorPane({error, handleBackButtonClick, hasFullscreen}) {
         handleBackButtonClick();
     };
 
-    const paneClasses = classNames('error_pane', {'error_pane_fullscreen': hasFullscreen});
-
     return (
-        <div className={paneClasses}>
+        <div className="error_pane">
             {!!error.httpStatus && <h1 className="error_pane__error_code">{error.httpStatus}</h1>}
             <h2 className="error_pane__big_caption">Что-то пошло не так</h2>
             <h3 className="error_pane__small_caption">Попробуйте перезагрузить страницу</h3>
@@ -30,8 +27,7 @@ function ErrorPane({error, handleBackButtonClick, hasFullscreen}) {
 }
 
 ErrorPane.defaultProps = {
-    handleBackButtonClick: null,
-    hasFullscreen: false
+    handleBackButtonClick: null
 }
 
 ErrorPane.propTypes = {
@@ -39,8 +35,7 @@ ErrorPane.propTypes = {
         httpStatus: PropTypes.number,
         httpText: PropTypes.string
     }),
-    handleBackButtonClick: PropTypes.func,
-    hasFullscreen: PropTypes.bool
+    handleBackButtonClick: PropTypes.func
 }
 
 export default ErrorPane;
