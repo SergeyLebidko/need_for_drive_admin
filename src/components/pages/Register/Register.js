@@ -77,7 +77,7 @@ function Register() {
         }
         if (_loginErrorText) setLoginErrorText(_loginErrorText);
         if (_passwordErrorText) setPasswordErrorText(_passwordErrorText.join(' '));
-        if (_passwordErrorText || _loginErrorText.length > 0) return;
+        if (_passwordErrorText.length > 0 || _loginErrorText) return;
 
         // Отправляем данные для регистрации
         setRegisterProcess(true);
