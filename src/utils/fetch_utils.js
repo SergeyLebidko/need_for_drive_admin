@@ -101,12 +101,10 @@ async function executeFetch(url, options = {}) {
 async function executeFetchWithRefresh(func, url, options = {}) {
     let attempts = 0;
     let response;
-
-    const _options = addHeadersToFetchOptions(getAuthorizationHeaders(), options);
-
     do {
         if (attempts === 1) await refresh();
         try {
+            const _options = addHeadersToFetchOptions(getAuthorizationHeaders(), options);
             response = await func(url, _options);
         } catch (err) {
             if (err.httpStatus !== 401) throw err;
@@ -189,7 +187,7 @@ export async function refresh() {
 }
 
 export async function logout() {
-    const options = {method: 'POST', ...getAuthorizationHeaders()};
+    const options = {method: 'POST', headers: getAuthorizationHeaders()};
 
     try {
         await executeFetch(LOGOUT_URL, options);
