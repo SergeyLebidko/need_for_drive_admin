@@ -71,14 +71,16 @@ function prepareDateRange(dateFilterValue) {
 
 function getAuthorizationHeaders() {
     const accessToken = cookie.get(ACCESS_TOKEN);
-    return {headers: {'Authorization': `Bearer ${accessToken}`}};
+    return {'Authorization': `Bearer ${accessToken}`};
+}
+
+function addHeadersToFetchOptions(headers, options) {
+    const _headers = options.headers ? {...options.headers, ...headers} : headers;
+    return {...options, headers: _headers}
 }
 
 async function executeFetch(url, options = {}) {
-    let {headers} = options;
-    headers = headers ? {...headers, ...DEFAULT_REQUEST_HEADERS} : DEFAULT_REQUEST_HEADERS;
-
-    const _options = {...options, headers};
+    const _options = addHeadersToFetchOptions(DEFAULT_REQUEST_HEADERS, options);
 
     let response;
     try {
@@ -96,13 +98,16 @@ async function executeFetch(url, options = {}) {
     return await response.json();
 }
 
-async function executeFetchWithRefresh(func, url, options) {
+async function executeFetchWithRefresh(func, url, options = {}) {
     let attempts = 0;
     let response;
+
+    const _options = addHeadersToFetchOptions(getAuthorizationHeaders(), options);
+
     do {
         if (attempts === 1) await refresh();
         try {
-            response = await func(url, options);
+            response = await func(url, _options);
         } catch (err) {
             if (err.httpStatus !== 401) throw err;
         }
@@ -211,9 +216,7 @@ export async function fetchOrderList(page, date, car, city, status) {
         if (dateTo) params.set(`${DATE_FROM_FILTER_NAME}[$lt]`, dateTo);
     }
 
-    const options = {...getAuthorizationHeaders()};
-
-    return await executeFetchWithRefresh(executeFetch, `${ORDER_URL}/?${params}`, options);
+    return await executeFetchWithRefresh(executeFetch, `${ORDER_URL}/?${params}`);
 }
 
 export async function fetchStatusList() {
@@ -228,6 +231,6 @@ export async function fetchCityList() {
     return await executeFetch(CITY_URL);
 }
 
-export async function fetchUsername(){
+export async function fetchUsername() {
     return await executeFetchWithRefresh(check);
 }
