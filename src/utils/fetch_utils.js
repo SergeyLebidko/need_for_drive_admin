@@ -30,8 +30,6 @@ import {
     REGISTER_URL
 } from '../constants/urls';
 import {extractDateParts, getRandomString} from './common_utils';
-import utf8 from 'utf8';
-import base64 from 'base-64';
 import cookie from 'cookie_js';
 
 function prepareDateRange(dateFilterValue) {
@@ -99,8 +97,7 @@ async function executeFetch(url, options = {}) {
 }
 
 export async function login(loginValue, passwordValue) {
-    const basicUtf = utf8.encode(`${getRandomString(SALT_SIZE, true)}:${process.env.REACT_APP_SECRET}`);
-    const basic = base64.encode(basicUtf);
+    const basic = btoa(`${getRandomString(SALT_SIZE, true)}:${process.env.REACT_APP_SECRET}`);
 
     const options = {
         headers: {
