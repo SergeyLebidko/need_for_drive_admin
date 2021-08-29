@@ -8,7 +8,7 @@ import './Menu.scss';
 function Menu() {
     const [hasOpened, setHasOpened] = useState(false);
 
-    const menuClasses = classNames('menu', {'opened_menu': hasOpened, 'closed_menu': !hasOpened});
+    const menuClasses = classNames('menu', {'opened_menu': hasOpened});
 
     const handleMenuButtonClick = () => setHasOpened(oldVal => !oldVal);
     const handleMenuItemClick = () => setHasOpened(false);

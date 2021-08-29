@@ -11,6 +11,8 @@
   overflow: hidden;
   transition: all 200ms;
   z-index: 100;
+  height: $step * 6;
+  width: $step * 6;
 
   .menu_button {
     display: flex;
@@ -26,11 +28,6 @@
     align-items: center;
     padding-left: 0;
   }
-}
-
-.closed_menu {
-  height: $step * 6;
-  width: $step * 6;
 }
 
 .opened_menu {
