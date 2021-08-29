@@ -35,3 +35,21 @@ export function username(state = null, action) {
             return state;
     }
 }
+
+export function error(state = null, action) {
+    switch (action.type) {
+        case act.SET_ERROR:
+            return action.error;
+        default:
+            return state;
+    }
+}
+
+export function preloader(state = false, action) {
+    switch (action.type) {
+        case act.SET_PRELOADER:
+            return action.preloader;
+        default:
+            return state;
+    }
+}
