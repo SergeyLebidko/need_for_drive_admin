@@ -61,7 +61,7 @@ function Admin() {
 
     return (
         <>
-            {preloader && <Preloader/>}
+            {preloader && <Preloader fullscreen/>}
             {error && <ErrorPane error={error.description} handleBackButtonClick={error.handler} fullscreen/>}
             {username &&
             <>
