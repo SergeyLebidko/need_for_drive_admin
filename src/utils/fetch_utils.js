@@ -181,6 +181,21 @@ export async function logout() {
     localStorage.removeItem(SALT);
 }
 
+export async function executeFetchWithRefresh(url, options) {
+    let attempts = 0;
+    let response;
+    do {
+        if (attempts === 1) await refresh();
+        try {
+            response = await executeFetch(url, options);
+        } catch (err) {
+            if (err.httpStatus !== 401) throw err;
+        }
+        attempts++;
+    } while (!response && attempts < 2);
+    return response;
+}
+
 export async function fetchOrderList(page, date, car, city, status) {
     const params = new URLSearchParams();
 
@@ -198,7 +213,7 @@ export async function fetchOrderList(page, date, car, city, status) {
 
     const options = {...getAuthorizationHeaders()};
 
-    return await executeFetch(`${ORDER_URL}/?${params}`, options);
+    return await executeFetchWithRefresh(`${ORDER_URL}/?${params}`, options);
 }
 
 export async function fetchStatusList() {
