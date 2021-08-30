@@ -18,6 +18,9 @@ function Register() {
 
     const [passwordValue, setPasswordValue] = useState('');
     const [passwordErrorText, setPasswordErrorText] = useState(null);
+    const [confirmPasswordValue, setConfirmPasswordValue] = useState('');
+    const [confirmPasswordErrorText, setConfirmPasswordErrorText] = useState(null);
+
     const [hasShowPassword, setHasShowPassword] = useState(false);
 
     const [registerProcess, setRegisterProcess] = useState(false);
@@ -25,31 +28,72 @@ function Register() {
 
     const history = useHistory();
 
-    const handleChangeLogin = event => {
-        const nextValue = event.target.value;
+    const getLoginError = value => {
+        const errors = [];
 
-        if (nextValue.length > 0) {
-            if (DIGIT_CHARS.includes(nextValue[0])) return;
-            for (const char of nextValue) {
-                if (!ALL_CHARS.includes(char)) return;
+        if (value.length > 0) {
+            if (DIGIT_CHARS.includes(value[0])) errors.push('Логин не может начинаться с цифры.');
+            for (const char of value) {
+                if (!ALL_CHARS.includes(char)) {
+                    errors.push('Логин может содержать только английские буквы, цифры и знак подчеркивания');
+                    break;
+                }
             }
         }
 
-        setLoginErrorText(null);
+        return errors.join(' ');
+    }
+
+    const getPasswordError = value => {
+        const errors = [];
+
+        if (value.length > 0) {
+            if (value.length < PASSWORD_SIZE) errors.push(`Длина пароля менее ${PASSWORD_SIZE} символов.`);
+            let findDigit = false;
+            let findLetter = false;
+            for (const char of value) {
+                if (LETTER_CHARS.includes(char)) findLetter = true;
+                if (DIGIT_CHARS.includes(char)) findDigit = true;
+                if (findLetter && findDigit) break;
+            }
+            if (!findLetter) errors.push('Пароль не содержит английские буквы.');
+            if (!findDigit) errors.push('Пароль не содержит цифры.');
+        }
+
+        return errors.join(' ');
+    }
+
+    const getConfirmPasswordError = (valuePass, valueConfirm) => {
+        if (valueConfirm !== valuePass) return 'Пароль и подтверждение не совпадают';
+        return null;
+    }
+
+    const handleChangeLogin = event => {
+        const nextValue = event.target.value;
+        setLoginErrorText(getLoginError(nextValue));
         setLoginValue(nextValue);
     }
 
     const handleChangePassword = event => {
         const nextValue = event.target.value;
-
-        setPasswordErrorText(null);
+        setPasswordErrorText(getPasswordError(nextValue));
         setPasswordValue(nextValue);
+        setConfirmPasswordErrorText(getConfirmPasswordError(nextValue, confirmPasswordValue));
+    }
+
+    const handleChangeConfirmPassword = event => {
+        const nextValue = event.target.value;
+        setConfirmPasswordErrorText(getConfirmPasswordError(passwordValue, nextValue));
+        setConfirmPasswordValue(nextValue);
     }
 
     const handleCreatePassword = () => {
-        setPasswordValue(getRandomString(PASSWORD_SIZE, true));
-        setHasShowPassword(true);
+        const createdPassword = getRandomString(PASSWORD_SIZE, true);
+        setPasswordValue(createdPassword);
         setPasswordErrorText(null);
+        setConfirmPasswordValue(createdPassword);
+        setConfirmPasswordErrorText(null);
+        setHasShowPassword(true);
     };
 
     const handleShowPasswordControlClick = () => setHasShowPassword(!hasShowPassword);
@@ -57,27 +101,13 @@ function Register() {
     const handleRegisterButtonClick = event => {
         event.preventDefault();
 
-        // Проверяем валидность полей с логином и паролем
-        let _loginErrorText = '';
-        const _passwordErrorText = [];
-        if (loginValue === '') _loginErrorText = 'Обязательное поле.';
-        if (passwordValue === '') {
-            _passwordErrorText.push('Обязательное поле.');
-        } else {
-            if (passwordValue.length < PASSWORD_SIZE) _passwordErrorText.push(`Длина пароля менее ${PASSWORD_SIZE} знаков`);
-            let findDigit = false;
-            let findLetter = false;
-            for (const char of passwordValue) {
-                if (LETTER_CHARS.includes(char)) findLetter = true;
-                if (DIGIT_CHARS.includes(char)) findDigit = true;
-                if (findLetter && findDigit) break;
-            }
-            if (!findLetter) _passwordErrorText.push('Пароль не содержит английские буквы.');
-            if (!findDigit) _passwordErrorText.push('Пароль не содержит цифры.');
-        }
-        if (_loginErrorText) setLoginErrorText(_loginErrorText);
-        if (_passwordErrorText) setPasswordErrorText(_passwordErrorText.join(' '));
-        if (_passwordErrorText.length > 0 || _loginErrorText) return;
+        const emptyError = loginValue.length === 0 || passwordValue.length === 0 || confirmPasswordValue.length === 0;
+        if (loginValue.length === 0) setLoginErrorText('Обязательное поле');
+        if (passwordValue.length === 0) setPasswordErrorText('Обязательное поле');
+        if (confirmPasswordValue.length === 0) setConfirmPasswordErrorText('Обязательное поле');
+        if (emptyError) return;
+
+        if (loginErrorText || passwordErrorText || confirmPasswordErrorText) return;
 
         // Отправляем данные для регистрации
         setRegisterProcess(true);
@@ -116,10 +146,6 @@ function Register() {
                     handleChangeValue={handleChangeLogin}
                     errorText={loginErrorText}
                 />
-                <span className="register__warning_caption">
-                    Логин может содержать только английские буквы, цифры и знак подчеркивания.
-                    Логин не может начинаться с цифры.
-                </span>
                 <ControlledPasswordField
                     label="Пароль"
                     value={passwordValue}
@@ -127,10 +153,6 @@ function Register() {
                     errorText={passwordErrorText}
                     hasShow={hasShowPassword}
                 />
-                <span className="register__warning_caption">
-                    Пароль должен содержать английские буквы и цифры
-                    Длина пароля должна быть не менее {PASSWORD_SIZE} знаков.
-                </span>
                 <div className="register__password_control_block">
                     <span className="register__create_password" onClick={handleCreatePassword}>
                         Создать пароль
@@ -141,6 +163,13 @@ function Register() {
                     </span>
                     }
                 </div>
+                <ControlledPasswordField
+                    label="Подтверждение пароля"
+                    value={confirmPasswordValue}
+                    handleChangeValue={handleChangeConfirmPassword}
+                    errorText={confirmPasswordErrorText}
+                    hasShow={hasShowPassword}
+                />
                 <div className="register__control_block">
                     <Link to={`/${LOGIN_APP_URL}`}>Выполнить вход</Link>
                     <button type="submit" className="button button_blue" onClick={handleRegisterButtonClick}>
