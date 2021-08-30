@@ -28,12 +28,12 @@ function Register() {
 
     const history = useHistory();
 
-    const getLoginError = value => {
+    const getLoginError = nextLogin => {
         const errors = [];
 
-        if (value.length > 0) {
-            if (DIGIT_CHARS.includes(value[0])) errors.push('Логин не может начинаться с цифры.');
-            for (const char of value) {
+        if (nextLogin.length > 0) {
+            if (DIGIT_CHARS.includes(nextLogin[0])) errors.push('Логин не может начинаться с цифры.');
+            for (const char of nextLogin) {
                 if (!ALL_CHARS.includes(char)) {
                     errors.push('Логин может содержать только английские буквы, цифры и знак подчеркивания');
                     break;
@@ -44,14 +44,14 @@ function Register() {
         return errors.join(' ');
     }
 
-    const getPasswordError = value => {
+    const getPasswordError = nextPassword => {
         const errors = [];
 
-        if (value.length > 0) {
-            if (value.length < PASSWORD_SIZE) errors.push(`Длина пароля менее ${PASSWORD_SIZE} символов.`);
+        if (nextPassword.length > 0) {
+            if (nextPassword.length < PASSWORD_SIZE) errors.push(`Длина пароля менее ${PASSWORD_SIZE} символов.`);
             let findDigit = false;
             let findLetter = false;
-            for (const char of value) {
+            for (const char of nextPassword) {
                 if (LETTER_CHARS.includes(char)) findLetter = true;
                 if (DIGIT_CHARS.includes(char)) findDigit = true;
                 if (findLetter && findDigit) break;
@@ -63,8 +63,8 @@ function Register() {
         return errors.join(' ');
     }
 
-    const getConfirmError = (valuePass, valueConfirm) => {
-        if (valueConfirm !== valuePass) return 'Пароль и подтверждение не совпадают';
+    const getConfirmError = (valuePassword, valueConfirm) => {
+        if (valueConfirm !== valuePassword) return 'Пароль и подтверждение не совпадают';
         return null;
     }
 
