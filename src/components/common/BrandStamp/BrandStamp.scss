@@ -1,0 +1,31 @@
+@import '../../../styles/vars';
+
+.brand_stamp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.large_stamp {
+  svg {
+    width: 3em;
+    height: 3em;
+  }
+
+  h1 {
+    font-size: 2em;
+    margin-left: $step * 2;
+  }
+}
+
+.small_stamp {
+  svg {
+    width: 1.5em;
+    height: 1.5em;
+  }
+
+  h1 {
+    font-size: 1em;
+    margin-left: $step;
+  }
+}

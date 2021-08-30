@@ -23,7 +23,10 @@
     "import/prefer-default-export": "off",
     "react-hooks/exhaustive-deps": "warn",
     "no-underscore-dangle": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "prefer-const": [
+      "error"
+    ]
   },
   "settings": {
     "react": {

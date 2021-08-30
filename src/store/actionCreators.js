@@ -1,6 +1,6 @@
 import * as act from './actions';
 import {fetchOrderList, fetchStatusList, fetchCarList, fetchCityList} from '../utils/fetch_utils';
-import {STATUS_LIST_CATALOG, CAR_LIST_CATALOG, CITY_LIST_CATALOG} from '../settings';
+import {STATUS_LIST_CATALOG, CAR_LIST_CATALOG, CITY_LIST_CATALOG} from '../constants/settings';
 
 // Функция возвращает корректный номер страницы
 function getCorrectPage(page) {
@@ -31,6 +31,30 @@ export function setCatalog(catalogName, catalogData) {
         type: act.SET_CATALOG,
         catalogName,
         catalogData
+    }
+}
+
+// Создатель действия для сохранения полученного от бэка имени пользователя
+export function setUsername(username) {
+    return {
+        type: act.SET_USERNAME,
+        username
+    }
+}
+
+// Создатель действия для сохранения сведений об ошибке
+export function setError(error) {
+    return {
+        type: act.SET_ERROR,
+        error
+    }
+}
+
+// Создатель действия для управления флагом прелоадера
+export function setPreloader(preloader){
+    return {
+        type: act.SET_PRELOADER,
+        preloader
     }
 }
 

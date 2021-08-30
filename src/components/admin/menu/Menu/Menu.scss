@@ -1,0 +1,64 @@
+@import '../../../../styles/vars';
+@import '../MenuButton/MenuButton';
+@import '../../../common/BrandStamp/BrandStamp';
+
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: $white;
+  box-shadow: none;
+  overflow: hidden;
+  transition: all 200ms;
+  z-index: 100;
+  height: $step * 6;
+  width: $step * 6;
+
+  .menu_button {
+    display: flex;
+  }
+
+  .brand_stamp {
+    display: none;
+  }
+
+  &__header {
+    height: $step * 6;
+    display: flex;
+    align-items: center;
+    padding-left: 0;
+  }
+}
+
+.opened_menu {
+  height: 100%;
+  width: 100%;
+}
+
+@media (min-width: $tablet-start) {
+  .menu {
+    &__header {
+      height: $step * 8;
+    }
+  }
+}
+
+@media (min-width: $desktop-min-start) {
+  .menu {
+    height: 100%;
+    box-shadow: $main-shadow;
+    width: $step * 28;
+
+    .menu_button {
+      display: none;
+    }
+
+    .brand_stamp {
+      display: flex;
+    }
+
+    &__header {
+      padding-left: $step * 4;
+    }
+  }
+}

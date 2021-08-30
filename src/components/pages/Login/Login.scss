@@ -1,0 +1,53 @@
+@import '../../../styles/vars';
+@import '../../../styles/common_presets';
+@import '../../common/BrandStamp/BrandStamp';
+@import '../../common/TextField/TextField';
+@import '../../common/PasswordField/PasswordField';
+
+.login {
+  padding: $step * 2;
+
+  .brand_stamp {
+    margin: $step * 4 auto 0;
+    max-width: $step * 60;
+  }
+
+  .password_field {
+    margin-top: $step * 6;
+  }
+
+  &__form_caption {
+    font-size: 1.5em;
+    margin-top: $step;
+    margin-bottom: $step * 4;
+    text-align: center;
+  }
+
+  &__control_block {
+    margin-top: $step * 4;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    a {
+      text-decoration: none;
+      color: $blue;
+    }
+  }
+}
+
+@media (min-width: $tablet-start) and (max-width: $tablet-end) {
+  .login {
+    .brand_stamp {
+      margin: $step * 8 auto 0;
+    }
+  }
+}
+
+@media (min-width: $desktop-min-start) {
+  .login {
+    .brand_stamp {
+      margin: $step * 16 auto 0;
+    }
+  }
+}

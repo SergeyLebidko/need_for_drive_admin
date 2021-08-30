@@ -1,5 +1,30 @@
 @import './vars';
 
+// Пресет для форм (логин, регистрация и т.п.)
+.form {
+  background: $white;
+  box-shadow: $main-shadow;
+  border-radius: $main-radius;
+  margin: ($step * 4) auto 0;
+  max-width: $step * 60;
+  padding: $step * 2;
+}
+
+// Стили для полей ввода
+.text_input {
+  width: 100%;
+  outline: none;
+  border: 1px solid $gray-light;
+  border-radius: $small-radius;
+  font-size: 1em;
+  padding: $step ($step * 2);
+}
+
+.text_input_error {
+  border: 0.5px solid $red;
+  box-shadow: $error_shadow;
+}
+
 // Стили для обычных кнопок
 .button {
   border: none;

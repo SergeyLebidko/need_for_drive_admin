@@ -1,3 +1,5 @@
+import {LETTER_CHARS, DIGIT_CHARS} from '../constants/settings';
+
 function format(value) {
     return ('0' + value).slice(-2);
 }
@@ -14,11 +16,11 @@ export function extractDateParts(date) {
     ];
 }
 
-export function getRandomString(size = 16) {
-    const CHARS = 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm';
+export function getRandomString(size = 16, allowDigits = false) {
+    const CHAR_SET = LETTER_CHARS + (allowDigits ? DIGIT_CHARS : '');
     const result = [];
     for (let index = 0; index < size; index++) {
-        result.push(CHARS[Math.floor(Math.random() * CHARS.length)]);
+        result.push(CHAR_SET[Math.floor(Math.random() * CHAR_SET.length)]);
     }
     return result.join('');
 }

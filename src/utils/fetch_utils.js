@@ -11,10 +11,26 @@ import {
     PER_MONTH,
     BEGIN_DAY,
     BEGIN_WEEK,
-    BEGIN_MONTH
-} from '../settings';
-import {DEFAULT_REQUEST_HEADERS, ORDER_URL, STATUS_LIST_URL, CAR_LIST_URL, CITY_LIST_URL} from '../urls';
-import {extractDateParts} from './common_utils';
+    BEGIN_MONTH,
+    SALT,
+    SALT_SIZE,
+    ACCESS_TOKEN,
+    REFRESH_TOKEN
+} from '../constants/settings';
+import {
+    DEFAULT_REQUEST_HEADERS,
+    ORDER_URL,
+    STATUS_URL,
+    CAR_URL,
+    CITY_URL,
+    LOGIN_URL,
+    CHECK_URL,
+    REFRESH_URL,
+    LOGOUT_URL,
+    REGISTER_URL
+} from '../constants/urls';
+import {extractDateParts, getRandomString} from './common_utils';
+import cookie from 'cookie_js';
 
 function prepareDateRange(dateFilterValue) {
     const msInSec = 1000;
@@ -53,15 +69,18 @@ function prepareDateRange(dateFilterValue) {
     }
 }
 
+function getAuthorizationHeaders() {
+    const accessToken = cookie.get(ACCESS_TOKEN);
+    return {'Authorization': `Bearer ${accessToken}`};
+}
+
+function addHeadersToFetchOptions(headers, options) {
+    const _headers = options.headers ? {...options.headers, ...headers} : headers;
+    return {...options, headers: _headers}
+}
+
 async function executeFetch(url, options = {}) {
-    let {headers} = options;
-    headers = headers ? {...headers, ...DEFAULT_REQUEST_HEADERS} : DEFAULT_REQUEST_HEADERS;
-
-    // TODO При реализации авторизации создать код подстановки токена пользователя.
-    // Сейчас временно использую access-токен полученный с помощью из Insomnia
-    headers = {...headers, 'Authorization': 'Bearer de45548d78add84919b333d27412d16810a19859'};
-
-    const _options = {...options, headers};
+    const _options = addHeadersToFetchOptions(DEFAULT_REQUEST_HEADERS, options);
 
     let response;
     try {
@@ -74,7 +93,110 @@ async function executeFetch(url, options = {}) {
         const text = await response.text();
         return Promise.reject({httpStatus: response.status, httpText: text});
     }
+
+    if (response.status === 204) return;
     return await response.json();
+}
+
+async function executeFetchWithRefresh(func, url, options = {}) {
+    let attempts = 0;
+    let response;
+    do {
+        if (attempts === 1) await refresh();
+        try {
+            const _options = addHeadersToFetchOptions(getAuthorizationHeaders(), options);
+            response = await func(url, _options);
+        } catch (err) {
+            if (err.httpStatus !== 401) throw err;
+        }
+        attempts++;
+    } while (!response && attempts < 2);
+    return response;
+}
+
+export async function login(loginValue, passwordValue) {
+    const salt = getRandomString(SALT_SIZE, true);
+    const basic = btoa(`${salt}:${process.env.REACT_APP_SECRET}`);
+
+    const options = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Basic ${basic}`
+        },
+        body: JSON.stringify({username: loginValue, password: passwordValue}),
+        method: 'POST'
+    }
+
+    const {access_token: accessToken, refresh_token: refreshToken} = await executeFetch(LOGIN_URL, options);
+    cookie.set(ACCESS_TOKEN, accessToken);
+    cookie.set(REFRESH_TOKEN, refreshToken);
+    localStorage.setItem(SALT, salt);
+}
+
+export async function register(loginValue, passwordValue) {
+    const options = {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({username: loginValue, password: passwordValue}),
+        method: 'POST'
+    }
+
+    await executeFetch(REGISTER_URL, options);
+}
+
+export async function check() {
+    const accessToken = cookie.get(ACCESS_TOKEN);
+    if (!accessToken) return null;
+
+    const options = {headers: {'Authorization': `Bearer ${accessToken}`}};
+
+    try {
+        const response = await executeFetch(CHECK_URL, options);
+        return response.username;
+    } catch (err) {
+        if (err.httpStatus === 0) throw err;
+        cookie.remove(ACCESS_TOKEN);
+    }
+}
+
+export async function refresh() {
+    const salt = localStorage.getItem(SALT);
+    const refreshToken = cookie.get(REFRESH_TOKEN);
+    if (!salt || !refreshToken) return;
+
+    const basic = btoa(`${salt}:${process.env.REACT_APP_SECRET}`);
+    const options = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Basic ${basic}`
+        },
+        body: JSON.stringify({'refresh_token': refreshToken}),
+        method: 'POST'
+    }
+
+    try {
+        const {access_token: _accessToken, refresh_token: _refreshToken} = await executeFetch(REFRESH_URL, options);
+        cookie.set(ACCESS_TOKEN, _accessToken);
+        cookie.set(REFRESH_TOKEN, _refreshToken);
+    } catch (err) {
+        if (err.httpStatus === 0) throw err;
+        cookie.remove([ACCESS_TOKEN, REFRESH_TOKEN]);
+        localStorage.removeItem(SALT);
+    }
+}
+
+export async function logout() {
+    const options = {method: 'POST', headers: getAuthorizationHeaders()};
+
+    try {
+        await executeFetch(LOGOUT_URL, options);
+    } catch (err) {
+        if (err.httpStatus === 0) throw err;
+    }
+    cookie.remove(ACCESS_TOKEN);
+    cookie.remove(REFRESH_TOKEN);
+    localStorage.removeItem(SALT);
 }
 
 export async function fetchOrderList(page, date, car, city, status) {
@@ -91,17 +213,22 @@ export async function fetchOrderList(page, date, car, city, status) {
         if (dateFrom) params.set(`${DATE_FROM_FILTER_NAME}[$gt]`, dateFrom);
         if (dateTo) params.set(`${DATE_FROM_FILTER_NAME}[$lt]`, dateTo);
     }
-    return await executeFetch(`${ORDER_URL}/?${params}`);
+
+    return await executeFetchWithRefresh(executeFetch, `${ORDER_URL}/?${params}`);
 }
 
 export async function fetchStatusList() {
-    return await executeFetch(STATUS_LIST_URL);
+    return await executeFetch(STATUS_URL);
 }
 
 export async function fetchCarList() {
-    return await executeFetch(CAR_LIST_URL);
+    return await executeFetch(CAR_URL);
 }
 
 export async function fetchCityList() {
-    return await executeFetch(CITY_LIST_URL);
+    return await executeFetch(CITY_URL);
+}
+
+export async function fetchUsername() {
+    return await executeFetchWithRefresh(check);
 }

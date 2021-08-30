@@ -1,0 +1,44 @@
+@import '../../../styles/vars';
+@import '../../../styles/common_presets';
+
+.error_pane {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $main-background;
+
+  &__error_code {
+    font-size: 5em;
+    color: $gray-light;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  &__big_caption {
+    font-size: 3em;
+    color: $black;
+    text-align: center;
+  }
+
+  &__small_caption {
+    font-size: 1.2em;
+    color: $gray;
+    text-align: center;
+    margin-top: $step * 3;
+  }
+
+  &__back_button {
+    margin-top: $step * 3;
+  }
+}
+
+.error_pane_fullscreen {
+  position: fixed;
+  z-index: 1000;
+}
