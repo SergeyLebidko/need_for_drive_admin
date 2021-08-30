@@ -4,13 +4,13 @@ import Preloader from '../../common/Preloader/Preloader';
 import ErrorPane from '../../common/ErrorPane/ErrorPane';
 import BrandStamp, {LARGE_STAMP} from '../../common/BrandStamp/BrandStamp';
 import TextField from '../../common/TextField/TextField';
+import ControlledPasswordField from '../../common/ControlledPasswordField/ControlledPasswordField';
 import {Link} from 'react-router-dom';
 import {getRandomString} from '../../../utils/common_utils';
 import {register} from '../../../utils/fetch_utils';
 import {LOGIN_APP_URL} from '../../../constants/urls';
 import {ALL_CHARS, LETTER_CHARS, DIGIT_CHARS, PASSWORD_SIZE} from '../../../constants/settings';
 import './Register.scss';
-import ControlledPasswordField from "../../common/ControlledPasswordField/ControlledPasswordField";
 
 function Register() {
     const [loginValue, setLoginValue] = useState('');
