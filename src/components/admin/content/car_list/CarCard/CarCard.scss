@@ -1,5 +1,6 @@
 @import '../../../../../styles/vars';
 @import '../../../../common/PhotoBlock/PhotoBlock';
+@import '../CarCardDescription/CarCardDescription';
 
 .car_card {
   display: flex;
@@ -9,5 +10,24 @@
 
   .photo_block {
     width: 100%;
+  }
+
+  .car_card_description {
+    margin: $step 0 0 0;
+  }
+}
+
+@media (min-width: $desktop-min-start) {
+  .car_card {
+    flex-direction: row;
+
+    .photo_block {
+      width: 25%;
+    }
+
+    .car_card_description {
+      flex: 1;
+      margin: 0 0 0 ($step * 2);
+    }
   }
 }

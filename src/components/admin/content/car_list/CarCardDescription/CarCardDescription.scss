@@ -7,6 +7,7 @@
 
   > * {
     margin-top: $step;
+    font-size: 0.9em;
   }
 
   &__name {
@@ -15,20 +16,16 @@
   }
 
   &__cat_name {
-    font-size: 0.8em;
   }
 
   &__cat_description {
-    font-size: 0.8em;
     color: $gray;
   }
 
   &__description {
-    font-size: 0.8em;
   }
 
   &__number {
-    font-size: 0.8em;
     display: inline-block;
     padding: 4px 10px;
     border: 1px solid $black;
@@ -38,11 +35,9 @@
   }
 
   &__price {
-    font-size: 0.8em;
   }
 
   &__tank {
-    font-size: 0.8em;
   }
 
   &__tank_indicator {
@@ -65,10 +60,38 @@
   }
 
   &__colors {
-    font-size: 0.8em;
-
     ul {
       margin: $step 0 0 $step;
+    }
+  }
+}
+
+@media (min-width: $tablet-start) and (max-width: $tablet-end) {
+  .car_card_description {
+    > * {
+      margin-top: $step;
+      font-size: 0.9em;
+    }
+
+    &__name {
+      font-size: 1.8em;
+    }
+  }
+}
+
+@media (min-width: $desktop-min-start) {
+  .car_card_description {
+    > * {
+      margin-top: $step;
+      font-size: 1em;
+    }
+
+    &__name {
+      font-size: 2em;
+    }
+
+    &__tank_indicator {
+      width: $step * 50;
     }
   }
 }
