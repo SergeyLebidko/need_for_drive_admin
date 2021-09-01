@@ -1,5 +1,74 @@
 @import '../../../../../styles/vars';
 
 .car_card_description {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
 
+  > * {
+    margin-top: $step;
+  }
+
+  &__name {
+    font-size: 1.5em;
+    border-bottom: 1px dashed $separator-color;
+  }
+
+  &__cat_name {
+    font-size: 0.8em;
+  }
+
+  &__cat_description {
+    font-size: 0.8em;
+    color: $gray;
+  }
+
+  &__description {
+    font-size: 0.8em;
+  }
+
+  &__number {
+    font-size: 0.8em;
+    display: inline-block;
+    padding: 4px 10px;
+    border: 1px solid $black;
+    border-radius: 2px;
+    box-shadow: $main-shadow;
+    align-self: flex-start;
+  }
+
+  &__price {
+    font-size: 0.8em;
+  }
+
+  &__tank {
+    font-size: 0.8em;
+  }
+
+  &__tank_indicator {
+    margin-top: $step * 0.5;
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 4px inset $gray;
+
+    div {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      background-color: $blue;
+      border-radius: 5px;
+    }
+  }
+
+  &__colors {
+    font-size: 0.8em;
+
+    ul {
+      margin: $step 0 0 $step;
+    }
+  }
 }
