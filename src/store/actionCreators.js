@@ -86,3 +86,13 @@ export function loadOrderList(page, date, car, city, status) {
         }
     }
 }
+
+// Создатель действия для загрузки списка автомобилей
+export function loadCarList(page) {
+    return async (dispatch) => {
+        // Загружаем список автомобилей
+        const _page = getCorrectPage(page);
+        const carList = await fetchCarList(_page);
+        dispatch(setFrame({count: carList.count, data: carList.data, page: _page}));
+    }
+}

@@ -221,8 +221,15 @@ export async function fetchStatusList() {
     return await executeFetch(STATUS_URL);
 }
 
-export async function fetchCarList() {
-    return await executeFetch(CAR_URL);
+export async function fetchCarList(page) {
+    let url = CAR_URL;
+
+    // Учитываем, что номер страницы может быть и равен нулю, поэтому явно проверяем его на значения null и undefined
+    if (page !== null && page !== undefined) {
+        url = `${url}/?limit=${LIMIT}&page=${page}`;
+    }
+
+    return await executeFetch(url);
 }
 
 export async function fetchCityList() {
