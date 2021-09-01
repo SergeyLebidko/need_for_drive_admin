@@ -2,15 +2,20 @@ import React, {useState, useEffect} from 'react';
 import {useLocation} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {useSelector} from 'react-redux';
+import Paginator from '../../../../common/Paginator/Paginator';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import {ADMIN_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
 import {PAGE_FILTER_NAME} from '../../../../../constants/settings';
 import {loadCarList, setPreloader} from '../../../../../store/actionCreators';
-import {getPreloader} from '../../../../../store/selectors';
+import {getFrame, getPreloader} from '../../../../../store/selectors';
 import './CarList.scss';
 
 function CarList() {
     const [error, setError] = useState(null);
+
+    const frame = useSelector(getFrame);
+    let items;
+    if (frame) items = frame.data;
 
     const location = useLocation();
     const dispatch = useDispatch();
@@ -39,9 +44,18 @@ function CarList() {
         <div className="car_list">
             <h1 className="car_list__caption">Автомобили</h1>
             {hasReadyData() &&
-                <>
-                    Здесь выводится список моделей авто
-                </>
+            <>
+                <div className="car_list__content">
+                    {items && items.length > 0 &&
+                    <>
+                        <ul>
+                            {items.map(item => <div key={item.id}>{item.name}</div>)}
+                        </ul>
+                        <Paginator/>
+                    </>
+                    }
+                </div>
+            </>
             }
         </div>
     );
