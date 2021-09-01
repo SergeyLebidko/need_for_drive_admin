@@ -1,5 +1,5 @@
 @import '../../../../../styles/vars';
-@import '../OrderCardPhoto/OrderCardPhoto';
+@import '../../../../common/PhotoBlock/PhotoBlock';
 @import '../OrderCardExtra/OrderCardExtra';
 @import '../OrderCardOptions/OrderCardOptions';
 @import '../OrderCardPrice/OrderCardPrice';
@@ -16,7 +16,7 @@
     flex-direction: column;
     margin: 0 0 ($step * 4) 0;
 
-    .order_card_photo {
+    .photo_block {
       width: 100%;
       margin: 0 0 ($step * 2) 0;
     }
@@ -53,7 +53,7 @@
       flex-direction: row;
       margin-bottom: $step * 4;
 
-      .order_card_photo {
+      .photo_block {
         flex: 1;
       }
 
@@ -92,7 +92,7 @@
       flex-direction: row;
       flex: 4;
 
-      .order_card_photo {
+      .photo_block {
         flex: 1;
       }
 
