@@ -1,6 +1,11 @@
 @import '../../../../../styles/vars';
 @import '../../../../../styles/common_presets';
+@import '../CarCard/CarCard';
 
 .car_list {
   @include content_mixin;
+
+  .car_card + .car_card {
+    border-top: 1px solid $separator-color;
+  }
 }

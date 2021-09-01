@@ -1,5 +1,13 @@
 @import '../../../../../styles/vars';
+@import '../../../../common/PhotoBlock/PhotoBlock';
 
 .car_card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: $step * 2;
 
+  .photo_block {
+    width: 100%;
+  }
 }

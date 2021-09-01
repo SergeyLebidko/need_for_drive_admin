@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CarCardPhoto from '../CarCardPhoto/CarCardPhoto';
+import PhotoBlock from '../../../../common/PhotoBlock/PhotoBlock';
 import CarCardDescription from '../CarCardDescription/CarCardDescription';
 import './CarCard.scss';
 
 function CarCard({car}){
     return (
         <li>
-            <CarCardPhoto car={car}/>
+            <PhotoBlock photoPath={car.thumbnail.path}/>
             <CarCardDescription car={car}/>
         </li>
     );

@@ -6,8 +6,9 @@ import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import OrderFilters from '../OrderFilters/OrderFilters';
 import Paginator from '../../../../common/Paginator/Paginator';
 import OrderCard from '../OrderCard/OrderCard';
-import {loadOrderList, setPreloader} from '../../../../../store/actionCreators';
-import {getFrame, getPreloader, getCatalog} from '../../../../../store/selectors';
+import {loadOrderList} from '../../../../../store/actionCreators';
+import {getFrame} from '../../../../../store/selectors';
+import {useGlobalPreloader} from '../../../../../store/hooks';
 import {ADMIN_APP_URL, ORDER_LIST_APP_URL} from '../../../../../constants/urls';
 import {
     PAGE_FILTER_NAME,
@@ -15,26 +16,21 @@ import {
     CAR_FILTER_NAME,
     CITY_FILTER_NAME,
     STATUS_FILTER_NAME,
-    CAR_LIST_CATALOG,
-    CITY_LIST_CATALOG,
-    STATUS_LIST_CATALOG
 } from '../../../../../constants/settings';
 import './OrderList.scss';
 
 function OrderList() {
+    const [done, setDone] = useState(false);
     const [error, setError] = useState(null);
+
+    const location = useLocation();
+    const dispatch = useDispatch();
+
+    const [showGlobalPreloader, hideGlobalPreloader] = useGlobalPreloader();
 
     const frame = useSelector(getFrame);
     let items;
     if (frame) items = frame.data;
-
-    const preloader = useSelector(getPreloader);
-    const carList = useSelector(getCatalog(CAR_LIST_CATALOG));
-    const cityList = useSelector(getCatalog(CITY_LIST_CATALOG));
-    const statusList = useSelector(getCatalog(STATUS_LIST_CATALOG));
-
-    const location = useLocation();
-    const dispatch = useDispatch();
 
     // При монтировании компонента - получаем с сервера список заказов
     useEffect(() => {
@@ -48,21 +44,23 @@ function OrderList() {
         const city = params.get(CITY_FILTER_NAME);
         const status = params.get(STATUS_FILTER_NAME);
 
-        dispatch(setPreloader(true));
+        showGlobalPreloader();
         setError(null);
+        setDone(false);
         dispatch(loadOrderList(page, date, car, city, status))
             .catch(err => setError(err))
-            .finally(() => dispatch(setPreloader(false)));
+            .finally(() => {
+                hideGlobalPreloader();
+                setDone(true);
+            });
     }, [location]);
 
     if (error) return <ErrorPane error={error}/>;
 
-    const hasReadyData = () => !preloader && !!carList && !!cityList && !!statusList;
-
     return (
         <div className="order_list">
             <h1 className="order_list__caption">Заказы</h1>
-            {hasReadyData() &&
+            {done &&
             <>
                 <div className="order_list__content">
                     <OrderFilters/>
