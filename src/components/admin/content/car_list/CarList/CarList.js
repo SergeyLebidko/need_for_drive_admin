@@ -9,6 +9,7 @@ import {PAGE_FILTER_NAME} from '../../../../../constants/settings';
 import {loadCarList, setPreloader} from '../../../../../store/actionCreators';
 import {getFrame, getPreloader} from '../../../../../store/selectors';
 import './CarList.scss';
+import CarCard from "../CarCard/CarCard";
 
 function CarList() {
     const [error, setError] = useState(null);
@@ -49,7 +50,7 @@ function CarList() {
                     {items && items.length > 0 &&
                     <>
                         <ul>
-                            {items.map(item => <div key={item.id}>{item.name}</div>)}
+                            {items.map(item => <CarCard key={item.id} car={item}/>)}
                         </ul>
                         <Paginator/>
                     </>
