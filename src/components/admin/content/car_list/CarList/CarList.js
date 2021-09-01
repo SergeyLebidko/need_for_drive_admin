@@ -4,7 +4,7 @@ import './CarList.scss';
 function CarList(){
     return (
         <div className="car_list">
-            Здесь будет список машин
+            <h1 className="car_list__caption">Автомобили</h1>
         </div>
     );
 }

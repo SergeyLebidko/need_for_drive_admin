@@ -1,5 +1,47 @@
 @import '../../../../../styles/vars';
 
 .car_list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: $step * 2;
+  overflow: auto;
 
+  &::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $gray-light;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: $gray;
+  }
+
+  &__caption {
+    font-size: 1.5em;
+    margin-bottom: $step * 2;
+  }
+
+  &__content {
+    box-shadow: $main-shadow;
+    background-color: $white;
+    border-radius: $main-radius;
+  }
+}
+
+
+@media (min-width: $tablet-start) {
+  .car_list {
+    padding: $step * 4;
+
+    &__caption {
+      font-size: 2.5em;
+      margin-bottom: $step * 4;
+    }
+  }
 }
