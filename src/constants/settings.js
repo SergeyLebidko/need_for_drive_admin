@@ -1,5 +1,7 @@
 import React from 'react';
 import {ReactComponent as OrderListIcon} from '../content/images/order_list_icon.svg';
+import {ReactComponent as CarListIcon} from '../content/images/car_list_icon.svg';
+import {ORDER_LIST_APP_URL, CAR_LIST_APP_URL} from './urls';
 
 // Размер страницы данных
 export const LIMIT = 10;
@@ -31,7 +33,12 @@ export const MENU_ITEMS = [
     {
         title: 'Заказы',
         iconComponent: <OrderListIcon/>,
-        href: 'orders'
+        href: ORDER_LIST_APP_URL
+    },
+    {
+        title: 'Автомобили',
+        iconComponent: <CarListIcon/>,
+        href: CAR_LIST_APP_URL
     }
 ];
 
