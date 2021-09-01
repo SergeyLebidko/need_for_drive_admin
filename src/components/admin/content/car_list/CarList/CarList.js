@@ -4,14 +4,16 @@ import {useDispatch} from 'react-redux';
 import {useSelector} from 'react-redux';
 import Paginator from '../../../../common/Paginator/Paginator';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
+import CarCard from '../CarCard/CarCard';
 import {ADMIN_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
 import {PAGE_FILTER_NAME} from '../../../../../constants/settings';
-import {loadCarList, setPreloader} from '../../../../../store/actionCreators';
-import {getFrame, getPreloader} from '../../../../../store/selectors';
+import {loadCarList} from '../../../../../store/actionCreators';
+import {getFrame} from '../../../../../store/selectors';
+import {useGlobalPreloader} from '../../../../../store/hooks';
 import './CarList.scss';
-import CarCard from "../CarCard/CarCard";
 
 function CarList() {
+    const [done, setDone] = useState(false);
     const [error, setError] = useState(null);
 
     const frame = useSelector(getFrame);
@@ -20,7 +22,8 @@ function CarList() {
 
     const location = useLocation();
     const dispatch = useDispatch();
-    const preloader = useSelector(getPreloader);
+
+    const [showGlobalPreloader, hideGlobalPreloader] = useGlobalPreloader();
 
     useEffect(() => {
         // Предотвращаем выполнение ненужных действий, если компонент размонтирован
@@ -29,22 +32,23 @@ function CarList() {
         const params = new URLSearchParams(location.search);
         const page = params.get(PAGE_FILTER_NAME);
 
-        dispatch(setPreloader(true));
+        showGlobalPreloader();
         setError(null);
+        setDone(false);
         dispatch(loadCarList(page))
             .catch(err => setError(err))
-            .finally(() => dispatch(setPreloader(false)));
-
+            .finally(() => {
+                hideGlobalPreloader();
+                setDone(true);
+            });
     }, [location])
 
     if (error) return <ErrorPane error={error}/>;
 
-    const hasReadyData = () => !preloader;
-
     return (
         <div className="car_list">
             <h1 className="car_list__caption">Автомобили</h1>
-            {hasReadyData() &&
+            {done &&
             <>
                 <div className="car_list__content">
                     {items && items.length > 0 &&

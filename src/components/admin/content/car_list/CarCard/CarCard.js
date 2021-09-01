@@ -6,7 +6,7 @@ import './CarCard.scss';
 
 function CarCard({car}){
     return (
-        <li>
+        <li className="car_card">
             <PhotoBlock photoPath={car.thumbnail.path}/>
             <CarCardDescription car={car}/>
         </li>
