@@ -1,6 +1,6 @@
 @import './vars';
 
-// Пресет для блоков с контентом
+// Пресет для блоков с контентом (список заказов, список машин и т.д.)
 @mixin content_mixin {
   position: absolute;
   top: 0;
@@ -9,6 +9,10 @@
   bottom: 0;
   padding: $step * 2;
   overflow: auto;
+
+  @media (min-width: $tablet-start) {
+    padding: $step * 4;
+  }
 
   &::-webkit-scrollbar {
     width: 7px;
