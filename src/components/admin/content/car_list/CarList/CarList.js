@@ -11,6 +11,7 @@ import {loadCarList} from '../../../../../store/actionCreators';
 import {getFrame} from '../../../../../store/selectors';
 import {useGlobalPreloader} from '../../../../../store/hooks';
 import './CarList.scss';
+import CarFilters from "../CarFilters/CarFilters";
 
 function CarList() {
     const [done, setDone] = useState(false);
@@ -51,6 +52,7 @@ function CarList() {
             {done &&
             <>
                 <div className="car_list__content">
+                    <CarFilters/>
                     {items && items.length > 0 &&
                     <>
                         <ul>
