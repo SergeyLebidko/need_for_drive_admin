@@ -88,11 +88,11 @@ export function loadOrderList(page, date, car, city, status) {
 }
 
 // Создатель действия для загрузки списка автомобилей
-export function loadCarList(page) {
+export function loadCarList(page, categoryId, priceMin, priceMax, tank) {
     return async (dispatch, getState) => {
         // Загружаем список автомобилей
         const _page = getCorrectPage(page);
-        const carList = await fetchCarList(_page);
+        const carList = await fetchCarList(_page, categoryId, priceMin, priceMax, tank);
         dispatch(setFrame({count: carList.count, data: carList.data, page: _page}));
 
         // Загружаем справочник с категориями авто

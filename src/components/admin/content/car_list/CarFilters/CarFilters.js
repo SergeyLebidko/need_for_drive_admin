@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {getCatalog} from '../../../../../store/selectors';
 import {useHistory} from 'react-router-dom';
@@ -29,9 +29,13 @@ function CarFilters() {
 
     const categoryList = useSelector(getCatalog(CAR_CATEGORY_CATALOG));
 
+    // Определяем начальные значения фильтров по параметрам из адресной строки
+    useEffect(() => {
+        // TODO Добавить код определения значения фильтров по параметрам в адресной строке
+    }, [])
+
     const isNatural = value => {
         const _value = +value;
-        console.log(_value);
         return !(isNaN(_value) || _value < 0 || Math.floor(_value) !== _value);
     }
 

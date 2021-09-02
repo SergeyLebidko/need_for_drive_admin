@@ -6,7 +6,12 @@ import Paginator from '../../../../common/Paginator/Paginator';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import CarCard from '../CarCard/CarCard';
 import {ADMIN_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
-import {PAGE_FILTER_NAME} from '../../../../../constants/settings';
+import {
+    CATEGORY_FILTER_NAME,
+    PAGE_FILTER_NAME,
+    PRICE_MAX_FILTER_NAME,
+    PRICE_MIN_FILTER_NAME, TANK_FILTER_NAME
+} from '../../../../../constants/settings';
 import {loadCarList} from '../../../../../store/actionCreators';
 import {getFrame} from '../../../../../store/selectors';
 import {useGlobalPreloader} from '../../../../../store/hooks';
@@ -32,11 +37,15 @@ function CarList() {
 
         const params = new URLSearchParams(location.search);
         const page = params.get(PAGE_FILTER_NAME);
+        const categoryId = params.get(CATEGORY_FILTER_NAME);
+        const priceMin = params.get(PRICE_MIN_FILTER_NAME);
+        const priceMax = params.get(PRICE_MAX_FILTER_NAME);
+        const tank = params.get(TANK_FILTER_NAME);
 
         showGlobalPreloader();
         setError(null);
         setDone(false);
-        dispatch(loadCarList(page))
+        dispatch(loadCarList(page, categoryId, priceMin, priceMax, tank))
             .catch(err => setError(err))
             .finally(() => {
                 hideGlobalPreloader();

@@ -15,7 +15,7 @@ import {
     SALT,
     SALT_SIZE,
     ACCESS_TOKEN,
-    REFRESH_TOKEN
+    REFRESH_TOKEN, CATEGORY_FILTER_NAME, PRICE_MIN_FILTER_NAME, PRICE_MAX_FILTER_NAME, TANK_FILTER_NAME
 } from '../constants/settings';
 import {
     DEFAULT_REQUEST_HEADERS,
@@ -222,12 +222,21 @@ export async function fetchStatusList() {
     return await executeFetch(STATUS_URL);
 }
 
-export async function fetchCarList(page) {
+export async function fetchCarList(page, categoryId, priceMin, priceMax, tank) {
     let url = CAR_URL;
 
     // Учитываем, что номер страницы может быть и равен нулю, поэтому явно проверяем его на значения null и undefined
-    if (page !== null && page !== undefined) {
-        url = `${url}/?limit=${LIMIT}&page=${page}`;
+    const hasPage = page !== null && page !== undefined;
+    if (hasPage || categoryId || priceMin || priceMax || tank) {
+        const params = new URLSearchParams();
+        params.set(LIMIT_FILTER_NAME, '' + LIMIT);
+
+        if (hasPage) params.set(PAGE_FILTER_NAME, '' + page);
+        if (categoryId) params.set(CATEGORY_FILTER_NAME, '' + categoryId);
+        if (priceMin) params.set(`${PRICE_MIN_FILTER_NAME}[$gte]`, '' + priceMin);
+        if (priceMax) params.set(`${PRICE_MAX_FILTER_NAME}[$lte]`, '' + priceMax);
+        if (tank) params.set(`${TANK_FILTER_NAME}[$gte]`, '' + tank);
+        url = `${url}/?${params}`;
     }
 
     return await executeFetch(url);
@@ -241,6 +250,6 @@ export async function fetchUsername() {
     return await executeFetchWithRefresh(check);
 }
 
-export async function fetchCarCategoryList(){
+export async function fetchCarCategoryList() {
     return await executeFetch(CAR_CATEGORY_URL);
 }
