@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {capitalize} from '../../../../../utils/common_utils';
+import ListElementControl from '../../../../common/ListElementControl/ListElementControl';
+import LineIndicator from '../../../../common/LineIndicator/LineIndicator';
 import './CarCardExtra.scss';
-
-import ListElementControl from "../../../../common/ListElementControl/ListElementControl";
-import LineIndicator from "../../../../common/LineIndicator/LineIndicator";
 
 function CarCardExtra({car}) {
 
