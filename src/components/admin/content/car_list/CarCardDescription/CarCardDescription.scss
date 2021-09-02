@@ -7,8 +7,12 @@
 
   &__name {
     font-size: 1.5em;
-    padding-bottom: $step * 0.5;
+    padding-bottom: 2px;
     border-bottom: 1px dashed $separator-color;
+  }
+
+  > div {
+    margin-top: $step;
   }
 
   &__number {

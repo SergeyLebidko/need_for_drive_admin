@@ -1,12 +1,12 @@
 import React from 'react';
-import './OrderControlBlock.scss';
+import './ListElementControl.scss';
 
-function OrderControlBlock(){
+function ListElementControl(){
     return (
-        <div className="order_control_block">
+        <div className="list_element_control">
             <button className="thin_button thin_button_edit">Изменить</button>
         </div>
     )
 }
 
-export default OrderControlBlock;
+export default ListElementControl;

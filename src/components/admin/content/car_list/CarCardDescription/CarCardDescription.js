@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import {capitalize} from '../../../../../utils/common_utils';
 import './CarCardDescription.scss';
 
+import ListElementControl from "../../../../common/ListElementControl/ListElementControl";
+
 function CarCardDescription({car}) {
 
     const getCategoryDescription = () => car.categoryId ? `${car.categoryId.name} (${car.categoryId.description})` : 'не указана';
@@ -13,7 +15,7 @@ function CarCardDescription({car}) {
     return (
         <div className="car_card_description">
 
-            <span className="car_card_description__name">{car.name}</span>
+            <h1 className="car_card_description__name">{car.name}</h1>
 
             <div>
                 <span className="car_card_description__normal_text">Категория: </span>
@@ -66,6 +68,8 @@ function CarCardDescription({car}) {
                     )}
                 </ul>
             </div>
+
+            <ListElementControl/>
 
         </div>
     );
