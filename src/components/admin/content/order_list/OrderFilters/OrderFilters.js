@@ -20,7 +20,8 @@ import {
     PAGE_FILTER_NAME
 } from '../../../../../constants/settings';
 import {
-    ADMIN_APP_URL, ORDER_LIST_APP_URL
+    ADMIN_APP_URL,
+    ORDER_LIST_APP_URL
 } from '../../../../../constants/urls';
 import {getCatalog} from '../../../../../store/selectors';
 import './OrderFilters.scss';

@@ -98,7 +98,7 @@ export function loadCarList(page) {
         // Загружаем справочник с категориями авто
         if (!getState().catalog[CAR_CATEGORY_CATALOG]) {
             const carCategoryList = await fetchCarCategoryList();
-            dispatch(setCatalog(CAR_CATEGORY_CATALOG, carCategoryList));
+            dispatch(setCatalog(CAR_CATEGORY_CATALOG, carCategoryList.data));
         }
     }
 }

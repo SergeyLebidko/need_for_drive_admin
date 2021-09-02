@@ -2,6 +2,22 @@
 @import '../../../../../styles/common_presets';
 
 .car_filters {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   padding: $step * 2;
   border-bottom: 1px solid $separator-color;
+
+  &__conditions, &__control {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__control {
+    margin: $step 0 0 0;
+  }
+
+  .button + .button {
+    margin: $step 0 0 0;
+  }
 }
