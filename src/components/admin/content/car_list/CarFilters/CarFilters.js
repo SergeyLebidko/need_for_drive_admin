@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {getCatalog} from '../../../../../store/selectors';
-import {useHistory} from 'react-router-dom';
+import {useHistory, useLocation} from 'react-router-dom';
 import Selector from '../../../../common/Selector/Selector';
 import TextField from '../../../../common/TextField/TextField';
 import {
@@ -16,9 +16,9 @@ import {NO_FILTER_VALUE} from '../../../../../constants/settings';
 import {ADMIN_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
 import './CarFilters.scss';
 
-
 function CarFilters() {
     const history = useHistory();
+    const location = useLocation();
 
     const [selectedCategory, setSelectedCategory] = useState(NO_FILTER_VALUE);
     const [priceMin, setPriceMin] = useState('');
@@ -31,12 +31,25 @@ function CarFilters() {
 
     // Определяем начальные значения фильтров по параметрам из адресной строки
     useEffect(() => {
-        // TODO Добавить код определения значения фильтров по параметрам в адресной строке
+        const params = new URLSearchParams(location.search);
+
+        const defaultCategory = params.get(CATEGORY_FILTER_NAME);
+        const defaultPriceMin = params.get(PRICE_MIN_FILTER_NAME);
+        const defaultPriceMax = params.get(PRICE_MAX_FILTER_NAME);
+        const defaultTank = params.get(TANK_FILTER_NAME);
+
+        setSelectedCategory(defaultCategory ? defaultCategory : NO_FILTER_VALUE);
+        setPriceMin(isNatural(defaultPriceMin) ? '' + defaultPriceMin : '');
+        setPriceMax(isNatural(defaultPriceMax) ? '' + defaultPriceMax : '');
+        setSelectedTank(
+            tankSelectorItems.find(item => item.value === defaultTank && item.value !== NO_FILTER_VALUE) ? defaultTank : NO_FILTER_VALUE
+        );
+
     }, [])
 
     const isNatural = value => {
         const _value = +value;
-        return !(isNaN(_value) || _value < 0 || Math.floor(_value) !== _value);
+        return !(isNaN(_value) || _value < 0 || Math.floor(_value) !== _value || value === null || value === undefined);
     }
 
     // Готовим данные для селектора категорий
