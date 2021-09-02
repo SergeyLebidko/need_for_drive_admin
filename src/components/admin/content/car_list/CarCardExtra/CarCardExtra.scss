@@ -1,5 +1,6 @@
 @import '../../../../../styles/vars';
 @import '../../../../common/ListElementControl/ListElementControl';
+@import '../../../../common/LineIndicator/LineIndicator';
 
 .car_card_extra {
   display: flex;
@@ -11,7 +12,7 @@
   }
 
   &__name {
-    font-size: 1.5em;
+    font-size: 1.3em;
     padding-bottom: $step;
     border-bottom: 1px dashed $separator-color;
   }
@@ -27,7 +28,7 @@
     }
 
     article + article {
-      margin-top: $step;
+      margin: $step 0 0 0;
     }
   }
 
@@ -54,30 +55,30 @@
   }
 }
 
-@media (min-width: $tablet-start) and (max-width: $tablet-end) {
+@media (min-width: $tablet-start) {
   .car_card_extra {
     &__name {
-      font-size: 1.8em;
-    }
-
-    &__normal_text, &__strong_text, &__number {
-      font-size: 0.9em;
-    }
-  }
-}
-
-@media (min-width: $desktop-min-start) {
-  .car_card_extra {
-    &__name {
-      font-size: 2.1em;
+      font-size: 1.6em;
     }
 
     &__normal_text, &__strong_text, &__number {
       font-size: 1em;
     }
+  }
+}
 
+@media (min-width: $desktop-start) {
+  .car_card_extra {
     .list_element_control {
       margin-top: 0;
+    }
+
+    .line_indicator {
+      max-width: $step * 40;
+    }
+
+    &__name {
+      font-size: 1.9em;
     }
 
     &__content {
@@ -87,12 +88,12 @@
         display: block;
       }
 
-      article + article {
-        margin-top: 0;
-      }
-
       section {
         flex: 1;
+      }
+
+      section + section {
+        margin: 0 ($step * 2) 0 $step;
       }
     }
   }
