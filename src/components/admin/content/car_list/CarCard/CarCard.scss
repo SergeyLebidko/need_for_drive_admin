@@ -17,17 +17,25 @@
   }
 }
 
-@media (min-width: $desktop-min-start) {
+@media (min-width: $tablet-start) {
   .car_card {
     flex-direction: row;
 
     .photo_block {
-      width: 15%;
+      width: 30%;
     }
 
     .car_card_extra {
       flex: 1;
       margin: 0 0 0 ($step * 2);
+    }
+  }
+}
+
+@media (min-width: $desktop-min-start) {
+  .car_card {
+    .photo_block {
+      width: 20%;
     }
   }
 }

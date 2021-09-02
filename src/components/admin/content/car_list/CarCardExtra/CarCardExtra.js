@@ -4,6 +4,7 @@ import {capitalize} from '../../../../../utils/common_utils';
 import './CarCardExtra.scss';
 
 import ListElementControl from "../../../../common/ListElementControl/ListElementControl";
+import LineIndicator from "../../../../common/LineIndicator/LineIndicator";
 
 function CarCardExtra({car}) {
 
@@ -48,11 +49,7 @@ function CarCardExtra({car}) {
                     <article>
                         <span className="car_card_extra__normal_text">Уровень топлива:</span>
                         <span className="car_card_extra__strong_text"> {getCarTank()}</span>
-                        {(car.tank >= 0 && car.tank <= 100) &&
-                        <div className="car_card_extra__tank_indicator">
-                            <div style={{width: `${car.tank}%`}}/>
-                        </div>
-                        }
+                        {(car.tank >= 0 && car.tank <= 100) && <LineIndicator value={car.tank}/>}
                     </article>
                     <article>
                         <span className="car_card_extra__normal_text">Доступные цвета:</span>
