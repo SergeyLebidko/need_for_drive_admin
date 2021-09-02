@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 import {getCatalog} from '../../../../../store/selectors';
 import Selector from '../../../../common/Selector/Selector';
 import TextField from '../../../../common/TextField/TextField';
-import {CAR_CATEGORY_CATALOG} from '../../../../../constants/settings';
+import {CAR_CATEGORY_CATALOG, PAGE_FILTER_NAME} from '../../../../../constants/settings';
 import {NO_FILTER_VALUE} from '../../../../../constants/settings';
 import './CarFilters.scss';
 
@@ -19,6 +19,7 @@ function CarFilters() {
 
     const isNatural = value => {
         const _value = +value;
+        console.log(_value);
         return !(isNaN(_value) || _value < 0 || Math.floor(_value) !== _value);
     }
 
@@ -48,8 +49,18 @@ function CarFilters() {
     // Обработчик применения фильтров
     const handleApplyFilters = () => {
         const priceError = 'Допускаются только целые неотрицательные значения';
-        if (!isNatural(priceMin)) setPriceMinError(priceError);
-        if (!isNatural(priceMax)) setPriceMaxError(priceError);
+        const minError = priceMin !== '' && !isNatural(priceMin);
+        const maxError = priceMax !== '' && !isNatural(priceMax);
+        if (minError) setPriceMinError(priceError);
+        if (maxError) setPriceMaxError(priceError);
+        if (minError || maxError) return;
+
+        const params = new URLSearchParams(location.search);
+
+        // При изменении любого фильтра - начинаем с первой страницы
+        params.set(PAGE_FILTER_NAME, '0');
+
+
     }
 
     // Обработчик сброса фильтров
