@@ -4,40 +4,69 @@ import {capitalize} from '../../../../../utils/common_utils';
 import './CarCardDescription.scss';
 
 function CarCardDescription({car}) {
+
+    const getCategoryDescription = () => car.categoryId ? `${car.categoryId.name} (${car.categoryId.description})` : 'не указана';
+    const getDescription = () => car.description || 'не указано';
+    const getCarTank = () => car.tank ? `${car.tank}%` : 'не указан';
+    const getColors = () => car.colors && car.colors > 0 ? car.colors.map(color => capitalize(color)) : ['не указаны'];
+
     return (
         <div className="car_card_description">
+
             <span className="car_card_description__name">{car.name}</span>
-            {car.categoryId &&
+
             <div>
-                <span className="car_card_description__cat_name">{car.categoryId.name}</span>
-                <span className="car_card_description__cat_description"> ({car.categoryId.description})</span>
+                <span className="car_card_description__normal_text">Категория: </span>
+                <span className="car_card_description__strong_text">
+                    {getCategoryDescription()}
+                </span>
             </div>
-            }
-            <span className="car_card_description__description">{car.description}</span>
-            {(car.number && car.number !== 'undefined') &&
-            <span className="car_card_description__number">
-                {car.number}
-            </span>
-            }
-            <span className="car_card_description__price">Цена: от {car.priceMin} до {car.priceMax}&#8381;</span>
-            {car.tank &&
+
+            <div>
+                <span className="car_card_description__normal_text">Описание: </span>
+                <span className="car_card_description__strong_text">{getDescription()}</span>
+            </div>
+
+            <div>
+                <span className="car_card_description__normal_text">Гос. номер: </span>
+                {(car.number && car.number !== 'undefined') ?
+                    <span className="car_card_description__number">
+                        {car.number}
+                    </span>
+                    :
+                    <span className="car_card_description__strong_text">
+                        не указан
+                    </span>
+                }
+            </div>
+
+            <div>
+                <span className="car_card_description__normal_text">Цена: </span>
+                <span className="car_card_description__strong_text">от {car.priceMin} до {car.priceMax}&#8381;</span>
+            </div>
+
             <div className="car_card_description__tank">
-                Топливо: {car.tank}%
+                <span className="car_card_description__normal_text">Уровень топлива:</span>
+                <span className="car_card_description__strong_text"> {getCarTank()}</span>
                 {(car.tank >= 0 && car.tank <= 100) &&
                 <div className="car_card_description__tank_indicator">
                     <div style={{width: `${car.tank}%`}}/>
                 </div>
                 }
             </div>
-            }
-            {car.colors && car.colors.length > 0 &&
-            <div className="car_card_description__colors">
-                Доступные цвета:
+
+            <div>
+                <span className="car_card_description__normal_text">Доступные цвета:</span>
                 <ul>
-                    {car.colors.map(color => <li key={color}>{capitalize(color)}</li>)}
+                    {getColors().map(
+                        color =>
+                            <li key={color}>
+                                <span className="car_card_description__strong_text">{capitalize(color)}</span>
+                            </li>
+                    )}
                 </ul>
             </div>
-            }
+
         </div>
     );
 }
