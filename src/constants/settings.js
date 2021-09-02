@@ -28,6 +28,10 @@ export const DATE_FROM_FILTER_NAME = 'dateFrom';
 export const CAR_FILTER_NAME = 'carId';
 export const CITY_FILTER_NAME = 'cityId';
 export const STATUS_FILTER_NAME = 'orderStatusId';
+export const CATEGORY_FILTER_NAME = 'categoryId';
+export const PRICE_MIN_FILTER_NAME = 'priceMin';
+export const PRICE_MAX_FILTER_NAME = 'priceMax';
+export const TANK_FILTER_NAME = 'tank';
 
 // Список пунктов главного меню
 export const MENU_ITEMS = [
