@@ -1,6 +1,6 @@
 import * as act from './actions';
-import {fetchOrderList, fetchStatusList, fetchCarList, fetchCityList} from '../utils/fetch_utils';
-import {STATUS_LIST_CATALOG, CAR_LIST_CATALOG, CITY_LIST_CATALOG} from '../constants/settings';
+import {fetchOrderList, fetchStatusList, fetchCarList, fetchCityList, fetchCarCategoryList} from '../utils/fetch_utils';
+import {STATUS_LIST_CATALOG, CAR_LIST_CATALOG, CITY_LIST_CATALOG, CAR_CATEGORY_CATALOG} from '../constants/settings';
 
 // Функция возвращает корректный номер страницы
 function getCorrectPage(page) {
@@ -51,7 +51,7 @@ export function setError(error) {
 }
 
 // Создатель действия для управления флагом прелоадера
-export function setPreloader(preloader){
+export function setPreloader(preloader) {
     return {
         type: act.SET_PRELOADER,
         preloader
@@ -89,10 +89,16 @@ export function loadOrderList(page, date, car, city, status) {
 
 // Создатель действия для загрузки списка автомобилей
 export function loadCarList(page) {
-    return async (dispatch) => {
+    return async (dispatch, getState) => {
         // Загружаем список автомобилей
         const _page = getCorrectPage(page);
         const carList = await fetchCarList(_page);
         dispatch(setFrame({count: carList.count, data: carList.data, page: _page}));
+
+        // Загружаем справочник с категориями авто
+        if (!getState().catalog[CAR_CATEGORY_CATALOG]) {
+            const carCategoryList = await fetchCarCategoryList();
+            dispatch(setCatalog(CAR_CATEGORY_CATALOG, carCategoryList));
+        }
     }
 }
