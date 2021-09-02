@@ -1,18 +1,34 @@
 @import '../../../../../styles/vars';
+@import '../../../../common/ListElementControl/ListElementControl';
 
-.car_card_description {
+.car_card_extra {
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
 
+  .list_element_control {
+    margin-top: $step * 2;
+  }
+
   &__name {
     font-size: 1.5em;
-    padding-bottom: 2px;
+    padding-bottom: $step;
     border-bottom: 1px dashed $separator-color;
   }
 
-  > div {
-    margin-top: $step;
+  &__content {
+    display: flex;
+    flex-direction: column;
+    margin-top: $step * 2;
+
+    article {
+      display: flex;
+      flex-direction: column;
+    }
+
+    article + article {
+      margin-top: $step;
+    }
   }
 
   &__number {
@@ -22,6 +38,7 @@
     border-radius: 2px;
     box-shadow: $main-shadow;
     align-self: flex-start;
+    margin-bottom: $step;
   }
 
   &__tank_indicator {
@@ -57,7 +74,7 @@
 }
 
 @media (min-width: $tablet-start) and (max-width: $tablet-end) {
-  .car_card_description {
+  .car_card_extra {
     &__name {
       font-size: 1.8em;
     }
@@ -69,7 +86,7 @@
 }
 
 @media (min-width: $desktop-min-start) {
-  .car_card_description {
+  .car_card_extra {
     &__name {
       font-size: 2.1em;
     }
@@ -80,6 +97,30 @@
 
     &__tank_indicator {
       width: $step * 50;
+    }
+  }
+}
+
+@media (min-width: $desktop-start) {
+  .car_card_extra {
+    .list_element_control {
+      margin-top: 0;
+    }
+
+    &__content {
+      flex-direction: row;
+
+      article {
+        display: block;
+      }
+
+      article + article {
+        margin-top: 0;
+      }
+
+      section {
+        flex: 1;
+      }
     }
   }
 }

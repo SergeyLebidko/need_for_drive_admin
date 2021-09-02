@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PhotoBlock from '../../../../common/PhotoBlock/PhotoBlock';
-import CarCardDescription from '../CarCardDescription/CarCardDescription';
+import CarCardExtra from '../CarCardExtra/CarCardExtra';
 import './CarCard.scss';
 
 function CarCard({car}){
     return (
         <li className="car_card">
             <PhotoBlock photoPath={car.thumbnail.path}/>
-            <CarCardDescription car={car}/>
+            <CarCardExtra car={car}/>
         </li>
     );
 }
