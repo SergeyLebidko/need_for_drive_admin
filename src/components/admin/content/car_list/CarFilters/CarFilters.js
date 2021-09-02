@@ -77,7 +77,7 @@ function CarFilters() {
 
     // Обработчик применения фильтров
     const handleApplyFilters = () => {
-        const priceError = 'Допускаются только целые неотрицательные значения';
+        const priceError = 'Допустимы только целые неотрицательные значения';
         const minError = priceMin !== '' && !isNatural(priceMin);
         const maxError = priceMax !== '' && !isNatural(priceMax);
         if (minError) setPriceMinError(priceError);
