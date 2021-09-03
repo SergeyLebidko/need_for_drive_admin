@@ -61,19 +61,17 @@ function OrderList() {
         <div className="order_list">
             <h1 className="order_list__caption">Заказы</h1>
             {done &&
-            <>
-                <div className="order_list__content">
-                    <OrderFilters/>
-                    {items && items.length > 0 &&
-                    <>
-                        <ul>
-                            {items.map(item => <OrderCard key={item.id} order={item}/>)}
-                        </ul>
-                        <Paginator/>
-                    </>
-                    }
-                </div>
-            </>
+            <div className="order_list__content">
+                <OrderFilters/>
+                {items && items.length > 0 &&
+                <>
+                    <ul>
+                        {items.map(item => <OrderCard key={item.id} order={item}/>)}
+                    </ul>
+                    <Paginator/>
+                </>
+                }
+            </div>
             }
         </div>
     );

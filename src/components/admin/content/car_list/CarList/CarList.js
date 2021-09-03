@@ -59,19 +59,17 @@ function CarList() {
         <div className="car_list">
             <h1 className="car_list__caption">Автомобили</h1>
             {done &&
-            <>
-                <div className="car_list__content">
-                    <CarFilters/>
-                    {items && items.length > 0 &&
-                    <>
-                        <ul>
-                            {items.map(item => <CarCard key={item.id} car={item}/>)}
-                        </ul>
-                        <Paginator/>
-                    </>
-                    }
-                </div>
-            </>
+            <div className="car_list__content">
+                <CarFilters/>
+                {items && items.length > 0 &&
+                <>
+                    <ul>
+                        {items.map(item => <CarCard key={item.id} car={item}/>)}
+                    </ul>
+                    <Paginator/>
+                </>
+                }
+            </div>
             }
         </div>
     );

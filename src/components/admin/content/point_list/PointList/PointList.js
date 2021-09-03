@@ -47,8 +47,8 @@ function PointList() {
         <div className="point_list">
             <h1 className="point_list__caption">Пункты выдачи</h1>
             {done &&
-                <>
                 <div className="point_list__content">
+
                     {items && items.length > 0 &&
                     <>
                         <ul>
@@ -58,7 +58,6 @@ function PointList() {
                     </>
                     }
                 </div>
-            </>
             }
         </div>
     )
