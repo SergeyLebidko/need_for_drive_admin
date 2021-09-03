@@ -9,11 +9,27 @@ import {
 } from '../utils/fetch_utils';
 import {STATUS_LIST_CATALOG, CAR_LIST_CATALOG, CITY_LIST_CATALOG, CAR_CATEGORY_CATALOG} from '../constants/settings';
 
-// Функция возвращает корректный номер страницы
+// Вспомогательная функция возвращающая корректный номер страницы
 function getCorrectPage(page) {
     let _page = (page === null || page === undefined) ? 0 : +page;
     if (isNaN(_page)) _page = 0;
     return _page
+}
+
+// Вспомогательная функция для загрузки каталогов
+async function loadCatalogs(dispatch, getState, catalogs) {
+    const loaderSelector = {
+        [STATUS_LIST_CATALOG]: fetchStatusList,
+        [CAR_LIST_CATALOG]: fetchCarList,
+        [CITY_LIST_CATALOG]: fetchCityList,
+        [CAR_CATEGORY_CATALOG]: fetchCarCategoryList
+    }
+    for (const catalog of catalogs) {
+        if (!getState().catalog[catalog]) {
+            const {data} = await loaderSelector[catalog]();
+            dispatch(setCatalog(catalog, data));
+        }
+    }
 }
 
 // Создатель действия для сохранения данных пунктов меню
@@ -73,24 +89,8 @@ export function loadOrderList(page, date, car, city, status) {
         const orderList = await fetchOrderList(_page, date, car, city, status);
         dispatch(setFrame({count: orderList.count, data: orderList.data, page: _page}));
 
-
-        // Загружаем справочник со статусами заказов, если он еще не был загружен
-        if (!getState().catalog[STATUS_LIST_CATALOG]) {
-            const statusList = await fetchStatusList();
-            dispatch(setCatalog(STATUS_LIST_CATALOG, statusList.data));
-        }
-
-        // Загружаем список авто (как справочник моделей), если он еще не был загружен
-        if (!getState().catalog[CAR_LIST_CATALOG]) {
-            const carList = await fetchCarList();
-            dispatch(setCatalog(CAR_LIST_CATALOG, carList.data));
-        }
-
-        // Загружаем список городов, если он еще не был загружен
-        if (!getState().catalog[CITY_LIST_CATALOG]) {
-            const cityList = await fetchCityList();
-            dispatch(setCatalog(CITY_LIST_CATALOG, cityList.data));
-        }
+        // Загружаем необходимые каталоги
+        await loadCatalogs(dispatch, getState, [STATUS_LIST_CATALOG, CAR_LIST_CATALOG, CITY_LIST_CATALOG]);
     }
 }
 
@@ -103,42 +103,19 @@ export function loadCarList(page, categoryId, priceMin, priceMax, tank) {
         dispatch(setFrame({count: carList.count, data: carList.data, page: _page}));
 
         // Загружаем справочник с категориями авто
-        if (!getState().catalog[CAR_CATEGORY_CATALOG]) {
-            const carCategoryList = await fetchCarCategoryList();
-            dispatch(setCatalog(CAR_CATEGORY_CATALOG, carCategoryList.data));
-        }
+        await loadCatalogs(dispatch, getState, [CAR_CATEGORY_CATALOG]);
     }
 }
 
 // Создатель действия для загрузки списка пунктов выдачи
-export function loadPointList(page){
+export function loadPointList(page) {
     return async (dispatch, getState) => {
         const _page = getCorrectPage(page);
         const pointList = await fetchPointList(_page);
         dispatch(setFrame({count: pointList.count, data: pointList.data, page: _page}));
 
         // Загружаем список городов, если он еще не был загружен
-        if (!getState().catalog[CITY_LIST_CATALOG]) {
-            const cityList = await fetchCityList();
-            dispatch(setCatalog(CITY_LIST_CATALOG, cityList.data));
-        }
+        await loadCatalogs(dispatch, getState, [CITY_LIST_CATALOG]);
     }
 }
 
-// Создатель действия для загрузки каталогов
-export function loadCatalogs(catalogs){
-    return async (dispatch, getState) => {
-        const loaderSelector = {
-            [STATUS_LIST_CATALOG]: fetchStatusList,
-            [CAR_LIST_CATALOG]: fetchCarList,
-            [CITY_LIST_CATALOG]: fetchCityList,
-            [CAR_CATEGORY_CATALOG]: fetchCarCategoryList
-        }
-        for (const catalog of catalogs){
-            if (!getState().catalog[catalog]){
-                const {data} = await loaderSelector[catalog]();
-                dispatch(setCatalog(catalog, data));
-            }
-        }
-    }
-}
