@@ -8,6 +8,7 @@ export const DEFAULT_REQUEST_HEADERS = {
 
 // Адреса конечных точек api
 export const CITY_URL = `${API_BASE}/city`;
+export const POINT_URL = `${API_BASE}/point`;
 export const CAR_URL = `${API_BASE}/car`;
 export const STATUS_URL = `${API_BASE}/orderStatus`;
 export const ORDER_URL = `${API_BASE}/order`;

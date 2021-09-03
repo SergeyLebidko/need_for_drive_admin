@@ -32,7 +32,8 @@ import {
     REFRESH_URL,
     LOGOUT_URL,
     REGISTER_URL,
-    CAR_CATEGORY_URL
+    CAR_CATEGORY_URL,
+    POINT_LIST_APP_URL
 } from '../constants/urls';
 import {extractDateParts, getRandomString} from './common_utils';
 import cookie from 'cookie_js';
@@ -244,6 +245,10 @@ export async function fetchCarList(page, categoryId, priceMin, priceMax, tank) {
     }
 
     return await executeFetch(url);
+}
+
+export async function fetchPointList(page){
+    return await executeFetch(`${POINT_LIST_APP_URL}/?limit=${LIMIT}&page=${page}`);
 }
 
 export async function fetchCityList() {

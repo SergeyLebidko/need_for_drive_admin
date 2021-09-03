@@ -1,5 +1,12 @@
 import * as act from './actions';
-import {fetchOrderList, fetchStatusList, fetchCarList, fetchCityList, fetchCarCategoryList} from '../utils/fetch_utils';
+import {
+    fetchOrderList,
+    fetchStatusList,
+    fetchCarList,
+    fetchCityList,
+    fetchCarCategoryList,
+    fetchPointList
+} from '../utils/fetch_utils';
 import {STATUS_LIST_CATALOG, CAR_LIST_CATALOG, CITY_LIST_CATALOG, CAR_CATEGORY_CATALOG} from '../constants/settings';
 
 // Функция возвращает корректный номер страницы
@@ -50,7 +57,7 @@ export function setError(error) {
     }
 }
 
-// Создатель действия для управления флагом прелоадера
+// Создатель действия для управления флагом глобального прелоадера
 export function setPreloader(preloader) {
     return {
         type: act.SET_PRELOADER,
@@ -99,6 +106,39 @@ export function loadCarList(page, categoryId, priceMin, priceMax, tank) {
         if (!getState().catalog[CAR_CATEGORY_CATALOG]) {
             const carCategoryList = await fetchCarCategoryList();
             dispatch(setCatalog(CAR_CATEGORY_CATALOG, carCategoryList.data));
+        }
+    }
+}
+
+// Создатель действия для загрузки списка пунктов выдачи
+export function loadPointList(page){
+    return async (dispatch, getState) => {
+        const _page = getCorrectPage(page);
+        const pointList = await fetchPointList(_page);
+        dispatch(setFrame({count: pointList.count, data: pointList.data, page: _page}));
+
+        // Загружаем список городов, если он еще не был загружен
+        if (!getState().catalog[CITY_LIST_CATALOG]) {
+            const cityList = await fetchCityList();
+            dispatch(setCatalog(CITY_LIST_CATALOG, cityList.data));
+        }
+    }
+}
+
+// Создатель действия для загрузки каталогов
+export function loadCatalogs(catalogs){
+    return async (dispatch, getState) => {
+        const loaderSelector = {
+            [STATUS_LIST_CATALOG]: fetchStatusList,
+            [CAR_LIST_CATALOG]: fetchCarList,
+            [CITY_LIST_CATALOG]: fetchCityList,
+            [CAR_CATEGORY_CATALOG]: fetchCarCategoryList
+        }
+        for (const catalog of catalogs){
+            if (!getState().catalog[catalog]){
+                const {data} = await loaderSelector[catalog]();
+                dispatch(setCatalog(catalog, data));
+            }
         }
     }
 }
