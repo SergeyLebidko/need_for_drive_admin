@@ -1,0 +1,6 @@
+@import '../../../../../styles/vars';
+@import '../../../../../styles/common_presets';
+
+.point_list {
+    @include content_mixin;
+}
