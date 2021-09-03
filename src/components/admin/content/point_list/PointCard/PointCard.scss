@@ -42,6 +42,10 @@
       margin: 0;
     }
 
+    > div:not(:last-child) {
+      padding-right: $step;
+    }
+
     &__city_block {
       width: 25%;
     }
