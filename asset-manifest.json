@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/need_for_drive_admin/static/css/main.ee19b6ea.chunk.css",
-    "main.js": "/need_for_drive_admin/static/js/main.bc2fd4c9.chunk.js",
-    "main.js.map": "/need_for_drive_admin/static/js/main.bc2fd4c9.chunk.js.map",
+    "main.css": "/need_for_drive_admin/static/css/main.ea2c286f.chunk.css",
+    "main.js": "/need_for_drive_admin/static/js/main.598e554a.chunk.js",
+    "main.js.map": "/need_for_drive_admin/static/js/main.598e554a.chunk.js.map",
     "runtime-main.js": "/need_for_drive_admin/static/js/runtime-main.fe2955cb.js",
     "runtime-main.js.map": "/need_for_drive_admin/static/js/runtime-main.fe2955cb.js.map",
-    "static/js/2.a03b7ebd.chunk.js": "/need_for_drive_admin/static/js/2.a03b7ebd.chunk.js",
-    "static/js/2.a03b7ebd.chunk.js.map": "/need_for_drive_admin/static/js/2.a03b7ebd.chunk.js.map",
+    "static/js/2.cd92b1e1.chunk.js": "/need_for_drive_admin/static/js/2.cd92b1e1.chunk.js",
+    "static/js/2.cd92b1e1.chunk.js.map": "/need_for_drive_admin/static/js/2.cd92b1e1.chunk.js.map",
     "index.html": "/need_for_drive_admin/index.html",
-    "static/css/main.ee19b6ea.chunk.css.map": "/need_for_drive_admin/static/css/main.ee19b6ea.chunk.css.map",
-    "static/js/2.a03b7ebd.chunk.js.LICENSE.txt": "/need_for_drive_admin/static/js/2.a03b7ebd.chunk.js.LICENSE.txt",
+    "static/css/main.ea2c286f.chunk.css.map": "/need_for_drive_admin/static/css/main.ea2c286f.chunk.css.map",
+    "static/js/2.cd92b1e1.chunk.js.LICENSE.txt": "/need_for_drive_admin/static/js/2.cd92b1e1.chunk.js.LICENSE.txt",
     "static/media/init.scss": "/need_for_drive_admin/static/media/Roboto-Regular.a8d6ac03.ttf",
     "static/media/car_list_icon.b308c23f.svg": "/need_for_drive_admin/static/media/car_list_icon.b308c23f.svg",
     "static/media/OrderList.scss": "/need_for_drive_admin/static/media/checked.c8756ac1.svg",
@@ -18,6 +18,7 @@
     "static/media/find.4ed27fda.svg": "/need_for_drive_admin/static/media/find.4ed27fda.svg",
     "static/media/hide.8b77170b.svg": "/need_for_drive_admin/static/media/hide.8b77170b.svg",
     "static/media/logo.02d5ddcf.svg": "/need_for_drive_admin/static/media/logo.02d5ddcf.svg",
+    "static/media/menu_item_icon.c6b78da0.svg": "/need_for_drive_admin/static/media/menu_item_icon.c6b78da0.svg",
     "static/media/notification.4a73f89d.svg": "/need_for_drive_admin/static/media/notification.4a73f89d.svg",
     "static/media/one_line.6fd386a4.svg": "/need_for_drive_admin/static/media/one_line.6fd386a4.svg",
     "static/media/order_list_icon.5727ef62.svg": "/need_for_drive_admin/static/media/order_list_icon.5727ef62.svg",
@@ -29,8 +30,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.fe2955cb.js",
-    "static/js/2.a03b7ebd.chunk.js",
-    "static/css/main.ee19b6ea.chunk.css",
-    "static/js/main.bc2fd4c9.chunk.js"
+    "static/js/2.cd92b1e1.chunk.js",
+    "static/css/main.ea2c286f.chunk.css",
+    "static/js/main.598e554a.chunk.js"
   ]
 }
