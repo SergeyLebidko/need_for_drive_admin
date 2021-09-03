@@ -25,3 +25,4 @@ export const REGISTER_APP_URL = 'register';
 export const ADMIN_APP_URL = 'admin'
 export const ORDER_LIST_APP_URL = 'orders';
 export const CAR_LIST_APP_URL = 'cars';
+export const POINT_LIST_APP_URL = 'points';
