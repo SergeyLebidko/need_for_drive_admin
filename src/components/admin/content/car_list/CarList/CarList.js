@@ -51,7 +51,7 @@ function CarList() {
                 hideGlobalPreloader();
                 setDone(true);
             });
-    }, [location])
+    }, [location]);
 
     if (error) return <ErrorPane error={error}/>;
 

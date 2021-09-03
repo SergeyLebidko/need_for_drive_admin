@@ -8,7 +8,7 @@ import {useLocation} from 'react-router-dom';
 import {useGlobalPreloader} from '../../../../../store/hooks';
 import {loadPointList} from '../../../../../store/actionCreators';
 import {getFrame} from '../../../../../store/selectors';
-import {PAGE_FILTER_NAME} from '../../../../../constants/settings';
+import {CITY_FILTER_NAME, PAGE_FILTER_NAME} from '../../../../../constants/settings';
 import {ADMIN_APP_URL, POINT_LIST_APP_URL} from '../../../../../constants/urls';
 import './PointList.scss';
 
@@ -31,11 +31,12 @@ function PointList() {
 
         const params = new URLSearchParams(location.search);
         const page = params.get(PAGE_FILTER_NAME);
+        const cityId = params.get(CITY_FILTER_NAME);
 
         showGlobalPreloader();
         setError(null);
         setDone(false);
-        dispatch(loadPointList(page))
+        dispatch(loadPointList(page, cityId))
             .catch(err => setError(err))
             .finally(() => {
                 hideGlobalPreloader();

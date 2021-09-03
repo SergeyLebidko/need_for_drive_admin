@@ -108,10 +108,10 @@ export function loadCarList(page, categoryId, priceMin, priceMax, tank) {
 }
 
 // Создатель действия для загрузки списка пунктов выдачи
-export function loadPointList(page) {
+export function loadPointList(page, cityId) {
     return async (dispatch, getState) => {
         const _page = getCorrectPage(page);
-        const pointList = await fetchPointList(_page);
+        const pointList = await fetchPointList(_page, cityId);
         dispatch(setFrame({count: pointList.count, data: pointList.data, page: _page}));
 
         // Загружаем список городов, если он еще не был загружен
