@@ -4,6 +4,7 @@ import {useDispatch} from 'react-redux';
 import {useSelector} from 'react-redux';
 import Paginator from '../../../../common/Paginator/Paginator';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
+import CarFilters from '../CarFilters/CarFilters';
 import CarCard from '../CarCard/CarCard';
 import {ADMIN_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
 import {
@@ -16,7 +17,6 @@ import {loadCarList} from '../../../../../store/actionCreators';
 import {getFrame} from '../../../../../store/selectors';
 import {useGlobalPreloader} from '../../../../../store/hooks';
 import './CarList.scss';
-import CarFilters from "../CarFilters/CarFilters";
 
 function CarList() {
     const [done, setDone] = useState(false);

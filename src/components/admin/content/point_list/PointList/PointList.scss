@@ -1,6 +1,50 @@
 @import '../../../../../styles/vars';
 @import '../../../../../styles/common_presets';
+@import '../PointCard/PointCard';
+@import '../PointFilters/PointFilters';
 
 .point_list {
-    @include content_mixin;
+  @include content_mixin;
+
+  .point_filters {
+    border-bottom: 1px solid $separator-color;
+  }
+
+  .point_card + .point_card {
+    border-top: 1px solid $separator-color;
+  }
+
+  &__title_block {
+    padding: $step * 2;
+    border-bottom: 1px solid $separator-color;
+    display: none;
+  }
+
+  &__city_title, &__address_title, &__name_title, &__control_title {
+    font-weight: bold;
+  }
+
+  &__city_title {
+    width: 25%;
+  }
+
+  &__address_title {
+    width: 30%;
+  }
+
+  &__name_title {
+    width: 30%;
+  }
+
+  &__control_title {
+    width: 15%;
+  }
+}
+
+@media (min-width: $tablet-start) {
+  .point_list {
+    &__title_block {
+      display: flex;
+    }
+  }
 }

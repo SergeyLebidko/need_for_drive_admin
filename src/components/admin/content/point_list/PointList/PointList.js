@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import Paginator from '../../../../common/Paginator/Paginator';
+import PointFilters from '../PointFilters/PointFilters';
+import PointCard from '../PointCard/PointCard';
 import {useDispatch, useSelector} from 'react-redux';
 import {useLocation} from 'react-router-dom';
 import {useGlobalPreloader} from '../../../../../store/hooks';
@@ -47,17 +49,23 @@ function PointList() {
         <div className="point_list">
             <h1 className="point_list__caption">Пункты выдачи</h1>
             {done &&
-                <div className="point_list__content">
-
-                    {items && items.length > 0 &&
-                    <>
-                        <ul>
-                            {items.map(item => <li key={item.id}>{item.name}</li>)}
-                        </ul>
-                        <Paginator/>
-                    </>
-                    }
-                </div>
+            <div className="point_list__content">
+                <PointFilters/>
+                {items && items.length > 0 &&
+                <>
+                    <ul className="point_list__title_block">
+                        <li className="point_list__city_title">Город</li>
+                        <li className="point_list__address_title">Адрес</li>
+                        <li className="point_list__name_title">Название</li>
+                        <li className="point_list__control_title"/>
+                    </ul>
+                    <ul>
+                        {items.map(item => <PointCard key={item.id} point={item}/>)}
+                    </ul>
+                    <Paginator/>
+                </>
+                }
+            </div>
             }
         </div>
     )

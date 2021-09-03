@@ -1,0 +1,73 @@
+@import '../../../../../styles/vars';
+@import '../../../../../styles/common_presets';
+
+.point_card {
+  padding: $step * 2;
+  display: flex;
+  flex-direction: column;
+
+  > div + div {
+    margin: ($step * 2) 0 0 0;
+  }
+
+  .thin_button {
+    margin: 0 0 0 auto;
+  }
+
+  &__city_block, &__address_block, &__name_block, &__control_block, {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__caption_text {
+    color: $gray;
+  }
+
+  &__value_text {
+    color: $black;
+  }
+
+  &__caption_text, &__value_text {
+    font-size: 0.9em;
+  }
+}
+
+@media (min-width: $tablet-start) {
+  .point_card {
+    flex-direction: row;
+    align-items: center;
+
+    > div + div {
+      margin: 0;
+    }
+
+    &__city_block {
+      width: 25%;
+    }
+
+    &__address_block {
+      width: 30%;
+    }
+
+    &__name_block {
+      width: 30%;
+    }
+
+    &__control_block {
+      width: 15%;
+    }
+
+    &__caption_text {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: $desktop-min-start) {
+  .point_card {
+    &__caption_text, &__value_text {
+      font-size: 1em;
+    }
+  }
+}
