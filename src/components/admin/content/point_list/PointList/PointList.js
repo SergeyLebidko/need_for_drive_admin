@@ -1,48 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import Paginator from '../../../../common/Paginator/Paginator';
 import PointFilters from '../PointFilters/PointFilters';
 import PointCard from '../PointCard/PointCard';
-import {useDispatch, useSelector} from 'react-redux';
-import {useLocation} from 'react-router-dom';
-import {useGlobalPreloader} from '../../../../../store/hooks';
+import {useListLoader} from '../../../../../store/hooks';
 import {loadPointList} from '../../../../../store/actionCreators';
-import {getFrame} from '../../../../../store/selectors';
-import {CITY_FILTER_NAME, PAGE_FILTER_NAME} from '../../../../../constants/settings';
-import {ADMIN_APP_URL, POINT_LIST_APP_URL} from '../../../../../constants/urls';
+import {CITY_FILTER_NAME} from '../../../../../constants/settings';
+import {POINT_LIST_APP_URL} from '../../../../../constants/urls';
 import './PointList.scss';
 
 function PointList() {
-    const [done, setDone] = useState(false);
-    const [error, setError] = useState(null);
-
-    const frame = useSelector(getFrame);
-    let items;
-    if (frame) items = frame.data;
-
-    const dispatch = useDispatch();
-    const location = useLocation();
-
-    const [showGlobalPreloader, hideGlobalPreloader] = useGlobalPreloader();
-
-    useEffect(() => {
-        // Предотвращаем выполнение ненужных действий, если компонент размонтирован
-        if (!location.pathname.startsWith(`/${ADMIN_APP_URL}/${POINT_LIST_APP_URL}`)) return;
-
-        const params = new URLSearchParams(location.search);
-        const page = params.get(PAGE_FILTER_NAME);
-        const cityId = params.get(CITY_FILTER_NAME);
-
-        showGlobalPreloader();
-        setError(null);
-        setDone(false);
-        dispatch(loadPointList(page, cityId))
-            .catch(err => setError(err))
-            .finally(() => {
-                hideGlobalPreloader();
-                setDone(true);
-            });
-    }, [location]);
+    const [done, error, items] = useListLoader(POINT_LIST_APP_URL, [CITY_FILTER_NAME], loadPointList);
 
     if (error) return <ErrorPane error={error}/>;
 
