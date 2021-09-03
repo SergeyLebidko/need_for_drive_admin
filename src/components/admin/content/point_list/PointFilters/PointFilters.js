@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Selector from '../../../../common/Selector/Selector';
 import {useSelector} from 'react-redux';
 import {getCatalog} from '../../../../../store/selectors';
-import {useHistory} from 'react-router-dom';
+import {useHistory, useLocation} from 'react-router-dom';
 import {
     CITY_FILTER_NAME,
     CITY_LIST_CATALOG,
@@ -16,6 +16,13 @@ function PointFilters() {
     const [selectedCity, setSelectedCity] = useState(NO_FILTER_VALUE);
 
     const history = useHistory();
+    const location = useLocation();
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const defaultCity = params.get(CITY_FILTER_NAME);
+        setSelectedCity(defaultCity ? defaultCity : NO_FILTER_VALUE);
+    }, []);
 
     const cityList = useSelector(getCatalog(CITY_LIST_CATALOG));
     const citySelectorItems = [{value: NO_FILTER_VALUE, name: 'Любой город'}];
