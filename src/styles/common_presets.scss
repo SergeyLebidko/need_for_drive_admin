@@ -115,6 +115,19 @@
   }
 }
 
+.button_silver {
+  background-color: $silver;
+  color: $black;
+
+  &:hover {
+    background-color: $silver-light;
+  }
+
+  &:active {
+    background-color: $silver-high-light;
+  }
+}
+
 // Стили для "тонких" кнопок
 .thin_button {
   position: relative;

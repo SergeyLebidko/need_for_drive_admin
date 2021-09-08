@@ -52,6 +52,11 @@ function Order() {
             {done &&
             <div className="order__content">
                 Форма редактирования/удаления заказа
+                <div className="order__control_block">
+                    <button className="button button_blue">Сохранить</button>
+                    <button className="button button_silver">Отменить</button>
+                    <button className="button button_red">Удалить</button>
+                </div>
             </div>
             }
         </div>

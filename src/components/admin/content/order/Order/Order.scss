@@ -23,12 +23,47 @@
       text-align: center;
     }
   }
+
+  &__content {
+    padding: $step * 2;
+  }
+
+  &__control_block {
+    margin-top: $step * 6;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    .button + .button {
+      margin-top: $step;
+    }
+  }
 }
 
 @media (min-width: $tablet-start) {
   .order {
     &__caption {
       font-size: 2.5em;
+    }
+
+    &__control_block {
+      flex-direction: row;
+
+      .button {
+        width: 12em;
+      }
+
+      .button + .button {
+        margin-top: 0;
+      }
+
+      .button:nth-child(2) {
+        margin-left: $step;
+      }
+
+      .button:nth-child(3) {
+        margin-left: auto;
+      }
     }
   }
 }
