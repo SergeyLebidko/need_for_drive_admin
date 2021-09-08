@@ -2,7 +2,14 @@ import React from 'react';
 import {ReactComponent as OrderListIcon} from '../content/images/order_list_icon.svg';
 import {ReactComponent as CarListIcon} from '../content/images/car_list_icon.svg';
 import {ReactComponent as MenuItemIcon} from '../content/images/menu_item_icon.svg';
-import {ORDER_LIST_APP_URL, CAR_LIST_APP_URL, POINT_LIST_APP_URL} from './urls';
+import {
+    ORDER_LIST_APP_URL,
+    CAR_LIST_APP_URL,
+    POINT_LIST_APP_URL,
+    ORDER_APP_URL,
+    CAR_APP_URL,
+    POINT_APP_URL
+} from './urls';
 
 // Размер страницы данных
 export const LIMIT = 10;
@@ -50,6 +57,21 @@ export const MENU_ITEMS = [
         title: 'Пункты выдачи',
         iconComponent: <MenuItemIcon/>,
         href: POINT_LIST_APP_URL
+    },
+    {
+        title: 'Заказ',
+        iconComponent: <MenuItemIcon/>,
+        href: ORDER_APP_URL
+    },
+    {
+        title: 'Автомобиль',
+        iconComponent: <MenuItemIcon/>,
+        href: CAR_APP_URL
+    },
+    {
+        title: 'Пункт выдачи',
+        iconComponent: <MenuItemIcon/>,
+        href: POINT_APP_URL
     }
 ];
 
