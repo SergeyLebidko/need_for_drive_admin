@@ -1,8 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {useHistory} from 'react-router-dom';
+import {ADMIN_APP_URL, POINT_APP_URL} from '../../../../../constants/urls';
 import './PointCard.scss';
 
 function PointCard({point}) {
+    const history = useHistory();
+    const toPointEditor = () => history.push(`/${ADMIN_APP_URL}/${POINT_APP_URL}/${point.id}`);
+
     return (
         <li className="point_card">
             <div className="point_card__city_block">
@@ -22,7 +27,7 @@ function PointCard({point}) {
                 <span className="point_card__value_text">{point.name}</span>
             </div>
             <div className="point_card__control_block">
-                <button className="thin_button thin_button_edit">Изменить</button>
+                <button className="thin_button thin_button_edit" onClick={toPointEditor}>Изменить</button>
             </div>
         </li>
     );

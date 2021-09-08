@@ -1,5 +1,35 @@
 @import '../../../../../styles/vars';
+@import '../../../../../styles/common_presets';
 
 .order {
+  @include content_mixin;
 
+  &__caption {
+    font-size: 1.2em;
+  }
+
+  &__no_order_id {
+    padding: $step * 6;
+    align-self: center;
+    max-width: $step * 60;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    h1 {
+      margin-bottom: $step * 3;
+      text-align: center;
+    }
+  }
 }
+
+@media (min-width: $tablet-start) {
+  .order {
+    &__caption {
+      font-size: 2.5em;
+    }
+  }
+}
+

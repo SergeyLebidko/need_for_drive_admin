@@ -42,10 +42,6 @@
     background-color: $white;
     border-radius: $main-radius;
   }
-
-  .order_card + .order_card {
-    border-top: 1px solid $separator-color;
-  }
 }
 
 // Пресет для форм (логин, регистрация и т.п.)
