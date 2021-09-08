@@ -5,7 +5,8 @@ import {
     fetchCarList,
     fetchCityList,
     fetchCarCategoryList,
-    fetchPointList
+    fetchPointList,
+    fetchOrder
 } from '../utils/fetch_utils';
 import {STATUS_LIST_CATALOG, CAR_LIST_CATALOG, CITY_LIST_CATALOG, CAR_CATEGORY_CATALOG} from '../constants/settings';
 
@@ -133,6 +134,14 @@ export function setEntityField(field, value) {
         type: act.SET_ENTITY_FIELD,
         field,
         value
+    }
+}
+
+// Создатель действия для загрузки заказа
+export function loadOrder(orderId) {
+    return async dispatch => {
+        const order = await fetchOrder(orderId);
+        dispatch(setEntity(order));
     }
 }
 

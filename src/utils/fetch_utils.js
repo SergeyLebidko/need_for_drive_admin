@@ -257,10 +257,14 @@ export async function fetchCityList() {
     return await executeFetch(CITY_URL);
 }
 
+export async function fetchCarCategoryList() {
+    return await executeFetch(CAR_CATEGORY_URL);
+}
+
 export async function fetchUsername() {
     return await executeFetchWithRefresh(check);
 }
 
-export async function fetchCarCategoryList() {
-    return await executeFetch(CAR_CATEGORY_URL);
+export async function fetchOrder(orderId){
+    return await executeFetchWithRefresh(executeFetch, `${ORDER_URL}/${orderId}`);
 }
