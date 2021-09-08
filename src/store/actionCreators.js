@@ -119,3 +119,20 @@ export function loadPointList(page, cityId) {
     }
 }
 
+// Создатель действия для инициализации сущности переданным объектом
+export function setEntity(entity) {
+    return {
+        type: act.SET_ENTITY,
+        entity
+    }
+}
+
+// Создатель действия для установки значения поля сущности
+export function setEntityField(field, value) {
+    return {
+        type: act.SET_ENTITY_FIELD,
+        field,
+        value
+    }
+}
+

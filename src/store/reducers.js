@@ -53,3 +53,14 @@ export function preloader(state = false, action) {
             return state;
     }
 }
+
+export function entity(state = {}, action) {
+    switch (action.type) {
+        case act.SET_ENTITY:
+            return action.entity
+        case act.SET_ENTITY_FIELD:
+            return {...state, [action.field]: action.value}
+        default:
+            return state;
+    }
+}
