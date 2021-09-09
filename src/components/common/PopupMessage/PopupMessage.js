@@ -13,17 +13,11 @@ function PopupMessage() {
     const hidePopupMessage = () => dispatch(setPopupMessage(null));
 
     useEffect(() => {
-        if (message) {
-            timer.current = setTimeout(hidePopupMessage, 3000);
-        } else {
-            clearTimeout(timer.current);
-        }
+        clearTimeout(timer.current);
+        if (message) timer.current = setTimeout(hidePopupMessage, 3000);
     }, [message]);
 
-    const handleCancelIconClick = () => {
-        clearTimeout(timer.current);
-        hidePopupMessage();
-    };
+    const handleCancelIconClick = () => hidePopupMessage();
 
     return (
         <div className="popup_message">

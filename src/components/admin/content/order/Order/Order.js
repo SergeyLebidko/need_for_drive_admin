@@ -37,6 +37,7 @@ function Order() {
             });
     }, [location, orderId]);
 
+    // Блок обработчиков кликов
     const toOrderList = () => history.push(`/${ADMIN_APP_URL}/${ORDER_LIST_APP_URL}`);
 
     const handleSaveButtonClick = () => {
@@ -46,16 +47,13 @@ function Order() {
             return;
         }
 
-        showPreloader();
-        setError(null);
-
         // Формируем данные для сохранения
         let orderData = {};
-        if (hasStatusChange) {
-            orderData = {...orderData, orderStatusId: orderStatus}
-        }
+        if (hasStatusChange) orderData = {...orderData, orderStatusId: orderStatus};
 
         // Пытаемся сохранить данные
+        showPreloader();
+        setError(null);
         dispatch(saveOrder(orderId, orderData))
             .then(() => {
                 dispatch(setPopupMessage('Заказ успешно сохранен'));
