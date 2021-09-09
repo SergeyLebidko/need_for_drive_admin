@@ -7,12 +7,11 @@ import Selector from '../../../../common/Selector/Selector';
 import {NO_FILTER_VALUE, STATUS_LIST_CATALOG} from '../../../../../constants/settings';
 import './StatusBlock.scss';
 
-function StatusBlock({error}) {
-    const [statusListForSelector, setStatusListForSelector] = useState([]);
-
+function StatusBlock({errorText, resetErrorText}) {
     const statusList = useSelector(getCatalog(STATUS_LIST_CATALOG));
+
+    const [statusListForSelector, setStatusListForSelector] = useState([]);
     const selectedStatus = useSelector(getOrderStatus);
-    const [selectorError, setSelectorError] = useState(error);
 
     const dispatch = useDispatch();
 
@@ -29,13 +28,10 @@ function StatusBlock({error}) {
         setStatusListForSelector(nextList);
     }, [selectedStatus]);
 
-    useEffect(() => setSelectorError(error), [error]);
-
     const handleStatusSelect = value => {
-        if (value === NO_FILTER_VALUE && !selectedStatus) return;
-        if (value === selectedStatus.id) return;
+        if (value === prepareItem(selectedStatus).value) return;
         dispatch(setEntityField('orderStatusId', statusList.find(status => status.id === value)));
-        setSelectorError(null);
+        resetErrorText();
     }
 
     return (
@@ -45,14 +41,15 @@ function StatusBlock({error}) {
                 value={prepareItem(selectedStatus).value}
                 handleSelect={handleStatusSelect}
                 label="Статус заказа"
-                errorText={selectorError}
+                errorText={errorText}
             />
         </div>
     );
 }
 
 StatusBlock.propTypes = {
-    error: PropTypes.func
+    errorText: PropTypes.string,
+    resetErrorText: PropTypes.func
 }
 
 export default StatusBlock;

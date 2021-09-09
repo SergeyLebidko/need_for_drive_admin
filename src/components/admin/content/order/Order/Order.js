@@ -17,6 +17,8 @@ function Order() {
     const dispatch = useDispatch();
     const order = useSelector(getEntity);
 
+    const [statusErrorText, setStatusErrorText] = useState(null);
+
     const location = useLocation();
     const {params: {orderId}} = useRouteMatch();
     const history = useHistory();
@@ -35,10 +37,18 @@ function Order() {
             });
     }, [location, orderId]);
 
+    // Блок функций сброса ошибок
+    const resetStatusErrorText = () => setStatusErrorText(null);
+
     // Блок обработчиков кликов
     const toOrderList = () => history.push(`/${ADMIN_APP_URL}/${ORDER_LIST_APP_URL}`);
 
     const handleSaveButtonClick = () => {
+        // Перед попыткой сохранения проверяем заполнение обязательных полей. Без их указания - бэк не даст выполнить сохранение
+        if (!order.orderStatusId) setStatusErrorText('Некорректный статус заказа');
+        if (!order.orderStatusId) return;
+
+        // Пытаемся выполнить сохранение
         showPreloader();
         setError(null);
         dispatch(saveOrder(order))
@@ -65,7 +75,7 @@ function Order() {
             .finally(() => hidePreloader());
     }
 
-    // Если не удалось определить номер заказа, то показываем заглушку со ссылкой для перехода к списку заказов
+    // Если не удалось определить номер заказа, то просто показываем ссылку для перехода к списку заказов
     if (!orderId) return (
         <div className="order">
             <div className="order__content order__no_order_id">
@@ -84,7 +94,7 @@ function Order() {
             <h1 className="order__caption">Заказ №{orderId}</h1>
             {done &&
             <div className="order__content">
-                <StatusBlock/>
+                <StatusBlock errorText={statusErrorText} resetErrorText={resetStatusErrorText}/>
                 <div className="order__control_block">
                     <button className="button button_blue" onClick={handleSaveButtonClick}>Сохранить</button>
                     <button className="button button_silver" onClick={handleCancelButtonClick}>Отменить</button>
