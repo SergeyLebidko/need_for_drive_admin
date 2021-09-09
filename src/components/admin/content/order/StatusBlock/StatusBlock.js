@@ -22,9 +22,8 @@ function StatusBlock() {
     const prepareItems = items => items.map(item => prepareItem(item));
 
     useEffect(() => {
-        let nextList = [];
-        if (!selectedStatus) nextList.push(null);
-        nextList = nextList.concat(statusList);
+        const nextList = [...statusList];
+        if (!selectedStatus) nextList.unshift(null);
         setStatusListForSelector(nextList);
     }, [selectedStatus]);
 
@@ -38,6 +37,7 @@ function StatusBlock() {
         <div className="status_block">
             <Selector
                 items={prepareItems(statusListForSelector)}
+                value={prepareItem(selectedStatus).value}
                 handleSelect={handleStatusSelect}
                 label="Статус заказа"
             />

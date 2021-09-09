@@ -268,3 +268,7 @@ export async function fetchUsername() {
 export async function fetchOrder(orderId){
     return await executeFetchWithRefresh(executeFetch, `${ORDER_URL}/${orderId}`);
 }
+
+export async function removeOrderInBase(orderId){
+    return await executeFetchWithRefresh(executeFetch, `${ORDER_URL}/${orderId}`, {method: 'DELETE'});
+}

@@ -6,7 +6,8 @@ import {
     fetchCityList,
     fetchCarCategoryList,
     fetchPointList,
-    fetchOrder
+    fetchOrder,
+    removeOrderInBase
 } from '../utils/fetch_utils';
 import {STATUS_LIST_CATALOG, CAR_LIST_CATALOG, CITY_LIST_CATALOG, CAR_CATEGORY_CATALOG} from '../constants/settings';
 
@@ -145,6 +146,14 @@ export function loadOrder(orderId) {
 
         // Загружаем необходимые каталоги
         await loadCatalogs(dispatch, getState, [STATUS_LIST_CATALOG]);
+    }
+}
+
+// Создатель действия для удаления заказа
+export function removeOrder(orderId) {
+    return async dispatch => {
+        await removeOrderInBase(orderId);
+        dispatch(setEntity({}));
     }
 }
 

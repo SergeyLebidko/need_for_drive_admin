@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {useRouteMatch, useHistory, useLocation} from 'react-router-dom';
 import {useGlobalPreloader} from '../../../../../store/hooks';
-import {loadOrder} from '../../../../../store/actionCreators';
+import {loadOrder, removeOrder} from '../../../../../store/actionCreators';
 import StatusBlock from '../StatusBlock/StatusBlock';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import {ADMIN_APP_URL, ORDER_LIST_APP_URL} from '../../../../../constants/urls';
@@ -19,11 +19,11 @@ function Order() {
     const {params: {orderId}} = useRouteMatch();
     const history = useHistory();
 
-    const toOrderList = () => history.push(`/${ADMIN_APP_URL}/${ORDER_LIST_APP_URL}`);
-
+    // При монтировании определяем id заказа из URL и пытаемся загрузить его
     useEffect(() => {
         if (!orderId) return;
         showPreloader();
+        setDone(false);
         setError(null);
         dispatch(loadOrder(orderId))
             .catch(err => setError(err))
@@ -32,6 +32,23 @@ function Order() {
                 hidePreloader();
             });
     }, [location, orderId]);
+
+    const toOrderList = () => history.push(`/${ADMIN_APP_URL}/${ORDER_LIST_APP_URL}`);
+
+    const handleCancelButtonClick = () => history.goBack();
+
+    const handleRemoveButtonClick = () => {
+        showPreloader();
+        setDone(false);
+        setError(null);
+        dispatch(removeOrder(orderId))
+            .then(() => history.push(`/${ADMIN_APP_URL}`))
+            .catch(err => {
+                setError(err);
+                setDone(true);
+            })
+            .finally(() => hidePreloader());
+    }
 
     // Если не удалось определить номер заказа, то показываем заглушку со ссылкой для перехода к списку заказов
     if (!orderId) return (
@@ -55,8 +72,8 @@ function Order() {
                 <StatusBlock/>
                 <div className="order__control_block">
                     <button className="button button_blue">Сохранить</button>
-                    <button className="button button_silver">Отменить</button>
-                    <button className="button button_red">Удалить</button>
+                    <button className="button button_silver" onClick={handleCancelButtonClick}>Отменить</button>
+                    <button className="button button_red" onClick={handleRemoveButtonClick}>Удалить</button>
                 </div>
             </div>
             }
