@@ -139,9 +139,12 @@ export function setEntityField(field, value) {
 
 // Создатель действия для загрузки заказа
 export function loadOrder(orderId) {
-    return async dispatch => {
+    return async (dispatch, getState) => {
         const order = await fetchOrder(orderId);
-        dispatch(setEntity(order));
+        dispatch(setEntity(order.data));
+
+        // Загружаем необходимые каталоги
+        await loadCatalogs(dispatch, getState, [STATUS_LIST_CATALOG]);
     }
 }
 

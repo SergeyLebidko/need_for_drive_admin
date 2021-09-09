@@ -9,3 +9,5 @@ export const getUsername = state => state.username;
 export const getError = state => state.error;
 
 export const getPreloader = state => state.preloader;
+
+export const getOrderStatus = state => state.entity.orderStatusId;
