@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useRouteMatch, useHistory, useLocation} from 'react-router-dom';
 import {useGlobalPreloader} from '../../../../../store/hooks';
-import {loadOrder, removeOrder, setPopupMessage} from '../../../../../store/actionCreators';
+import {loadOrder, removeOrder, saveOrder, setPopupMessage} from '../../../../../store/actionCreators';
 import StatusBlock from '../StatusBlock/StatusBlock';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import {ADMIN_APP_URL, ORDER_LIST_APP_URL} from '../../../../../constants/urls';
+import {getOrderStatus} from '../../../../../store/selectors';
 import './Order.scss';
 
 function Order() {
@@ -14,6 +15,9 @@ function Order() {
     const [showPreloader, hidePreloader] = useGlobalPreloader();
 
     const dispatch = useDispatch();
+    const orderStatus = useSelector(getOrderStatus);
+
+    const [hasStatusChange, setHasStatusChange] = useState(false);
 
     const location = useLocation();
     const {params: {orderId}} = useRouteMatch();
@@ -34,6 +38,29 @@ function Order() {
     }, [location, orderId]);
 
     const toOrderList = () => history.push(`/${ADMIN_APP_URL}/${ORDER_LIST_APP_URL}`);
+
+    const handleSaveButtonClick = () => {
+        showPreloader();
+        setError(null);
+
+        // Формируем данные для сохранения
+        let orderData = {id: orderId};
+        if (hasStatusChange) {
+            orderData = {...orderData, orderStatusId: orderStatus}
+        }
+
+        // Пытаемся сохранить данные
+        dispatch(saveOrder(orderData))
+            .then(() => {
+                dispatch(setPopupMessage('Заказ успешно сохранен'));
+                setHasStatusChange(false);
+            })
+            .catch(err => {
+                console.log(err);
+                setError(err)
+            })
+            .finally(() => hidePreloader());
+    }
 
     const handleCancelButtonClick = () => history.goBack();
 
@@ -72,9 +99,9 @@ function Order() {
             <h1 className="order__caption">Заказ №{orderId}</h1>
             {done &&
             <div className="order__content">
-                <StatusBlock/>
+                <StatusBlock setStatusChangeFlag={() => setHasStatusChange(true)}/>
                 <div className="order__control_block">
-                    <button className="button button_blue">Сохранить</button>
+                    <button className="button button_blue" onClick={handleSaveButtonClick}>Сохранить</button>
                     <button className="button button_silver" onClick={handleCancelButtonClick}>Отменить</button>
                     <button className="button button_red" onClick={handleRemoveButtonClick}>Удалить</button>
                 </div>

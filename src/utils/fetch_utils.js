@@ -265,10 +265,24 @@ export async function fetchUsername() {
     return await executeFetchWithRefresh(check);
 }
 
-export async function fetchOrder(orderId){
+export async function fetchOrder(orderId) {
     return await executeFetchWithRefresh(executeFetch, `${ORDER_URL}/${orderId}`);
 }
 
-export async function removeOrderInBase(orderId){
+export async function removeOrderInBase(orderId) {
     return await executeFetchWithRefresh(executeFetch, `${ORDER_URL}/${orderId}`, {method: 'DELETE'});
+}
+
+export async function saveOrderInBase(orderData) {
+    return await executeFetchWithRefresh(
+        executeFetch,
+        `${ORDER_URL}/${orderData.id}`,
+        {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderData)
+        }
+    );
 }

@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import PropTypes from 'prop-types';
 import Selector from '../../../../common/Selector/Selector';
 import {useSelector, useDispatch} from 'react-redux';
 import {getCatalog, getOrderStatus} from '../../../../../store/selectors';
@@ -6,7 +7,7 @@ import {setEntityField} from '../../../../../store/actionCreators';
 import {NO_FILTER_VALUE, STATUS_LIST_CATALOG} from '../../../../../constants/settings';
 import './StatusBlock.scss';
 
-function StatusBlock() {
+function StatusBlock({setStatusChangeFlag}) {
     const [statusListForSelector, setStatusListForSelector] = useState([]);
 
     const statusList = useSelector(getCatalog(STATUS_LIST_CATALOG));
@@ -31,6 +32,7 @@ function StatusBlock() {
         if (value === NO_FILTER_VALUE && !selectedStatus) return;
         if (value === selectedStatus.id) return;
         dispatch(setEntityField('orderStatusId', statusList.find(status => status.id === value)));
+        setStatusChangeFlag();
     }
 
     return (
@@ -43,6 +45,10 @@ function StatusBlock() {
             />
         </div>
     );
+}
+
+StatusBlock.propTypes = {
+    setStatusChangeFlag: PropTypes.func
 }
 
 export default StatusBlock;
