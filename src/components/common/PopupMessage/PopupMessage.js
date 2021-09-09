@@ -17,7 +17,7 @@ function PopupMessage() {
         if (message) timer.current = setTimeout(hidePopupMessage, 3000);
     }, [message]);
 
-    // Предотвращаем возможную попытку обновления состояния компонента при его размонтировании
+    // Предотвращаем возможную попытку обновления состояния компонента после его размонтирования
     useEffect(() => () => clearTimeout(timer.current), []);
 
     const handleCancelIconClick = () => hidePopupMessage();
