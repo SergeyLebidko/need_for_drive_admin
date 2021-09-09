@@ -54,7 +54,7 @@
   padding: $step * 2;
 }
 
-// Стили для полей ввода
+// Стили для полей ввода и селекторов
 .text_input {
   width: 100%;
   outline: none;
@@ -64,7 +64,28 @@
   padding: $step ($step * 2);
 }
 
-.text_input_error {
+.select_input {
+  appearance: none;
+  position: relative;
+  border: 1px solid $gray-light;
+  border-radius: $small-radius;
+  background-color: $white;
+  padding: $step ($step * 4) $step ($step * 2);
+  outline: none;
+  color: $gray;
+  background-image: url('../content/images/selector.svg');
+  background-repeat: no-repeat;
+  background-position: 90% 50%;
+  font-size: 1em;
+  width: 100%;
+}
+
+.select_option {
+  font-size: 1em;
+  color: $gray;
+}
+
+.text_input_error, .select_input_error {
   border: 0.5px solid $red;
   box-shadow: $error_shadow;
 }

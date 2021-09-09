@@ -1,21 +1,8 @@
 @import '../../../styles/vars';
+@import '../../../styles/common_presets';
 
 .selector {
-  appearance: none;
-  position: relative;
-  border: 1px solid $gray-light;
-  border-radius: $small-radius;
-  background-color: $white;
-  padding: $step ($step * 4) $step ($step * 2);
-  outline: none;
-  color: $gray;
-  background-image: url('../../../content/images/selector.svg');
-  background-repeat: no-repeat;
-  background-position: 90% 50%;
-  font-size: 1em;
-
-  option {
-    font-size: 1em;
-    color: $gray;
-  }
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
