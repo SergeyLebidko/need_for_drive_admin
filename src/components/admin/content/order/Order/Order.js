@@ -55,10 +55,7 @@ function Order() {
                 dispatch(setPopupMessage('Заказ успешно сохранен'));
                 setHasStatusChange(false);
             })
-            .catch(err => {
-                console.log(err);
-                setError(err)
-            })
+            .catch(err => setError(err))
             .finally(() => hidePreloader());
     }
 
