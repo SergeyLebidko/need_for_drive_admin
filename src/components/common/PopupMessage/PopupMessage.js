@@ -12,10 +12,13 @@ function PopupMessage() {
 
     const hidePopupMessage = () => dispatch(setPopupMessage(null));
 
+    // Если сообщение изменяется пока компонент виден - снова запускаем таймер отображения сообщения
     useEffect(() => {
-        clearTimeout(timer.current);
         if (message) timer.current = setTimeout(hidePopupMessage, 3000);
     }, [message]);
+
+    // Предотвращаем возможную попытку обновления состояния компонента при его размонтировании
+    useEffect(() => () => clearTimeout(timer.current), []);
 
     const handleCancelIconClick = () => hidePopupMessage();
 

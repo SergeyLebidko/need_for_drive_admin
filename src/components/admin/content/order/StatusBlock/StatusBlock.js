@@ -7,11 +7,12 @@ import Selector from '../../../../common/Selector/Selector';
 import {NO_FILTER_VALUE, STATUS_LIST_CATALOG} from '../../../../../constants/settings';
 import './StatusBlock.scss';
 
-function StatusBlock({setStatusChangeFlag}) {
+function StatusBlock({error}) {
     const [statusListForSelector, setStatusListForSelector] = useState([]);
 
     const statusList = useSelector(getCatalog(STATUS_LIST_CATALOG));
     const selectedStatus = useSelector(getOrderStatus);
+    const [selectorError, setSelectorError] = useState(error);
 
     const dispatch = useDispatch();
 
@@ -28,11 +29,13 @@ function StatusBlock({setStatusChangeFlag}) {
         setStatusListForSelector(nextList);
     }, [selectedStatus]);
 
+    useEffect(() => setSelectorError(error), [error]);
+
     const handleStatusSelect = value => {
         if (value === NO_FILTER_VALUE && !selectedStatus) return;
         if (value === selectedStatus.id) return;
         dispatch(setEntityField('orderStatusId', statusList.find(status => status.id === value)));
-        setStatusChangeFlag();
+        setSelectorError(null);
     }
 
     return (
@@ -42,13 +45,14 @@ function StatusBlock({setStatusChangeFlag}) {
                 value={prepareItem(selectedStatus).value}
                 handleSelect={handleStatusSelect}
                 label="Статус заказа"
+                errorText={selectorError}
             />
         </div>
     );
 }
 
 StatusBlock.propTypes = {
-    setStatusChangeFlag: PropTypes.func
+    error: PropTypes.func
 }
 
 export default StatusBlock;

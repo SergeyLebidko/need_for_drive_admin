@@ -12,4 +12,6 @@ export const getPreloader = state => state.preloader;
 
 export const getPopupMessage = state => state.popupMessage;
 
+export const getEntity = state => state.entity;
+
 export const getOrderStatus = state => state.entity.orderStatusId;

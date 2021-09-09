@@ -5,7 +5,7 @@ import {useGlobalPreloader} from '../../../../../store/hooks';
 import {loadOrder, removeOrder, saveOrder, setPopupMessage} from '../../../../../store/actionCreators';
 import StatusBlock from '../StatusBlock/StatusBlock';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
-import {getOrderStatus} from '../../../../../store/selectors';
+import {getEntity} from '../../../../../store/selectors';
 import {ADMIN_APP_URL, ORDER_LIST_APP_URL} from '../../../../../constants/urls';
 import './Order.scss';
 
@@ -15,9 +15,7 @@ function Order() {
     const [showPreloader, hidePreloader] = useGlobalPreloader();
 
     const dispatch = useDispatch();
-
-    const orderStatus = useSelector(getOrderStatus);
-    const [hasStatusChange, setHasStatusChange] = useState(false);
+    const order = useSelector(getEntity);
 
     const location = useLocation();
     const {params: {orderId}} = useRouteMatch();
@@ -41,24 +39,10 @@ function Order() {
     const toOrderList = () => history.push(`/${ADMIN_APP_URL}/${ORDER_LIST_APP_URL}`);
 
     const handleSaveButtonClick = () => {
-        // Проверяем, внесены ли изменения, которые можно было бы сохранить
-        if (!hasStatusChange) {
-            dispatch(setPopupMessage('Внесите изменения для сохранения'));
-            return;
-        }
-
-        // Формируем данные для сохранения
-        let orderData = {};
-        if (hasStatusChange) orderData = {...orderData, orderStatusId: orderStatus};
-
-        // Пытаемся сохранить данные
         showPreloader();
         setError(null);
-        dispatch(saveOrder(orderId, orderData))
-            .then(() => {
-                dispatch(setPopupMessage('Заказ успешно сохранен'));
-                setHasStatusChange(false);
-            })
+        dispatch(saveOrder(order))
+            .then(() => dispatch(setPopupMessage('Заказ успешно сохранен')))
             .catch(err => setError(err))
             .finally(() => hidePreloader());
     }
@@ -100,7 +84,7 @@ function Order() {
             <h1 className="order__caption">Заказ №{orderId}</h1>
             {done &&
             <div className="order__content">
-                <StatusBlock setStatusChangeFlag={() => setHasStatusChange(true)}/>
+                <StatusBlock/>
                 <div className="order__control_block">
                     <button className="button button_blue" onClick={handleSaveButtonClick}>Сохранить</button>
                     <button className="button button_silver" onClick={handleCancelButtonClick}>Отменить</button>

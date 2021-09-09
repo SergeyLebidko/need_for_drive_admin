@@ -167,10 +167,10 @@ export function removeOrder(orderId) {
 }
 
 // Создатель действия для сохранения заказа
-export function saveOrder(orderId, orderData) {
+export function saveOrder(order) {
     return async dispatch => {
-        const order = await saveOrderInBase(orderId, orderData);
-        dispatch(setEntity(order.data));
+        const updatedOrder = await saveOrderInBase(order);
+        dispatch(setEntity(updatedOrder.data));
     }
 }
 
