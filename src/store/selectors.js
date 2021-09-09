@@ -10,4 +10,6 @@ export const getError = state => state.error;
 
 export const getPreloader = state => state.preloader;
 
+export const getPopupMessage = state => state.popupMessage;
+
 export const getOrderStatus = state => state.entity.orderStatusId;

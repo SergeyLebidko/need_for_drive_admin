@@ -64,3 +64,12 @@ export function entity(state = {}, action) {
             return state;
     }
 }
+
+export function popupMessage(state = null, action) {
+    switch (action.type) {
+        case act.SET_POPUP_MESSAGE:
+            return action.message;
+        default:
+            return state;
+    }
+}

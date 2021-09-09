@@ -6,3 +6,4 @@ export const SET_ERROR = 'set_error';
 export const SET_PRELOADER = 'set_preloader';
 export const SET_ENTITY = 'set_entity';
 export const SET_ENTITY_FIELD = 'set_entity_field';
+export const SET_POPUP_MESSAGE = 'set_popup_message';

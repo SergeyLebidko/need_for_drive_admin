@@ -138,6 +138,14 @@ export function setEntityField(field, value) {
     }
 }
 
+// Создатель действия для установки всплывающего сообщения
+export function setPopupMessage(message) {
+    return {
+        type: act.SET_POPUP_MESSAGE,
+        message
+    }
+}
+
 // Создатель действия для загрузки заказа
 export function loadOrder(orderId) {
     return async (dispatch, getState) => {

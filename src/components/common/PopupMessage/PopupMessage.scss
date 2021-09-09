@@ -1,0 +1,35 @@
+@import '../../../styles/vars';
+
+.popup_message {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: $step * 2;
+  background-color: $green;
+  z-index: 100;
+
+  &__text {
+    color: $white;
+    margin-right: auto;
+  }
+
+  svg {
+    width: 1em;
+    height: 1em;
+    margin-right: $step;
+    cursor: pointer;
+  }
+
+  svg path {
+    stroke: $white;
+    fill: $white;
+  }
+}
+
+@media (min-width: $tablet-start) {
+  .popup_message {
+    padding: ($step * 2) ($step * 4);
+  }
+}

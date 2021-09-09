@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {useRouteMatch, useHistory, useLocation} from 'react-router-dom';
 import {useGlobalPreloader} from '../../../../../store/hooks';
-import {loadOrder, removeOrder} from '../../../../../store/actionCreators';
+import {loadOrder, removeOrder, setPopupMessage} from '../../../../../store/actionCreators';
 import StatusBlock from '../StatusBlock/StatusBlock';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import {ADMIN_APP_URL, ORDER_LIST_APP_URL} from '../../../../../constants/urls';
@@ -42,7 +42,10 @@ function Order() {
         setDone(false);
         setError(null);
         dispatch(removeOrder(orderId))
-            .then(() => history.push(`/${ADMIN_APP_URL}`))
+            .then(() => {
+                dispatch(setPopupMessage('Заказ успешно удален'));
+                history.push(`/${ADMIN_APP_URL}`);
+            })
             .catch(err => {
                 setError(err);
                 setDone(true);
