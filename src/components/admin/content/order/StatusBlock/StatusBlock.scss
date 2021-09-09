@@ -1,0 +1,16 @@
+@import '../../../../../styles/vars';
+@import '../../../../common/Selector/Selector';
+
+.status_block {
+  .selector {
+    width: 100%;
+  }
+}
+
+@media (min-width: $tablet-start) {
+  .status_block {
+    .selector {
+      width: 15em;
+    }
+  }
+}

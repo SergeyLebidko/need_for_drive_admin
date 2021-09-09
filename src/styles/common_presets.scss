@@ -90,6 +90,12 @@
   box-shadow: $error_shadow;
 }
 
+.text_input_error_text, .select_input_error_text {
+  color: $red;
+  margin-left: $step * 2;
+  font-size: 0.8em;
+}
+
 // Стили для обычных кнопок
 .button {
   border: none;

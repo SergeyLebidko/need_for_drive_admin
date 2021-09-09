@@ -2,10 +2,11 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {useRouteMatch, useHistory, useLocation} from 'react-router-dom';
 import {useGlobalPreloader} from '../../../../../store/hooks';
+import {loadOrder} from '../../../../../store/actionCreators';
+import StatusBlock from '../StatusBlock/StatusBlock';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import {ADMIN_APP_URL, ORDER_LIST_APP_URL} from '../../../../../constants/urls';
 import './Order.scss';
-import {loadOrder} from "../../../../../store/actionCreators";
 
 function Order() {
     const [done, setDone] = useState(false);
@@ -51,7 +52,7 @@ function Order() {
             <h1 className="order__caption">Заказ №{orderId}</h1>
             {done &&
             <div className="order__content">
-                Форма редактирования/удаления заказа
+                <StatusBlock/>
                 <div className="order__control_block">
                     <button className="button button_blue">Сохранить</button>
                     <button className="button button_silver">Отменить</button>

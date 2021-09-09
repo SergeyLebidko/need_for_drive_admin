@@ -20,7 +20,7 @@ function TextField({label, value, handleChangeValue, errorText, placeholder}) {
                 id={inputId}
                 placeholder={placeholder ? placeholder : ''}
             />
-            {errorText && <span className="text_field__error_text">{errorText}</span>}
+            {errorText && <span className="text_input_error_text">{errorText}</span>}
         </div>
     )
 }

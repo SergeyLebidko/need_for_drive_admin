@@ -4,10 +4,4 @@
 .text_field {
   display: flex;
   flex-direction: column;
-
-  &__error_text {
-    color: $red;
-    margin-left: $step * 2;
-    font-size: 0.8em;
-  }
 }
