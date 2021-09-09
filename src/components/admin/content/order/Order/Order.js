@@ -5,8 +5,8 @@ import {useGlobalPreloader} from '../../../../../store/hooks';
 import {loadOrder, removeOrder, saveOrder, setPopupMessage} from '../../../../../store/actionCreators';
 import StatusBlock from '../StatusBlock/StatusBlock';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
-import {ADMIN_APP_URL, ORDER_LIST_APP_URL} from '../../../../../constants/urls';
 import {getOrderStatus} from '../../../../../store/selectors';
+import {ADMIN_APP_URL, ORDER_LIST_APP_URL} from '../../../../../constants/urls';
 import './Order.scss';
 
 function Order() {
@@ -15,8 +15,8 @@ function Order() {
     const [showPreloader, hidePreloader] = useGlobalPreloader();
 
     const dispatch = useDispatch();
-    const orderStatus = useSelector(getOrderStatus);
 
+    const orderStatus = useSelector(getOrderStatus);
     const [hasStatusChange, setHasStatusChange] = useState(false);
 
     const location = useLocation();
@@ -40,17 +40,23 @@ function Order() {
     const toOrderList = () => history.push(`/${ADMIN_APP_URL}/${ORDER_LIST_APP_URL}`);
 
     const handleSaveButtonClick = () => {
+        // Проверяем, внесены ли изменения, которые можно было бы сохранить
+        if (!hasStatusChange) {
+            dispatch(setPopupMessage('Внесите изменения для сохранения'));
+            return;
+        }
+
         showPreloader();
         setError(null);
 
         // Формируем данные для сохранения
-        let orderData = {id: orderId};
+        let orderData = {};
         if (hasStatusChange) {
             orderData = {...orderData, orderStatusId: orderStatus}
         }
 
         // Пытаемся сохранить данные
-        dispatch(saveOrder(orderData))
+        dispatch(saveOrder(orderId, orderData))
             .then(() => {
                 dispatch(setPopupMessage('Заказ успешно сохранен'));
                 setHasStatusChange(false);

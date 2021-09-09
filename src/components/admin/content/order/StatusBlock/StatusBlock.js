@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import Selector from '../../../../common/Selector/Selector';
 import {useSelector, useDispatch} from 'react-redux';
 import {getCatalog, getOrderStatus} from '../../../../../store/selectors';
 import {setEntityField} from '../../../../../store/actionCreators';
+import Selector from '../../../../common/Selector/Selector';
 import {NO_FILTER_VALUE, STATUS_LIST_CATALOG} from '../../../../../constants/settings';
 import './StatusBlock.scss';
 

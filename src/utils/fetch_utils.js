@@ -273,10 +273,10 @@ export async function removeOrderInBase(orderId) {
     return await executeFetchWithRefresh(executeFetch, `${ORDER_URL}/${orderId}`, {method: 'DELETE'});
 }
 
-export async function saveOrderInBase(orderData) {
+export async function saveOrderInBase(orderId, orderData) {
     return await executeFetchWithRefresh(
         executeFetch,
-        `${ORDER_URL}/${orderData.id}`,
+        `${ORDER_URL}/${orderId}`,
         {
             method: 'PUT',
             headers: {

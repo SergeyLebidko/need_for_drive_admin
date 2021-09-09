@@ -1,9 +1,9 @@
 import React, {useEffect, useRef} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {getPopupMessage} from '../../../store/selectors';
 import {ReactComponent as CancelIcon} from '../../../content/images/cancel_icon.svg';
+import {getPopupMessage} from '../../../store/selectors';
+import {setPopupMessage} from '../../../store/actionCreators';
 import './PopupMessage.scss';
-import {setPopupMessage} from "../../../store/actionCreators";
 
 function PopupMessage() {
     const message = useSelector(getPopupMessage);
@@ -13,8 +13,12 @@ function PopupMessage() {
     const hidePopupMessage = () => dispatch(setPopupMessage(null));
 
     useEffect(() => {
-        timer.current = setTimeout(hidePopupMessage, 3000);
-    }, []);
+        if (message) {
+            timer.current = setTimeout(hidePopupMessage, 3000);
+        } else {
+            clearTimeout(timer.current);
+        }
+    }, [message]);
 
     const handleCancelIconClick = () => {
         clearTimeout(timer.current);

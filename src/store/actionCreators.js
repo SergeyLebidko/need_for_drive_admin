@@ -7,7 +7,8 @@ import {
     fetchCarCategoryList,
     fetchPointList,
     fetchOrder,
-    removeOrderInBase, saveOrderInBase
+    removeOrderInBase,
+    saveOrderInBase
 } from '../utils/fetch_utils';
 import {STATUS_LIST_CATALOG, CAR_LIST_CATALOG, CITY_LIST_CATALOG, CAR_CATEGORY_CATALOG} from '../constants/settings';
 
@@ -166,9 +167,9 @@ export function removeOrder(orderId) {
 }
 
 // Создатель действия для сохранения заказа
-export function saveOrder(orderData) {
+export function saveOrder(orderId, orderData) {
     return async dispatch => {
-        const order = await saveOrderInBase(orderData);
+        const order = await saveOrderInBase(orderId, orderData);
         dispatch(setEntity(order.data));
     }
 }
