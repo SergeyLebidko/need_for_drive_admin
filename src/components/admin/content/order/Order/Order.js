@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useRouteMatch, useHistory, useLocation} from 'react-router-dom';
 import {useGlobalPreloader} from '../../../../../store/hooks';
-import {loadOrder, removeOrder, saveOrder, setPopupMessage} from '../../../../../store/actionCreators';
+import {loadOrder, removeOrder, updateOrder, setPopupMessage} from '../../../../../store/actionCreators';
 import StatusBlock from '../StatusBlock/StatusBlock';
 import PlaceBlock from '../PlaceBlock/PlaceBlock';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
@@ -52,7 +52,7 @@ function Order() {
         // Пытаемся выполнить сохранение
         showPreloader();
         setError(null);
-        dispatch(saveOrder(order))
+        dispatch(updateOrder(order))
             .then(() => dispatch(setPopupMessage('Заказ успешно сохранен')))
             .catch(err => setError(err))
             .finally(() => hidePreloader());

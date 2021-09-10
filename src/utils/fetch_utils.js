@@ -273,7 +273,7 @@ export async function removeOrderInBase(orderId) {
     return await executeFetchWithRefresh(executeFetch, `${ORDER_URL}/${orderId}`, {method: 'DELETE'});
 }
 
-export async function saveOrderInBase(order) {
+export async function updateOrderInBase(order) {
     return await executeFetchWithRefresh(
         executeFetch,
         `${ORDER_URL}/${order.id}`,
