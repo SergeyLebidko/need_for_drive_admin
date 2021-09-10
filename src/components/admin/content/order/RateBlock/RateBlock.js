@@ -1,11 +1,11 @@
 import React from 'react';
-import Selector from '../../../../common/Selector/Selector';
-import './RateBlock.scss';
 import {useSelector, useDispatch} from 'react-redux';
+import Selector from '../../../../common/Selector/Selector';
 import {getCatalog, getOrderRate} from '../../../../../store/selectors';
-import {NO_FILTER_VALUE, RATE_LIST_CATALOG} from '../../../../../constants/settings';
 import {prepareItemForSelector, prepareItemsForSelector} from '../../../../../utils/common_utils';
-import {setEntityField} from "../../../../../store/actionCreators";
+import {setEntityField} from '../../../../../store/actionCreators';
+import {NO_FILTER_VALUE, RATE_LIST_CATALOG} from '../../../../../constants/settings';
+import './RateBlock.scss';
 
 function RateBlock() {
     const rateList = useSelector(getCatalog(RATE_LIST_CATALOG));
