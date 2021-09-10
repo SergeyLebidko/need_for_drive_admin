@@ -20,6 +20,7 @@ export const CAR_LIST_CATALOG = 'car_list_catalog';
 export const CITY_LIST_CATALOG = 'city_list_catalog';
 export const POINT_LIST_CATALOG = 'point_list_catalog';
 export const CAR_CATEGORY_CATALOG = 'car_category_catalog';
+export const RATE_LIST_CATALOG = 'rate_catalog';
 
 // Пресеты (значения) для фильтров по времени
 export const NO_FILTER_VALUE = 'no_filter_value';

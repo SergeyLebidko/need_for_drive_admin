@@ -13,6 +13,7 @@ export const CAR_URL = `${API_BASE}/car`;
 export const STATUS_URL = `${API_BASE}/orderStatus`;
 export const ORDER_URL = `${API_BASE}/order`;
 export const CAR_CATEGORY_URL = `${API_BASE}/category`;
+export const RATE_URL = `${API_BASE}/rate`;
 
 export const LOGIN_URL = `${AUTH_BASE}/login`;
 export const REGISTER_URL = `${AUTH_BASE}/register`;

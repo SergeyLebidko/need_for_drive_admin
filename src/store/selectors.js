@@ -19,3 +19,5 @@ export const getOrderStatus = state => state.entity.orderStatusId;
 export const getOrderCity = state => state.entity.cityId;
 
 export const getOrderPoint = state => state.entity.pointId;
+
+export const getOrderRate = state => state.entity.rateId;

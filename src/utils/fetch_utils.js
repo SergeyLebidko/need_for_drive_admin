@@ -33,7 +33,8 @@ import {
     LOGOUT_URL,
     REGISTER_URL,
     CAR_CATEGORY_URL,
-    POINT_URL
+    POINT_URL,
+    RATE_URL
 } from '../constants/urls';
 import {extractDateParts, getRandomString} from './common_utils';
 import cookie from 'cookie_js';
@@ -262,6 +263,10 @@ export async function fetchCityList() {
 
 export async function fetchCarCategoryList() {
     return await executeFetch(CAR_CATEGORY_URL);
+}
+
+export async function fetchRateList(){
+    return await executeFetch(RATE_URL);
 }
 
 export async function fetchUsername() {
