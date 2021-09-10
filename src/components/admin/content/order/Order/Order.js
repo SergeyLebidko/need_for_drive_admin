@@ -6,6 +6,7 @@ import {loadOrder, removeOrder, updateOrder, setPopupMessage} from '../../../../
 import StatusBlock from '../StatusBlock/StatusBlock';
 import PlaceBlock from '../PlaceBlock/PlaceBlock';
 import RateBlock from '../RateBlock/RateBlock';
+import OptionBlock from '../OptionBlock/OptionBlock';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import {getEntity} from '../../../../../store/selectors';
 import {ADMIN_APP_URL, ORDER_LIST_APP_URL} from '../../../../../constants/urls';
@@ -110,6 +111,7 @@ function Order() {
                     resetPointErrorText={resetPointErrorText}
                 />
                 <RateBlock/>
+                <OptionBlock/>
                 <div className="order__control_block">
                     <button className="button button_blue" onClick={handleSaveButtonClick}>Сохранить</button>
                     <button className="button button_silver" onClick={handleCancelButtonClick}>Отменить</button>

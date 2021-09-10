@@ -2,11 +2,12 @@
 @import '../../../../../styles/common_presets';
 @import '../PlaceBlock/PlaceBlock';
 @import '../RateBlock/RateBlock';
+@import '../OptionBlock/OptionBlock';
 
 .order {
   @include content_mixin;
 
-  .place_block, .rate_block {
+  .place_block, .rate_block, .option_block {
     margin-top: $step * 4;
   }
 

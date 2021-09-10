@@ -21,3 +21,9 @@ export const getOrderCity = state => state.entity.cityId;
 export const getOrderPoint = state => state.entity.pointId;
 
 export const getOrderRate = state => state.entity.rateId;
+
+export const getOrderTank = state => state.entity.isFullTank;
+
+export const getOrderChair = state => state.entity.isNeedChildChair;
+
+export const getOrderWheel = state => state.entity.isRightWheel;
