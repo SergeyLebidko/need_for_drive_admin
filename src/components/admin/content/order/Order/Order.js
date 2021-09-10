@@ -11,6 +11,7 @@ import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import {getEntity} from '../../../../../store/selectors';
 import {ADMIN_APP_URL, ORDER_LIST_APP_URL} from '../../../../../constants/urls';
 import './Order.scss';
+import DateBlock from "../DateBlock/DateBlock";
 
 function Order() {
     const [done, setDone] = useState(false);
@@ -110,6 +111,7 @@ function Order() {
                     resetCityErrorText={resetCityErrorText}
                     resetPointErrorText={resetPointErrorText}
                 />
+                <DateBlock/>
                 <RateBlock/>
                 <OptionBlock/>
                 <div className="order__control_block">

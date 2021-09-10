@@ -27,3 +27,7 @@ export const getOrderTank = state => state.entity.isFullTank;
 export const getOrderChair = state => state.entity.isNeedChildChair;
 
 export const getOrderWheel = state => state.entity.isRightWheel;
+
+export const getOrderDateFrom = state => state.entity.dateFrom;
+
+export const getOrderDateTo = state => state.entity.dateTo;
