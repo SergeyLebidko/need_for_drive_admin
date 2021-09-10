@@ -19,6 +19,8 @@ function Order() {
     const order = useSelector(getEntity);
 
     const [statusErrorText, setStatusErrorText] = useState(null);
+    const [cityErrorText, setCityErrorText] = useState(null);
+    const [pointErrorText, setPointErrorText] = useState(null);
 
     const location = useLocation();
     const {params: {orderId}} = useRouteMatch();
@@ -40,14 +42,18 @@ function Order() {
 
     // Блок функций сброса ошибок
     const resetStatusErrorText = () => setStatusErrorText(null);
+    const resetCityErrorText = () => setCityErrorText(null);
+    const resetPointErrorText = () => setPointErrorText(null);
 
     // Блок обработчиков кликов
     const toOrderList = () => history.push(`/${ADMIN_APP_URL}/${ORDER_LIST_APP_URL}`);
 
     const handleSaveButtonClick = () => {
         // Перед попыткой сохранения проверяем заполнение обязательных полей. Без их указания - бэк не даст выполнить сохранение
-        if (!order.orderStatusId) setStatusErrorText('Некорректный статус заказа');
-        if (!order.orderStatusId) return;
+        if (!order.orderStatusId) setStatusErrorText('Выберите статус заказа');
+        if (!order.cityId) setCityErrorText('Выберите город');
+        if (!order.pointId) setPointErrorText('Выберите пункт выдачи');
+        if (!order.orderStatusId || !order.cityId || !order.pointId) return;
 
         // Пытаемся выполнить сохранение
         showPreloader();
@@ -96,7 +102,12 @@ function Order() {
             {done &&
             <div className="order__content">
                 <StatusBlock errorText={statusErrorText} resetErrorText={resetStatusErrorText}/>
-                <PlaceBlock/>
+                <PlaceBlock
+                    cityErrorText={cityErrorText}
+                    pointErrorText={pointErrorText}
+                    resetCityErrorText={resetCityErrorText}
+                    resetPointErrorText={resetPointErrorText}
+                />
                 <div className="order__control_block">
                     <button className="button button_blue" onClick={handleSaveButtonClick}>Сохранить</button>
                     <button className="button button_silver" onClick={handleCancelButtonClick}>Отменить</button>

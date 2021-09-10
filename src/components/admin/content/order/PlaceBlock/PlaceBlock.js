@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import PropTypes from 'prop-types';
 import {useSelector, useDispatch} from 'react-redux';
 import Selector from '../../../../common/Selector/Selector';
 import {getOrderCity, getOrderPoint, getCatalog} from '../../../../../store/selectors';
@@ -7,7 +8,7 @@ import {prepareItemForSelector, prepareItemsForSelector} from '../../../../../ut
 import {setEntityField} from '../../../../../store/actionCreators';
 import './PlaceBlock.scss';
 
-function PlaceBlock() {
+function PlaceBlock({cityErrorText, pointErrorText, resetCityErrorText, resetPointErrorText}) {
     const cityList = useSelector(getCatalog(CITY_LIST_CATALOG));
     const pointList = useSelector(getCatalog(POINT_LIST_CATALOG));
 
@@ -64,12 +65,14 @@ function PlaceBlock() {
         if (value === prepareItemForSelector(selectedCity).value) return;
         const nextSelectedCity = extractDataForEntity(cityListForSelector.find(city => city && city.id === value));
         dispatch(setEntityField('cityId', nextSelectedCity));
+        resetCityErrorText();
     }
 
     const handlePointChange = value => {
         if (value === prepareItemForSelector(selectedPoint).value) return;
         const nextSelectedPoint = extractDataForEntity(pointListForSelector.find(point => point && point.id === value));
         dispatch(setEntityField('pointId', nextSelectedPoint));
+        resetPointErrorText();
     }
 
     return (
@@ -79,15 +82,24 @@ function PlaceBlock() {
                 value={prepareItemForSelector(selectedCity).value}
                 handleSelect={handleCityChange}
                 label="Город"
+                errorText={cityErrorText}
             />
             <Selector
                 items={prepareItemsForSelector(pointListForSelector, pointNameExtractor)}
                 value={prepareItemForSelector(selectedPoint, pointNameExtractor).value}
                 handleSelect={handlePointChange}
                 label="Пункт выдачи"
+                errorText={pointErrorText}
             />
         </div>
     );
+}
+
+PlaceBlock.propTypes = {
+    cityErrorText: PropTypes.string,
+    pointErrorText: PropTypes.string,
+    resetCityErrorText: PropTypes.func,
+    resetPointErrorText: PropTypes.func
 }
 
 export default PlaceBlock;
