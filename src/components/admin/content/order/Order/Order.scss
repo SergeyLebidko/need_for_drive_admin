@@ -34,10 +34,12 @@
   }
 
   &__control_block {
-    margin-top: $step * 10;
+    margin-top: $step * 6;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    padding-top: $step * 2;
+    border-top: 1px dashed $separator-color;
 
     .button + .button {
       margin-top: $step;
@@ -53,6 +55,7 @@
 
     &__control_block {
       flex-direction: row;
+      margin-top: $step * 16;
 
       .button {
         width: 12em;

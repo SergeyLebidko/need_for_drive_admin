@@ -2,5 +2,28 @@
 @import '../../../../common/Selector/Selector';
 
 .place_block {
+  display: flex;
+  flex-direction: column;
 
+  .selector {
+    width: 100%;
+  }
+
+  .selector + .selector {
+    margin: ($step * 2) 0 0 0;
+  }
+}
+
+@media (min-width: $tablet-start) {
+  .place_block {
+    flex-direction: row;
+
+    .selector {
+      width: 15em;
+    }
+
+    .selector + .selector {
+      margin: 0 0 0 ($step * 2);
+    }
+  }
 }
