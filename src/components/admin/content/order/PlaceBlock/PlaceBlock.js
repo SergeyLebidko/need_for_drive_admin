@@ -32,19 +32,19 @@ function PlaceBlock() {
         const pointNoCity = pointList.filter(point => !point.cityId);
         const pointWithCity = pointList.filter(point => !!point.cityId);
 
-        pointNoCity.sort((a, b) => {
+        const addressComparator = (a, b) => {
             if (a.address.toLowerCase() < b.address.toLowerCase()) return -1;
             if (a.address.toLowerCase() > b.address.toLowerCase()) return 1;
             return 0;
-        });
+        }
+
+        pointNoCity.sort(addressComparator);
 
         // В пределах одного города пункты выдачи будут отсортированы лексикографически по адресу
         pointWithCity.sort((a, b) => {
             if (a.cityId.name.toLowerCase() < b.cityId.name.toLowerCase()) return -1;
             if (a.cityId.name.toLowerCase() > b.cityId.name.toLowerCase()) return 1;
-            if (a.address.toLowerCase() < b.address.toLowerCase()) return -1;
-            if (a.address.toLowerCase() > b.address.toLowerCase()) return 1;
-            return 0;
+            return addressComparator(a, b);
         });
 
         const nextList = [...pointNoCity, ...pointWithCity];
