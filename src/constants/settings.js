@@ -18,6 +18,7 @@ export const LIMIT = 10;
 export const STATUS_LIST_CATALOG = 'status_list_catalog';
 export const CAR_LIST_CATALOG = 'car_list_catalog';
 export const CITY_LIST_CATALOG = 'city_list_catalog';
+export const POINT_LIST_CATALOG = 'point_list_catalog';
 export const CAR_CATEGORY_CATALOG = 'car_category_catalog';
 
 // Пресеты (значения) для фильтров по времени

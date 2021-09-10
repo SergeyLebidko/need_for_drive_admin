@@ -10,7 +10,13 @@ import {
     removeOrderInBase,
     updateOrderInBase
 } from '../utils/fetch_utils';
-import {STATUS_LIST_CATALOG, CAR_LIST_CATALOG, CITY_LIST_CATALOG, CAR_CATEGORY_CATALOG} from '../constants/settings';
+import {
+    STATUS_LIST_CATALOG,
+    CAR_LIST_CATALOG,
+    CITY_LIST_CATALOG,
+    CAR_CATEGORY_CATALOG,
+    POINT_LIST_CATALOG
+} from '../constants/settings';
 
 // Вспомогательная функция возвращающая корректный номер страницы
 function getCorrectPage(page) {
@@ -24,6 +30,7 @@ async function loadCatalogs(dispatch, getState, catalogs) {
     const loaderSelector = {
         [STATUS_LIST_CATALOG]: fetchStatusList,
         [CAR_LIST_CATALOG]: fetchCarList,
+        [POINT_LIST_CATALOG]: fetchPointList,
         [CITY_LIST_CATALOG]: fetchCityList,
         [CAR_CATEGORY_CATALOG]: fetchCarCategoryList
     }
@@ -154,7 +161,7 @@ export function loadOrder(orderId) {
         dispatch(setEntity(order.data));
 
         // Загружаем необходимые каталоги
-        await loadCatalogs(dispatch, getState, [STATUS_LIST_CATALOG]);
+        await loadCatalogs(dispatch, getState, [STATUS_LIST_CATALOG, CITY_LIST_CATALOG, POINT_LIST_CATALOG]);
     }
 }
 

@@ -4,7 +4,8 @@ import {useSelector, useDispatch} from 'react-redux';
 import {getCatalog, getOrderStatus} from '../../../../../store/selectors';
 import {setEntityField} from '../../../../../store/actionCreators';
 import Selector from '../../../../common/Selector/Selector';
-import {NO_FILTER_VALUE, STATUS_LIST_CATALOG} from '../../../../../constants/settings';
+import {STATUS_LIST_CATALOG} from '../../../../../constants/settings';
+import {prepareItemForSelector, prepareItemsForSelector} from '../../../../../utils/common_utils';
 import './StatusBlock.scss';
 
 function StatusBlock({errorText, resetErrorText}) {
@@ -15,13 +16,6 @@ function StatusBlock({errorText, resetErrorText}) {
 
     const dispatch = useDispatch();
 
-    const prepareItem = item => {
-        if (!item) return {value: NO_FILTER_VALUE, name: 'Статус не выбран'};
-        return {value: item.id, name: item.name}
-    }
-
-    const prepareItems = items => items.map(item => prepareItem(item));
-
     useEffect(() => {
         const nextList = [...statusList];
         if (!selectedStatus) nextList.unshift(null);
@@ -29,16 +23,16 @@ function StatusBlock({errorText, resetErrorText}) {
     }, [selectedStatus]);
 
     const handleStatusSelect = value => {
-        if (value === prepareItem(selectedStatus).value) return;
-        dispatch(setEntityField('orderStatusId', statusList.find(status => status.id === value)));
+        if (value === prepareItemForSelector(selectedStatus).value) return;
+        dispatch(setEntityField('orderStatusId', statusList.find(status => status && status.id === value)));
         resetErrorText();
     }
 
     return (
         <div className="status_block">
             <Selector
-                items={prepareItems(statusListForSelector)}
-                value={prepareItem(selectedStatus).value}
+                items={prepareItemsForSelector(statusListForSelector)}
+                value={prepareItemForSelector(selectedStatus).value}
                 handleSelect={handleStatusSelect}
                 label="Статус заказа"
                 errorText={errorText}

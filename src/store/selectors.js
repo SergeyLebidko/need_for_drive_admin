@@ -15,3 +15,7 @@ export const getPopupMessage = state => state.popupMessage;
 export const getEntity = state => state.entity;
 
 export const getOrderStatus = state => state.entity.orderStatusId;
+
+export const getOrderCity = state => state.entity.cityId;
+
+export const getOrderPoint = state => state.entity.pointId;

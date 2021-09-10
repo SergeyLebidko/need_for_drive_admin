@@ -1,4 +1,4 @@
-import {LETTER_CHARS, DIGIT_CHARS} from '../constants/settings';
+import {LETTER_CHARS, DIGIT_CHARS, NO_FILTER_VALUE} from '../constants/settings';
 
 function format(value) {
     return ('0' + value).slice(-2);
@@ -37,3 +37,11 @@ export function capitalize(str) {
 export function getFormattedPrice(price) {
     return new Intl.NumberFormat('ru-RU').format(price);
 }
+
+export const prepareItemForSelector = (item, nameExtractor) => {
+    if (!item) return {value: NO_FILTER_VALUE, name: 'Не выбран'};
+    if (nameExtractor) return {value: item.id, name: nameExtractor(item)};
+    return {value: item.id, name: item.name};
+}
+
+export const prepareItemsForSelector = (items, nameExtractor) => items.map(item => prepareItemForSelector(item, nameExtractor));
