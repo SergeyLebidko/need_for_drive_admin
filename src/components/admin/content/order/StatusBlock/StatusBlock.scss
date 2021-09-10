@@ -7,7 +7,23 @@
   }
 }
 
-@media (min-width: $tablet-start) {
+@media (min-width: $tablet-start) and (max-width: $tablet-end) {
+  .status_block {
+    .selector {
+      width: 12em;
+    }
+  }
+}
+
+@media (min-width: $desktop-min-start) and (max-width: $desktop-min-end) {
+  .status_block {
+    .selector {
+      width: 13em;
+    }
+  }
+}
+
+@media (min-width: $desktop-start) {
   .status_block {
     .selector {
       width: 15em;

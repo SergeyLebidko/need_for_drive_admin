@@ -38,11 +38,33 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding-top: $step * 2;
-    border-top: 1px dashed $separator-color;
 
     .button + .button {
       margin-top: $step;
+    }
+  }
+}
+
+@media (min-width: $tablet-start) and (max-width: $tablet-end) {
+  .order {
+    .button {
+      width: 12em;
+    }
+  }
+}
+
+@media (min-width: $desktop-min-start) and (max-width: $desktop-min-end) {
+  .order {
+    .button {
+      width: 13em;
+    }
+  }
+}
+
+@media (min-width: $desktop-start) {
+  .order {
+    .button {
+      width: 15em;
     }
   }
 }
@@ -56,10 +78,6 @@
     &__control_block {
       flex-direction: row;
       margin-top: $step * 16;
-
-      .button {
-        width: 12em;
-      }
 
       .button + .button {
         margin-top: 0;
