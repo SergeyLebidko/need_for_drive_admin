@@ -4,6 +4,7 @@ import {useRouteMatch, useHistory, useLocation} from 'react-router-dom';
 import {useGlobalPreloader} from '../../../../../store/hooks';
 import {loadOrder, removeOrder, saveOrder, setPopupMessage} from '../../../../../store/actionCreators';
 import StatusBlock from '../StatusBlock/StatusBlock';
+import PlaceBlock from '../PlaceBlock/PlaceBlock';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import {getEntity} from '../../../../../store/selectors';
 import {ADMIN_APP_URL, ORDER_LIST_APP_URL} from '../../../../../constants/urls';
@@ -95,6 +96,7 @@ function Order() {
             {done &&
             <div className="order__content">
                 <StatusBlock errorText={statusErrorText} resetErrorText={resetStatusErrorText}/>
+                <PlaceBlock/>
                 <div className="order__control_block">
                     <button className="button button_blue" onClick={handleSaveButtonClick}>Сохранить</button>
                     <button className="button button_silver" onClick={handleCancelButtonClick}>Отменить</button>

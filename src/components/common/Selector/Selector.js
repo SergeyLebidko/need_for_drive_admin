@@ -10,8 +10,8 @@ function Selector({items, value, handleSelect, label, errorText}) {
     return (
         <div className="selector">
             {label && <label>{label}</label>}
-            <select onChange={handleChange} value={value} className={selectClasses} disabled={!items.length}>
-                {items.map(
+            <select onChange={handleChange} value={value} className={selectClasses} disabled={!items || !items.length}>
+                {items && items.map(
                     item =>
                         <option key={item.value} value={item.value} className="select_option">
                             {item.name}
