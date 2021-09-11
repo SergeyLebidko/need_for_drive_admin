@@ -1,5 +1,68 @@
 @import '../../../../../styles/vars';
 
 .date_block {
+  &__from_block, &__to_block {
 
+  }
+
+  &__to_block {
+    margin-top: $step;
+  }
+
+  input {
+    width: 100%;
+    outline: none;
+    border: 1px solid $gray-light;
+    border-radius: $small-radius;
+    font-size: 1em;
+    padding: $step ($step * 2);
+    color: $gray;
+  }
+
+  // Переопределяем стили кнопки очистки даты в DatePicker
+  .react-datepicker__close-icon::after {
+    background-color: transparent;
+    color: $black;
+    font-size: 1.4em;
+    padding: 0;
+  }
+
+  // Переопределяем стиль для отображения месяца в окошке DatePicker
+  .react-datepicker__current-month {
+    text-transform: capitalize;
+  }
+}
+
+@media (min-width: $tablet-start) and (max-width: $tablet-end) {
+  .date_block {
+    input {
+      width: 12em;
+    }
+  }
+}
+
+@media (min-width: $desktop-min-start) and (max-width: $desktop-min-end) {
+  .date_block {
+    input {
+      width: 13em;
+    }
+  }
+}
+
+@media (min-width: $desktop-start) {
+  .date_block {
+    input {
+      width: 15em;
+    }
+  }
+}
+
+@media (min-width: $tablet-start) {
+  .date_block {
+    flex-direction: row;
+
+    input + input {
+      margin: 0 0 0 $step;
+    }
+  }
 }

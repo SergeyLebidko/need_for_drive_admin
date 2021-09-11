@@ -14,8 +14,14 @@ function DateBlock() {
 
     return (
         <div className="date_block">
-            <DatePicker selected={dateFrom}/>
-            <DatePicker selected={dateTo}/>
+            <div className="date_block__from_block">
+                <label>Дата начала аренды</label>
+                <DatePicker selected={dateFrom}/>
+            </div>
+            <div className="date_block__to_block">
+                <label>Дата окончания аренды</label>
+                <DatePicker selected={dateTo}/>
+            </div>
         </div>
     );
 }
