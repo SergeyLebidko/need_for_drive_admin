@@ -34,8 +34,10 @@ function CarBlock() {
 
     useEffect(() => {
         let nextList = [null];
-        if (selectedColor && !selectedCar.colors.includes(selectedColor)) nextList.push(selectedColor);
-        if (selectedCar) nextList = nextList.concat(selectedCar.colors);
+        if (selectedCar && selectedCar.colors) {
+            if (selectedColor && !selectedCar.colors.includes(selectedColor)) nextList.push(selectedColor);
+            nextList = nextList.concat(selectedCar.colors);
+        }
         setColorListForSelector(nextList);
     }, [selectedColor, selectedCar]);
 
