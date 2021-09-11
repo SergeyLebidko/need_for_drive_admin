@@ -63,14 +63,14 @@ function PlaceBlock({cityErrorText, pointErrorText, resetCityErrorText, resetPoi
 
     const handleCityChange = value => {
         if (value === prepareItemForSelector(selectedCity).value) return;
-        const nextSelectedCity = extractDataForEntity(cityListForSelector.find(city => city && city.id === value));
+        const nextSelectedCity = extractDataForEntity(cityList.find(city => city.id === value));
         dispatch(setEntityField('cityId', nextSelectedCity));
         resetCityErrorText();
     }
 
     const handlePointChange = value => {
         if (value === prepareItemForSelector(selectedPoint).value) return;
-        const nextSelectedPoint = extractDataForEntity(pointListForSelector.find(point => point && point.id === value));
+        const nextSelectedPoint = extractDataForEntity(pointList.find(point => point.id === value));
         dispatch(setEntityField('pointId', nextSelectedPoint));
         resetPointErrorText();
     }

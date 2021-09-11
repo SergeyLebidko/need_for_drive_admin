@@ -24,7 +24,7 @@ function StatusBlock({errorText, resetErrorText}) {
 
     const handleStatusSelect = value => {
         if (value === prepareItemForSelector(selectedStatus).value) return;
-        dispatch(setEntityField('orderStatusId', statusList.find(status => status && status.id === value)));
+        dispatch(setEntityField('orderStatusId', statusList.find(status => status.id === value)));
         resetErrorText();
     }
 
