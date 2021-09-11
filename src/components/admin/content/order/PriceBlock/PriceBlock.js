@@ -18,7 +18,7 @@ function PriceBlock({errorText, resetErrorText}) {
 
     return (
         <div className="price_block">
-            <TextField label="Цена" value={price} handleChangeValue={handlePriceChange} errorText={errorText}/>
+            <TextField label="Цена" value={'' + price} handleChangeValue={handlePriceChange} errorText={errorText}/>
             <span className="price_block__currency">&#8381;</span>
         </div>
     );
