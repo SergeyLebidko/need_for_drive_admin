@@ -1,5 +1,6 @@
 @import '../../../../../styles/vars';
 @import '../../../../../styles/common_presets';
+@import '../../../../common/EditorControlBlock/EditorControlBlock';
 @import '../PlaceBlock/PlaceBlock';
 @import '../RateBlock/RateBlock';
 @import '../OptionBlock/OptionBlock';
@@ -14,9 +15,13 @@
     margin-top: $step * 4;
   }
 
+  .editor_control_block {
+    margin-top: $step * 8;
+  }
+
   &__content {
     padding: $step * 2;
-    max-width: $step * 100;
+    max-width: $step * 110;
   }
 
   &__caption {
@@ -38,64 +43,16 @@
       text-align: center;
     }
   }
-
-  &__control_block {
-    margin-top: $step * 6;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-
-    .button + .button {
-      margin-top: $step;
-    }
-  }
-}
-
-@media (min-width: $tablet-start) and (max-width: $tablet-end) {
-  .order {
-    .button {
-      width: 12em;
-    }
-  }
-}
-
-@media (min-width: $desktop-min-start) and (max-width: $desktop-min-end) {
-  .order {
-    .button {
-      width: 13em;
-    }
-  }
-}
-
-@media (min-width: $desktop-start) {
-  .order {
-    .button {
-      width: 15em;
-    }
-  }
 }
 
 @media (min-width: $tablet-start) {
   .order {
-    &__caption {
-      font-size: 2.5em;
+    .editor_control_block {
+      margin-top: $step * 12;
     }
 
-    &__control_block {
-      flex-direction: row;
-      margin-top: $step * 16;
-
-      .button + .button {
-        margin-top: 0;
-      }
-
-      .button:nth-child(2) {
-        margin-left: $step;
-      }
-
-      .button:nth-child(3) {
-        margin-left: auto;
-      }
+    &__caption {
+      font-size: 2.5em;
     }
   }
 }

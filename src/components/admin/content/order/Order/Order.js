@@ -15,6 +15,7 @@ import {getEntity} from '../../../../../store/selectors';
 import {isNatural} from '../../../../../utils/common_utils';
 import {ADMIN_APP_URL, ORDER_LIST_APP_URL} from '../../../../../constants/urls';
 import './Order.scss';
+import EditorControlBlock from "../../../../common/EditorControlBlock/EditorControlBlock";
 
 function Order() {
     const [done, setDone] = useState(false);
@@ -125,11 +126,11 @@ function Order() {
                 <RateBlock/>
                 <OptionBlock/>
                 <PriceBlock errorText={priceErrorText} resetErrorText={resetPriceErrorText}/>
-                <div className="order__control_block">
-                    <button className="button button_blue" onClick={handleSaveButtonClick}>Сохранить</button>
-                    <button className="button button_silver" onClick={handleCancelButtonClick}>Отменить</button>
-                    <button className="button button_red" onClick={handleRemoveButtonClick}>Удалить</button>
-                </div>
+                <EditorControlBlock
+                    handleCancel={handleCancelButtonClick}
+                    handleSave={handleSaveButtonClick}
+                    handleRemove={handleRemoveButtonClick}
+                />
             </div>
             }
         </div>

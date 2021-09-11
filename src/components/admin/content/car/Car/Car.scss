@@ -1,8 +1,13 @@
 @import '../../../../../styles/vars';
 @import '../../../../../styles/common_presets';
+@import '../../../../common/EditorControlBlock/EditorControlBlock';
 
 .car {
   @include content_mixin;
+
+  .editor_control_block {
+    margin-top: $step * 8;
+  }
 
   &__content_wrapper {
     display: flex;
@@ -24,36 +29,13 @@
   &__second_content_block {
     width: 100%;
   }
-
-  &__control_block {
-    margin-top: $step * 6;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-
-    .button + .button {
-      margin-top: $step;
-    }
-  }
 }
+
 
 @media (min-width: $tablet-start) {
   .car {
-    &__control_block {
-      flex-direction: row;
-      margin-top: $step * 16;
-
-      .button + .button {
-        margin-top: 0;
-      }
-
-      .button:nth-child(2) {
-        margin-left: $step;
-      }
-
-      .button:nth-child(3) {
-        margin-left: auto;
-      }
+    .editor_control_block {
+      margin-top: $step * 12;
     }
   }
 }
@@ -74,6 +56,14 @@
 
     &__second_content_block {
       flex: 1;
+    }
+  }
+}
+
+@media (min-width: $desktop-full){
+  .car {
+    &__first_content_block {
+      width: $step * 55;
     }
   }
 }
