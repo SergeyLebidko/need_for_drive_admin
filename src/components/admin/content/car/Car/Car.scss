@@ -37,7 +37,28 @@
   }
 }
 
-@media (min-width: $desktop-min-start) {
+@media (min-width: $tablet-start) {
+  .car {
+    &__control_block {
+      flex-direction: row;
+      margin-top: $step * 16;
+
+      .button + .button {
+        margin-top: 0;
+      }
+
+      .button:nth-child(2) {
+        margin-left: $step;
+      }
+
+      .button:nth-child(3) {
+        margin-left: auto;
+      }
+    }
+  }
+}
+
+@media (min-width: $desktop-start) {
   .car {
     &__content_wrapper {
       flex-direction: row;

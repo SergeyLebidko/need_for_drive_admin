@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {useLocation, useRouteMatch} from 'react-router-dom';
+import {useHistory, useLocation, useRouteMatch} from 'react-router-dom';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import {useGlobalPreloader} from '../../../../../store/hooks';
 import {loadCar, setEntity} from '../../../../../store/actionCreators';
+import {ADMIN_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
 import './Car.scss';
 
 function Car() {
@@ -13,7 +14,7 @@ function Car() {
 
     const location = useLocation();
     const {params: {carId}} = useRouteMatch();
-    //const history = useHistory();
+    const history = useHistory();
 
     const dispatch = useDispatch();
 
@@ -38,6 +39,15 @@ function Car() {
             });
     }, [location, carId]);
 
+    // Блок обработчиков кликов
+    const handleCancelButtonClick = () => {
+        if (carId) {
+            history.push(`/${ADMIN_APP_URL}/${CAR_LIST_APP_URL}`);
+            return
+        }
+        history.push(`/${ADMIN_APP_URL}`);
+    }
+
     if (error) return <ErrorPane error={error}/>;
 
     return (
@@ -52,7 +62,7 @@ function Car() {
                     Параметры
                     <div className="car__control_block">
                         <button className="button button_blue">Сохранить</button>
-                        <button className="button button_silver">Отменить</button>
+                        <button className="button button_silver" onClick={handleCancelButtonClick}>Отменить</button>
                         <button className="button button_red">Удалить</button>
                     </div>
                 </div>
