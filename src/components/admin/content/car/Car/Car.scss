@@ -1,5 +1,47 @@
 @import '../../../../../styles/vars';
+@import '../../../../../styles/common_presets';
 
 .car {
+  @include content_mixin;
 
+  &__content_wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__content {
+    padding: $step * 2;
+  }
+
+  &__content + &__content {
+    margin: ($step * 2) 0 0 0;
+  }
+
+  &__first_content_block {
+    width: 100%;
+  }
+
+  &__second_content_block {
+    width: 100%;
+  }
+}
+
+@media (min-width: $desktop-min-start) {
+  .car {
+    &__content_wrapper {
+      flex-direction: row;
+    }
+
+    &__content + &__content {
+      margin: 0 0 0 ($step * 2);
+    }
+
+    &__first_content_block {
+      width: $step * 45;
+    }
+
+    &__second_content_block {
+      flex: 1;
+    }
+  }
 }
