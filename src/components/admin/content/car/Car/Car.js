@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {useHistory, useLocation, useRouteMatch} from 'react-router-dom';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
+import EditorControlBlock from '../../../../common/EditorControlBlock/EditorControlBlock';
 import {useGlobalPreloader} from '../../../../../store/hooks';
 import {loadCar, setEntity} from '../../../../../store/actionCreators';
 import {ADMIN_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
@@ -60,11 +61,7 @@ function Car() {
                 </div>
                 <div className="car__content car__second_content_block">
                     Параметры
-                    <div className="car__control_block">
-                        <button className="button button_blue">Сохранить</button>
-                        <button className="button button_silver" onClick={handleCancelButtonClick}>Отменить</button>
-                        <button className="button button_red">Удалить</button>
-                    </div>
+                    <EditorControlBlock handleCancel={handleCancelButtonClick}/>
                 </div>
             </div>
             }
