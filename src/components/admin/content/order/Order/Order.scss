@@ -14,6 +14,11 @@
     margin-top: $step * 4;
   }
 
+  &__content {
+    padding: $step * 2;
+    max-width: $step * 100;
+  }
+
   &__caption {
     font-size: 1.2em;
   }
@@ -32,11 +37,6 @@
       margin-bottom: $step * 3;
       text-align: center;
     }
-  }
-
-  &__content {
-    padding: $step * 2;
-    max-width: $step * 100;
   }
 
   &__control_block {
