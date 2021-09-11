@@ -5,11 +5,12 @@
 @import '../OptionBlock/OptionBlock';
 @import '../DateBlock/DateBlock';
 @import '../PriceBlock/PriceBlock';
+@import '../CarBlock/CarBlock';
 
 .order {
   @include content_mixin;
 
-  .place_block, .rate_block, .option_block, .date_block, .price_block {
+  .place_block, .rate_block, .option_block, .date_block, .price_block, .car_block {
     margin-top: $step * 4;
   }
 
@@ -35,6 +36,7 @@
 
   &__content {
     padding: $step * 2;
+    max-width: $step * 100;
   }
 
   &__control_block {

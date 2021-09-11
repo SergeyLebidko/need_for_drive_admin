@@ -5,6 +5,7 @@ import {useGlobalPreloader} from '../../../../../store/hooks';
 import {loadOrder, removeOrder, updateOrder, setPopupMessage} from '../../../../../store/actionCreators';
 import StatusBlock from '../StatusBlock/StatusBlock';
 import PlaceBlock from '../PlaceBlock/PlaceBlock';
+import CarBlock from '../CarBlock/CarBlock';
 import RateBlock from '../RateBlock/RateBlock';
 import OptionBlock from '../OptionBlock/OptionBlock';
 import DateBlock from '../DateBlock/DateBlock';
@@ -119,6 +120,7 @@ function Order() {
                     resetCityErrorText={resetCityErrorText}
                     resetPointErrorText={resetPointErrorText}
                 />
+                <CarBlock/>
                 <DateBlock/>
                 <RateBlock/>
                 <OptionBlock/>

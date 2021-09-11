@@ -33,3 +33,7 @@ export const getOrderDateFrom = state => state.entity.dateFrom;
 export const getOrderDateTo = state => state.entity.dateTo;
 
 export const getOrderPrice = state => state.entity.price;
+
+export const getOrderCar = state => state.entity.carId;
+
+export const getOrderColor = state => state.entity.color;
