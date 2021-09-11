@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {DOMEN} from '../../../constants/urls';
 import './PhotoBlock.scss';
 
 function PhotoBlock({photoPath}) {
     const [path, setPath] = useState(photoPath);
+
+    useEffect(() => setPath(photoPath), [photoPath]);
 
     if (path) return (
         <div className="photo_block">

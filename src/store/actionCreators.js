@@ -167,7 +167,7 @@ export function loadOrder(orderId) {
         await loadCatalogs(
             dispatch,
             getState,
-            [STATUS_LIST_CATALOG, CITY_LIST_CATALOG, POINT_LIST_CATALOG, RATE_LIST_CATALOG]
+            [STATUS_LIST_CATALOG, CITY_LIST_CATALOG, POINT_LIST_CATALOG, RATE_LIST_CATALOG, CAR_LIST_CATALOG]
         );
     }
 }
