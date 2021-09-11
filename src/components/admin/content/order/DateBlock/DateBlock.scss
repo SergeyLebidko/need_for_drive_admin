@@ -2,7 +2,8 @@
 
 .date_block {
   &__from_block, &__to_block {
-
+    display: flex;
+    flex-direction: column;
   }
 
   &__to_block {
@@ -17,6 +18,10 @@
     font-size: 1em;
     padding: $step ($step * 2);
     color: $gray;
+  }
+
+  .react-datepicker-wrapper {
+    width: 100%;
   }
 
   // Переопределяем стили кнопки очистки даты в DatePicker
@@ -38,6 +43,10 @@
     input {
       width: 12em;
     }
+
+    .react-datepicker-wrapper {
+      width: 12em;
+    }
   }
 }
 
@@ -46,12 +55,20 @@
     input {
       width: 13em;
     }
+
+    .react-datepicker-wrapper {
+      width: 13em;
+    }
   }
 }
 
 @media (min-width: $desktop-start) {
   .date_block {
     input {
+      width: 15em;
+    }
+
+    .react-datepicker-wrapper {
       width: 15em;
     }
   }
