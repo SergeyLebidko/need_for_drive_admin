@@ -249,10 +249,13 @@ export async function fetchCarList(page, categoryId, priceMin, priceMax, tank) {
 }
 
 export async function fetchPointList(page, cityId) {
-    let url = `${POINT_URL}`;
-    if (page && cityId) {
-        url += `/?limit=${LIMIT}&page=${page}`;
-        url += cityId ? `&${CITY_FILTER_NAME}=${cityId}` : '';
+    let url = POINT_URL;
+    if (page || page === 0 || cityId) {
+        const params = new URLSearchParams();
+        params.set(LIMIT_FILTER_NAME, '' + LIMIT);
+        if (page || page === 0) params.set(PAGE_FILTER_NAME, page);
+        if (cityId) params.set(CITY_FILTER_NAME, cityId)
+        url += `?${params}`;
     }
     return await executeFetch(url);
 }
@@ -265,7 +268,7 @@ export async function fetchCarCategoryList() {
     return await executeFetch(CAR_CATEGORY_URL);
 }
 
-export async function fetchRateList(){
+export async function fetchRateList() {
     return await executeFetch(RATE_URL);
 }
 
