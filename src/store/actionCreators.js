@@ -9,7 +9,8 @@ import {
     fetchOrder,
     removeOrderInBase,
     updateOrderInBase,
-    fetchRateList
+    fetchRateList,
+    fetchCar
 } from '../utils/fetch_utils';
 import {
     STATUS_LIST_CATALOG,
@@ -185,6 +186,14 @@ export function updateOrder(order) {
     return async dispatch => {
         const updatedOrder = await updateOrderInBase(order);
         dispatch(setEntity(updatedOrder.data));
+    }
+}
+
+// Создатель действия для загрузки автомобиля
+export function loadCar(carId){
+    return async dispatch => {
+        const car = await fetchCar(carId);
+        dispatch(setEntity(car.data));
     }
 }
 

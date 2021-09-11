@@ -297,3 +297,7 @@ export async function updateOrderInBase(order) {
         }
     );
 }
+
+export async function fetchCar(carId) {
+    return await executeFetch(`${CAR_URL}/${carId}`);
+}
