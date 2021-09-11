@@ -1,13 +1,16 @@
 @import '../../../../../styles/vars';
 
 .date_block {
+  display: flex;
+  flex-direction: column;
+
   &__from_block, &__to_block {
     display: flex;
     flex-direction: column;
   }
 
   &__to_block {
-    margin-top: $step;
+    margin: $step 0 0 0;
   }
 
   input {
@@ -40,10 +43,6 @@
 
 @media (min-width: $tablet-start) and (max-width: $tablet-end) {
   .date_block {
-    input {
-      width: 12em;
-    }
-
     .react-datepicker-wrapper {
       width: 12em;
     }
@@ -52,10 +51,6 @@
 
 @media (min-width: $desktop-min-start) and (max-width: $desktop-min-end) {
   .date_block {
-    input {
-      width: 13em;
-    }
-
     .react-datepicker-wrapper {
       width: 13em;
     }
@@ -64,10 +59,6 @@
 
 @media (min-width: $desktop-start) {
   .date_block {
-    input {
-      width: 15em;
-    }
-
     .react-datepicker-wrapper {
       width: 15em;
     }
@@ -78,7 +69,7 @@
   .date_block {
     flex-direction: row;
 
-    input + input {
+    &__to_block {
       margin: 0 0 0 $step;
     }
   }
