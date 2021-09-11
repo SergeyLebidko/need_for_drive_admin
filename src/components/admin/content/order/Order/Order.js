@@ -7,11 +7,13 @@ import StatusBlock from '../StatusBlock/StatusBlock';
 import PlaceBlock from '../PlaceBlock/PlaceBlock';
 import RateBlock from '../RateBlock/RateBlock';
 import OptionBlock from '../OptionBlock/OptionBlock';
+import DateBlock from '../DateBlock/DateBlock';
+import PriceBlock from '../PriceBlock/PriceBlock';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import {getEntity} from '../../../../../store/selectors';
+import {isNatural} from '../../../../../utils/common_utils';
 import {ADMIN_APP_URL, ORDER_LIST_APP_URL} from '../../../../../constants/urls';
 import './Order.scss';
-import DateBlock from "../DateBlock/DateBlock";
 
 function Order() {
     const [done, setDone] = useState(false);
@@ -24,6 +26,7 @@ function Order() {
     const [statusErrorText, setStatusErrorText] = useState(null);
     const [cityErrorText, setCityErrorText] = useState(null);
     const [pointErrorText, setPointErrorText] = useState(null);
+    const [priceErrorText, setPriceErrorText] = useState(null);
 
     const location = useLocation();
     const {params: {orderId}} = useRouteMatch();
@@ -47,6 +50,7 @@ function Order() {
     const resetStatusErrorText = () => setStatusErrorText(null);
     const resetCityErrorText = () => setCityErrorText(null);
     const resetPointErrorText = () => setPointErrorText(null);
+    const resetPriceErrorText = () => setPriceErrorText(null);
 
     // Блок обработчиков кликов
     const toOrderList = () => history.push(`/${ADMIN_APP_URL}/${ORDER_LIST_APP_URL}`);
@@ -56,7 +60,11 @@ function Order() {
         if (!order.orderStatusId) setStatusErrorText('Выберите статус заказа');
         if (!order.cityId) setCityErrorText('Выберите город');
         if (!order.pointId) setPointErrorText('Выберите пункт выдачи');
-        if (!order.orderStatusId || !order.cityId || !order.pointId) return;
+
+        const priceError = !order.price || !isNatural(order.price);
+        if (priceError) setPriceErrorText('Введите корректное значение цены');
+
+        if (!order.orderStatusId || !order.cityId || !order.pointId || priceError) return;
 
         // Пытаемся выполнить сохранение
         showPreloader();
@@ -114,6 +122,7 @@ function Order() {
                 <DateBlock/>
                 <RateBlock/>
                 <OptionBlock/>
+                <PriceBlock errorText={priceErrorText} resetErrorText={resetPriceErrorText}/>
                 <div className="order__control_block">
                     <button className="button button_blue" onClick={handleSaveButtonClick}>Сохранить</button>
                     <button className="button button_silver" onClick={handleCancelButtonClick}>Отменить</button>

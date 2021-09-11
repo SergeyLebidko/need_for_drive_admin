@@ -14,6 +14,7 @@ import {
 } from '../../../../../constants/settings';
 import {NO_FILTER_VALUE} from '../../../../../constants/settings';
 import {ADMIN_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
+import {isNatural} from '../../../../../utils/common_utils';
 import './CarFilters.scss';
 
 function CarFilters() {
@@ -46,11 +47,6 @@ function CarFilters() {
         );
 
     }, [])
-
-    const isNatural = value => {
-        const _value = +value;
-        return !(isNaN(_value) || _value < 0 || Math.floor(_value) !== _value || value === null || value === undefined);
-    }
 
     // Готовим данные для селектора категорий
     const categorySelectorItems = [{value: NO_FILTER_VALUE, name: 'Все категории'}];

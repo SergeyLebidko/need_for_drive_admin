@@ -38,6 +38,11 @@ export function getFormattedPrice(price) {
     return new Intl.NumberFormat('ru-RU').format(price);
 }
 
+export function isNatural(value) {
+    const _value = +value;
+    return !(isNaN(_value) || _value < 0 || Math.floor(_value) !== _value || value === null || value === undefined);
+}
+
 export const prepareItemForSelector = (item, nameExtractor) => {
     if (!item) return {value: NO_FILTER_VALUE, name: 'Не выбран'};
     if (nameExtractor) return {value: item.id, name: nameExtractor(item)};

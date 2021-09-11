@@ -31,3 +31,5 @@ export const getOrderWheel = state => state.entity.isRightWheel;
 export const getOrderDateFrom = state => state.entity.dateFrom;
 
 export const getOrderDateTo = state => state.entity.dateTo;
+
+export const getOrderPrice = state => state.entity.price;

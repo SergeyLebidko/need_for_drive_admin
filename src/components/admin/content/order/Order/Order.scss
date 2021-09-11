@@ -4,11 +4,12 @@
 @import '../RateBlock/RateBlock';
 @import '../OptionBlock/OptionBlock';
 @import '../DateBlock/DateBlock';
+@import '../PriceBlock/PriceBlock';
 
 .order {
   @include content_mixin;
 
-  .place_block, .rate_block, .option_block, .date_block {
+  .place_block, .rate_block, .option_block, .date_block, .price_block {
     margin-top: $step * 4;
   }
 
