@@ -65,6 +65,7 @@
 
 .visible_popup {
   display: block;
+  z-index: 1000;
 }
 
 @media (min-width: $tablet-start) {

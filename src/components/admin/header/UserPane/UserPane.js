@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import classNames from 'classnames';
 import {useSelector} from 'react-redux';
 import {useHistory} from 'react-router-dom';
@@ -18,6 +18,9 @@ function UserPane() {
 
     const [showGlobalPreloader, hideGlobalPreloader] = useGlobalPreloader();
     const [showGlobalError, hideGlobalError] = useGlobalError();
+
+    // При размонтировании - сбрасываем таймер, чтобы предотвратить попытку обновления уже размонтированного компонента
+    useEffect(() => () => clearTimeout(popupTimer.current), []);
 
     const handleElementClick = () => setHasPopup(oldVal => !oldVal);
 
