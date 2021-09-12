@@ -155,6 +155,20 @@
   }
 }
 
+.button_disabled {
+  color: $gray-light;
+  border: 1px solid $gray-light;
+  background-color: $white;
+
+  &:hover {
+    background-color: $white;
+  }
+
+  &:active {
+    background-color: $white;
+  }
+}
+
 // Стили для "тонких" кнопок
 .thin_button {
   position: relative;
