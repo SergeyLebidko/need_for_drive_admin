@@ -1,17 +1,22 @@
 import React, {useEffect, useState} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useHistory, useLocation, useRouteMatch} from 'react-router-dom';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import EditorControlBlock from '../../../../common/EditorControlBlock/EditorControlBlock';
 import {useGlobalPreloader} from '../../../../../store/hooks';
-import {loadCar, setEntity} from '../../../../../store/actionCreators';
+import {loadCar, setEntity, setPopupMessage} from '../../../../../store/actionCreators';
+import {getEntity} from '../../../../../store/selectors';
+import {FAIL} from '../../../../../constants/settings';
 import {ADMIN_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
 import './Car.scss';
+
 
 function Car() {
     const [done, setDone] = useState(false);
     const [error, setError] = useState(null);
     const [showPreloader, hidePreloader] = useGlobalPreloader();
+
+    const car = useSelector(getEntity);
 
     const location = useLocation();
     const {params: {carId}} = useRouteMatch();
@@ -41,12 +46,25 @@ function Car() {
     }, [location, carId]);
 
     // Блок обработчиков кликов
+    const handleSaveButtonClick = () => {
+        // TODO Удалить тестовый вывод
+        console.log('Сохранение автомобиля...');
+    }
+
     const handleCancelButtonClick = () => {
         if (carId) {
             history.push(`/${ADMIN_APP_URL}/${CAR_LIST_APP_URL}`);
             return
         }
         history.push(`/${ADMIN_APP_URL}`);
+    }
+
+    const handleRemoveButtonClick = () => {
+        // Не даем выполнить удаление, если машина не сохранена
+        if (!car.id) {
+            dispatch(setPopupMessage(FAIL, 'Нельзя удалить не сохраненный автомобиль'));
+            return;
+        }
     }
 
     if (error) return <ErrorPane error={error}/>;
@@ -61,7 +79,11 @@ function Car() {
                 </div>
                 <div className="car__content car__second_content_block">
                     Параметры
-                    <EditorControlBlock handleCancel={handleCancelButtonClick}/>
+                    <EditorControlBlock
+                        handleSave={handleSaveButtonClick}
+                        handleCancel={handleCancelButtonClick}
+                        handleRemove={handleRemoveButtonClick}
+                    />
                 </div>
             </div>
             }

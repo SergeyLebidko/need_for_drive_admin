@@ -151,10 +151,10 @@ export function setEntityField(field, value) {
 }
 
 // Создатель действия для установки всплывающего сообщения
-export function setPopupMessage(message) {
+export function setPopupMessage(status, text) {
     return {
         type: act.SET_POPUP_MESSAGE,
-        message
+        message: {status, text}
     }
 }
 

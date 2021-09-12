@@ -16,6 +16,7 @@ import {isNatural} from '../../../../../utils/common_utils';
 import {ADMIN_APP_URL, ORDER_LIST_APP_URL} from '../../../../../constants/urls';
 import './Order.scss';
 import EditorControlBlock from "../../../../common/EditorControlBlock/EditorControlBlock";
+import {SUCCESS} from "../../../../../constants/settings";
 
 function Order() {
     const [done, setDone] = useState(false);
@@ -72,7 +73,7 @@ function Order() {
         showPreloader();
         setError(null);
         dispatch(updateOrder(order))
-            .then(() => dispatch(setPopupMessage('Заказ успешно сохранен')))
+            .then(() => dispatch(setPopupMessage(SUCCESS, 'Заказ успешно сохранен')))
             .catch(err => setError(err))
             .finally(() => hidePreloader());
     }
@@ -85,7 +86,7 @@ function Order() {
         setError(null);
         dispatch(removeOrder(orderId))
             .then(() => {
-                dispatch(setPopupMessage('Заказ успешно удален'));
+                dispatch(setPopupMessage(SUCCESS, 'Заказ успешно удален'));
                 history.push(`/${ADMIN_APP_URL}`);
             })
             .catch(err => {

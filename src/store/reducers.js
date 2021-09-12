@@ -65,7 +65,7 @@ export function entity(state = {}, action) {
     }
 }
 
-export function popupMessage(state = null, action) {
+export function popupMessage(state = {}, action) {
     switch (action.type) {
         case act.SET_POPUP_MESSAGE:
             return action.message;

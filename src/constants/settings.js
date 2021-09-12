@@ -92,3 +92,7 @@ export const SALT_SIZE = 7;
 // Наименования cookie для токенов
 export const ACCESS_TOKEN = 'access_token';
 export const REFRESH_TOKEN = 'refresh_token';
+
+// Метки для сообщений
+export const SUCCESS = 'success';
+export const FAIL = 'fail';
