@@ -47,8 +47,7 @@ function Car() {
 
     // Блок обработчиков кликов
     const handleSaveButtonClick = () => {
-        // TODO Удалить тестовый вывод
-        console.log('Сохранение автомобиля...');
+        // TODO Добавить код сохранения автомобиля
     }
 
     const handleCancelButtonClick = () => {
@@ -65,6 +64,7 @@ function Car() {
             dispatch(setPopupMessage(FAIL, 'Нельзя удалить не сохраненный автомобиль'));
             return;
         }
+        // TODO Вставить код удаления автомобиля
     }
 
     if (error) return <ErrorPane error={error}/>;
@@ -75,7 +75,7 @@ function Car() {
             {done &&
             <div className="car__content_wrapper">
                 <div className="car__content car__first_content_block">
-                    Фото
+                    <input type="file"/>
                 </div>
                 <div className="car__content car__second_content_block">
                     Параметры

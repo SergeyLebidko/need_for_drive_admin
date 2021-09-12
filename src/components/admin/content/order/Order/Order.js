@@ -11,12 +11,12 @@ import OptionBlock from '../OptionBlock/OptionBlock';
 import DateBlock from '../DateBlock/DateBlock';
 import PriceBlock from '../PriceBlock/PriceBlock';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
+import EditorControlBlock from '../../../../common/EditorControlBlock/EditorControlBlock';
 import {getEntity} from '../../../../../store/selectors';
 import {isNatural} from '../../../../../utils/common_utils';
 import {ADMIN_APP_URL, ORDER_LIST_APP_URL} from '../../../../../constants/urls';
+import {SUCCESS} from '../../../../../constants/settings';
 import './Order.scss';
-import EditorControlBlock from "../../../../common/EditorControlBlock/EditorControlBlock";
-import {SUCCESS} from "../../../../../constants/settings";
 
 function Order() {
     const [done, setDone] = useState(false);
@@ -64,6 +64,7 @@ function Order() {
         if (!order.cityId) setCityErrorText('Выберите город');
         if (!order.pointId) setPointErrorText('Выберите пункт выдачи');
 
+        // Проверяем корректность указания цены
         const priceError = !order.price || !isNatural(order.price);
         if (priceError) setPriceErrorText('Введите корректное значение цены');
 
