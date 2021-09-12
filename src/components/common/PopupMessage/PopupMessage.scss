@@ -29,17 +29,17 @@
   }
 }
 
-.popup_message_visible {
-  height: initial;
-  padding: $step * 2;
-}
-
 .success_message {
   background-color: $green;
 }
 
 .fail_message {
   background-color: $red;
+}
+
+.popup_message_visible {
+  height: initial;
+  padding: $step * 2;
 }
 
 @media (min-width: $tablet-start) {
