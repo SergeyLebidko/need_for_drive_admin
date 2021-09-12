@@ -2,4 +2,8 @@
 
 .car_photo {
   padding: $step * 2;
+
+  input[type=file]{
+    display: none;
+  }
 }

@@ -47,6 +47,8 @@ function Car() {
 
     // Блок обработчиков кликов
     const handleSaveButtonClick = () => {
+        // TODO Вставить код проверки корректности данных
+        // TODO Переработать код сохранения данных автомобиля
         dispatch(saveCar(car));
     }
 

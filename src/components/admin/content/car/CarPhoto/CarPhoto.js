@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import PhotoBlock from '../../../../common/PhotoBlock/PhotoBlock';
 import {getCarCategory, getCarName, getCarThumbnail} from '../../../../../store/selectors';
 import {setEntityField, setPopupMessage} from '../../../../../store/actionCreators';
+import {getRandomString} from '../../../../../utils/common_utils';
 import {FAIL} from '../../../../../constants/settings';
 import './CarPhoto.scss';
 
@@ -12,6 +13,7 @@ function CarPhoto() {
     const thumbnail = useSelector(getCarThumbnail);
 
     const [photoPath, setPhotoPath] = useState(null);
+    const [fileName, setFileName] = useState(null);
 
     const dispatch = useDispatch();
 
@@ -37,6 +39,7 @@ function CarPhoto() {
         fileReader.onload = event => {
             dispatch(setEntityField('thumbnail', file));
             setPhotoPath(event.currentTarget.result);
+            setFileName(file.name);
         };
         fileReader.onerror = () => {
             dispatch(setPopupMessage(FAIL, 'Не удалось загрузить изображение'));
@@ -44,6 +47,7 @@ function CarPhoto() {
         }
     }
 
+    const fileInputId = getRandomString();
 
     return (
         <div className="car_photo">
@@ -52,7 +56,11 @@ function CarPhoto() {
                 {name && name}
                 {category && category.name}
             </div>
-            <input type="file" onChange={handleFileSelect}/>
+            <div>
+                <input type="file" id={fileInputId} onChange={handleFileSelect}/>
+                <span>{fileName ? fileName : 'Выберите файл...'}</span>
+                <label htmlFor={fileInputId}>Обзор</label>
+            </div>
         </div>
     );
 }
