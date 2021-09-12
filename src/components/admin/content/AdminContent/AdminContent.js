@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useDispatch} from 'react-redux';
 import {Switch, Route} from 'react-router-dom';
 import OrderList from '../order_list/OrderList/OrderList';
 import CarList from '../car_list/CarList/CarList';
@@ -8,6 +9,7 @@ import Car from '../car/Car/Car';
 import Point from '../point/Point/Point';
 import NoMatch from '../../../common/NoMatch/NoMatch';
 import PopupMessage from '../../../common/PopupMessage/PopupMessage';
+import {setPopupMessage} from '../../../../store/actionCreators';
 import {
     ADMIN_APP_URL,
     CAR_APP_URL,
@@ -20,6 +22,13 @@ import {
 import './AdminContent.scss';
 
 function AdminContent() {
+    const dispatch = useDispatch();
+
+    // При размонтировании компонента - удаляем из хранилища данные всплывающего сообщения
+    useEffect(() => () => {
+        dispatch(setPopupMessage(null, null));
+    }, []);
+
     // Учитываем, что если не выбран ни один пункт меню, то внутри области контента не должен отображаться ни один компонент
     return (
         <main className="admin_content">

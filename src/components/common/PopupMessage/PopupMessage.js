@@ -33,6 +33,7 @@ function PopupMessage() {
 
     const handleCancelIconClick = () => hidePopupMessage();
 
+    // После завершения анимации скрытия сообщения - удаляем его и из хранилища
     const handleTransition = () => {
         if (!hasVisible) removePopupMessage();
     }
