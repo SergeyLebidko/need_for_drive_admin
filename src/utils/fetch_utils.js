@@ -301,3 +301,18 @@ export async function updateOrderInBase(order) {
 export async function fetchCar(carId) {
     return await executeFetch(`${CAR_URL}/${carId}`);
 }
+
+export async function saveCarInBase(car) {
+    const url = car.id ? `${CAR_URL}/${car.id}` : CAR_URL;
+
+    const body = new FormData();
+    if (car.thumbnail instanceof File) body.append('thumbnail', car.thumbnail);
+
+    const method = car.id ? 'PUT' : 'POST';
+    const options = {
+        method,
+        body
+    }
+
+    return await executeFetchWithRefresh(executeFetch, url, options);
+}

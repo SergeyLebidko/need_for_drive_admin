@@ -5,7 +5,7 @@ import CarPhoto from '../CarPhoto/CarPhoto';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import EditorControlBlock from '../../../../common/EditorControlBlock/EditorControlBlock';
 import {useGlobalPreloader} from '../../../../../store/hooks';
-import {loadCar, setEntity, setPopupMessage} from '../../../../../store/actionCreators';
+import {loadCar, saveCar, setEntity, setPopupMessage} from '../../../../../store/actionCreators';
 import {getEntity} from '../../../../../store/selectors';
 import {FAIL} from '../../../../../constants/settings';
 import {ADMIN_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
@@ -47,7 +47,7 @@ function Car() {
 
     // Блок обработчиков кликов
     const handleSaveButtonClick = () => {
-        // TODO Добавить код сохранения автомобиля
+        dispatch(saveCar(car));
     }
 
     const handleCancelButtonClick = () => {

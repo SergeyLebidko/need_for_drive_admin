@@ -10,7 +10,8 @@ import {
     removeOrderInBase,
     updateOrderInBase,
     fetchRateList,
-    fetchCar
+    fetchCar,
+    saveCarInBase
 } from '../utils/fetch_utils';
 import {
     STATUS_LIST_CATALOG,
@@ -190,10 +191,20 @@ export function updateOrder(order) {
 }
 
 // Создатель действия для загрузки автомобиля
-export function loadCar(carId){
+export function loadCar(carId) {
     return async dispatch => {
         const car = await fetchCar(carId);
         dispatch(setEntity(car.data));
+
+        // TODO Добавить код загрузки необходимых справочников
+    }
+}
+
+// Создатель действия для сохранения автомобиля
+export function saveCar(car) {
+    return async dispatch => {
+        const savedCar = await saveCarInBase(car);
+        dispatch(setEntity(savedCar.data));
     }
 }
 
