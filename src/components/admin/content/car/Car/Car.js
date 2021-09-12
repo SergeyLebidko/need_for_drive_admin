@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useHistory, useLocation, useRouteMatch} from 'react-router-dom';
+import CarPhoto from '../CarPhoto/CarPhoto';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import EditorControlBlock from '../../../../common/EditorControlBlock/EditorControlBlock';
 import {useGlobalPreloader} from '../../../../../store/hooks';
@@ -9,7 +10,6 @@ import {getEntity} from '../../../../../store/selectors';
 import {FAIL} from '../../../../../constants/settings';
 import {ADMIN_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
 import './Car.scss';
-
 
 function Car() {
     const [done, setDone] = useState(false);
@@ -75,10 +75,10 @@ function Car() {
             {done &&
             <div className="car__content_wrapper">
                 <div className="car__content car__first_content_block">
-                    <input type="file"/>
+                    <CarPhoto/>
                 </div>
                 <div className="car__content car__second_content_block">
-                    Параметры
+                    <h1 className="car__settings_caption">Настройки автомобиля</h1>
                     <EditorControlBlock
                         handleSave={handleSaveButtonClick}
                         handleCancel={handleCancelButtonClick}

@@ -37,3 +37,9 @@ export const getOrderPrice = state => state.entity.price;
 export const getOrderCar = state => state.entity.carId;
 
 export const getOrderColor = state => state.entity.color;
+
+export const getCarName = state => state.entity.name;
+
+export const getCarCategory = state => state.entity.categoryId;
+
+export const getCarThumbnail = state => state.entity.thumbnail;
