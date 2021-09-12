@@ -1,19 +1,22 @@
 import React, {useEffect, useRef, useState} from 'react';
 import classNames from 'classnames';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {ReactComponent as CancelIcon} from '../../../content/images/cancel_icon.svg';
 import {getPopupMessage} from '../../../store/selectors';
+import {setPopupMessage} from '../../../store/actionCreators';
 import {FAIL, SUCCESS} from '../../../constants/settings';
 import './PopupMessage.scss';
 
 function PopupMessage() {
     const [hasVisible, setHasVisible] = useState(false);
     const message = useSelector(getPopupMessage);
+    const dispatch = useDispatch();
     const timer = useRef(null);
 
     const {text, status} = message;
 
     const hidePopupMessage = () => setHasVisible(false);
+    const removePopupMessage = () => dispatch(setPopupMessage(null, null));
 
     useEffect(() => {
         clearTimeout(timer.current);
@@ -30,6 +33,10 @@ function PopupMessage() {
 
     const handleCancelIconClick = () => hidePopupMessage();
 
+    const handleTransition = () => {
+        if (!hasVisible) removePopupMessage();
+    }
+
     const popupMessageClasses = classNames(
         'popup_message',
         {
@@ -40,7 +47,7 @@ function PopupMessage() {
     );
 
     return (
-        <div className={popupMessageClasses}>
+        <div className={popupMessageClasses} onTransitionEnd={handleTransition}>
             <h1 className="popup_message__text">{text}</h1>
             <CancelIcon onClick={handleCancelIconClick}/>
         </div>

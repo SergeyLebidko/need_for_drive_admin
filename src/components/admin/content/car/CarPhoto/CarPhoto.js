@@ -11,7 +11,7 @@ function CarPhoto(){
 
     return (
         <div className="car_photo">
-            <PhotoBlock photoPath={thumbnail.path}/>
+            <PhotoBlock photoPath={thumbnail ? thumbnail.path : null}/>
             <div>
                 {name && name}
                 {category && category.name}
