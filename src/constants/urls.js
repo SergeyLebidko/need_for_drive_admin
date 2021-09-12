@@ -28,6 +28,6 @@ export const ADMIN_APP_URL = 'admin'
 export const ORDER_LIST_APP_URL = 'orders';
 export const CAR_LIST_APP_URL = 'cars';
 export const POINT_LIST_APP_URL = 'points';
-export const ORDER_APP_URL = 'order';
+export const ORDER_EDIT_APP_URL = 'order_edit';
 export const CAR_APP_URL = 'car';
 export const POINT_APP_URL = 'point';

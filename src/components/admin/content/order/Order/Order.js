@@ -35,9 +35,8 @@ function Order() {
     const {params: {orderId}} = useRouteMatch();
     const history = useHistory();
 
-    // При монтировании определяем id заказа из URL и пытаемся загрузить его
+    // При монтировании пытаемся загрузить заказ
     useEffect(() => {
-        if (!orderId) return;
         showPreloader();
         setDone(false);
         setError(null);

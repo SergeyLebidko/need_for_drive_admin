@@ -15,7 +15,7 @@ import {
     ADMIN_APP_URL,
     CAR_APP_URL,
     CAR_LIST_APP_URL,
-    ORDER_APP_URL,
+    ORDER_EDIT_APP_URL,
     ORDER_LIST_APP_URL,
     POINT_APP_URL,
     POINT_LIST_APP_URL
@@ -44,8 +44,8 @@ function AdminContent() {
                 <Route path={`/${ADMIN_APP_URL}/${CAR_LIST_APP_URL}`} component={CarList}/>
                 <Route path={`/${ADMIN_APP_URL}/${POINT_LIST_APP_URL}`} component={PointList}/>
 
-                <Route path={`/${ADMIN_APP_URL}/${ORDER_APP_URL}/:orderId`} component={Order}/>
-                <Route path={`/${ADMIN_APP_URL}/${ORDER_APP_URL}`}>
+                <Route path={`/${ADMIN_APP_URL}/${ORDER_EDIT_APP_URL}/:orderId`} component={Order}/>
+                <Route path={`/${ADMIN_APP_URL}/${ORDER_EDIT_APP_URL}`}>
                     <RouterCap
                         mainCaption="Для редактирования заказа сперва выберите нужный заказ из списка"
                         buttonCaption="Перейти к списку заказов"

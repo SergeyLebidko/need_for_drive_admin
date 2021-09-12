@@ -6,12 +6,12 @@ import OrderCardExtra from '../OrderCardExtra/OrderCardExtra';
 import OrderCardOptions from '../OrderCardOptions/OrderCardOptions';
 import OrderCardPrice from '../OrderCardPrice/OrderCardPrice';
 import ListElementControl from '../../../../common/ListElementControl/ListElementControl';
-import {ADMIN_APP_URL, ORDER_APP_URL} from '../../../../../constants/urls';
+import {ADMIN_APP_URL, ORDER_EDIT_APP_URL} from '../../../../../constants/urls';
 import './OrderCard.scss';
 
 function OrderCard({order}) {
     const history = useHistory();
-    const toOrderEditor = () => history.push(`/${ADMIN_APP_URL}/${ORDER_APP_URL}/${order.id}`);
+    const toOrderEditor = () => history.push(`/${ADMIN_APP_URL}/${ORDER_EDIT_APP_URL}/${order.id}`);
 
     return (
         <li className="order_card">
