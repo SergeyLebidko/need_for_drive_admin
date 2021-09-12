@@ -24,7 +24,7 @@ import './AdminContent.scss';
 function AdminContent() {
     const dispatch = useDispatch();
 
-    // При размонтировании компонента - удаляем из хранилища данные всплывающего сообщения
+    // При размонтировании компонента - удаляем из хранилища данные всплывающих сообщений
     useEffect(() => () => {
         dispatch(setPopupMessage(null, null));
     }, []);
