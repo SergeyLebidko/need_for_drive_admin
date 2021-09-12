@@ -13,7 +13,6 @@ function CarPhoto() {
     const thumbnail = useSelector(getCarThumbnail);
 
     const [photoPath, setPhotoPath] = useState(null);
-    const [fileName, setFileName] = useState(null);
     const fileSelectorRef = useRef(null);
 
     const dispatch = useDispatch();
@@ -21,7 +20,6 @@ function CarPhoto() {
     useEffect(() => {
         if (!thumbnail) {
             setPhotoPath(null);
-            setFileName(null);
             fileSelectorRef.current.value = null;
             return;
         }
@@ -37,7 +35,6 @@ function CarPhoto() {
         fileReader.onload = event => {
             dispatch(setEntityField('thumbnail', file));
             setPhotoPath(event.currentTarget.result);
-            setFileName(file.name);
         };
         fileReader.onerror = () => {
             dispatch(setPopupMessage(FAIL, 'Не удалось загрузить изображение'));
@@ -63,7 +60,7 @@ function CarPhoto() {
                     ref={fileSelectorRef}
                 />
                 <label htmlFor={fileInputId} className="car_photo__file_name">
-                    {fileName ? fileName : 'Выберите файл...'}
+                    {(thumbnail instanceof File) ? thumbnail.name : 'Выберите файл...'}
                 </label>
                 <label htmlFor={fileInputId} className="car_photo__file_choose">Обзор</label>
             </div>
