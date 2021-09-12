@@ -13,12 +13,13 @@ import PopupMessage from '../../../common/PopupMessage/PopupMessage';
 import {setPopupMessage} from '../../../../store/actionCreators';
 import {
     ADMIN_APP_URL,
-    CAR_APP_URL,
-    CAR_LIST_APP_URL,
-    ORDER_EDIT_APP_URL,
     ORDER_LIST_APP_URL,
+    CAR_LIST_APP_URL,
+    POINT_LIST_APP_URL,
+    ORDER_EDIT_APP_URL,
+    CAR_CREATE_APP_URL,
+    CAR_EDIT_APP_URL,
     POINT_APP_URL,
-    POINT_LIST_APP_URL
 } from '../../../../constants/urls';
 import './AdminContent.scss';
 
@@ -33,6 +34,7 @@ function AdminContent() {
     }, []);
 
     const toOrderList = () => history.push(`/${ADMIN_APP_URL}/${ORDER_LIST_APP_URL}`);
+    const toCarList = () => history.push(`/${ADMIN_APP_URL}/${CAR_LIST_APP_URL}`);
 
     // Учитываем, что если не выбран ни один пункт меню, то внутри области контента не должен отображаться ни один компонент
     return (
@@ -53,8 +55,15 @@ function AdminContent() {
                     />
                 </Route>
 
-                <Route path={`/${ADMIN_APP_URL}/${CAR_APP_URL}/:carId`} component={Car}/>
-                <Route path={`/${ADMIN_APP_URL}/${CAR_APP_URL}`} component={Car}/>
+                <Route path={`/${ADMIN_APP_URL}/${CAR_CREATE_APP_URL}`} component={Car}/>
+                <Route path={`/${ADMIN_APP_URL}/${CAR_EDIT_APP_URL}/:carId`} component={Car}/>
+                <Route path={`/${ADMIN_APP_URL}/${CAR_EDIT_APP_URL}`}>
+                    <RouterCap
+                        mainCaption="Для редактирования автомобиля сперва выберите нужный автомобиль из списка"
+                        buttonCaption="Перейти к списку автомобилей"
+                        handleButtonClick={toCarList}
+                    />
+                </Route>
 
                 <Route path={`/${ADMIN_APP_URL}/${POINT_APP_URL}/:pointId`} component={Point}/>
                 <Route path={`/${ADMIN_APP_URL}/${POINT_APP_URL}`} component={Point}/>

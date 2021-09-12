@@ -29,5 +29,6 @@ export const ORDER_LIST_APP_URL = 'orders';
 export const CAR_LIST_APP_URL = 'cars';
 export const POINT_LIST_APP_URL = 'points';
 export const ORDER_EDIT_APP_URL = 'order_edit';
-export const CAR_APP_URL = 'car';
+export const CAR_EDIT_APP_URL = 'car_edit';
+export const CAR_CREATE_APP_URL = 'car_create';
 export const POINT_APP_URL = 'point';

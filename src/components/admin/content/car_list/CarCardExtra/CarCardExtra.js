@@ -4,12 +4,12 @@ import {useHistory} from 'react-router-dom';
 import {capitalize} from '../../../../../utils/common_utils';
 import ListElementControl from '../../../../common/ListElementControl/ListElementControl';
 import LineIndicator from '../../../../common/LineIndicator/LineIndicator';
-import {ADMIN_APP_URL, CAR_APP_URL} from '../../../../../constants/urls';
+import {ADMIN_APP_URL, CAR_EDIT_APP_URL} from '../../../../../constants/urls';
 import './CarCardExtra.scss';
 
 function CarCardExtra({car}) {
     const history = useHistory();
-    const toCarEditor = () => history.push(`/${ADMIN_APP_URL}/${CAR_APP_URL}/${car.id}`);
+    const toCarEditor = () => history.push(`/${ADMIN_APP_URL}/${CAR_EDIT_APP_URL}/${car.id}`);
 
     const getCategoryDescription = () => car.categoryId ? `${car.categoryId.name} (${car.categoryId.description})` : 'не указана';
     const getDescription = () => car.description || 'не указано';
