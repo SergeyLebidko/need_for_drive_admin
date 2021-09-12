@@ -5,10 +5,10 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
   height: 0;
+  width: 100%;
   z-index: 100;
-  transition: all 150ms;
+  transition: all 200ms;
   overflow: hidden;
 
   &__text {
@@ -21,7 +21,6 @@
     height: 1em;
     margin-right: $step;
     cursor: pointer;
-    opacity: 0;
   }
 
   svg path {
@@ -33,10 +32,6 @@
 .popup_message_visible {
   height: initial;
   padding: $step * 2;
-
-  svg {
-    opacity: 1;
-  }
 }
 
 .success_message {
