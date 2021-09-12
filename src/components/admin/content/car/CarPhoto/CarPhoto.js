@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import PhotoBlock from '../../../../common/PhotoBlock/PhotoBlock';
 import {getCarCategory, getCarName, getCarThumbnail} from '../../../../../store/selectors';
@@ -14,12 +14,15 @@ function CarPhoto() {
 
     const [photoPath, setPhotoPath] = useState(null);
     const [fileName, setFileName] = useState(null);
+    const fileSelectorRef = useRef(null);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         if (!thumbnail) {
             setPhotoPath(null);
+            setFileName(null);
+            fileSelectorRef.current.value = null;
             return;
         }
         if ('path' in thumbnail) setPhotoPath(thumbnail.path);
@@ -52,7 +55,13 @@ function CarPhoto() {
                 {category && <span className="car_photo__category_caption">{category.name}</span>}
             </div>
             <div className="car_photo__file_selector">
-                <input type="file" id={fileInputId} accept="image/png, image/jpeg" onChange={handleFileSelect}/>
+                <input
+                    type="file"
+                    id={fileInputId}
+                    accept="image/png, image/jpeg"
+                    onChange={handleFileSelect}
+                    ref={fileSelectorRef}
+                />
                 <label htmlFor={fileInputId} className="car_photo__file_name">
                     {fileName ? fileName : 'Выберите файл...'}
                 </label>
