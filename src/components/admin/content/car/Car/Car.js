@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useHistory, useLocation, useRouteMatch} from 'react-router-dom';
-import CarPhoto from '../CarPhoto/CarPhoto';
+import CarPhotoChooser from '../CarPhotoChooser/CarPhotoChooser';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import EditorControlBlock from '../../../../common/EditorControlBlock/EditorControlBlock';
 import {useGlobalPreloader} from '../../../../../store/hooks';
@@ -79,7 +79,7 @@ function Car() {
             {done &&
             <div className="car__content_wrapper">
                 <div className="car__content car__first_content_block">
-                    <CarPhoto/>
+                    <CarPhotoChooser/>
                 </div>
                 <div className="car__content car__second_content_block">
                     <h1 className="car__settings_caption">

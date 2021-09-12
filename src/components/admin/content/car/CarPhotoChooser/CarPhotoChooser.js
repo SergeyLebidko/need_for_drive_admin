@@ -5,9 +5,9 @@ import {getCarCategory, getCarName, getCarThumbnail} from '../../../../../store/
 import {setEntityField, setPopupMessage} from '../../../../../store/actionCreators';
 import {getRandomString} from '../../../../../utils/common_utils';
 import {FAIL} from '../../../../../constants/settings';
-import './CarPhoto.scss';
+import './CarPhotoChooser.scss';
 
-function CarPhoto() {
+function CarPhotoChooser() {
     const name = useSelector(getCarName);
     const category = useSelector(getCarCategory);
     const thumbnail = useSelector(getCarThumbnail);
@@ -45,13 +45,13 @@ function CarPhoto() {
     const fileInputId = getRandomString();
 
     return (
-        <div className="car_photo">
+        <div className="car_photo_chooser">
             <PhotoBlock photoPath={photoPath}/>
-            <div className="car_photo__info">
-                {name && <span className="car_photo__name_caption">{name}</span>}
-                {category && <span className="car_photo__category_caption">{category.name}</span>}
+            <div className="car_photo_chooser__info">
+                {name && <span className="car_photo_chooser__name_caption">{name}</span>}
+                {category && <span className="car_photo_chooser__category_caption">{category.name}</span>}
             </div>
-            <div className="car_photo__file_selector">
+            <div className="car_photo_chooser__file_selector">
                 <input
                     type="file"
                     id={fileInputId}
@@ -59,13 +59,13 @@ function CarPhoto() {
                     onChange={handleFileSelect}
                     ref={fileSelectorRef}
                 />
-                <label htmlFor={fileInputId} className="car_photo__file_name">
+                <label htmlFor={fileInputId} className="car_photo_chooser__file_name">
                     {(thumbnail instanceof File) ? thumbnail.name : 'Выберите файл...'}
                 </label>
-                <label htmlFor={fileInputId} className="car_photo__file_choose">Обзор</label>
+                <label htmlFor={fileInputId} className="car_photo_chooser__file_choose">Обзор</label>
             </div>
         </div>
     );
 }
 
-export default CarPhoto;
+export default CarPhotoChooser;
