@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
-import {ADMIN_APP_URL, POINT_APP_URL} from '../../../../../constants/urls';
+import {ADMIN_APP_URL, POINT_EDIT_APP_URL} from '../../../../../constants/urls';
 import './PointCard.scss';
 
 function PointCard({point}) {
     const history = useHistory();
-    const toPointEditor = () => history.push(`/${ADMIN_APP_URL}/${POINT_APP_URL}/${point.id}`);
+    const toPointEditor = () => history.push(`/${ADMIN_APP_URL}/${POINT_EDIT_APP_URL}/${point.id}`);
 
     return (
         <li className="point_card">

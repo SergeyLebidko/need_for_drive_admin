@@ -19,7 +19,8 @@ import {
     ORDER_EDIT_APP_URL,
     CAR_CREATE_APP_URL,
     CAR_EDIT_APP_URL,
-    POINT_APP_URL,
+    POINT_CREATE_APP_URL,
+    POINT_EDIT_APP_URL,
 } from '../../../../constants/urls';
 import './AdminContent.scss';
 
@@ -35,6 +36,7 @@ function AdminContent() {
 
     const toOrderList = () => history.push(`/${ADMIN_APP_URL}/${ORDER_LIST_APP_URL}`);
     const toCarList = () => history.push(`/${ADMIN_APP_URL}/${CAR_LIST_APP_URL}`);
+    const toPointList = () => history.push(`/${ADMIN_APP_URL}/${POINT_LIST_APP_URL}`);
 
     // Учитываем, что если не выбран ни один пункт меню, то внутри области контента не должен отображаться ни один компонент
     return (
@@ -65,8 +67,16 @@ function AdminContent() {
                     />
                 </Route>
 
-                <Route path={`/${ADMIN_APP_URL}/${POINT_APP_URL}/:pointId`} component={Point}/>
-                <Route path={`/${ADMIN_APP_URL}/${POINT_APP_URL}`} component={Point}/>
+                <Route path={`/${ADMIN_APP_URL}/${POINT_CREATE_APP_URL}`} component={Point}/>
+                <Route path={`/${ADMIN_APP_URL}/${POINT_EDIT_APP_URL}/:pointId`} component={Point}/>
+                <Route path={`/${ADMIN_APP_URL}/${POINT_EDIT_APP_URL}/`}>
+                    <RouterCap
+                        mainCaption="Для редактирования пункта выдачи сперва выберите нужный пункт выдачи из списка"
+                        buttonCaption="Перейти к списку пунктов выдачи"
+                        handleButtonClick={toPointList}
+                    />
+                </Route>
+
                 <Route path="*" component={NoMatch}/>
             </Switch>
         </main>
