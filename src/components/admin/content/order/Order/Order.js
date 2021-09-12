@@ -14,7 +14,7 @@ import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import EditorControlBlock from '../../../../common/EditorControlBlock/EditorControlBlock';
 import {getEntity} from '../../../../../store/selectors';
 import {isNatural} from '../../../../../utils/common_utils';
-import {ADMIN_APP_URL, ORDER_LIST_APP_URL} from '../../../../../constants/urls';
+import {ADMIN_APP_URL} from '../../../../../constants/urls';
 import {SUCCESS} from '../../../../../constants/settings';
 import './Order.scss';
 
@@ -55,9 +55,6 @@ function Order() {
     const resetPointErrorText = () => setPointErrorText(null);
     const resetPriceErrorText = () => setPriceErrorText(null);
 
-    // Блок обработчиков кликов
-    const toOrderList = () => history.push(`/${ADMIN_APP_URL}/${ORDER_LIST_APP_URL}`);
-
     const handleSaveButtonClick = () => {
         // Перед попыткой сохранения проверяем заполнение обязательных полей. Без их указания - бэк не даст выполнить сохранение
         if (!order.orderStatusId) setStatusErrorText('Выберите статус заказа');
@@ -96,18 +93,6 @@ function Order() {
             })
             .finally(() => hidePreloader());
     }
-
-    // Если не удалось определить номер заказа, то сообщаем об этом и показываем ссылку для перехода к списку заказов
-    if (!orderId) return (
-        <div className="order">
-            <div className="order__content order__no_order_id">
-                <h1>Выберите заказ для редактирования на странице списка заказов</h1>
-                <button className="button button_green" onClick={toOrderList}>
-                    Перейти к списку заказов
-                </button>
-            </div>
-        </div>
-    );
 
     if (error) return <ErrorPane error={error}/>;
 

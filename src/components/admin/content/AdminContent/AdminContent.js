@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, useHistory} from 'react-router-dom';
 import OrderList from '../order_list/OrderList/OrderList';
 import CarList from '../car_list/CarList/CarList';
 import PointList from '../point_list/PointList/PointList';
@@ -8,6 +8,7 @@ import Order from '../order/Order/Order';
 import Car from '../car/Car/Car';
 import Point from '../point/Point/Point';
 import NoMatch from '../../../common/NoMatch/NoMatch';
+import RouterCap from '../../../common/RouterCap/RouterCap';
 import PopupMessage from '../../../common/PopupMessage/PopupMessage';
 import {setPopupMessage} from '../../../../store/actionCreators';
 import {
@@ -21,13 +22,17 @@ import {
 } from '../../../../constants/urls';
 import './AdminContent.scss';
 
+
 function AdminContent() {
+    const history = useHistory();
     const dispatch = useDispatch();
 
     // При размонтировании компонента - удаляем из хранилища данные всплывающих сообщений
     useEffect(() => () => {
         dispatch(setPopupMessage(null, null));
     }, []);
+
+    const toOrderList = () => history.push(`/${ADMIN_APP_URL}/${ORDER_LIST_APP_URL}`);
 
     // Учитываем, что если не выбран ни один пункт меню, то внутри области контента не должен отображаться ни один компонент
     return (
@@ -40,7 +45,13 @@ function AdminContent() {
                 <Route path={`/${ADMIN_APP_URL}/${POINT_LIST_APP_URL}`} component={PointList}/>
 
                 <Route path={`/${ADMIN_APP_URL}/${ORDER_APP_URL}/:orderId`} component={Order}/>
-                <Route path={`/${ADMIN_APP_URL}/${ORDER_APP_URL}`} component={Order}/>
+                <Route path={`/${ADMIN_APP_URL}/${ORDER_APP_URL}`}>
+                    <RouterCap
+                        mainCaption="Для редактирования заказа сперва выберите нужный заказ из списка"
+                        buttonCaption="Перейти к списку заказов"
+                        handleButtonClick={toOrderList}
+                    />
+                </Route>
 
                 <Route path={`/${ADMIN_APP_URL}/${CAR_APP_URL}/:carId`} component={Car}/>
                 <Route path={`/${ADMIN_APP_URL}/${CAR_APP_URL}`} component={Car}/>

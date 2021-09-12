@@ -4,10 +4,16 @@
 .router_cap {
   @include content_mixin;
 
+
   &__content {
-    box-shadow: $main-shadow;
-    background-color: $white;
-    border-radius: $main-radius;
+    padding: $step * 6;
+    align-self: center;
+    max-width: $step * 60;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
   }
 
   &__main_caption {
