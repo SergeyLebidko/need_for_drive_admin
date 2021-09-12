@@ -73,14 +73,18 @@ function Car() {
 
     return (
         <div className="car">
-            <h1 className="car__caption">Карточка автомобиля</h1>
+            <h1 className="car__caption">
+                Карточка автомобиля
+            </h1>
             {done &&
             <div className="car__content_wrapper">
                 <div className="car__content car__first_content_block">
                     <CarPhoto/>
                 </div>
                 <div className="car__content car__second_content_block">
-                    <h1 className="car__settings_caption">Настройки автомобиля</h1>
+                    <h1 className="car__settings_caption">
+                        {car.id ? 'Настройки автомобиля' : 'Новый автомобиль'}
+                    </h1>
                     <EditorControlBlock
                         handleSave={handleSaveButtonClick}
                         handleCancel={handleCancelButtonClick}
