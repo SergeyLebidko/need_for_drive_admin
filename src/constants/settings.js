@@ -6,7 +6,6 @@ import {
     ORDER_LIST_APP_URL,
     CAR_LIST_APP_URL,
     POINT_LIST_APP_URL,
-    ORDER_APP_URL,
     CAR_APP_URL,
     POINT_APP_URL
 } from './urls';
@@ -61,17 +60,12 @@ export const MENU_ITEMS = [
         href: POINT_LIST_APP_URL
     },
     {
-        title: 'Заказ',
-        iconComponent: <MenuItemIcon/>,
-        href: ORDER_APP_URL
-    },
-    {
-        title: 'Автомобиль',
+        title: 'Добавить автомобиль',
         iconComponent: <MenuItemIcon/>,
         href: CAR_APP_URL
     },
     {
-        title: 'Пункт выдачи',
+        title: 'Добавить пункт выдачи',
         iconComponent: <MenuItemIcon/>,
         href: POINT_APP_URL
     }
