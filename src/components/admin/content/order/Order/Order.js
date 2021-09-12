@@ -97,7 +97,7 @@ function Order() {
             .finally(() => hidePreloader());
     }
 
-    // Если не удалось определить номер заказа, то просто показываем ссылку для перехода к списку заказов
+    // Если не удалось определить номер заказа, то сообщаем об этом и показываем ссылку для перехода к списку заказов
     if (!orderId) return (
         <div className="order">
             <div className="order__content order__no_order_id">

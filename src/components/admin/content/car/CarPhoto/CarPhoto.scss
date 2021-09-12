@@ -3,7 +3,52 @@
 .car_photo {
   padding: $step * 2;
 
-  input[type=file]{
+  input[type=file] {
     display: none;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: $step 0 0 0;
+  }
+
+  &__name_caption {
+    font-size: 1.8em;
+    color: $black;
+  }
+
+  &__category_caption {
+    font-size: 1em;
+    color: $gray-light;
+  }
+
+  &__file_selector {
+    margin: ($step * 2) 0 0 0;
+    display: flex;
+  }
+
+  &__file_name {
+    flex: 1;
+    border: 1px solid $gray-light;
+    border-radius: $small-radius 0 0 $small-radius;
+    padding: $step ($step * 2);
+    color: $gray;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__file_choose {
+    position: relative;
+    left: -1px;
+    border: 1px solid $gray-light;
+    border-radius: 0 $small-radius $small-radius 0;
+    padding: $step ($step * 2);
+    background-color: $main-background;
+  }
+
+  &__file_name, &__file_choose {
+    cursor: pointer;
   }
 }

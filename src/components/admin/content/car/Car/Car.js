@@ -47,8 +47,8 @@ function Car() {
 
     // Блок обработчиков кликов
     const handleSaveButtonClick = () => {
-        // TODO Вставить код проверки корректности данных
-        // TODO Переработать код сохранения данных автомобиля
+        //TODO Вставить код проверки корректности данных
+        //TODO Переработать код сохранения данных автомобиля
         dispatch(saveCar(car));
     }
 
@@ -66,7 +66,7 @@ function Car() {
             dispatch(setPopupMessage(FAIL, 'Нельзя удалить не сохраненный автомобиль'));
             return;
         }
-        // TODO Вставить код удаления автомобиля
+        //TODO Вставить код удаления автомобиля
     }
 
     if (error) return <ErrorPane error={error}/>;

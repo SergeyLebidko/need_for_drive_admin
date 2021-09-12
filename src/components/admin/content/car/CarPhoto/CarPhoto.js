@@ -29,11 +29,6 @@ function CarPhoto() {
         const file = event.target.files[0];
         if (!file) return;
 
-        if (file.type !== 'image/png' && file.type !== 'image/jpeg') {
-            dispatch(setPopupMessage(FAIL, 'Допустимы только файлы изображений в форматах JPEG и PNG'));
-            return;
-        }
-
         const fileReader = new FileReader();
         fileReader.readAsDataURL(file);
         fileReader.onload = event => {
@@ -52,14 +47,16 @@ function CarPhoto() {
     return (
         <div className="car_photo">
             <PhotoBlock photoPath={photoPath}/>
-            <div>
-                {name && name}
-                {category && category.name}
+            <div className="car_photo__info">
+                {name && <span className="car_photo__name_caption">{name}</span>}
+                {category && <span className="car_photo__category_caption">{category.name}</span>}
             </div>
-            <div>
-                <input type="file" id={fileInputId} onChange={handleFileSelect}/>
-                <span>{fileName ? fileName : 'Выберите файл...'}</span>
-                <label htmlFor={fileInputId}>Обзор</label>
+            <div className="car_photo__file_selector">
+                <input type="file" id={fileInputId} accept="image/png, image/jpeg" onChange={handleFileSelect}/>
+                <label htmlFor={fileInputId} className="car_photo__file_name">
+                    {fileName ? fileName : 'Выберите файл...'}
+                </label>
+                <label htmlFor={fileInputId} className="car_photo__file_choose">Обзор</label>
             </div>
         </div>
     );
