@@ -1,0 +1,17 @@
+@import '../../../../../styles/vars';
+
+.car_info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__name_caption {
+    font-size: 1.8em;
+    color: $black;
+  }
+
+  &__category_caption {
+    font-size: 1em;
+    color: $gray-light;
+  }
+}

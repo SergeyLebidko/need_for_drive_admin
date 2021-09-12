@@ -1,4 +1,5 @@
 @import '../../../../../styles/vars';
+@import '../CarInfo/CarInfo';
 
 .car_photo_chooser {
   padding: $step * 2;
@@ -7,21 +8,8 @@
     display: none;
   }
 
-  &__info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: $step 0 0 0;
-  }
-
-  &__name_caption {
-    font-size: 1.8em;
-    color: $black;
-  }
-
-  &__category_caption {
-    font-size: 1em;
-    color: $gray-light;
+  .car_info {
+    margin: $step * 2;
   }
 
   &__file_selector {

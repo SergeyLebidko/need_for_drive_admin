@@ -1,16 +1,15 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import PhotoBlock from '../../../../common/PhotoBlock/PhotoBlock';
-import {getCarCategory, getCarName, getCarThumbnail} from '../../../../../store/selectors';
+import CarInfo from '../CarInfo/CarInfo';
+import {getEntity} from '../../../../../store/selectors';
 import {setEntityField, setPopupMessage} from '../../../../../store/actionCreators';
 import {getRandomString} from '../../../../../utils/common_utils';
 import {FAIL} from '../../../../../constants/settings';
 import './CarPhotoChooser.scss';
 
 function CarPhotoChooser() {
-    const name = useSelector(getCarName);
-    const category = useSelector(getCarCategory);
-    const thumbnail = useSelector(getCarThumbnail);
+    const {id: carId, thumbnail} = useSelector(getEntity);
 
     const [photoPath, setPhotoPath] = useState(null);
     const fileSelectorRef = useRef(null);
@@ -47,10 +46,7 @@ function CarPhotoChooser() {
     return (
         <div className="car_photo_chooser">
             <PhotoBlock photoPath={photoPath}/>
-            <div className="car_photo_chooser__info">
-                {name && <span className="car_photo_chooser__name_caption">{name}</span>}
-                {category && <span className="car_photo_chooser__category_caption">{category.name}</span>}
-            </div>
+            {carId && <CarInfo/>}
             <div className="car_photo_chooser__file_selector">
                 <input
                     type="file"
