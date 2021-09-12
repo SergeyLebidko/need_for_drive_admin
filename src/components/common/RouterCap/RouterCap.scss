@@ -1,0 +1,17 @@
+@import '../../../styles/vars';
+@import '../../../styles/common_presets';
+
+.router_cap {
+  @include content_mixin;
+
+  &__content {
+    box-shadow: $main-shadow;
+    background-color: $white;
+    border-radius: $main-radius;
+  }
+
+  &__main_caption {
+    margin-bottom: $step * 3;
+    text-align: center;
+  }
+}
