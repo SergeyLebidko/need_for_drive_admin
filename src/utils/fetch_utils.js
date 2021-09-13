@@ -302,6 +302,10 @@ export async function fetchCar(carId) {
     return await executeFetch(`${CAR_URL}/${carId}`);
 }
 
+export async function removeCarInBase(carId) {
+    return await executeFetchWithRefresh(executeFetch, `${CAR_URL}/${carId}`, {method: 'DELETE'});
+}
+
 export async function saveCarInBase(car) {
     const url = car.id ? `${CAR_URL}/${car.id}` : CAR_URL;
 

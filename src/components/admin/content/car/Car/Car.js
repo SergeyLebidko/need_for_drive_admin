@@ -5,9 +5,15 @@ import CarPhotoChooser from '../CarPhotoChooser/CarPhotoChooser';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import EditorControlBlock from '../../../../common/EditorControlBlock/EditorControlBlock';
 import {useGlobalPreloader} from '../../../../../store/hooks';
-import {loadCar, saveCar, setEntity, setPopupMessage} from '../../../../../store/actionCreators';
+import {
+    loadCar,
+    removeCar,
+    saveCar,
+    setEntity,
+    setPopupMessage
+} from '../../../../../store/actionCreators';
 import {getEntity} from '../../../../../store/selectors';
-import {FAIL} from '../../../../../constants/settings';
+import {FAIL, SUCCESS} from '../../../../../constants/settings';
 import {ADMIN_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
 import './Car.scss';
 
@@ -54,9 +60,13 @@ function Car() {
         if (!car.thumbnail) setThumbnailError('Выберите фото автомобиля');
         if (!car.thumbnail) return;
 
-
-        //TODO Переработать код сохранения данных автомобиля
-        dispatch(saveCar(car));
+        // Пытаемся выполнить сохранение
+        showPreloader();
+        setError(null);
+        dispatch(saveCar(car))
+            .then(() => dispatch(setPopupMessage(SUCCESS, 'Автомобиль успешно сохранен')))
+            .catch(err => setError(err))
+            .finally(() => hidePreloader());
     }
 
     const handleCancelButtonClick = () => {
@@ -68,12 +78,25 @@ function Car() {
     }
 
     const handleRemoveButtonClick = () => {
-        // Не даем выполнить удаление, если машина не сохранена
-        if (!car.id) {
+        // Не даем выполнить удаление, если редактируем данные нового авто и машина еще не сохранена
+        if (!carId) {
             dispatch(setPopupMessage(FAIL, 'Нельзя удалить не сохраненный автомобиль'));
             return;
         }
-        //TODO Вставить код удаления автомобиля
+
+        showPreloader();
+        setDone(false);
+        setError(null);
+        dispatch(removeCar(carId))
+            .then(() => {
+                dispatch(setPopupMessage(SUCCESS, 'Автомобиль успешно удален'));
+                history.push(`/${ADMIN_APP_URL}`);
+            })
+            .catch(err => {
+                setError(err);
+                setDone(true);
+            })
+            .finally(() => hidePreloader());
     }
 
     if (error) return <ErrorPane error={error}/>;
