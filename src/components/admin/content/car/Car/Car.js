@@ -16,13 +16,14 @@ function Car() {
     const [error, setError] = useState(null);
     const [showPreloader, hidePreloader] = useGlobalPreloader();
 
+    const dispatch = useDispatch();
     const car = useSelector(getEntity);
+
+    const [thumbnailError, setThumbnailError] = useState(null);
 
     const location = useLocation();
     const {params: {carId}} = useRouteMatch();
     const history = useHistory();
-
-    const dispatch = useDispatch();
 
     useEffect(() => {
         setDone(false);
@@ -45,9 +46,15 @@ function Car() {
             });
     }, [location, carId]);
 
+    // Блок функций сброса ошибок
+    const resetThumbnailError = () => setThumbnailError(null);
+
     // Блок обработчиков кликов
     const handleSaveButtonClick = () => {
-        //TODO Вставить код проверки корректности данных
+        if (!car.thumbnail) setThumbnailError('Выберите фото автомобиля');
+        if (!car.thumbnail) return;
+
+
         //TODO Переработать код сохранения данных автомобиля
         dispatch(saveCar(car));
     }
@@ -79,7 +86,7 @@ function Car() {
             {done &&
             <div className="car__content_wrapper">
                 <div className="car__content car__first_content_block">
-                    <CarPhotoChooser/>
+                    <CarPhotoChooser errorText={thumbnailError} resetErrorText={resetThumbnailError}/>
                 </div>
                 <div className="car__content car__second_content_block">
                     <h1 className="car__settings_caption">Настройки автомобиля</h1>

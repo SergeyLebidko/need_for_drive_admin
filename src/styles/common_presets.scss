@@ -85,12 +85,12 @@
   color: $gray;
 }
 
-.text_input_error, .select_input_error {
+.text_input_error, .select_input_error, .file_input_error {
   border: 0.5px solid $red;
   box-shadow: $error_shadow;
 }
 
-.text_input_error_text, .select_input_error_text {
+.text_input_error_text, .select_input_error_text, .file_input_error_text {
   color: $red;
   margin-left: $step * 2;
   font-size: 0.8em;

@@ -1,4 +1,5 @@
 @import '../../../../../styles/vars';
+@import '../../../../../styles/common_presets';
 @import '../CarInfo/CarInfo';
 
 .car_photo_chooser {
@@ -15,11 +16,14 @@
   &__file_selector {
     margin: ($step * 2) 0 0 0;
     display: flex;
+    border-radius: $small-radius;
   }
 
   &__file_name {
     flex: 1;
-    border: 1px solid $gray-light;
+    border-top: 1px solid $gray-light;
+    border-left: 1px solid $gray-light;
+    border-bottom: 1px solid $gray-light;
     border-radius: $small-radius 0 0 $small-radius;
     padding: $step ($step * 2);
     color: $gray;
@@ -28,8 +32,6 @@
   }
 
   &__file_choose {
-    position: relative;
-    left: -1px;
     border: 1px solid $gray-light;
     border-radius: 0 $small-radius $small-radius 0;
     padding: $step ($step * 2);
