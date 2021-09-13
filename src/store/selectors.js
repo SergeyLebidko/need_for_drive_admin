@@ -42,4 +42,4 @@ export const getCarName = state => state.entity.name;
 
 export const getCarCategory = state => state.entity.categoryId;
 
-export const getCarThumbnail = state => state.entity.thumbnail;
+export const getCarTank = state => state.entity.tank;
