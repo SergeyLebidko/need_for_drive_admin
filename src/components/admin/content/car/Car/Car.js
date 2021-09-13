@@ -14,7 +14,7 @@ import {
 } from '../../../../../store/actionCreators';
 import {getEntity} from '../../../../../store/selectors';
 import {FAIL, SUCCESS} from '../../../../../constants/settings';
-import {ADMIN_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
+import {ADMIN_APP_URL, CAR_EDIT_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
 import './Car.scss';
 
 function Car() {
@@ -60,11 +60,14 @@ function Car() {
         if (!car.thumbnail) setThumbnailError('Выберите фото автомобиля');
         if (!car.thumbnail) return;
 
-        // Пытаемся выполнить сохранение
+        // Пытаемся выполнить сохранение. Если сохраняли новый автомобиль, то переходим на страницу редактирования
         showPreloader();
         setError(null);
         dispatch(saveCar(car))
-            .then(() => dispatch(setPopupMessage(SUCCESS, 'Автомобиль успешно сохранен')))
+            .then(() => {
+                dispatch(setPopupMessage(SUCCESS, 'Автомобиль успешно сохранен'));
+                if (!carId) history.push(`/${ADMIN_APP_URL}/${CAR_EDIT_APP_URL}/${car.id}`);
+            })
             .catch(err => setError(err))
             .finally(() => hidePreloader());
     }
