@@ -38,6 +38,10 @@ export const getOrderCar = state => state.entity.carId;
 
 export const getOrderColor = state => state.entity.color;
 
+export const getCarId = state => state.entity.id;
+
+export const getCarThumbnail = state => state.entity.thumbnail;
+
 export const getCarName = state => state.entity.name;
 
 export const getCarCategory = state => state.entity.categoryId;

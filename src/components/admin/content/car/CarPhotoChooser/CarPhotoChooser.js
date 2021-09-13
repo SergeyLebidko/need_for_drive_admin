@@ -4,14 +4,15 @@ import classNames from 'classnames';
 import {useSelector, useDispatch} from 'react-redux';
 import PhotoBlock from '../../../../common/PhotoBlock/PhotoBlock';
 import CarInfo from '../CarInfo/CarInfo';
-import {getEntity} from '../../../../../store/selectors';
+import {getCarId, getCarThumbnail} from '../../../../../store/selectors';
 import {setEntityField, setPopupMessage} from '../../../../../store/actionCreators';
 import {getRandomString} from '../../../../../utils/common_utils';
 import {FAIL} from '../../../../../constants/settings';
 import './CarPhotoChooser.scss';
 
 function CarPhotoChooser({errorText, resetErrorText}) {
-    const {id: carId, thumbnail} = useSelector(getEntity);
+    const id = useSelector(getCarId);
+    const thumbnail = useSelector(getCarThumbnail);
 
     const [photoPath, setPhotoPath] = useState(null);
     const fileSelectorRef = useRef(null);
@@ -51,7 +52,7 @@ function CarPhotoChooser({errorText, resetErrorText}) {
     return (
         <div className="car_photo_chooser">
             <PhotoBlock photoPath={photoPath}/>
-            {carId && <CarInfo/>}
+            {id && <CarInfo/>}
             <div className={fileSelectorClasses}>
                 <input
                     type="file"

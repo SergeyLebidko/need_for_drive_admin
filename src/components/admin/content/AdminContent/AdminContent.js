@@ -43,6 +43,7 @@ function AdminContent() {
             <PopupMessage/>
             <Switch>
                 <Route exact path={`/${ADMIN_APP_URL}`} component={null}/>
+
                 <Route path={`/${ADMIN_APP_URL}/${ORDER_LIST_APP_URL}`} component={OrderList}/>
                 <Route path={`/${ADMIN_APP_URL}/${CAR_LIST_APP_URL}`} component={CarList}/>
                 <Route path={`/${ADMIN_APP_URL}/${POINT_LIST_APP_URL}`} component={PointList}/>

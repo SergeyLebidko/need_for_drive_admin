@@ -35,7 +35,7 @@ function Car() {
         setDone(false);
         setError(null);
 
-        // Если идентификатор автомобиля не указан в URL, то считаем, что это форма создания автомобиля
+        // Если идентификатор автомобиля не указан в URL, то инициализируем пустую новую сущность в хранилище
         if (!carId) {
             dispatch(setEntity({}));
             setDone(true);
@@ -106,9 +106,7 @@ function Car() {
 
     return (
         <div className="car">
-            <h1 className="car__caption">
-                Карточка автомобиля
-            </h1>
+            <h1 className="car__caption">Карточка автомобиля</h1>
             {done &&
             <div className="car__content_wrapper">
                 <div className="car__content car__first_content_block">

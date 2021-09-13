@@ -54,6 +54,7 @@ function Order() {
     const resetPointErrorText = () => setPointErrorText(null);
     const resetPriceErrorText = () => setPriceErrorText(null);
 
+    // Блок обработчиков кликов
     const handleSaveButtonClick = () => {
         // Перед попыткой сохранения проверяем заполнение обязательных полей. Без их указания - бэк не даст выполнить сохранение
         if (!order.orderStatusId) setStatusErrorText('Выберите статус заказа');
