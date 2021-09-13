@@ -24,7 +24,6 @@ import {
 } from '../../../../constants/urls';
 import './AdminContent.scss';
 
-
 function AdminContent() {
     const history = useHistory();
     const dispatch = useDispatch();
