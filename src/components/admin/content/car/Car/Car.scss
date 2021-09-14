@@ -4,8 +4,6 @@
 @import '../CarPhotoChooser/CarPhotoChooser';
 @import '../CarTankViewer/CarTankViewer';
 @import '../CarDescription/CarDescription';
-@import '../CarName/CarName';
-@import '../CarCategory/CarCategory';
 
 .car {
   @include content_mixin;
@@ -25,10 +23,6 @@
 
   .car_description {
     flex: 1;
-  }
-
-  .car_category {
-    margin: ($step * 2) 0 0 0;
   }
 
   &__content_wrapper {
@@ -61,13 +55,6 @@
   &__settings_caption {
     font-size: 1.2em;
   }
-
-  &__settings_block {
-    margin-top: $step * 3;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
 }
 
 @media (min-width: $tablet-start) and (max-width: $desktop-min-end) {
@@ -78,12 +65,12 @@
       border-right: 1px solid $separator-color;
     }
 
-    &__first_content_block {
-      flex-direction: row;
-    }
-
     &__description_block {
       flex: 1;
+    }
+
+    &__first_content_block {
+      flex-direction: row;
     }
   }
 }
@@ -92,19 +79,6 @@
   .car {
     .editor_control_block {
       margin-top: $step * 12;
-    }
-
-    .car_name, .car_category {
-      width: calc(50% - 16px);
-    }
-
-    .car_category {
-      margin: 0 0 0 ($step * 2);
-    }
-
-    &__settings_block {
-      flex-direction: row;
-      flex-wrap: wrap;
     }
   }
 }

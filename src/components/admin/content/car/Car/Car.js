@@ -7,7 +7,7 @@ import EditorControlBlock from '../../../../common/EditorControlBlock/EditorCont
 import CarTankViewer from '../CarTankViewer/CarTankViewer';
 import CarDescription from '../CarDescription/CarDescription';
 import TextValueEditor from '../../../../common/TextValueEditor/TextValueEditor';
-import CarCategory from '../CarCategory/CarCategory';
+import CatalogSelector from '../../../../common/CatalogSelector/CatalogSelector';
 import {useGlobalPreloader} from '../../../../../store/hooks';
 import {
     loadCar,
@@ -17,7 +17,7 @@ import {
     setPopupMessage
 } from '../../../../../store/actionCreators';
 import {getEntity, getCarName} from '../../../../../store/selectors';
-import {FAIL, SUCCESS} from '../../../../../constants/settings';
+import {FAIL, SUCCESS, CAR_CATEGORY_CATALOG} from '../../../../../constants/settings';
 import {ADMIN_APP_URL, CAR_EDIT_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
 import './Car.scss';
 
@@ -128,7 +128,7 @@ function Car() {
                 </div>
                 <div className="car__content car__second_content_block">
                     <h1 className="car__settings_caption">Настройки автомобиля</h1>
-                    <div className="car__settings_block">
+                    <div>
                         <TextValueEditor
                             label="Модель автомобиля"
                             getValue={getCarName}
@@ -136,7 +136,14 @@ function Car() {
                             errorText={nameError}
                             resetErrorText={resetNameError}
                         />
-                        <CarCategory errorText={categoryError} resetErrorText={resetCategoryError}/>
+                        <CatalogSelector
+                            label="Тип автомобиля"
+                            catalogName={CAR_CATEGORY_CATALOG}
+                            entityField="categoryId"
+                            errorText={categoryError}
+                            resetErrorText={resetCategoryError}
+                            nameExtractor={category => `${category.name} (${category.description})`}
+                        />
                     </div>
                     <EditorControlBlock
                         handleSave={handleSaveButtonClick}
