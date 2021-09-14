@@ -10,6 +10,7 @@
 
   .editor_control_block {
     margin-top: $step * 8;
+    padding: $step * 2;
   }
 
   .car_photo_chooser, {
@@ -58,14 +59,14 @@
 
 @media (min-width: $tablet-start) and (max-width: $desktop-min-end) {
   .car {
-    &__first_content_block {
-      flex-direction: row;
-    }
-
     .car_photo_chooser {
       flex: 1;
       border-bottom: none;
       border-right: 1px solid $separator-color;
+    }
+
+    &__first_content_block {
+      flex-direction: row;
     }
 
     &__description_block {
