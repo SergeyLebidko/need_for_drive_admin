@@ -113,7 +113,7 @@ function Car() {
             <div className="car__content_wrapper">
                 <div className="car__content car__first_content_block">
                     <CarPhotoChooser errorText={thumbnailError} resetErrorText={resetThumbnailError}/>
-                    <div>
+                    <div className="car__description_block">
                         <CarTankViewer/>
                         <CarDescription/>
                     </div>

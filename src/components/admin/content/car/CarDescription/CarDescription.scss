@@ -12,6 +12,7 @@
   }
 
   textarea {
+    font-size: 1em;
     box-sizing: border-box;
     min-height: $step * 15;
     resize: none;
@@ -19,5 +20,19 @@
     border: 1px solid $separator-color;
     border-radius: $small-radius;
     padding: $step;
+    flex: 1;
+
+    &::-webkit-scrollbar {
+      width: $step;
+      height: $step;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $gray-light;
+    }
+
+    &:hover::-webkit-scrollbar-thumb {
+      background-color: $gray;
+    }
   }
 }
