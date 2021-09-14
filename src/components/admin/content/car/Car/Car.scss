@@ -57,9 +57,10 @@
   }
 
   &__settings_block {
-    margin-top: $step * 2;
+    margin-top: $step * 3;
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
   }
 }
 

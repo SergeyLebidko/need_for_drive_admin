@@ -311,8 +311,8 @@ export async function saveCarInBase(car) {
 
     const body = new FormData();
 
-    //TODO Обдумать случай, когда поле thumbnail не является объектом File
     if (car.thumbnail instanceof File) body.append('thumbnail', car.thumbnail);
+    if (car.name) body.append('name', car.name);
     if (car.description) body.append('description', car.description);
 
     const method = car.id ? 'PUT' : 'POST';

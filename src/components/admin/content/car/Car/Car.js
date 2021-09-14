@@ -6,6 +6,7 @@ import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import EditorControlBlock from '../../../../common/EditorControlBlock/EditorControlBlock';
 import CarTankViewer from '../CarTankViewer/CarTankViewer';
 import CarDescription from '../CarDescription/CarDescription';
+import CarName from '../CarName/CarName';
 import {useGlobalPreloader} from '../../../../../store/hooks';
 import {
     loadCar,
@@ -28,6 +29,7 @@ function Car() {
     const car = useSelector(getEntity);
 
     const [thumbnailError, setThumbnailError] = useState(null);
+    const [nameError, setNameError] = useState(null);
 
     const location = useLocation();
     const {params: {carId}} = useRouteMatch();
@@ -56,11 +58,13 @@ function Car() {
 
     // Блок функций сброса ошибок
     const resetThumbnailError = () => setThumbnailError(null);
+    const resetNameError = () => setNameError(null);
 
     // Блок обработчиков кликов
     const handleSaveButtonClick = () => {
         if (!car.thumbnail) setThumbnailError('Выберите фото автомобиля');
-        if (!car.thumbnail) return;
+        if (!car.name) setNameError('Введите название модели');
+        if (!car.thumbnail || !car.name) return;
 
         // Пытаемся выполнить сохранение. Если сохраняли новый автомобиль, то переходим на страницу редактирования
         showPreloader();
@@ -121,7 +125,7 @@ function Car() {
                 <div className="car__content car__second_content_block">
                     <h1 className="car__settings_caption">Настройки автомобиля</h1>
                     <div className="car__settings_block">
-                        Блок с настройками автомобиля
+                        <CarName errorText={nameError} resetErrorText={resetNameError}/>
                     </div>
                     <EditorControlBlock
                         handleSave={handleSaveButtonClick}
