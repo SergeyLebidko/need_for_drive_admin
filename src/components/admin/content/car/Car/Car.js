@@ -10,7 +10,7 @@ import TextValueEditor from '../../../../common/TextValueEditor/TextValueEditor'
 import CatalogSelector from '../../../../common/CatalogSelector/CatalogSelector';
 import {useGlobalPreloader} from '../../../../../store/hooks';
 import {loadCar, removeCar, saveCar, setEntity, setPopupMessage} from '../../../../../store/actionCreators';
-import {getEntity, getCarName, getPriceMin, getPriceMax} from '../../../../../store/selectors';
+import {getEntity, getCarName, getPriceMin, getPriceMax, getCarNumber} from '../../../../../store/selectors';
 import {FAIL, SUCCESS, CAR_CATEGORY_CATALOG} from '../../../../../constants/settings';
 import {ADMIN_APP_URL, CAR_EDIT_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
 import './Car.scss';
@@ -162,6 +162,11 @@ function Car() {
                             entityField="priceMax"
                             errorText={priceMaxError}
                             resetErrorText={resetPriceMaxError}
+                        />
+                        <TextValueEditor
+                            label="Гос. номер"
+                            getValue={getCarNumber}
+                            entityField="number"
                         />
                     </div>
                     <EditorControlBlock

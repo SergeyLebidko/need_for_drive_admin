@@ -324,6 +324,13 @@ export async function saveCarInBase(car) {
         body.append('description', car.description);
     }
 
+    // Препятствуем появлению на бэкенде автомобильных номеров со значением "null" или "undefined"
+    if (car.number === null || car.number === undefined) {
+        body.append('number', '');
+    } else {
+        body.append('number', car.number);
+    }
+
     const method = car.id ? 'PUT' : 'POST';
     const options = {
         method,
