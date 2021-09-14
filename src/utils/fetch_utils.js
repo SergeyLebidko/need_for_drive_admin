@@ -314,6 +314,8 @@ export async function saveCarInBase(car) {
     if (car.thumbnail instanceof File) body.append('thumbnail', car.thumbnail);
     if (car.name) body.append('name', car.name);
     if (car.categoryId) body.append('categoryId', car.categoryId.id);
+    if (car.priceMin) body.append('priceMin', car.priceMin);
+    if (car.priceMax) body.append('priceMax', car.priceMax);
 
     // Препятствуем появлению на бэкенде описаний автомобилей со строкой "null" или "undefined"
     if (car.description === null || car.description === undefined) {

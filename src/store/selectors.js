@@ -48,4 +48,8 @@ export const gedCarDescription = state => state.entity.description;
 
 export const getCarCategory = state => state.entity.categoryId;
 
+export const getPriceMin = state => state.entity.priceMin;
+
+export const getPriceMax = state => state.entity.priceMax;
+
 export const getCarTank = state => state.entity.tank;

@@ -10,10 +10,11 @@ import TextValueEditor from '../../../../common/TextValueEditor/TextValueEditor'
 import CatalogSelector from '../../../../common/CatalogSelector/CatalogSelector';
 import {useGlobalPreloader} from '../../../../../store/hooks';
 import {loadCar, removeCar, saveCar, setEntity, setPopupMessage} from '../../../../../store/actionCreators';
-import {getEntity, getCarName} from '../../../../../store/selectors';
+import {getEntity, getCarName, getPriceMin, getPriceMax} from '../../../../../store/selectors';
 import {FAIL, SUCCESS, CAR_CATEGORY_CATALOG} from '../../../../../constants/settings';
 import {ADMIN_APP_URL, CAR_EDIT_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
 import './Car.scss';
+import {isWholePositiveOrZero} from "../../../../../utils/common_utils";
 
 function Car() {
     const [done, setDone] = useState(false);
@@ -26,6 +27,8 @@ function Car() {
     const [thumbnailError, setThumbnailError] = useState(null);
     const [nameError, setNameError] = useState(null);
     const [categoryError, setCategoryError] = useState(null);
+    const [priceMinError, setPriceMinError] = useState(null);
+    const [priceMaxError, setPriceMaxError] = useState(null);
 
     const location = useLocation();
     const {params: {carId}} = useRouteMatch();
@@ -56,13 +59,21 @@ function Car() {
     const resetThumbnailError = () => setThumbnailError(null);
     const resetNameError = () => setNameError(null);
     const resetCategoryError = () => setCategoryError(null);
+    const resetPriceMinError = () => setPriceMinError(null);
+    const resetPriceMaxError = () => setPriceMaxError(null);
 
     // Блок обработчиков кликов
     const handleSaveButtonClick = () => {
         if (!car.thumbnail) setThumbnailError('Выберите фото автомобиля');
         if (!car.name) setNameError('Введите название модели');
         if (!car.categoryId) setCategoryError('Выберите тип автомобиля');
-        if (!car.thumbnail || !car.name || !car.categoryId) return;
+
+        const priceMinError = !isWholePositiveOrZero(car.priceMin);
+        const priceMaxError = !isWholePositiveOrZero(car.priceMax);
+        const priceError = priceMinError || priceMaxError;
+        if (priceMinError) setPriceMinError("Некорректное значение начальной цены");
+        if (priceMaxError) setPriceMaxError("Некорректное значение конечной цены");
+        if (!car.thumbnail || !car.name || !car.categoryId || priceError) return;
 
         // Пытаемся выполнить сохранение. Если сохраняли новый автомобиль, то переходим на страницу редактирования
         showPreloader();
@@ -137,6 +148,20 @@ function Car() {
                             errorText={categoryError}
                             resetErrorText={resetCategoryError}
                             nameExtractor={category => `${category.name} (${category.description})`}
+                        />
+                        <TextValueEditor
+                            label="Начальная цена"
+                            getValue={getPriceMin}
+                            entityField="priceMin"
+                            errorText={priceMinError}
+                            resetErrorText={resetPriceMinError}
+                        />
+                        <TextValueEditor
+                            label="Конечная цена"
+                            getValue={getPriceMax}
+                            entityField="priceMax"
+                            errorText={priceMaxError}
+                            resetErrorText={resetPriceMaxError}
                         />
                     </div>
                     <EditorControlBlock

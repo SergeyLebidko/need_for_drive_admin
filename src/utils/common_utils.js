@@ -38,9 +38,9 @@ export function getFormattedPrice(price) {
     return new Intl.NumberFormat('ru-RU').format(price);
 }
 
-export function isNatural(value) {
+export function isWholePositiveOrZero(value) {
     const _value = +value;
-    return !(isNaN(_value) || _value < 0 || Math.floor(_value) !== _value || value === null || value === undefined);
+    return !(isNaN(_value) || _value < 0 || Math.floor(_value) !== _value || value === null || value === undefined || value === '');
 }
 
 export const prepareItemForSelector = (item, nameExtractor) => {

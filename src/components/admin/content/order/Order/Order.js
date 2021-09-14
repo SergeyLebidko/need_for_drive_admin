@@ -13,7 +13,7 @@ import PriceBlock from '../PriceBlock/PriceBlock';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import EditorControlBlock from '../../../../common/EditorControlBlock/EditorControlBlock';
 import {getEntity} from '../../../../../store/selectors';
-import {isNatural} from '../../../../../utils/common_utils';
+import {isWholePositiveOrZero} from '../../../../../utils/common_utils';
 import {ADMIN_APP_URL} from '../../../../../constants/urls';
 import {SUCCESS} from '../../../../../constants/settings';
 import './Order.scss';
@@ -62,7 +62,7 @@ function Order() {
         if (!order.pointId) setPointErrorText('Выберите пункт выдачи');
 
         // Проверяем корректность указания цены
-        const priceError = !order.price || !isNatural(order.price);
+        const priceError = !order.price || !isWholePositiveOrZero(order.price);
         if (priceError) setPriceErrorText('Введите корректное значение цены');
 
         if (!order.orderStatusId || !order.cityId || !order.pointId || priceError) return;

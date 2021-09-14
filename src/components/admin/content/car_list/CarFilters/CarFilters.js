@@ -14,7 +14,7 @@ import {
 } from '../../../../../constants/settings';
 import {NO_FILTER_VALUE} from '../../../../../constants/settings';
 import {ADMIN_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
-import {isNatural} from '../../../../../utils/common_utils';
+import {isWholePositiveOrZero} from '../../../../../utils/common_utils';
 import './CarFilters.scss';
 
 function CarFilters() {
@@ -40,8 +40,8 @@ function CarFilters() {
         const defaultTank = params.get(TANK_FILTER_NAME);
 
         setSelectedCategory(defaultCategory ? defaultCategory : NO_FILTER_VALUE);
-        setPriceMin(isNatural(defaultPriceMin) ? '' + defaultPriceMin : '');
-        setPriceMax(isNatural(defaultPriceMax) ? '' + defaultPriceMax : '');
+        setPriceMin(isWholePositiveOrZero(defaultPriceMin) ? '' + defaultPriceMin : '');
+        setPriceMax(isWholePositiveOrZero(defaultPriceMax) ? '' + defaultPriceMax : '');
         setSelectedTank(
             tankSelectorItems.find(item => item.value === defaultTank && item.value !== NO_FILTER_VALUE) ? defaultTank : NO_FILTER_VALUE
         );
@@ -74,8 +74,8 @@ function CarFilters() {
     // Обработчик применения фильтров
     const handleApplyFilters = () => {
         const priceError = 'Допустимы только целые неотрицательные значения';
-        const minError = priceMin !== '' && !isNatural(priceMin);
-        const maxError = priceMax !== '' && !isNatural(priceMax);
+        const minError = priceMin !== '' && !isWholePositiveOrZero(priceMin);
+        const maxError = priceMax !== '' && !isWholePositiveOrZero(priceMax);
         if (minError) setPriceMinError(priceError);
         if (maxError) setPriceMaxError(priceError);
         if (minError || maxError) return;
