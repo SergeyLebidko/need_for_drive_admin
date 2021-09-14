@@ -62,7 +62,7 @@ function Order() {
         if (!order.pointId) setPointErrorText('Выберите пункт выдачи');
 
         // Проверяем корректность указания цены
-        const priceError = !order.price || !isWholePositiveOrZero(order.price);
+        const priceError = !isWholePositiveOrZero(order.price);
         if (priceError) setPriceErrorText('Введите корректное значение цены');
 
         if (!order.orderStatusId || !order.cityId || !order.pointId || priceError) return;
