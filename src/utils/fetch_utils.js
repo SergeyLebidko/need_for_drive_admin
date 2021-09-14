@@ -314,10 +314,12 @@ export async function saveCarInBase(car) {
     if (car.thumbnail instanceof File) body.append('thumbnail', car.thumbnail);
     if (car.name) body.append('name', car.name);
     if (car.categoryId) body.append('categoryId', car.categoryId.id);
-    if (car.description !== null && car.description !== undefined) {
-        body.append('description', car.description);
-    } else {
+
+    // Препятствуем появлению на бэкенде описаний автомобилей со строкой "null" или "undefined"
+    if (car.description === null || car.description === undefined) {
         body.append('description', '');
+    } else {
+        body.append('description', car.description);
     }
 
     const method = car.id ? 'PUT' : 'POST';
