@@ -16,7 +16,7 @@ function TextValueEditor({label, getValue, entityField, errorText, resetErrorTex
         if (!nextValue.trim() && nextValue.length > 0) return;
 
         dispatch(setEntityField(entityField, nextValue));
-        resetErrorText();
+        if (resetErrorText) resetErrorText();
     };
 
     return (
@@ -33,6 +33,8 @@ function TextValueEditor({label, getValue, entityField, errorText, resetErrorTex
 }
 
 TextValueEditor.defaultProps = {
+    errorText: null,
+    resetErrorText: null,
     placeholder: ''
 }
 
