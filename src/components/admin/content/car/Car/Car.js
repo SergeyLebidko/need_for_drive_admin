@@ -9,13 +9,7 @@ import CarDescription from '../CarDescription/CarDescription';
 import TextValueEditor from '../../../../common/TextValueEditor/TextValueEditor';
 import CatalogSelector from '../../../../common/CatalogSelector/CatalogSelector';
 import {useGlobalPreloader} from '../../../../../store/hooks';
-import {
-    loadCar,
-    removeCar,
-    saveCar,
-    setEntity,
-    setPopupMessage
-} from '../../../../../store/actionCreators';
+import {loadCar, removeCar, saveCar, setEntity, setPopupMessage} from '../../../../../store/actionCreators';
 import {getEntity, getCarName} from '../../../../../store/selectors';
 import {FAIL, SUCCESS, CAR_CATEGORY_CATALOG} from '../../../../../constants/settings';
 import {ADMIN_APP_URL, CAR_EDIT_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
