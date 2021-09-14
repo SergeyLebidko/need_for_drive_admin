@@ -10,7 +10,6 @@
 
   .editor_control_block {
     margin-top: $step * 8;
-    padding: $step * 2;
   }
 
   .car_photo_chooser, {
@@ -43,6 +42,7 @@
   }
 
   &__second_content_block {
+    padding: $step * 2;
     width: 100%;
   }
 
@@ -54,6 +54,12 @@
 
   &__settings_caption {
     font-size: 1.2em;
+  }
+
+  &__settings_block {
+    margin-top: $step * 2;
+    display: flex;
+    flex-wrap: wrap;
   }
 }
 

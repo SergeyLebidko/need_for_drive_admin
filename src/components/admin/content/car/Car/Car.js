@@ -120,6 +120,9 @@ function Car() {
                 </div>
                 <div className="car__content car__second_content_block">
                     <h1 className="car__settings_caption">Настройки автомобиля</h1>
+                    <div className="car__settings_block">
+                        Блок с настройками автомобиля
+                    </div>
                     <EditorControlBlock
                         handleSave={handleSaveButtonClick}
                         handleCancel={handleCancelButtonClick}
