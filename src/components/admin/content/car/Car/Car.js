@@ -10,11 +10,19 @@ import TextValueEditor from '../../../../common/TextValueEditor/TextValueEditor'
 import CatalogSelector from '../../../../common/CatalogSelector/CatalogSelector';
 import {useGlobalPreloader} from '../../../../../store/hooks';
 import {loadCar, removeCar, saveCar, setEntity, setPopupMessage} from '../../../../../store/actionCreators';
-import {getEntity, getCarName, getPriceMin, getPriceMax, getCarNumber} from '../../../../../store/selectors';
 import {FAIL, SUCCESS, CAR_CATEGORY_CATALOG} from '../../../../../constants/settings';
 import {ADMIN_APP_URL, CAR_EDIT_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
+import {isWholePositiveOrZero} from '../../../../../utils/common_utils';
+import {
+    getEntity,
+    getCarName,
+    getPriceMin,
+    getPriceMax,
+    getCarNumber,
+    getCarTank
+} from '../../../../../store/selectors';
 import './Car.scss';
-import {isWholePositiveOrZero} from "../../../../../utils/common_utils";
+
 
 function Car() {
     const [done, setDone] = useState(false);
@@ -29,6 +37,7 @@ function Car() {
     const [categoryError, setCategoryError] = useState(null);
     const [priceMinError, setPriceMinError] = useState(null);
     const [priceMaxError, setPriceMaxError] = useState(null);
+    const [tankError, setTankError] = useState(null);
 
     const location = useLocation();
     const {params: {carId}} = useRouteMatch();
@@ -61,6 +70,7 @@ function Car() {
     const resetCategoryError = () => setCategoryError(null);
     const resetPriceMinError = () => setPriceMinError(null);
     const resetPriceMaxError = () => setPriceMaxError(null);
+    const resetTankError = () => setTankError(null);
 
     // Блок обработчиков кликов
     const handleSaveButtonClick = () => {
@@ -73,7 +83,11 @@ function Car() {
         const priceError = priceMinError || priceMaxError;
         if (priceMinError) setPriceMinError("Некорректное значение начальной цены");
         if (priceMaxError) setPriceMaxError("Некорректное значение конечной цены");
-        if (!car.thumbnail || !car.name || !car.categoryId || priceError) return;
+
+        const tankError = car.tank !== '' && (!isWholePositiveOrZero(car.tank) || car.tank > 100);
+        if (tankError) setTankError("Введите корректный уровень топлива (от 0 до 100%)");
+
+        if (!car.thumbnail || !car.name || !car.categoryId || priceError || tankError) return;
 
         // Пытаемся выполнить сохранение. Если сохраняли новый автомобиль, то переходим на страницу редактирования
         showPreloader();
@@ -167,6 +181,13 @@ function Car() {
                             label="Гос. номер"
                             getValue={getCarNumber}
                             entityField="number"
+                        />
+                        <TextValueEditor
+                            label="Уровень топлива"
+                            getValue={getCarTank}
+                            entityField="tank"
+                            errorText={tankError}
+                            resetErrorText={resetTankError}
                         />
                     </div>
                     <EditorControlBlock

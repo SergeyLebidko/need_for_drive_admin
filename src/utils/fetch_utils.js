@@ -311,25 +311,23 @@ export async function saveCarInBase(car) {
 
     const body = new FormData();
 
+    // Обрабатываем сохранение обязательных полей
+    // Условные операторы используем для более легкого обнаружения ошибок сохранения
     if (car.thumbnail instanceof File) body.append('thumbnail', car.thumbnail);
     if (car.name) body.append('name', car.name);
     if (car.categoryId) body.append('categoryId', car.categoryId.id);
     if (car.priceMin) body.append('priceMin', car.priceMin);
     if (car.priceMax) body.append('priceMax', car.priceMax);
 
-    // Препятствуем появлению на бэкенде описаний автомобилей со строкой "null" или "undefined"
-    if (car.description === null || car.description === undefined) {
-        body.append('description', '');
-    } else {
-        body.append('description', car.description);
-    }
-
-    // Препятствуем появлению на бэкенде автомобильных номеров со значением "null" или "undefined"
-    if (car.number === null || car.number === undefined) {
-        body.append('number', '');
-    } else {
-        body.append('number', car.number);
-    }
+    // Обрабатываем сохранение необязательных полей
+    // При этом препятствуем появлению на бэкенде значений "null" или "undefined"
+    ['description', 'number', 'tank'].forEach(field => {
+        if (car[field] === null || car[field] === undefined) {
+            body.append(field, '');
+        } else {
+            body.append(field, car[field]);
+        }
+    });
 
     const method = car.id ? 'PUT' : 'POST';
     const options = {
