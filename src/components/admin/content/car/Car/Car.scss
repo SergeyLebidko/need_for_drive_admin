@@ -4,6 +4,7 @@
 @import '../CarPhotoChooser/CarPhotoChooser';
 @import '../CarTankViewer/CarTankViewer';
 @import '../CarDescription/CarDescription';
+@import '../CarName/CarName';
 @import '../CarCategory/CarCategory';
 
 .car {
@@ -27,7 +28,7 @@
   }
 
   .car_category {
-    margin-top: $step * 2;
+    margin: ($step * 2) 0 0 0;
   }
 
   &__content_wrapper {
@@ -91,6 +92,19 @@
   .car {
     .editor_control_block {
       margin-top: $step * 12;
+    }
+
+    .car_name, .car_category {
+      width: calc(50% - 16px);
+    }
+
+    .car_category {
+      margin: 0 0 0 ($step * 2);
+    }
+
+    &__settings_block {
+      flex-direction: row;
+      flex-wrap: wrap;
     }
   }
 }
