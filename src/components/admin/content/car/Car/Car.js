@@ -5,6 +5,7 @@ import CarPhotoChooser from '../CarPhotoChooser/CarPhotoChooser';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import EditorControlBlock from '../../../../common/EditorControlBlock/EditorControlBlock';
 import CarTankViewer from '../CarTankViewer/CarTankViewer';
+import CarDescription from '../CarDescription/CarDescription';
 import {useGlobalPreloader} from '../../../../../store/hooks';
 import {
     loadCar,
@@ -114,6 +115,7 @@ function Car() {
                     <CarPhotoChooser errorText={thumbnailError} resetErrorText={resetThumbnailError}/>
                     <div>
                         <CarTankViewer/>
+                        <CarDescription/>
                     </div>
                 </div>
                 <div className="car__content car__second_content_block">

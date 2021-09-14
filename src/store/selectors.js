@@ -47,3 +47,5 @@ export const getCarName = state => state.entity.name;
 export const getCarCategory = state => state.entity.categoryId;
 
 export const getCarTank = state => state.entity.tank;
+
+export const gedCarDescription = state => state.entity.description;

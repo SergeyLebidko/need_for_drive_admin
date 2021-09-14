@@ -1,0 +1,23 @@
+@import '../../../../../styles/vars';
+
+.car_description {
+  padding: $step * 2;
+  display: flex;
+  flex-direction: column;
+
+  label {
+    display: inline-block;
+    color: $gray;
+    margin-bottom: $step;
+  }
+
+  textarea {
+    box-sizing: border-box;
+    min-height: $step * 15;
+    resize: none;
+    outline: none;
+    border: 1px solid $separator-color;
+    border-radius: $small-radius;
+    padding: $step;
+  }
+}
