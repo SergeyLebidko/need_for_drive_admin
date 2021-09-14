@@ -6,7 +6,10 @@
   &__value_block {
     display: flex;
     justify-content: space-between;
-    color: $gray;
-    margin-bottom: $step * 2;
+    margin-bottom: $step;
+
+    span {
+      color: $gray;
+    }
   }
 }

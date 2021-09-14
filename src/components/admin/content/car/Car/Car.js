@@ -4,6 +4,7 @@ import {useHistory, useLocation, useRouteMatch} from 'react-router-dom';
 import CarPhotoChooser from '../CarPhotoChooser/CarPhotoChooser';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import EditorControlBlock from '../../../../common/EditorControlBlock/EditorControlBlock';
+import CarTankViewer from '../CarTankViewer/CarTankViewer';
 import {useGlobalPreloader} from '../../../../../store/hooks';
 import {
     loadCar,
@@ -111,6 +112,9 @@ function Car() {
             <div className="car__content_wrapper">
                 <div className="car__content car__first_content_block">
                     <CarPhotoChooser errorText={thumbnailError} resetErrorText={resetThumbnailError}/>
+                    <div>
+                        <CarTankViewer/>
+                    </div>
                 </div>
                 <div className="car__content car__second_content_block">
                     <h1 className="car__settings_caption">Настройки автомобиля</h1>

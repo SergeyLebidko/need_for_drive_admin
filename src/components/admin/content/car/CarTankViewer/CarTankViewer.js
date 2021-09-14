@@ -13,7 +13,7 @@ function CarTankViewer() {
         <div className="car_tank_viewer">
             <div className="car_tank_viewer__value_block">
                 <span>Заполнено</span>
-                <span>{hasTankValue ? tank : '-'}</span>
+                <span>{hasTankValue ? `${tank}%` : '-'}</span>
             </div>
             <LineIndicator value={hasTankValue ? tank : 0}/>
         </div>
