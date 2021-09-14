@@ -22,8 +22,11 @@ function CarName({errorText, resetErrorText}) {
 
     return (
         <div className="car_name">
-            <TextField label="Модель автомобиля" value={name} handleChangeValue={handleNameChange}
-                       errorText={errorText}/>
+            <TextField
+                label="Модель автомобиля"
+                value={name} handleChangeValue={handleNameChange}
+                errorText={errorText}
+            />
         </div>
     );
 }
