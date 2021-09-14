@@ -313,7 +313,12 @@ export async function saveCarInBase(car) {
 
     if (car.thumbnail instanceof File) body.append('thumbnail', car.thumbnail);
     if (car.name) body.append('name', car.name);
-    if (car.description) body.append('description', car.description);
+    if (car.categoryId) body.append('categoryId', car.categoryId.id);
+    if (car.description !== null && car.description !== undefined) {
+        body.append('description', car.description);
+    } else {
+        body.append('description', '');
+    }
 
     const method = car.id ? 'PUT' : 'POST';
     const options = {

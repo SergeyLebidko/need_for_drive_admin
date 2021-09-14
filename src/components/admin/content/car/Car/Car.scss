@@ -4,6 +4,7 @@
 @import '../CarPhotoChooser/CarPhotoChooser';
 @import '../CarTankViewer/CarTankViewer';
 @import '../CarDescription/CarDescription';
+@import '../CarCategory/CarCategory';
 
 .car {
   @include content_mixin;
@@ -23,6 +24,10 @@
 
   .car_description {
     flex: 1;
+  }
+
+  .car_category {
+    margin-top: $step * 2;
   }
 
   &__content_wrapper {

@@ -7,6 +7,7 @@ import EditorControlBlock from '../../../../common/EditorControlBlock/EditorCont
 import CarTankViewer from '../CarTankViewer/CarTankViewer';
 import CarDescription from '../CarDescription/CarDescription';
 import CarName from '../CarName/CarName';
+import CarCategory from '../CarCategory/CarCategory';
 import {useGlobalPreloader} from '../../../../../store/hooks';
 import {
     loadCar,
@@ -30,6 +31,7 @@ function Car() {
 
     const [thumbnailError, setThumbnailError] = useState(null);
     const [nameError, setNameError] = useState(null);
+    const [categoryError, setCategoryError] = useState(null);
 
     const location = useLocation();
     const {params: {carId}} = useRouteMatch();
@@ -59,12 +61,14 @@ function Car() {
     // Блок функций сброса ошибок
     const resetThumbnailError = () => setThumbnailError(null);
     const resetNameError = () => setNameError(null);
+    const resetCategoryError = () => setCategoryError(null);
 
     // Блок обработчиков кликов
     const handleSaveButtonClick = () => {
         if (!car.thumbnail) setThumbnailError('Выберите фото автомобиля');
         if (!car.name) setNameError('Введите название модели');
-        if (!car.thumbnail || !car.name) return;
+        if (!car.categoryId) setCategoryError('Выберите тип автомобиля');
+        if (!car.thumbnail || !car.name || !car.categoryId) return;
 
         // Пытаемся выполнить сохранение. Если сохраняли новый автомобиль, то переходим на страницу редактирования
         showPreloader();
@@ -126,6 +130,7 @@ function Car() {
                     <h1 className="car__settings_caption">Настройки автомобиля</h1>
                     <div className="car__settings_block">
                         <CarName errorText={nameError} resetErrorText={resetNameError}/>
+                        <CarCategory errorText={categoryError} resetErrorText={resetCategoryError}/>
                     </div>
                     <EditorControlBlock
                         handleSave={handleSaveButtonClick}
