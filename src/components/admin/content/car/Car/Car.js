@@ -6,7 +6,7 @@ import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import EditorControlBlock from '../../../../common/EditorControlBlock/EditorControlBlock';
 import CarTankViewer from '../CarTankViewer/CarTankViewer';
 import CarDescription from '../CarDescription/CarDescription';
-import CarName from '../CarName/CarName';
+import TextValueEditor from '../../../../common/TextValueEditor/TextValueEditor';
 import CarCategory from '../CarCategory/CarCategory';
 import {useGlobalPreloader} from '../../../../../store/hooks';
 import {
@@ -16,7 +16,7 @@ import {
     setEntity,
     setPopupMessage
 } from '../../../../../store/actionCreators';
-import {getEntity} from '../../../../../store/selectors';
+import {getEntity, getCarName} from '../../../../../store/selectors';
 import {FAIL, SUCCESS} from '../../../../../constants/settings';
 import {ADMIN_APP_URL, CAR_EDIT_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
 import './Car.scss';
@@ -129,7 +129,13 @@ function Car() {
                 <div className="car__content car__second_content_block">
                     <h1 className="car__settings_caption">Настройки автомобиля</h1>
                     <div className="car__settings_block">
-                        <CarName errorText={nameError} resetErrorText={resetNameError}/>
+                        <TextValueEditor
+                            label="Модель автомобиля"
+                            getValue={getCarName}
+                            entityField="name"
+                            errorText={nameError}
+                            resetErrorText={resetNameError}
+                        />
                         <CarCategory errorText={categoryError} resetErrorText={resetCategoryError}/>
                     </div>
                     <EditorControlBlock
