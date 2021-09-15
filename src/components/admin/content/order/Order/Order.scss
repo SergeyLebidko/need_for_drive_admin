@@ -11,10 +11,6 @@
 .order {
   @include content_mixin;
 
-  .place_block, .rate_block, .option_block, .date_block, .price_block, .car_block {
-    margin-top: $step * 4;
-  }
-
   .editor_control_block {
     margin-top: $step * 8;
   }

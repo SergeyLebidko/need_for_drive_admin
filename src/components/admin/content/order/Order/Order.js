@@ -5,17 +5,16 @@ import {useGlobalPreloader} from '../../../../../store/hooks';
 import {loadOrder, removeOrder, updateOrder, setPopupMessage} from '../../../../../store/actionCreators';
 import PlaceBlock from '../PlaceBlock/PlaceBlock';
 import CarBlock from '../CarBlock/CarBlock';
-import RateBlock from '../RateBlock/RateBlock';
 import OptionBlock from '../OptionBlock/OptionBlock';
 import DateBlock from '../DateBlock/DateBlock';
 import PriceBlock from '../PriceBlock/PriceBlock';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import EditorControlBlock from '../../../../common/EditorControlBlock/EditorControlBlock';
 import CatalogSelector from '../../../../common/CatalogSelector/CatalogSelector';
-import {getEntity, getOrderStatus} from '../../../../../store/selectors';
+import {getEntity, getOrderStatus, getOrderRate} from '../../../../../store/selectors';
 import {isWholePositiveOrZero} from '../../../../../utils/common_utils';
 import {ADMIN_APP_URL} from '../../../../../constants/urls';
-import {STATUS_LIST_CATALOG, SUCCESS} from '../../../../../constants/settings';
+import {RATE_LIST_CATALOG, STATUS_LIST_CATALOG, SUCCESS} from '../../../../../constants/settings';
 import './Order.scss';
 
 function Order() {
@@ -34,6 +33,8 @@ function Order() {
     const location = useLocation();
     const {params: {orderId}} = useRouteMatch();
     const history = useHistory();
+
+    const rateNameExtractor = rate => `${rate.rateTypeId.name} (${rate.price}р./${rate.rateTypeId.unit})`
 
     // При монтировании пытаемся загрузить заказ
     useEffect(() => {
@@ -117,7 +118,14 @@ function Order() {
                 />
                 <CarBlock/>
                 <DateBlock/>
-                <RateBlock/>
+                <CatalogSelector
+                    label="Тариф"
+                    catalogName={RATE_LIST_CATALOG}
+                    entityField="rateId"
+                    fieldGetter={getOrderRate}
+                    nameExtractor={rateNameExtractor}
+                    enableEmpty
+                />
                 <OptionBlock/>
                 <PriceBlock errorText={priceErrorText} resetErrorText={resetPriceErrorText}/>
                 <EditorControlBlock

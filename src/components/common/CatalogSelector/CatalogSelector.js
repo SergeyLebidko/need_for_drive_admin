@@ -17,7 +17,8 @@ function CatalogSelector(props) {
         resetErrorText,
         nameExtractor,
         entityDataExtractor,
-        itemsListCreator
+        itemsListCreator,
+        enableEmpty
     } = props;
 
     const catalog = useSelector(getCatalog(catalogName));
@@ -30,16 +31,16 @@ function CatalogSelector(props) {
     useEffect(() => {
         let nextList;
         if (itemsListCreator) {
-            nextList = itemsListCreator(catalog, selectedValue);
+            nextList = itemsListCreator(catalog, selectedValue, enableEmpty);
         } else {
             nextList = [...catalog];
-            if (!selectedValue) nextList.unshift(null);
+            if (!selectedValue || enableEmpty) nextList.unshift(null);
         }
         setItemsForSelector(nextList);
     }, [selectedValue]);
 
     const handleSelect = value => {
-        let nextFieldValue = catalog.find(item => item.id === value);
+        let nextFieldValue = catalog.find(item => item.id === value) || null;
         nextFieldValue = entityDataExtractor ? entityDataExtractor(nextFieldValue) : nextFieldValue;
         dispatch(setEntityField(entityField, nextFieldValue));
         if (resetErrorText) resetErrorText();
@@ -63,7 +64,8 @@ CatalogSelector.defaulpProps = {
     entityDataExtractor: null,
     itemsListCreator: null,
     errorText: null,
-    resetErrorText: null
+    resetErrorText: null,
+    removeEmptyAfterSelection: false
 }
 
 CatalogSelector.propTypes = {
@@ -75,7 +77,8 @@ CatalogSelector.propTypes = {
     resetErrorText: PropTypes.func,
     nameExtractor: PropTypes.func,
     entityDataExtractor: PropTypes.func,
-    itemsListCreator: PropTypes.func
+    itemsListCreator: PropTypes.func,
+    enableEmpty: PropTypes.bool
 }
 
 export default CatalogSelector;
