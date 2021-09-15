@@ -7,11 +7,11 @@ import PlaceBlock from '../PlaceBlock/PlaceBlock';
 import CarBlock from '../CarBlock/CarBlock';
 import OptionBlock from '../OptionBlock/OptionBlock';
 import DateBlock from '../DateBlock/DateBlock';
-import PriceBlock from '../PriceBlock/PriceBlock';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import EditorControlBlock from '../../../../common/EditorControlBlock/EditorControlBlock';
 import CatalogSelector from '../../../../common/CatalogSelector/CatalogSelector';
-import {getEntity, getOrderStatus, getOrderRate} from '../../../../../store/selectors';
+import TextValueEditor from '../../../../common/TextValueEditor/TextValueEditor';
+import {getEntity, getOrderStatus, getOrderRate, getOrderPrice} from '../../../../../store/selectors';
 import {isWholePositiveOrZero} from '../../../../../utils/common_utils';
 import {ADMIN_APP_URL} from '../../../../../constants/urls';
 import {RATE_LIST_CATALOG, STATUS_LIST_CATALOG, SUCCESS} from '../../../../../constants/settings';
@@ -63,7 +63,7 @@ function Order() {
         if (!order.pointId) setPointErrorText('Выберите пункт выдачи');
 
         // Проверяем корректность указания цены
-        const priceError = !isWholePositiveOrZero(order.price);
+        const priceError = (order.price !== null && order.price !== undefined) && !isWholePositiveOrZero(order.price);
         if (priceError) setPriceErrorText('Введите корректное значение цены');
 
         if (!order.orderStatusId || !order.cityId || !order.pointId || priceError) return;
@@ -127,7 +127,14 @@ function Order() {
                     enableEmpty
                 />
                 <OptionBlock/>
-                <PriceBlock errorText={priceErrorText} resetErrorText={resetPriceErrorText}/>
+                <TextValueEditor
+                    label="Цена"
+                    getValue={getOrderPrice}
+                    entityField="price"
+                    errorText={priceErrorText}
+                    resetErrorText={resetPriceErrorText}
+                    setNullIfEmpty
+                />
                 <EditorControlBlock
                     handleCancel={handleCancelButtonClick}
                     handleSave={handleSaveButtonClick}
