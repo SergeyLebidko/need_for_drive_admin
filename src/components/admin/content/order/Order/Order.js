@@ -102,39 +102,41 @@ function Order() {
             <h1 className="order__caption">Заказ №{orderId}</h1>
             {done &&
             <div className="order__content">
-                <CatalogSelector
-                    label="Статус заказа"
-                    catalogName={STATUS_LIST_CATALOG}
-                    entityField="orderStatusId"
-                    fieldGetter={getOrderStatus}
-                    errorText={statusErrorText}
-                    resetErrorText={resetStatusErrorText}
-                />
-                <PlaceBlock
-                    cityErrorText={cityErrorText}
-                    pointErrorText={pointErrorText}
-                    resetCityErrorText={resetCityErrorText}
-                    resetPointErrorText={resetPointErrorText}
-                />
-                <CarBlock/>
-                <DateBlock/>
-                <CatalogSelector
-                    label="Тариф"
-                    catalogName={RATE_LIST_CATALOG}
-                    entityField="rateId"
-                    fieldGetter={getOrderRate}
-                    nameExtractor={rateNameExtractor}
-                    enableEmpty
-                />
-                <OptionBlock/>
-                <TextValueEditor
-                    label="Цена"
-                    getValue={getOrderPrice}
-                    entityField="price"
-                    errorText={priceErrorText}
-                    resetErrorText={resetPriceErrorText}
-                    setNullIfEmpty
-                />
+                <div className="order__settings_block">
+                    <CatalogSelector
+                        label="Статус заказа"
+                        catalogName={STATUS_LIST_CATALOG}
+                        entityField="orderStatusId"
+                        fieldGetter={getOrderStatus}
+                        errorText={statusErrorText}
+                        resetErrorText={resetStatusErrorText}
+                    />
+                    <PlaceBlock
+                        cityErrorText={cityErrorText}
+                        pointErrorText={pointErrorText}
+                        resetCityErrorText={resetCityErrorText}
+                        resetPointErrorText={resetPointErrorText}
+                    />
+                    <CarBlock/>
+                    <DateBlock/>
+                    <CatalogSelector
+                        label="Тариф"
+                        catalogName={RATE_LIST_CATALOG}
+                        entityField="rateId"
+                        fieldGetter={getOrderRate}
+                        nameExtractor={rateNameExtractor}
+                        enableEmpty
+                    />
+                    <OptionBlock/>
+                    <TextValueEditor
+                        label="Цена"
+                        getValue={getOrderPrice}
+                        entityField="price"
+                        errorText={priceErrorText}
+                        resetErrorText={resetPriceErrorText}
+                        setNullIfEmpty
+                    />
+                </div>
                 <EditorControlBlock
                     handleCancel={handleCancelButtonClick}
                     handleSave={handleSaveButtonClick}

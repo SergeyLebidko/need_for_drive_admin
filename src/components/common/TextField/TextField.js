@@ -32,7 +32,10 @@ TextField.defaultProps = {
 
 TextField.propTypes = {
     label: PropTypes.string,
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]),
     handleChangeValue: PropTypes.func,
     errorText: PropTypes.string,
     placeholder: PropTypes.string
