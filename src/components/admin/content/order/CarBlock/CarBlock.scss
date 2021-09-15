@@ -1,5 +1,6 @@
 @import '../../../../../styles/vars';
 @import '../../../../common/Selector/Selector';
+@import '../../../../common/CatalogSelector/CatalogSelector';
 @import '../../../../common/PhotoBlock/PhotoBlock';
 
 .car_block {
@@ -8,7 +9,7 @@
     flex-direction: column;
   }
 
-  .selector + .selector {
+  .catalog_selector + .selector {
     margin: $step 0 0 0;
   }
 
@@ -20,7 +21,7 @@
 
 @media (min-width: $tablet-start) and (max-width: $tablet-end) {
   .car_block {
-    .selector {
+    .catalog_selector, .selector {
       width: 12em;
     }
 
@@ -32,7 +33,7 @@
 
 @media (min-width: $desktop-min-start) and (max-width: $desktop-min-end) {
   .car_block {
-    .selector {
+    .catalog_selector, .selector {
       width: 13em;
     }
 
@@ -44,7 +45,7 @@
 
 @media (min-width: $desktop-start) {
   .car_block {
-    .selector {
+    .catalog_selector, .selector {
       width: 15em;
     }
 
@@ -60,7 +61,7 @@
       flex-direction: row;
     }
 
-    .selector + .selector {
+    .catalog_selector + .selector {
       margin: 0 0 0 $step;
     }
   }

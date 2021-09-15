@@ -1,23 +1,21 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import Selector from '../../../../common/Selector/Selector';
 import PhotoBlock from '../../../../common/PhotoBlock/PhotoBlock';
-import {getCatalog, getOrderCar, getOrderColor} from '../../../../../store/selectors';
-import {prepareItemForSelector, prepareItemsForSelector} from '../../../../../utils/common_utils';
+import CatalogSelector from '../../../../common/CatalogSelector/CatalogSelector';
+import {getOrderCar, getOrderColor} from '../../../../../store/selectors';
 import {setEntityField} from '../../../../../store/actionCreators';
 import {CAR_LIST_CATALOG, NO_FILTER_VALUE} from '../../../../../constants/settings';
 import './CarBlock.scss';
 
 function CarBlock() {
-    const carList = useSelector(getCatalog(CAR_LIST_CATALOG));
-
-    const [carListForSelector, setCarListForSelector] = useState([]);
-    const selectedCar = useSelector(getOrderCar);
-
     const [colorListForSelector, setColorListForSelector] = useState([]);
     const selectedColor = useSelector(getOrderColor);
+    const selectedCar = useSelector(getOrderCar);
 
     const dispatch = useDispatch();
+
+    const hasFirstEffect = useRef(true);
 
     const prepareColorForSelector = color => {
         if (!color) return {value: NO_FILTER_VALUE, name: 'Любой цвет'};
@@ -26,11 +24,15 @@ function CarBlock() {
 
     const prepareColorsForSelector = colors => colors.map(color => prepareColorForSelector(color));
 
+    // При выборе другой машины - сбрасываем и выбранный цвет
     useEffect(() => {
-        const nextList = [...carList];
-        if (!selectedCar) nextList.unshift(null);
-        setCarListForSelector(nextList)
+        if (hasFirstEffect.current) {
+            hasFirstEffect.current = false;
+            return;
+        }
+        dispatch(setEntityField('color', null));
     }, [selectedCar]);
+
 
     useEffect(() => {
         let nextList = [null];
@@ -41,16 +43,7 @@ function CarBlock() {
         setColorListForSelector(nextList);
     }, [selectedColor, selectedCar]);
 
-    const handleCarChange = value => {
-        if (value === prepareItemForSelector(selectedCar).value) return;
-        dispatch(setEntityField('carId', carList.find(car => car.id === value)));
-
-        // При выборе другого авто - сбрасываем также и выбранный ранее цвет
-        dispatch(setEntityField('color', null));
-    }
-
     const handleColorChange = value => {
-        if (value === prepareColorForSelector(selectedColor).value) return;
         if (value === NO_FILTER_VALUE) {
             dispatch(setEntityField('color', null));
             return;
@@ -61,11 +54,11 @@ function CarBlock() {
     return (
         <div className="car_block">
             <div className="car_block__selectors">
-                <Selector
+                <CatalogSelector
                     label="Автомобиль"
-                    items={prepareItemsForSelector(carListForSelector)}
-                    value={prepareItemForSelector(selectedCar).value}
-                    handleSelect={handleCarChange}
+                    catalogName={CAR_LIST_CATALOG}
+                    entityField="carId"
+                    fieldGetter={getOrderCar}
                 />
                 <Selector
                     label="Цвет"

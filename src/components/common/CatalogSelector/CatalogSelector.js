@@ -42,7 +42,7 @@ function CatalogSelector(props) {
         let nextFieldValue = catalog.find(item => item.id === value);
         nextFieldValue = entityDataExtractor ? entityDataExtractor(nextFieldValue) : nextFieldValue;
         dispatch(setEntityField(entityField, nextFieldValue));
-        resetErrorText();
+        if (resetErrorText) resetErrorText();
     }
 
     return (
@@ -61,7 +61,9 @@ function CatalogSelector(props) {
 CatalogSelector.defaulpProps = {
     nameExtractor: null,
     entityDataExtractor: null,
-    itemsListCreator: null
+    itemsListCreator: null,
+    errorText: null,
+    resetErrorText: null
 }
 
 CatalogSelector.propTypes = {
