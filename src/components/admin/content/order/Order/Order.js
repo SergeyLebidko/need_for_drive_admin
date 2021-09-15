@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useRouteMatch, useHistory, useLocation} from 'react-router-dom';
 import {useGlobalPreloader} from '../../../../../store/hooks';
 import {loadOrder, removeOrder, updateOrder, setPopupMessage} from '../../../../../store/actionCreators';
-import StatusBlock from '../StatusBlock/StatusBlock';
 import PlaceBlock from '../PlaceBlock/PlaceBlock';
 import CarBlock from '../CarBlock/CarBlock';
 import RateBlock from '../RateBlock/RateBlock';
@@ -12,10 +11,11 @@ import DateBlock from '../DateBlock/DateBlock';
 import PriceBlock from '../PriceBlock/PriceBlock';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import EditorControlBlock from '../../../../common/EditorControlBlock/EditorControlBlock';
-import {getEntity} from '../../../../../store/selectors';
+import CatalogSelector from '../../../../common/CatalogSelector/CatalogSelector';
+import {getEntity, getOrderStatus} from '../../../../../store/selectors';
 import {isWholePositiveOrZero} from '../../../../../utils/common_utils';
 import {ADMIN_APP_URL} from '../../../../../constants/urls';
-import {SUCCESS} from '../../../../../constants/settings';
+import {STATUS_LIST_CATALOG, SUCCESS} from '../../../../../constants/settings';
 import './Order.scss';
 
 function Order() {
@@ -101,7 +101,14 @@ function Order() {
             <h1 className="order__caption">Заказ №{orderId}</h1>
             {done &&
             <div className="order__content">
-                <StatusBlock errorText={statusErrorText} resetErrorText={resetStatusErrorText}/>
+                <CatalogSelector
+                    label="Статус заказа"
+                    catalogName={STATUS_LIST_CATALOG}
+                    entityField="orderStatusId"
+                    fieldGetter={getOrderStatus}
+                    errorText={statusErrorText}
+                    resetErrorText={resetStatusErrorText}
+                />
                 <PlaceBlock
                     cityErrorText={cityErrorText}
                     pointErrorText={pointErrorText}

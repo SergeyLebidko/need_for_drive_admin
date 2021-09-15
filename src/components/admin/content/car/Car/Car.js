@@ -19,7 +19,8 @@ import {
     getPriceMin,
     getPriceMax,
     getCarNumber,
-    getCarTank
+    getCarTank,
+    getCarCategory
 } from '../../../../../store/selectors';
 import './Car.scss';
 
@@ -159,6 +160,7 @@ function Car() {
                             label="Тип автомобиля"
                             catalogName={CAR_CATEGORY_CATALOG}
                             entityField="categoryId"
+                            fieldGetter={getCarCategory}
                             errorText={categoryError}
                             resetErrorText={resetCategoryError}
                             nameExtractor={category => `${category.name} (${category.description})`}

@@ -2,16 +2,16 @@ import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {useDispatch, useSelector} from 'react-redux';
 import Selector from '../Selector/Selector';
-import {getCarCategory, getCatalog} from '../../../store/selectors';
+import {getCatalog} from '../../../store/selectors';
 import {prepareItemForSelector, prepareItemsForSelector} from '../../../utils/common_utils';
 import {setEntityField} from '../../../store/actionCreators';
 import './CatalogSelector.scss';
 
-function CatalogSelector({label, catalogName, entityField, errorText, resetErrorText, nameExtractor}) {
+function CatalogSelector({label, catalogName, entityField, fieldGetter, errorText, resetErrorText, nameExtractor}) {
     const catalog = useSelector(getCatalog(catalogName));
 
     const [itemsForSelector, setItemsForSelector] = useState([]);
-    const selectedValue = useSelector(getCarCategory);
+    const selectedValue = useSelector(fieldGetter);
 
     const dispatch = useDispatch();
 
@@ -31,7 +31,7 @@ function CatalogSelector({label, catalogName, entityField, errorText, resetError
             <Selector
                 label={label}
                 items={prepareItemsForSelector(itemsForSelector, nameExtractor)}
-                value={prepareItemForSelector(selectedValue, nameExtractor)}
+                value={prepareItemForSelector(selectedValue, nameExtractor).value}
                 handleSelect={handleSelect}
                 errorText={errorText}
             />
@@ -47,6 +47,7 @@ CatalogSelector.propTypes = {
     label: PropTypes.string,
     catalogName: PropTypes.string,
     entityField: PropTypes.string,
+    fieldGetter: PropTypes.func,
     errorText: PropTypes.string,
     resetErrorText: PropTypes.func,
     nameExtractor: PropTypes.func
