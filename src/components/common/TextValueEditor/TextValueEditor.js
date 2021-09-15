@@ -23,10 +23,8 @@ function TextValueEditor(props) {
     const handleChangeValue = event => {
         let nextValue = event.target.value;
 
-        // Если указан соответствующий флаг - отсекаем попытки ввести строку только из одних пробелов
-        if (!enabledSpaceOnly) {
-            if (!nextValue.trim() && nextValue.length > 0) return
-        }
+        // Если указан соответствующий флаг - разрешаем вводить строки, состоящие из одних пробелов
+        if (!nextValue.trim() && nextValue.length > 0 && !enabledSpaceOnly) return;
 
         // Если указан соответствующий флаг, то пустую строку сохраняем в объекте как null
         if (nextValue === '' && setNullIfEmpty) nextValue = null;
