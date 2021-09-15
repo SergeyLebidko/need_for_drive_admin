@@ -1,12 +1,6 @@
 @import '../../../../../styles/vars';
 @import '../../../../../styles/common_presets';
 @import '../../../../common/EditorControlBlock/EditorControlBlock';
-@import '../PlaceBlock/PlaceBlock';
-@import '../RateBlock/RateBlock';
-@import '../OptionBlock/OptionBlock';
-@import '../DateBlock/DateBlock';
-@import '../PriceBlock/PriceBlock';
-@import '../CarBlock/CarBlock';
 
 .order {
   @include content_mixin;
