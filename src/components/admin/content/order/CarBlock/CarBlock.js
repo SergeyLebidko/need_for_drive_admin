@@ -24,7 +24,7 @@ function CarBlock() {
 
     const prepareColorsForSelector = colors => colors.map(color => prepareColorForSelector(color));
 
-    // При выборе другой машины - сбрасываем и выбранный цвет
+    // При выборе другой машины - сбрасываем и выбранный цвет. Отслеживаем первый запуск, чтоб не сбросить цвет сразу при монтировании
     useEffect(() => {
         if (hasFirstEffect.current) {
             hasFirstEffect.current = false;
@@ -33,14 +33,14 @@ function CarBlock() {
         dispatch(setEntityField('color', null));
     }, [selectedCar]);
 
-
     useEffect(() => {
-        let nextList = [null];
+        const colorsSet = new Set();
         if (selectedCar && selectedCar.colors) {
-            if (selectedColor && !selectedCar.colors.includes(selectedColor)) nextList.push(selectedColor);
-            nextList = nextList.concat(selectedCar.colors);
+            for (const color of selectedCar.colors) colorsSet.add(color);
         }
-        setColorListForSelector(nextList);
+        if (selectedColor) colorsSet.add(selectedColor);
+        colorsSet.add(null);
+        setColorListForSelector(Array.from(colorsSet).sort());
     }, [selectedColor, selectedCar]);
 
     const handleColorChange = value => {
