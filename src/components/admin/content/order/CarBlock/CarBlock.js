@@ -24,14 +24,17 @@ function CarBlock() {
 
     const prepareColorsForSelector = colors => colors.map(color => prepareColorForSelector(color));
 
-    // При выборе другой машины - сбрасываем и выбранный цвет. Отслеживаем первый запуск, чтоб не сбросить цвет сразу при монтировании
+    const carIdForEffect = selectedCar ? selectedCar.id : '';
+
+    // При выборе нового автомобиля сбрасываем выбранный цвет.
+    // При этом отбрасываем первый запуск хука, чтобы не сбросить цвет сразу же при монтировании.
     useEffect(() => {
         if (hasFirstEffect.current) {
             hasFirstEffect.current = false;
             return;
         }
         dispatch(setEntityField('color', null));
-    }, [selectedCar]);
+    }, [carIdForEffect]);
 
     useEffect(() => {
         const colorsSet = new Set();
