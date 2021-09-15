@@ -50,7 +50,13 @@ function Car() {
 
         // Если идентификатор автомобиля не указан в URL, то инициализируем пустую новую сущность в хранилище
         if (!carId) {
-            dispatch(setEntity({}));
+            dispatch(setEntity({
+                name: '',
+                priceMin: 0,
+                priceMax: 0,
+                number: '',
+                tank: 0
+            }));
             setDone(true);
             return;
         }
@@ -96,6 +102,7 @@ function Car() {
         dispatch(saveCar(car))
             .then(() => {
                 dispatch(setPopupMessage(SUCCESS, 'Автомобиль успешно сохранен'));
+                //TODO Исправить баг с некорректным переходом при сохранении авто
                 if (!carId) history.push(`/${ADMIN_APP_URL}/${CAR_EDIT_APP_URL}/${car.id}`);
             })
             .catch(err => setError(err))
