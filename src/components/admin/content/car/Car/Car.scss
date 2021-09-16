@@ -3,6 +3,7 @@
 @import '../CarPhotoChooser/CarPhotoChooser';
 @import '../CarTankViewer/CarTankViewer';
 @import '../CarDescription/CarDescription';
+@import '../CarColors/CarColors';
 @import '../../../../common/EditorControlBlock/EditorControlBlock';
 
 .car {
@@ -23,6 +24,10 @@
 
   .car_description {
     flex: 1;
+  }
+
+  .car_colors {
+    margin-top: $step * 3;
   }
 
   &__content_wrapper {

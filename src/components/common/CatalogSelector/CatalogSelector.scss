@@ -5,27 +5,3 @@
     width: 100%;
   }
 }
-
-@media (min-width: $tablet-start) and (max-width: $tablet-end) {
-  .catalog_selector {
-    .selector {
-      width: 12em;
-    }
-  }
-}
-
-@media (min-width: $desktop-min-start) and (max-width: $desktop-min-end) {
-  .catalog_selector {
-    .selector {
-      width: 13em;
-    }
-  }
-}
-
-@media (min-width: $desktop-start) {
-  .catalog_selector {
-    .selector {
-      width: 15em;
-    }
-  }
-}

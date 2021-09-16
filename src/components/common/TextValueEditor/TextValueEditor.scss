@@ -5,27 +5,3 @@
     width: 100%;
   }
 }
-
-@media (min-width: $tablet-start) and (max-width: $tablet-end) {
-  .text_value_editor {
-    .text_field {
-      width: 12em;
-    }
-  }
-}
-
-@media (min-width: $desktop-min-start) and (max-width: $desktop-min-end) {
-  .text_value_editor {
-    .text_field {
-      width: 13em;
-    }
-  }
-}
-
-@media (min-width: $desktop-start) {
-  .text_value_editor {
-    .text_field {
-      width: 15em;
-    }
-  }
-}

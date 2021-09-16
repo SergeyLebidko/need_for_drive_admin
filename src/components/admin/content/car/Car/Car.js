@@ -9,7 +9,7 @@ import CarDescription from '../CarDescription/CarDescription';
 import TextValueEditor from '../../../../common/TextValueEditor/TextValueEditor';
 import CatalogSelector from '../../../../common/CatalogSelector/CatalogSelector';
 import {useGlobalPreloader} from '../../../../../store/hooks';
-import {loadCar, removeCar, saveCar, setEntity, setPopupMessage} from '../../../../../store/actionCreators';
+import {initNewCar, loadCar, removeCar, saveCar, setPopupMessage} from '../../../../../store/actionCreators';
 import {FAIL, SUCCESS, CAR_CATEGORY_CATALOG} from '../../../../../constants/settings';
 import {ADMIN_APP_URL, CAR_EDIT_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
 import {isWholePositiveOrZero} from '../../../../../utils/common_utils';
@@ -23,6 +23,7 @@ import {
     getCarCategory
 } from '../../../../../store/selectors';
 import './Car.scss';
+import CarColors from "../CarColors/CarColors";
 
 
 function Car() {
@@ -47,24 +48,20 @@ function Car() {
     useEffect(() => {
         setDone(false);
         setError(null);
+        showPreloader();
 
         // Если идентификатор автомобиля не указан в URL, то инициализируем пустую новую сущность в хранилище
-        if (!carId) {
-            dispatch(setEntity({
-                name: '',
-                description: '',
-                priceMin: 0,
-                priceMax: 0,
-                number: '',
-                tank: 0
-            }));
-            setDone(true);
-            return;
+        let actionCreator, params;
+        if (carId) {
+            actionCreator = loadCar;
+            params = [carId];
+        } else {
+            actionCreator = initNewCar;
+            params = []
         }
 
-        // Если идентификатор автомобиля найден - пытаемся загрузить данные о нём
-        showPreloader();
-        dispatch(loadCar(carId))
+        // Запускаем необходимое действие
+        dispatch(actionCreator(...params))
             .catch(err => setError(err))
             .finally(() => {
                 setDone(true);
@@ -204,6 +201,7 @@ function Car() {
                             resetErrorText={resetTankError}
                         />
                     </div>
+                    <CarColors/>
                     <EditorControlBlock
                         handleSave={handleSaveButtonClick}
                         handleCancel={handleCancelButtonClick}

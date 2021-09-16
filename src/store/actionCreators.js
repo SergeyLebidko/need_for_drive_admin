@@ -190,6 +190,23 @@ export function updateOrder(order) {
     }
 }
 
+// Создатель действия для инициализации в хранилище нового автомобиля
+export function initNewCar() {
+    return async (dispatch, getState) => {
+        dispatch(setEntity({
+            name: '',
+            description: '',
+            priceMin: 0,
+            priceMax: 0,
+            number: '',
+            tank: 0
+        }));
+
+        // Загружаем необходимые каталоги
+        await loadCatalogs(dispatch, getState, [CAR_CATEGORY_CATALOG]);
+    }
+}
+
 // Создатель действия для загрузки автомобиля
 export function loadCar(carId) {
     return async (dispatch, getState) => {
@@ -202,7 +219,7 @@ export function loadCar(carId) {
 }
 
 // Создатель действия для удаления автомобиля
-export function removeCar(carId){
+export function removeCar(carId) {
     return async dispatch => {
         await removeCarInBase(carId);
         dispatch(setEntity({}));

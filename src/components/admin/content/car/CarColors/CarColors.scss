@@ -1,0 +1,24 @@
+@import '../../../../../styles/vars';
+@import '../../../../common/TextField/TextField';
+
+.car_colors {
+  width: 100%;
+}
+
+@media (min-width: $tablet-start) and (max-width: $tablet-end) {
+  .car_colors {
+    width: 12em;
+  }
+}
+
+@media (min-width: $desktop-min-start) and (max-width: $desktop-min-end) {
+  .car_colors {
+    width: 13em;
+  }
+}
+
+@media (min-width: $desktop-start) {
+  .car_colors {
+    width: 15em;
+  }
+}
