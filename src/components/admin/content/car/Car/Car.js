@@ -60,6 +60,9 @@ function Car() {
             params = []
         }
 
+        // Сбрасываем все ошибки полей ввода
+        resetAllErrors();
+
         // Запускаем необходимое действие
         dispatch(actionCreator(...params))
             .catch(err => setError(err))
@@ -76,6 +79,15 @@ function Car() {
     const resetPriceMinError = () => setPriceMinError(null);
     const resetPriceMaxError = () => setPriceMaxError(null);
     const resetTankError = () => setTankError(null);
+
+    const resetAllErrors = () => {
+        resetThumbnailError();
+        resetNameError();
+        resetCategoryError();
+        resetPriceMinError();
+        resetPriceMaxError();
+        resetTankError();
+    }
 
     // Блок обработчиков кликов
     const handleSaveButtonClick = () => {
