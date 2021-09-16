@@ -156,7 +156,7 @@ function Car() {
                 </div>
                 <div className="car__content car__second_content_block">
                     <h1 className="car__settings_caption">Настройки автомобиля</h1>
-                    <div>
+                    <div className="car__settings_block">
                         <TextValueEditor
                             label="Модель автомобиля"
                             getValue={getCarName}
@@ -173,6 +173,8 @@ function Car() {
                             resetErrorText={resetCategoryError}
                             nameExtractor={category => `${category.name} (${category.description})`}
                         />
+                    </div>
+                    <div className="car__settings_block">
                         <TextValueEditor
                             label="Начальная цена"
                             getValue={getPriceMin}
@@ -187,6 +189,8 @@ function Car() {
                             errorText={priceMaxError}
                             resetErrorText={resetPriceMaxError}
                         />
+                    </div>
+                    <div className="car__settings_block">
                         <TextValueEditor
                             label="Гос. номер"
                             getValue={getCarNumber}
