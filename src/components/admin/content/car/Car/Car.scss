@@ -134,3 +134,27 @@
     }
   }
 }
+
+@media (min-width: $tablet-start) and (max-width: $tablet-end) {
+  .car {
+    .selector, .text_field, .car_colors {
+      width: 12em;
+    }
+  }
+}
+
+@media (min-width: $desktop-min-start) and (max-width: $desktop-min-end) {
+  .car {
+    .selector, .text_field, .car_colors {
+      width: 13em;
+    }
+  }
+}
+
+@media (min-width: $desktop-start) {
+  .car {
+    .selector, .text_field, .car_colors {
+      width: 15em;
+    }
+  }
+}

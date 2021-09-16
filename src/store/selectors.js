@@ -55,3 +55,5 @@ export const getPriceMax = state => state.entity.priceMax;
 export const getCarTank = state => state.entity.tank;
 
 export const getCarNumber = state => state.entity.number;
+
+export const getCarColors = state => state.entity.colors;

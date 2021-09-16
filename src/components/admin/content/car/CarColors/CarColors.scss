@@ -3,22 +3,40 @@
 
 .car_colors {
   width: 100%;
-}
 
-@media (min-width: $tablet-start) and (max-width: $tablet-end) {
-  .car_colors {
-    width: 12em;
+  &__input_block {
+    display: flex;
+    align-items: flex-start;
+
+    button {
+      margin-left: $step;
+      padding: 3px 9px;
+      position: relative;
+      top: 19px;
+      font-size: 1.5em;
+      background-color: $white;
+      color: $gray-light;
+      border: 1px solid $gray-light;
+      border-radius: $small-radius;
+      cursor: pointer;
+
+      &:hover {
+        color: $gray;
+        border: 1px solid $gray;
+      }
+
+      &:active {
+        color: $black;
+        border: 1px solid $black;
+      }
+    }
   }
-}
 
-@media (min-width: $desktop-min-start) and (max-width: $desktop-min-end) {
-  .car_colors {
-    width: 13em;
-  }
-}
+  &__colors_block {
+    margin-top: $step * 2;
 
-@media (min-width: $desktop-start) {
-  .car_colors {
-    width: 15em;
+    li + li {
+      margin-top: $step;
+    }
   }
 }
