@@ -52,6 +52,7 @@ function Car() {
         if (!carId) {
             dispatch(setEntity({
                 name: '',
+                description: '',
                 priceMin: 0,
                 priceMax: 0,
                 number: '',
