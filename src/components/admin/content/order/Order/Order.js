@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {useRouteMatch, useHistory, useLocation} from 'react-router-dom';
-import {useGlobalPreloader} from '../../../../../store/hooks';
+import {useRouteMatch, useHistory} from 'react-router-dom';
+import {useEntityLoader, useGlobalPreloader} from '../../../../../store/hooks';
 import {loadOrder, removeOrder, updateOrder, setPopupMessage} from '../../../../../store/actionCreators';
 import PlaceBlock from '../PlaceBlock/PlaceBlock';
 import CarBlock from '../CarBlock/CarBlock';
@@ -30,30 +30,26 @@ function Order() {
     const [pointErrorText, setPointErrorText] = useState(null);
     const [priceErrorText, setPriceErrorText] = useState(null);
 
-    const location = useLocation();
     const {params: {id}} = useRouteMatch();
     const history = useHistory();
 
     const rateNameExtractor = rate => `${rate.rateTypeId.name} (${rate.price}р./${rate.rateTypeId.unit})`
-
-    // При монтировании пытаемся загрузить заказ
-    useEffect(() => {
-        showPreloader();
-        setDone(false);
-        setError(null);
-        dispatch(loadOrder(id))
-            .catch(err => setError(err))
-            .finally(() => {
-                setDone(true);
-                hidePreloader();
-            });
-    }, [location, id]);
 
     // Блок функций сброса ошибок
     const resetStatusErrorText = () => setStatusErrorText(null);
     const resetCityErrorText = () => setCityErrorText(null);
     const resetPointErrorText = () => setPointErrorText(null);
     const resetPriceErrorText = () => setPriceErrorText(null);
+
+    const resetAllErrors = () => {
+        resetStatusErrorText();
+        resetCityErrorText();
+        resetPointErrorText();
+        resetPriceErrorText();
+    }
+
+    // При монтировании пытаемся загрузить заказ
+    useEntityLoader(setDone, setError, resetAllErrors, loadOrder)
 
     // Блок обработчиков кликов
     const handleSaveButtonClick = () => {

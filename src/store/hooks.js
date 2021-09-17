@@ -66,7 +66,7 @@ export function useEntityLoader(doneSetter, errorSetter, errorResetFunc, loadEnt
 
     useEffect(() => {
         doneSetter(false);
-        setError(null);
+        errorSetter(null);
         showPreloader();
 
         let actionCreator, params;
@@ -81,7 +81,7 @@ export function useEntityLoader(doneSetter, errorSetter, errorResetFunc, loadEnt
         errorResetFunc();
 
         dispatch(actionCreator(...params))
-            .catch(err => setError(err))
+            .catch(err => errorSetter(err))
             .finally(() => {
                 doneSetter(true);
                 hidePreloader();
