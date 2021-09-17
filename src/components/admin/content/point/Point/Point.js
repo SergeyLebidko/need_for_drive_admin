@@ -6,16 +6,10 @@ import EditorControlBlock from '../../../../common/EditorControlBlock/EditorCont
 import CatalogSelector from '../../../../common/CatalogSelector/CatalogSelector';
 import TextValueEditor from '../../../../common/TextValueEditor/TextValueEditor';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
-import {
-    initNewPoint,
-    loadPoint,
-    removePoint,
-    savePoint,
-    setPopupMessage
-} from '../../../../../store/actionCreators';
+import {initNewPoint, loadPoint, removePoint, savePoint, setPopupMessage} from '../../../../../store/actionCreators';
 import {getEntity, getPointCity, getPointName, getPointAddress} from '../../../../../store/selectors';
 import {CITY_LIST_CATALOG, FAIL, SUCCESS} from '../../../../../constants/settings';
-import {ADMIN_APP_URL, CAR_EDIT_APP_URL, POINT_LIST_APP_URL} from '../../../../../constants/urls';
+import {ADMIN_APP_URL, POINT_EDIT_APP_URL, POINT_LIST_APP_URL} from '../../../../../constants/urls';
 import './Point.scss';
 
 function Point() {
@@ -74,7 +68,11 @@ function Point() {
 
     // Блок обработчиков кликов
     const handleSaveButtonClick = () => {
-        // TODO Вставить проверку ошибок
+        const {cityId, name, address} = point;
+        if (!cityId) setCityError('Выберите город');
+        if (!name) setPointNameError('Введите описание');
+        if (!address) setAddressError('Введите адрес пункта выдачи');
+        if (!cityId || !name || !address) return;
 
         // Пытаемся выполнить сохранение. Если сохраняли новый автомобиль, то переходим на страницу редактирования
         showPreloader();
@@ -82,7 +80,7 @@ function Point() {
         dispatch(savePoint(point))
             .then(id => {
                 dispatch(setPopupMessage(SUCCESS, 'Автомобиль успешно сохранен'));
-                if (!pointId) history.push(`/${ADMIN_APP_URL}/${CAR_EDIT_APP_URL}/${id}`);
+                if (!pointId) history.push(`/${ADMIN_APP_URL}/${POINT_EDIT_APP_URL}/${id}`);
             })
             .catch(err => setError(err))
             .finally(() => hidePreloader());

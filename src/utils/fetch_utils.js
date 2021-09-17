@@ -350,11 +350,14 @@ export async function removePointInBase(pointId) {
 }
 
 export async function savePointInBase(point) {
+    const url = point.id ? `${POINT_URL}/${point.id}` : POINT_URL;
+    const method = point.id ? 'PUT' : 'POST';
+
     return await executeFetchWithRefresh(
         executeFetch,
-        `${POINT_URL}/${point.id}`,
+        url,
         {
-            method: 'PUT',
+            method,
             headers: {
                 'Content-Type': 'application/json'
             },
