@@ -43,10 +43,12 @@ export function isWholePositiveOrZero(value) {
     return !(isNaN(_value) || _value < 0 || Math.floor(_value) !== _value || value === null || value === undefined || value === '');
 }
 
-export const prepareItemForSelector = (item, nameExtractor) => {
+export function prepareItemForSelector(item, nameExtractor) {
     if (!item) return {value: NO_FILTER_VALUE, name: 'Не выбран'};
     if (nameExtractor) return {value: item.id, name: nameExtractor(item)};
     return {value: item.id, name: item.name};
 }
 
-export const prepareItemsForSelector = (items, nameExtractor) => items.map(item => prepareItemForSelector(item, nameExtractor));
+export function prepareItemsForSelector(items, nameExtractor) {
+    return items.map(item => prepareItemForSelector(item, nameExtractor));
+}
