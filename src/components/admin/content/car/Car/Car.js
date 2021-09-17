@@ -45,33 +45,6 @@ function Car() {
     const {params: {id}} = useRouteMatch();
     const history = useHistory();
 
-    // useEffect(() => {
-    //     setDone(false);
-    //     setError(null);
-    //     showPreloader();
-    //
-    //     // Если идентификатор автомобиля не указан в URL, то инициализируем пустую новую сущность в хранилище
-    //     let actionCreator, params;
-    //     if (id) {
-    //         actionCreator = loadCar;
-    //         params = [id];
-    //     } else {
-    //         actionCreator = initNewCar;
-    //         params = []
-    //     }
-    //
-    //     // Сбрасываем все ошибки полей ввода
-    //     resetAllErrors();
-    //
-    //     // Запускаем необходимое действие
-    //     dispatch(actionCreator(...params))
-    //         .catch(err => setError(err))
-    //         .finally(() => {
-    //             setDone(true);
-    //             hidePreloader();
-    //         });
-    // }, [location, id]);
-
     // Блок функций сброса ошибок
     const resetThumbnailError = () => setThumbnailError(null);
     const resetNameError = () => setNameError(null);
