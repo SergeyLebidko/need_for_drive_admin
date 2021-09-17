@@ -6,7 +6,13 @@ import EditorControlBlock from '../../../../common/EditorControlBlock/EditorCont
 import CatalogSelector from '../../../../common/CatalogSelector/CatalogSelector';
 import TextValueEditor from '../../../../common/TextValueEditor/TextValueEditor';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
-import {initNewPoint, loadPoint, savePoint, setPopupMessage} from '../../../../../store/actionCreators';
+import {
+    initNewPoint,
+    loadPoint,
+    removePoint,
+    savePoint,
+    setPopupMessage
+} from '../../../../../store/actionCreators';
 import {getEntity, getPointCity, getPointName, getPointAddress} from '../../../../../store/selectors';
 import {CITY_LIST_CATALOG, FAIL, SUCCESS} from '../../../../../constants/settings';
 import {ADMIN_APP_URL, CAR_EDIT_APP_URL, POINT_LIST_APP_URL} from '../../../../../constants/urls';
@@ -95,7 +101,20 @@ function Point() {
             dispatch(setPopupMessage(FAIL, 'Нельзя удалить не сохраненный пункт выдачи'));
             return;
         }
-        // TODO Удаление пункта выдачи
+
+        showPreloader();
+        setDone(false);
+        setError(null);
+        dispatch(removePoint(pointId))
+            .then(() => {
+                dispatch(setPopupMessage(SUCCESS, 'Пункт выдачи успешно удален'));
+                history.push(`/${ADMIN_APP_URL}`);
+            })
+            .catch(err => {
+                setError(err);
+                setDone(true);
+            })
+            .finally(() => hidePreloader());
     }
 
     if (error) return <ErrorPane error={error}/>;
