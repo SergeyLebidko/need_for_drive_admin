@@ -54,7 +54,7 @@ function Point() {
         setError(null);
         dispatch(savePoint(point))
             .then(createdId => {
-                dispatch(setPopupMessage(SUCCESS, 'Автомобиль успешно сохранен'));
+                dispatch(setPopupMessage(SUCCESS, 'Пункт выдачи успешно сохранен'));
                 if (!id) history.push(`/${ADMIN_APP_URL}/${POINT_EDIT_APP_URL}/${createdId}`);
             })
             .catch(err => setError(err))
