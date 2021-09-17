@@ -31,7 +31,7 @@ function Order() {
     const [priceErrorText, setPriceErrorText] = useState(null);
 
     const location = useLocation();
-    const {params: {orderId}} = useRouteMatch();
+    const {params: {id}} = useRouteMatch();
     const history = useHistory();
 
     const rateNameExtractor = rate => `${rate.rateTypeId.name} (${rate.price}р./${rate.rateTypeId.unit})`
@@ -41,13 +41,13 @@ function Order() {
         showPreloader();
         setDone(false);
         setError(null);
-        dispatch(loadOrder(orderId))
+        dispatch(loadOrder(id))
             .catch(err => setError(err))
             .finally(() => {
                 setDone(true);
                 hidePreloader();
             });
-    }, [location, orderId]);
+    }, [location, id]);
 
     // Блок функций сброса ошибок
     const resetStatusErrorText = () => setStatusErrorText(null);
@@ -83,7 +83,7 @@ function Order() {
         showPreloader();
         setDone(false);
         setError(null);
-        dispatch(removeOrder(orderId))
+        dispatch(removeOrder(id))
             .then(() => {
                 dispatch(setPopupMessage(SUCCESS, 'Заказ успешно удален'));
                 history.push(`/${ADMIN_APP_URL}`);
@@ -99,7 +99,7 @@ function Order() {
 
     return (
         <div className="order">
-            <h1 className="order__caption">Заказ №{orderId}</h1>
+            <h1 className="order__caption">Заказ №{id}</h1>
             {done &&
             <div className="order__content">
                 <div className="order__settings_block">

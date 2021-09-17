@@ -3,8 +3,8 @@ import {setError, setPreloader} from './actionCreators';
 import {useEffect, useState} from 'react';
 import {useLocation} from 'react-router-dom';
 import {getFrame} from './selectors';
-import {ADMIN_APP_URL} from "../constants/urls";
-import {PAGE_FILTER_NAME} from "../constants/settings";
+import {ADMIN_APP_URL} from '../constants/urls';
+import {PAGE_FILTER_NAME} from '../constants/settings';
 
 export function useGlobalPreloader() {
     const dispatch = useDispatch();
