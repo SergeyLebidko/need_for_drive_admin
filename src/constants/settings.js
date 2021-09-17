@@ -7,7 +7,7 @@ import {
     CAR_LIST_APP_URL,
     POINT_LIST_APP_URL,
     CAR_CREATE_APP_URL,
-    POINT_EDIT_APP_URL,
+    POINT_CREATE_APP_URL,
 } from './urls';
 
 // Размер страницы данных
@@ -67,7 +67,7 @@ export const MENU_ITEMS = [
     {
         title: 'Добавить пункт выдачи',
         iconComponent: <MenuItemIcon/>,
-        href: POINT_EDIT_APP_URL
+        href: POINT_CREATE_APP_URL
     }
 ];
 
