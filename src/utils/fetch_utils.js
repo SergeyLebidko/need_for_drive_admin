@@ -340,3 +340,25 @@ export async function saveCarInBase(car) {
 
     return await executeFetchWithRefresh(executeFetch, url, options);
 }
+
+export async function fetchPoint(pointId) {
+    return await executeFetch(`${POINT_URL}/${pointId}`);
+}
+
+export async function removePointInBase(pointId) {
+    return await executeFetchWithRefresh(executeFetch, `${POINT_URL}/${pointId}`, {method: 'DELETE'});
+}
+
+export async function savePointInBase(point) {
+    return await executeFetchWithRefresh(
+        executeFetch,
+        `${POINT_URL}/${point.id}`,
+        {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(point)
+        }
+    );
+}

@@ -11,7 +11,11 @@ import {
     updateOrderInBase,
     fetchRateList,
     fetchCar,
-    saveCarInBase, removeCarInBase
+    saveCarInBase,
+    removeCarInBase,
+    fetchPoint,
+    removePointInBase,
+    savePointInBase
 } from '../utils/fetch_utils';
 import {
     STATUS_LIST_CATALOG,
@@ -237,3 +241,44 @@ export function saveCar(car) {
     }
 }
 
+// Создатель действия для инициализации в хранилище нового пункта выдачи
+export function initNewPoint() {
+    return async (dispatch, getState) => {
+        dispatch(setEntity({
+            name: '',
+            address: ''
+        }));
+
+        // Загружаем необходимые каталоги
+        await loadCatalogs(dispatch, getState, [CITY_LIST_CATALOG]);
+    }
+}
+
+// Создатель действия для загрузки пункта выдачи
+export function loadPoint(pointId) {
+    return async (dispatch, getState) => {
+        const point = await fetchPoint(pointId);
+        dispatch(setEntity(point.data));
+
+        // Загружаем необходимые каталоги
+        await loadCatalogs(dispatch, getState, [CITY_LIST_CATALOG]);
+    }
+}
+
+// Создатель действия для удаления пункта выдачи
+export function removePoint(pointId) {
+    return async dispatch => {
+        await removePointInBase(pointId);
+        dispatch(setEntity({}));
+    }
+}
+
+// Создатель действия для сохранения пункта выдачи
+export function savePoint(point) {
+    return async dispatch => {
+        const savedPoint = await savePointInBase(point);
+        dispatch(setEntity(savedPoint.data));
+
+        return savedPoint.data.id;
+    }
+}

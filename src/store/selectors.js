@@ -57,3 +57,9 @@ export const getCarTank = state => state.entity.tank;
 export const getCarNumber = state => state.entity.number;
 
 export const getCarColors = state => state.entity.colors;
+
+export const getPointCity = state => state.entity.cityId;
+
+export const getPointName = state => state.entity.name;
+
+export const getPointAddress = state => state.entity.address;
