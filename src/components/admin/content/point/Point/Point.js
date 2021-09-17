@@ -49,7 +49,7 @@ function Point() {
         if (!address) setAddressError('Введите адрес пункта выдачи');
         if (!cityId || !name || !address) return;
 
-        // Пытаемся выполнить сохранение. Если сохраняли новый автомобиль, то переходим на страницу редактирования
+        // Пытаемся выполнить сохранение
         showPreloader();
         setError(null);
         dispatch(savePoint(point))

@@ -90,9 +90,9 @@ function Car() {
         showPreloader();
         setError(null);
         dispatch(saveCar(car))
-            .then(createdId => {
+            .then(savedId => {
                 dispatch(setPopupMessage(SUCCESS, 'Автомобиль успешно сохранен'));
-                if (!id) history.push(`/${ADMIN_APP_URL}/${CAR_EDIT_APP_URL}/${createdId}`);
+                if (!id) history.push(`/${ADMIN_APP_URL}/${CAR_EDIT_APP_URL}/${savedId}`);
             })
             .catch(err => setError(err))
             .finally(() => hidePreloader());
