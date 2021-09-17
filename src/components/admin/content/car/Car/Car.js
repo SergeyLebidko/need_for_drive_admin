@@ -43,7 +43,7 @@ function Car() {
     const [colorsError, setColorsError] = useState(null);
 
     const location = useLocation();
-    const {params: {carId}} = useRouteMatch();
+    const {params: {id}} = useRouteMatch();
     const history = useHistory();
 
     useEffect(() => {
@@ -53,9 +53,9 @@ function Car() {
 
         // Если идентификатор автомобиля не указан в URL, то инициализируем пустую новую сущность в хранилище
         let actionCreator, params;
-        if (carId) {
+        if (id) {
             actionCreator = loadCar;
-            params = [carId];
+            params = [id];
         } else {
             actionCreator = initNewCar;
             params = []
@@ -71,7 +71,7 @@ function Car() {
                 setDone(true);
                 hidePreloader();
             });
-    }, [location, carId]);
+    }, [location, id]);
 
     // Блок функций сброса ошибок
     const resetThumbnailError = () => setThumbnailError(null);
@@ -115,16 +115,16 @@ function Car() {
         showPreloader();
         setError(null);
         dispatch(saveCar(car))
-            .then(id => {
+            .then(createdId => {
                 dispatch(setPopupMessage(SUCCESS, 'Автомобиль успешно сохранен'));
-                if (!carId) history.push(`/${ADMIN_APP_URL}/${CAR_EDIT_APP_URL}/${id}`);
+                if (!id) history.push(`/${ADMIN_APP_URL}/${CAR_EDIT_APP_URL}/${createdId}`);
             })
             .catch(err => setError(err))
             .finally(() => hidePreloader());
     }
 
     const handleCancelButtonClick = () => {
-        if (carId) {
+        if (id) {
             history.push(`/${ADMIN_APP_URL}/${CAR_LIST_APP_URL}`);
             return
         }
@@ -133,7 +133,7 @@ function Car() {
 
     const handleRemoveButtonClick = () => {
         // Не даем выполнить удаление, если редактируем данные нового авто и машина еще не сохранена
-        if (!carId) {
+        if (!id) {
             dispatch(setPopupMessage(FAIL, 'Нельзя удалить не сохраненный автомобиль'));
             return;
         }
@@ -141,7 +141,7 @@ function Car() {
         showPreloader();
         setDone(false);
         setError(null);
-        dispatch(removeCar(carId))
+        dispatch(removeCar(id))
             .then(() => {
                 dispatch(setPopupMessage(SUCCESS, 'Автомобиль успешно удален'));
                 history.push(`/${ADMIN_APP_URL}`);

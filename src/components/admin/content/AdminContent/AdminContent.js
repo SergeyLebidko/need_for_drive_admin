@@ -58,7 +58,7 @@ function AdminContent() {
                 </Route>
 
                 <Route path={`/${ADMIN_APP_URL}/${CAR_CREATE_APP_URL}`} component={Car}/>
-                <Route path={`/${ADMIN_APP_URL}/${CAR_EDIT_APP_URL}/:carId`} component={Car}/>
+                <Route path={`/${ADMIN_APP_URL}/${CAR_EDIT_APP_URL}/:id`} component={Car}/>
                 <Route path={`/${ADMIN_APP_URL}/${CAR_EDIT_APP_URL}`}>
                     <RouterCap
                         mainCaption="Для редактирования автомобиля сперва выберите нужный автомобиль из списка"
