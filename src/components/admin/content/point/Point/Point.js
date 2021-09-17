@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {useHistory, useLocation, useRouteMatch} from 'react-router-dom';
-import {useGlobalPreloader} from '../../../../../store/hooks';
+import {useHistory, useRouteMatch} from 'react-router-dom';
+import {useEntityLoader, useGlobalPreloader} from '../../../../../store/hooks';
 import EditorControlBlock from '../../../../common/EditorControlBlock/EditorControlBlock';
 import CatalogSelector from '../../../../common/CatalogSelector/CatalogSelector';
 import TextValueEditor from '../../../../common/TextValueEditor/TextValueEditor';
@@ -24,36 +24,8 @@ function Point() {
     const [addressError, setAddressError] = useState(null);
     const [pointNameError, setPointNameError] = useState(null);
 
-    const location = useLocation();
     const {params: {id}} = useRouteMatch();
     const history = useHistory();
-
-    useEffect(() => {
-        setDone(false);
-        setError(null);
-        showPreloader();
-
-        // Если идентификатор автомобиля не указан в URL, то инициализируем пустую новую сущность в хранилище
-        let actionCreator, params;
-        if (id) {
-            actionCreator = loadPoint;
-            params = [id];
-        } else {
-            actionCreator = initNewPoint;
-            params = []
-        }
-
-        // Сбрасываем все ошибки полей ввода
-        resetAllErrors();
-
-        // Запускаем необходимое действие
-        dispatch(actionCreator(...params))
-            .catch(err => setError(err))
-            .finally(() => {
-                setDone(true);
-                hidePreloader();
-            });
-    }, [location, id]);
 
     // Блок функций сброса ошибок
     const resetCityError = () => setCityError(null);
@@ -65,6 +37,9 @@ function Point() {
         resetAddressError();
         resetPointNameError();
     }
+
+    // Загружаем пункт выдачи для редактирования или создаем новый, если нужно
+    useEntityLoader(setDone, setError, resetAllErrors, loadPoint, initNewPoint);
 
     // Блок обработчиков кликов
     const handleSaveButtonClick = () => {
