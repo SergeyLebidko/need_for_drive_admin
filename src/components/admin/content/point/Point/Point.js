@@ -122,28 +122,30 @@ function Point() {
             <h1 className="point__caption">Пункт выдачи</h1>
             {done &&
             <div className="point__content">
-                <CatalogSelector
-                    label="Город"
-                    catalogName={CITY_LIST_CATALOG}
-                    entityField="cityId"
-                    fieldGetter={getPointCity}
-                    errorText={cityError}
-                    resetErrorText={resetCityError}
-                />
-                <TextValueEditor
-                    label="Название"
-                    errorText={pointNameError}
-                    resetErrorText={resetPointNameError}
-                    getValue={getPointName}
-                    entityField="name"
-                />
-                <TextValueEditor
-                    label="Адрес"
-                    errorText={addressError}
-                    resetErrorText={resetAddressError}
-                    getValue={getPointAddress}
-                    entityField="address"
-                />
+                    <CatalogSelector
+                        label="Город"
+                        catalogName={CITY_LIST_CATALOG}
+                        entityField="cityId"
+                        fieldGetter={getPointCity}
+                        errorText={cityError}
+                        resetErrorText={resetCityError}
+                    />
+                    <div className="point__place_settings">
+                    <TextValueEditor
+                        label="Название"
+                        errorText={pointNameError}
+                        resetErrorText={resetPointNameError}
+                        getValue={getPointName}
+                        entityField="name"
+                    />
+                    <TextValueEditor
+                        label="Адрес"
+                        errorText={addressError}
+                        resetErrorText={resetAddressError}
+                        getValue={getPointAddress}
+                        entityField="address"
+                    />
+                    </div>
                 <EditorControlBlock
                     handleSave={handleSaveButtonClick}
                     handleCancel={handleCancelButtonClick}

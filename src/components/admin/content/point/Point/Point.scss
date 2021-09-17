@@ -1,5 +1,7 @@
 @import '../../../../../styles/vars';
 @import '../../../../../styles/common_presets';
+@import '../../../../common/TextField/TextField';
+@import '../../../../common/Selector/Selector';
 
 .point {
   @include content_mixin;
@@ -12,12 +14,54 @@
     max-width: $step * 105;
     padding: $step * 2;
   }
+
+  &__place_settings {
+    display: flex;
+    flex-direction: column;
+    margin-top: $step * 3;
+
+    > div + div {
+      margin: ($step * 3) 0 0 0;
+    }
+  }
 }
 
 @media (min-width: $tablet-start) {
   .point {
     .editor_control_block {
       margin-top: $step * 12;
+    }
+
+    &__place_settings {
+      flex-direction: row;
+
+      > div + div {
+        margin: 0 0 0 $step;
+      }
+    }
+  }
+}
+
+@media (min-width: $tablet-start) and (max-width: $tablet-end) {
+  .point {
+    .selector, .text_field {
+      width: 12em;
+    }
+  }
+}
+
+@media (min-width: $desktop-min-start) and (max-width: $desktop-min-end) {
+  .point {
+    .selector, .text_field {
+      width: 13em;
+    }
+  }
+}
+
+@media (min-width: $desktop-start) {
+  .point {
+    .selector, .text_field {
+      width: 15em;
     }
   }
 }
