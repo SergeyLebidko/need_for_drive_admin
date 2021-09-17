@@ -8,6 +8,7 @@ import CarTankViewer from '../CarTankViewer/CarTankViewer';
 import CarDescription from '../CarDescription/CarDescription';
 import TextValueEditor from '../../../../common/TextValueEditor/TextValueEditor';
 import CatalogSelector from '../../../../common/CatalogSelector/CatalogSelector';
+import CarColors from '../CarColors/CarColors';
 import {useEntityLoader, useGlobalPreloader} from '../../../../../store/hooks';
 import {initNewCar, loadCar, removeCar, saveCar, setPopupMessage} from '../../../../../store/actionCreators';
 import {FAIL, SUCCESS, CAR_CATEGORY_CATALOG} from '../../../../../constants/settings';
@@ -23,8 +24,6 @@ import {
     getCarCategory
 } from '../../../../../store/selectors';
 import './Car.scss';
-import CarColors from "../CarColors/CarColors";
-
 
 function Car() {
     const [done, setDone] = useState(false);
