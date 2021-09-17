@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/need_for_drive_admin/static/css/main.1da85274.chunk.css",
-    "main.js": "/need_for_drive_admin/static/js/main.1579547a.chunk.js",
-    "main.js.map": "/need_for_drive_admin/static/js/main.1579547a.chunk.js.map",
+    "main.css": "/need_for_drive_admin/static/css/main.3c0a003a.chunk.css",
+    "main.js": "/need_for_drive_admin/static/js/main.76fde801.chunk.js",
+    "main.js.map": "/need_for_drive_admin/static/js/main.76fde801.chunk.js.map",
     "runtime-main.js": "/need_for_drive_admin/static/js/runtime-main.fe2955cb.js",
     "runtime-main.js.map": "/need_for_drive_admin/static/js/runtime-main.fe2955cb.js.map",
     "static/css/2.ecdd39c8.chunk.css": "/need_for_drive_admin/static/css/2.ecdd39c8.chunk.css",
-    "static/js/2.2603bc82.chunk.js": "/need_for_drive_admin/static/js/2.2603bc82.chunk.js",
-    "static/js/2.2603bc82.chunk.js.map": "/need_for_drive_admin/static/js/2.2603bc82.chunk.js.map",
+    "static/js/2.7f56bf43.chunk.js": "/need_for_drive_admin/static/js/2.7f56bf43.chunk.js",
+    "static/js/2.7f56bf43.chunk.js.map": "/need_for_drive_admin/static/js/2.7f56bf43.chunk.js.map",
     "index.html": "/need_for_drive_admin/index.html",
     "static/css/2.ecdd39c8.chunk.css.map": "/need_for_drive_admin/static/css/2.ecdd39c8.chunk.css.map",
-    "static/css/main.1da85274.chunk.css.map": "/need_for_drive_admin/static/css/main.1da85274.chunk.css.map",
-    "static/js/2.2603bc82.chunk.js.LICENSE.txt": "/need_for_drive_admin/static/js/2.2603bc82.chunk.js.LICENSE.txt",
+    "static/css/main.3c0a003a.chunk.css.map": "/need_for_drive_admin/static/css/main.3c0a003a.chunk.css.map",
+    "static/js/2.7f56bf43.chunk.js.LICENSE.txt": "/need_for_drive_admin/static/js/2.7f56bf43.chunk.js.LICENSE.txt",
     "static/media/init.scss": "/need_for_drive_admin/static/media/Roboto-Regular.a8d6ac03.ttf",
     "static/media/cancel_icon.8b91f441.svg": "/need_for_drive_admin/static/media/cancel_icon.8b91f441.svg",
     "static/media/car_list_icon.b308c23f.svg": "/need_for_drive_admin/static/media/car_list_icon.b308c23f.svg",
@@ -33,8 +33,8 @@
   "entrypoints": [
     "static/js/runtime-main.fe2955cb.js",
     "static/css/2.ecdd39c8.chunk.css",
-    "static/js/2.2603bc82.chunk.js",
-    "static/css/main.1da85274.chunk.css",
-    "static/js/main.1579547a.chunk.js"
+    "static/js/2.7f56bf43.chunk.js",
+    "static/css/main.3c0a003a.chunk.css",
+    "static/js/main.76fde801.chunk.js"
   ]
 }
