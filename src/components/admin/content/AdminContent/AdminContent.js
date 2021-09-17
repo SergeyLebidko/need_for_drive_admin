@@ -68,7 +68,7 @@ function AdminContent() {
                 </Route>
 
                 <Route path={`/${ADMIN_APP_URL}/${POINT_CREATE_APP_URL}`} component={Point}/>
-                <Route path={`/${ADMIN_APP_URL}/${POINT_EDIT_APP_URL}/:pointId`} component={Point}/>
+                <Route path={`/${ADMIN_APP_URL}/${POINT_EDIT_APP_URL}/:id`} component={Point}/>
                 <Route path={`/${ADMIN_APP_URL}/${POINT_EDIT_APP_URL}/`}>
                     <RouterCap
                         mainCaption="Для редактирования пункта выдачи сперва выберите нужный пункт выдачи из списка"

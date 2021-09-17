@@ -25,7 +25,7 @@ function Point() {
     const [pointNameError, setPointNameError] = useState(null);
 
     const location = useLocation();
-    const {params: {pointId}} = useRouteMatch();
+    const {params: {id}} = useRouteMatch();
     const history = useHistory();
 
     useEffect(() => {
@@ -35,9 +35,9 @@ function Point() {
 
         // Если идентификатор автомобиля не указан в URL, то инициализируем пустую новую сущность в хранилище
         let actionCreator, params;
-        if (pointId) {
+        if (id) {
             actionCreator = loadPoint;
-            params = [pointId];
+            params = [id];
         } else {
             actionCreator = initNewPoint;
             params = []
@@ -53,7 +53,7 @@ function Point() {
                 setDone(true);
                 hidePreloader();
             });
-    }, [location, pointId]);
+    }, [location, id]);
 
     // Блок функций сброса ошибок
     const resetCityError = () => setCityError(null);
@@ -78,16 +78,16 @@ function Point() {
         showPreloader();
         setError(null);
         dispatch(savePoint(point))
-            .then(id => {
+            .then(createdId => {
                 dispatch(setPopupMessage(SUCCESS, 'Автомобиль успешно сохранен'));
-                if (!pointId) history.push(`/${ADMIN_APP_URL}/${POINT_EDIT_APP_URL}/${id}`);
+                if (!id) history.push(`/${ADMIN_APP_URL}/${POINT_EDIT_APP_URL}/${createdId}`);
             })
             .catch(err => setError(err))
             .finally(() => hidePreloader());
     }
 
     const handleCancelButtonClick = () => {
-        if (pointId) {
+        if (id) {
             history.push(`/${ADMIN_APP_URL}/${POINT_LIST_APP_URL}`);
             return
         }
@@ -95,7 +95,7 @@ function Point() {
     }
 
     const handleRemoveButtonClick = () => {
-        if (!pointId) {
+        if (!id) {
             dispatch(setPopupMessage(FAIL, 'Нельзя удалить не сохраненный пункт выдачи'));
             return;
         }
@@ -103,7 +103,7 @@ function Point() {
         showPreloader();
         setDone(false);
         setError(null);
-        dispatch(removePoint(pointId))
+        dispatch(removePoint(id))
             .then(() => {
                 dispatch(setPopupMessage(SUCCESS, 'Пункт выдачи успешно удален'));
                 history.push(`/${ADMIN_APP_URL}`);
