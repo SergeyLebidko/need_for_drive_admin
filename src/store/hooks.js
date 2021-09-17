@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {setError, setPreloader} from './actionCreators';
 import {useEffect, useState} from 'react';
-import {useLocation} from 'react-router-dom';
+import {useLocation, useRouteMatch} from 'react-router-dom';
 import {getFrame} from './selectors';
 import {ADMIN_APP_URL} from '../constants/urls';
 import {PAGE_FILTER_NAME} from '../constants/settings';
@@ -55,4 +55,36 @@ export function useListLoader(listAppUrl, filterNames, loaderFunc) {
     }, [location, dispatch]);
 
     return [done, error, items];
+}
+
+export function useEntityLoader(doneSetter, errorSetter, errorResetFunc, loadEntityFunc, initEntityFunc) {
+    const dispatch = useDispatch();
+    const location = useLocation();
+    const {params: {id}} = useRouteMatch();
+
+    const [showPreloader, hidePreloader] = useGlobalPreloader();
+
+    useEffect(() => {
+        doneSetter(false);
+        setError(null);
+        showPreloader();
+
+        let actionCreator, params;
+        if (id) {
+            actionCreator = loadEntityFunc;
+            params = [id];
+        } else if (initEntityFunc) {
+            actionCreator = initEntityFunc;
+            params = []
+        }
+
+        errorResetFunc();
+
+        dispatch(actionCreator(...params))
+            .catch(err => setError(err))
+            .finally(() => {
+                doneSetter(true);
+                hidePreloader();
+            });
+    }, [location, id]);
 }
