@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {useHistory, useLocation, useRouteMatch} from 'react-router-dom';
+import {useHistory, useRouteMatch} from 'react-router-dom';
 import CarPhotoChooser from '../CarPhotoChooser/CarPhotoChooser';
 import ErrorPane from '../../../../common/ErrorPane/ErrorPane';
 import EditorControlBlock from '../../../../common/EditorControlBlock/EditorControlBlock';
@@ -8,7 +8,7 @@ import CarTankViewer from '../CarTankViewer/CarTankViewer';
 import CarDescription from '../CarDescription/CarDescription';
 import TextValueEditor from '../../../../common/TextValueEditor/TextValueEditor';
 import CatalogSelector from '../../../../common/CatalogSelector/CatalogSelector';
-import {useGlobalPreloader} from '../../../../../store/hooks';
+import {useEntityLoader, useGlobalPreloader} from '../../../../../store/hooks';
 import {initNewCar, loadCar, removeCar, saveCar, setPopupMessage} from '../../../../../store/actionCreators';
 import {FAIL, SUCCESS, CAR_CATEGORY_CATALOG} from '../../../../../constants/settings';
 import {ADMIN_APP_URL, CAR_EDIT_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
@@ -42,36 +42,35 @@ function Car() {
     const [tankError, setTankError] = useState(null);
     const [colorsError, setColorsError] = useState(null);
 
-    const location = useLocation();
     const {params: {id}} = useRouteMatch();
     const history = useHistory();
 
-    useEffect(() => {
-        setDone(false);
-        setError(null);
-        showPreloader();
-
-        // Если идентификатор автомобиля не указан в URL, то инициализируем пустую новую сущность в хранилище
-        let actionCreator, params;
-        if (id) {
-            actionCreator = loadCar;
-            params = [id];
-        } else {
-            actionCreator = initNewCar;
-            params = []
-        }
-
-        // Сбрасываем все ошибки полей ввода
-        resetAllErrors();
-
-        // Запускаем необходимое действие
-        dispatch(actionCreator(...params))
-            .catch(err => setError(err))
-            .finally(() => {
-                setDone(true);
-                hidePreloader();
-            });
-    }, [location, id]);
+    // useEffect(() => {
+    //     setDone(false);
+    //     setError(null);
+    //     showPreloader();
+    //
+    //     // Если идентификатор автомобиля не указан в URL, то инициализируем пустую новую сущность в хранилище
+    //     let actionCreator, params;
+    //     if (id) {
+    //         actionCreator = loadCar;
+    //         params = [id];
+    //     } else {
+    //         actionCreator = initNewCar;
+    //         params = []
+    //     }
+    //
+    //     // Сбрасываем все ошибки полей ввода
+    //     resetAllErrors();
+    //
+    //     // Запускаем необходимое действие
+    //     dispatch(actionCreator(...params))
+    //         .catch(err => setError(err))
+    //         .finally(() => {
+    //             setDone(true);
+    //             hidePreloader();
+    //         });
+    // }, [location, id]);
 
     // Блок функций сброса ошибок
     const resetThumbnailError = () => setThumbnailError(null);
@@ -91,6 +90,9 @@ function Car() {
         resetTankError();
         resetColorsError();
     }
+
+    // Загружаем автомобиль для редактирования или создаем новый, если нужно
+    useEntityLoader(setDone, setError, resetAllErrors, loadCar, initNewCar);
 
     // Блок обработчиков кликов
     const handleSaveButtonClick = () => {
@@ -126,7 +128,7 @@ function Car() {
     const handleCancelButtonClick = () => {
         if (id) {
             history.push(`/${ADMIN_APP_URL}/${CAR_LIST_APP_URL}`);
-            return
+            return;
         }
         history.push(`/${ADMIN_APP_URL}`);
     }
