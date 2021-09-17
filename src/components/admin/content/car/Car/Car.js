@@ -115,10 +115,9 @@ function Car() {
         showPreloader();
         setError(null);
         dispatch(saveCar(car))
-            .then(() => {
+            .then(id => {
                 dispatch(setPopupMessage(SUCCESS, 'Автомобиль успешно сохранен'));
-                //TODO Исправить баг с некорректным переходом при сохранении авто
-                if (!carId) history.push(`/${ADMIN_APP_URL}/${CAR_EDIT_APP_URL}/${car.id}`);
+                if (!carId) history.push(`/${ADMIN_APP_URL}/${CAR_EDIT_APP_URL}/${id}`);
             })
             .catch(err => setError(err))
             .finally(() => hidePreloader());

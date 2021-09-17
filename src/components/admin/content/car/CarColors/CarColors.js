@@ -43,6 +43,7 @@ function CarColors({errorText, resetErrorText}) {
 
         setColorsForSelect([colorInputValue, ...colorsForSelect]);
         setColorsFlag([true, ...colorsFlag]);
+        setColorInputValue('');
     }
 
     const handleCheckBoxChange = index => {

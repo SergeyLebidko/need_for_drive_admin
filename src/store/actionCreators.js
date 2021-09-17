@@ -232,6 +232,8 @@ export function saveCar(car) {
     return async dispatch => {
         const savedCar = await saveCarInBase(car);
         dispatch(setEntity(savedCar.data));
+
+        return savedCar.data.id;
     }
 }
 
