@@ -40,6 +40,7 @@ function Car() {
     const [priceMinError, setPriceMinError] = useState(null);
     const [priceMaxError, setPriceMaxError] = useState(null);
     const [tankError, setTankError] = useState(null);
+    const [colorsError, setColorsError] = useState(null);
 
     const location = useLocation();
     const {params: {carId}} = useRouteMatch();
@@ -79,6 +80,7 @@ function Car() {
     const resetPriceMinError = () => setPriceMinError(null);
     const resetPriceMaxError = () => setPriceMaxError(null);
     const resetTankError = () => setTankError(null);
+    const resetColorsError = () => setColorsError(null);
 
     const resetAllErrors = () => {
         resetThumbnailError();
@@ -87,6 +89,7 @@ function Car() {
         resetPriceMinError();
         resetPriceMaxError();
         resetTankError();
+        resetColorsError();
     }
 
     // Блок обработчиков кликов
@@ -101,10 +104,12 @@ function Car() {
         if (priceMinError) setPriceMinError("Некорректное значение начальной цены");
         if (priceMaxError) setPriceMaxError("Некорректное значение конечной цены");
 
-        const tankError = car.tank !== '' && (!isWholePositiveOrZero(car.tank) || car.tank > 100);
-        if (tankError) setTankError("Введите корректный уровень топлива (от 0 до 100%)");
+        const hasTankError = car.tank !== '' && (!isWholePositiveOrZero(car.tank) || car.tank > 100);
+        if (hasTankError) setTankError("Введите корректный уровень топлива (от 0 до 100%)");
 
-        if (!car.thumbnail || !car.name || !car.categoryId || priceError || tankError) return;
+        if (!car.colors.length) setColorsError('Выберите или введите хотя бы один цвет');
+
+        if (!car.thumbnail || !car.name || !car.categoryId || priceError || hasTankError || !car.colors.length) return;
 
         // Пытаемся выполнить сохранение. Если сохраняли новый автомобиль, то переходим на страницу редактирования
         showPreloader();
@@ -213,7 +218,7 @@ function Car() {
                             resetErrorText={resetTankError}
                         />
                     </div>
-                    <CarColors/>
+                    <CarColors errorText={colorsError} resetErrorText={resetColorsError}/>
                     <EditorControlBlock
                         handleSave={handleSaveButtonClick}
                         handleCancel={handleCancelButtonClick}

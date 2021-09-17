@@ -329,6 +329,9 @@ export async function saveCarInBase(car) {
         }
     });
 
+    // Обрабатываем сохранение массива цветов
+    for (const color of car.colors) body.append('colors', color);
+
     const method = car.id ? 'PUT' : 'POST';
     const options = {
         method,

@@ -199,7 +199,8 @@ export function initNewCar() {
             priceMin: 0,
             priceMax: 0,
             number: '',
-            tank: 0
+            tank: 0,
+            colors: []
         }));
 
         // Загружаем необходимые каталоги
