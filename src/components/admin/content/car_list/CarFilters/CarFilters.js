@@ -100,6 +100,7 @@ function CarFilters() {
         history.push(`/${ADMIN_APP_URL}/${CAR_LIST_APP_URL}/?${PAGE_FILTER_NAME}=0`);
     }
 
+
     return (
         <div className="car_filters">
             <div className="car_filters__conditions">
