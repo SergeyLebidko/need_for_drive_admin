@@ -52,3 +52,8 @@ export function prepareItemForSelector(item, nameExtractor) {
 export function prepareItemsForSelector(items, nameExtractor) {
     return items.map(item => prepareItemForSelector(item, nameExtractor));
 }
+
+export function extractSearchParams(location, paramNames) {
+    const searchParams = new URLSearchParams(location.search);
+    return paramNames.map(paramName => searchParams.get(paramName));
+}

@@ -26,6 +26,7 @@ import {
 } from '../../../../../constants/urls';
 import {getCatalog} from '../../../../../store/selectors';
 import './OrderFilters.scss';
+import {extractSearchParams} from "../../../../../utils/common_utils";
 
 function OrderFilters() {
     const location = useLocation();
@@ -42,16 +43,13 @@ function OrderFilters() {
 
     // При монтировании учитываем, что при вводе в адресную строку готового URL в нём уже могут быть фильтры, которые надо учесть
     useEffect(() => {
-        const searchParams = new URLSearchParams(location.search);
-        const defaultDate = searchParams.get(DATE_FROM_FILTER_NAME);
-        const defaultCar = searchParams.get(CAR_FILTER_NAME);
-        const defaultCity = searchParams.get(CITY_FILTER_NAME);
-        const defaultStatus = searchParams.get(STATUS_FILTER_NAME);
+        const paramNames = [DATE_FROM_FILTER_NAME, CAR_FILTER_NAME, CITY_FILTER_NAME, STATUS_FILTER_NAME];
+        const [date, car, city, status] = extractSearchParams(location, paramNames);
 
-        setSelectedDate(defaultDate || NO_FILTER_VALUE);
-        setSelectedCar(defaultCar ||  NO_FILTER_VALUE);
-        setSelectedCity(defaultCity || NO_FILTER_VALUE);
-        setSelectedStatus(defaultStatus || NO_FILTER_VALUE);
+        setSelectedDate(date || NO_FILTER_VALUE);
+        setSelectedCar(car || NO_FILTER_VALUE);
+        setSelectedCity(city || NO_FILTER_VALUE);
+        setSelectedStatus(status || NO_FILTER_VALUE);
     }, [location]);
 
     // Готовим данные для селектора времени
