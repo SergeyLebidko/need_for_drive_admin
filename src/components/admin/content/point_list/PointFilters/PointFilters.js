@@ -11,6 +11,7 @@ import {
 } from '../../../../../constants/settings';
 import {ADMIN_APP_URL, POINT_LIST_APP_URL} from '../../../../../constants/urls';
 import './PointFilters.scss';
+import FilterControlBlock from "../../../../common/FilterControlBlock/FilterControlBlock";
 
 function PointFilters() {
     const [selectedCity, setSelectedCity] = useState(NO_FILTER_VALUE);
@@ -51,18 +52,7 @@ function PointFilters() {
     return (
         <div className="point_filters">
             <Selector items={citySelectorItems} value={selectedCity} handleSelect={handleCitySelect}/>
-            <button
-                className="button button_red point_filters__reset_button"
-                onClick={handleResetClick}
-            >
-                Сброс
-            </button>
-            <button
-                className="button button_blue point_filters__apply_button"
-                onClick={handleApplyClick}
-            >
-                Применить
-            </button>
+            <FilterControlBlock handleApply={handleApplyClick} handleReset={handleResetClick}/>
         </div>
     );
 }

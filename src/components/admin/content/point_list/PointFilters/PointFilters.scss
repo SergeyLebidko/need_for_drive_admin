@@ -1,12 +1,13 @@
 @import '../../../../../styles/vars';
 @import '../../../../../styles/common_presets';
+@import '../../../../common/FilterControlBlock/FilterControlBlock';
 
 .point_filters {
   padding: $step * 2;
   display: flex;
   flex-direction: column;
 
-  &__reset_button, &__apply_button {
+  .filter_control_block {
     margin: $step 0 0 0;
   }
 }
@@ -14,16 +15,9 @@
 @media (min-width: $tablet-start) {
   .point_filters {
     flex-direction: row;
+    justify-content: space-between;
 
-    .button {
-      width: 12em;
-    }
-
-    &__reset_button {
-      margin: 0 0 0 auto;
-    }
-
-    &__apply_button {
+    .filter_control_block {
       margin: 0 0 0 $step;
     }
   }
