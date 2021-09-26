@@ -21,7 +21,7 @@ function PointFilters() {
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const defaultCity = params.get(CITY_FILTER_NAME);
-        setSelectedCity(defaultCity ? defaultCity : NO_FILTER_VALUE);
+        setSelectedCity(defaultCity || NO_FILTER_VALUE);
     }, []);
 
     const cityList = useSelector(getCatalog(CITY_LIST_CATALOG));
