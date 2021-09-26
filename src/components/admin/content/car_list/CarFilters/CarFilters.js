@@ -4,6 +4,7 @@ import {getCatalog} from '../../../../../store/selectors';
 import {useHistory, useLocation} from 'react-router-dom';
 import Selector from '../../../../common/Selector/Selector';
 import TextField from '../../../../common/TextField/TextField';
+import FilterControlBlock from '../../../../common/FilterControlBlock/FilterControlBlock';
 import {
     CAR_CATEGORY_CATALOG,
     CATEGORY_FILTER_NAME,
@@ -138,10 +139,7 @@ function CarFilters() {
                 />
                 <Selector items={tankSelectorItems} value={selectedTank} handleSelect={handleTankSelect}/>
             </div>
-            <div className="car_filters__control">
-                <button className="button button_red" onClick={handleResetFilters}>Сбросить</button>
-                <button className="button button_blue" onClick={handleApplyFilters}>Применить</button>
-            </div>
+            <FilterControlBlock handleApply={handleApplyFilters} handleReset={handleResetFilters}/>
         </div>
     );
 }

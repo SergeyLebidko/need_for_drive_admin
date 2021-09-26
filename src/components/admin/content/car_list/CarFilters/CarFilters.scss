@@ -2,6 +2,7 @@
 @import '../../../../../styles/common_presets';
 @import '../../../../common/TextField/TextField';
 @import '../../../../common/Selector/Selector';
+@import '../../../../common/FilterControlBlock/FilterControlBlock';
 
 .car_filters {
   display: flex;
@@ -10,13 +11,13 @@
   padding: $step * 2;
   border-bottom: 1px solid $separator-color;
 
-  &__conditions, &__control {
-    display: flex;
-    flex-direction: column;
+  .filter_control_block {
+    margin: $step 0 0 0;
   }
 
-  &__control {
-    margin: $step 0 0 0;
+  &__conditions {
+    display: flex;
+    flex-direction: column;
   }
 
   .button + .button, .text_field + .text_field, .selector + .text_field, .text_field + .selector {
@@ -29,12 +30,12 @@
     flex-direction: row;
     justify-content: space-between;
 
-    &__conditions {
-      min-width: 25em;
+    .filter_control_block {
+      margin: 0 0 0 $step;
     }
 
-    &__control {
-      margin: 0 0 0 $step;
+    &__conditions {
+      min-width: 25em;
     }
   }
 }

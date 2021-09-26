@@ -2,5 +2,20 @@
 @import '../../../styles/common_presets';
 
 .filter_control_block {
-  
+  display: flex;
+  flex-direction: column;
+
+  .button + .button {
+    margin: $step 0 0 0;
+  }
+}
+
+@media (min-width: $desktop-start) {
+  .filter_control_block {
+    flex-direction: row;
+
+    .button + .button {
+      margin: 0 0 0 $step;
+    }
+  }
 }
