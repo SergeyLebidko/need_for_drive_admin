@@ -15,7 +15,7 @@ import {
 } from '../../../../../constants/settings';
 import {NO_FILTER_VALUE} from '../../../../../constants/settings';
 import {ADMIN_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
-import {extractSearchParams, isWholePositiveOrZero} from '../../../../../utils/common_utils';
+import {createSearchString, extractSearchParams, isWholePositiveOrZero} from '../../../../../utils/common_utils';
 import './CarFilters.scss';
 
 function CarFilters() {
@@ -76,31 +76,13 @@ function CarFilters() {
         if (maxError) setPriceMaxError(priceError);
         if (minError || maxError) return;
 
-        const params = new URLSearchParams(location.search);
-
-        // При изменении любого фильтра - начинаем с первой страницы
-        params.set(PAGE_FILTER_NAME, '0');
-
-        if (selectedCategory === NO_FILTER_VALUE) {
-            params.delete(CATEGORY_FILTER_NAME);
-        } else {
-            params.set(CATEGORY_FILTER_NAME, selectedCategory);
-        }
-        if (!priceMin) {
-            params.delete(PRICE_MIN_FILTER_NAME)
-        } else {
-            params.set(PRICE_MIN_FILTER_NAME, priceMin);
-        }
-        if (!priceMax) {
-            params.delete(PRICE_MAX_FILTER_NAME);
-        } else {
-            params.set(PRICE_MAX_FILTER_NAME, priceMax);
-        }
-        if (selectedTank === NO_FILTER_VALUE) {
-            params.delete(TANK_FILTER_NAME);
-        } else {
-            params.set(TANK_FILTER_NAME, selectedTank);
-        }
+        const params = createSearchString({
+            [PAGE_FILTER_NAME]: '0',
+            [CATEGORY_FILTER_NAME]: selectedCategory,
+            [PRICE_MIN_FILTER_NAME]: priceMin,
+            [PRICE_MAX_FILTER_NAME]: priceMax,
+            [TANK_FILTER_NAME]: selectedTank
+        });
 
         history.push(`/${ADMIN_APP_URL}/${CAR_LIST_APP_URL}/?${params}`);
     }
