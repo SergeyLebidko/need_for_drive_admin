@@ -42,11 +42,10 @@ function CarFilters() {
         setSelectedCategory(defaultCategory ? defaultCategory : NO_FILTER_VALUE);
         setPriceMin(isWholePositiveOrZero(defaultPriceMin) ? '' + defaultPriceMin : '');
         setPriceMax(isWholePositiveOrZero(defaultPriceMax) ? '' + defaultPriceMax : '');
-        setSelectedTank(
-            tankSelectorItems.find(item => item.value === defaultTank && item.value !== NO_FILTER_VALUE) ? defaultTank : NO_FILTER_VALUE
-        );
 
-    }, [])
+        const hasDefaultTankFind = tankSelectorItems.some(item => item.value === defaultTank);
+        setSelectedTank(hasDefaultTankFind ? defaultTank : NO_FILTER_VALUE);
+    }, [location])
 
     // Готовим данные для селектора категорий
     const categorySelectorItems = [{value: NO_FILTER_VALUE, name: 'Все категории'}];
