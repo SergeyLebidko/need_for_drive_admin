@@ -57,3 +57,11 @@ export function extractSearchParams(location, paramNames) {
     const searchParams = new URLSearchParams(location.search);
     return paramNames.map(paramName => searchParams.get(paramName));
 }
+
+export function createSearchString(params) {
+    const result = new URLSearchParams();
+    Object.keys(params).forEach(key => {
+        if (params[key] && params[key] !== NO_FILTER_VALUE) result.set(key, params[key]);
+    });
+    return result;
+}

@@ -25,7 +25,7 @@ import {
     ORDER_LIST_APP_URL
 } from '../../../../../constants/urls';
 import {getCatalog} from '../../../../../store/selectors';
-import {extractSearchParams} from '../../../../../utils/common_utils';
+import {createSearchString, extractSearchParams} from '../../../../../utils/common_utils';
 import './OrderFilters.scss';
 
 function OrderFilters() {
@@ -85,31 +85,13 @@ function OrderFilters() {
 
     // Обработчик применения фильтров
     const handleApplyFilters = () => {
-        const params = new URLSearchParams(location.search);
-
-        // При изменении любого фильтра - начинаем с первой страницы
-        params.set(PAGE_FILTER_NAME, '0');
-
-        if (selectedDate === NO_FILTER_VALUE) {
-            params.delete(DATE_FROM_FILTER_NAME);
-        } else {
-            params.set(DATE_FROM_FILTER_NAME, selectedDate);
-        }
-        if (selectedCar === NO_FILTER_VALUE) {
-            params.delete(CAR_FILTER_NAME);
-        } else {
-            params.set(CAR_FILTER_NAME, selectedCar);
-        }
-        if (selectedCity === NO_FILTER_VALUE) {
-            params.delete(CITY_FILTER_NAME);
-        } else {
-            params.set(CITY_FILTER_NAME, selectedCity);
-        }
-        if (selectedStatus === NO_FILTER_VALUE) {
-            params.delete(STATUS_FILTER_NAME);
-        } else {
-            params.set(STATUS_FILTER_NAME, selectedStatus);
-        }
+        const params = createSearchString({
+            [PAGE_FILTER_NAME]: '0',
+            [DATE_FROM_FILTER_NAME]: selectedDate,
+            [CAR_FILTER_NAME]: selectedCar,
+            [CITY_FILTER_NAME]: selectedCity,
+            [STATUS_FILTER_NAME]: selectedStatus
+        });
 
         history.push(`/${ADMIN_APP_URL}/${ORDER_LIST_APP_URL}/?${params}`);
     }
