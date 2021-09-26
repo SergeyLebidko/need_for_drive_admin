@@ -23,7 +23,7 @@ function PointFilters() {
         const params = new URLSearchParams(location.search);
         const defaultCity = params.get(CITY_FILTER_NAME);
         setSelectedCity(defaultCity || NO_FILTER_VALUE);
-    }, []);
+    }, [location]);
 
     const cityList = useSelector(getCatalog(CITY_LIST_CATALOG));
     const citySelectorItems = [{value: NO_FILTER_VALUE, name: 'Любой город'}];

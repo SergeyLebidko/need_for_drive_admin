@@ -48,11 +48,11 @@ function OrderFilters() {
         const defaultCity = searchParams.get(CITY_FILTER_NAME);
         const defaultStatus = searchParams.get(STATUS_FILTER_NAME);
 
-        setSelectedDate(defaultDate ? defaultDate : NO_FILTER_VALUE);
-        setSelectedCar(defaultCar ? defaultCar : NO_FILTER_VALUE);
-        setSelectedCity(defaultCity ? defaultCity : NO_FILTER_VALUE);
-        setSelectedStatus(defaultStatus ? defaultStatus : NO_FILTER_VALUE);
-    }, []);
+        setSelectedDate(defaultDate || NO_FILTER_VALUE);
+        setSelectedCar(defaultCar ||  NO_FILTER_VALUE);
+        setSelectedCity(defaultCity || NO_FILTER_VALUE);
+        setSelectedStatus(defaultStatus || NO_FILTER_VALUE);
+    }, [location]);
 
     // Готовим данные для селектора времени
     const dateSelectorItems = [

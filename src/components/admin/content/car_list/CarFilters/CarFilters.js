@@ -40,7 +40,7 @@ function CarFilters() {
         const defaultPriceMax = params.get(PRICE_MAX_FILTER_NAME);
         const defaultTank = params.get(TANK_FILTER_NAME);
 
-        setSelectedCategory(defaultCategory ? defaultCategory : NO_FILTER_VALUE);
+        setSelectedCategory(defaultCategory || NO_FILTER_VALUE);
         setPriceMin(isWholePositiveOrZero(defaultPriceMin) ? '' + defaultPriceMin : '');
         setPriceMax(isWholePositiveOrZero(defaultPriceMax) ? '' + defaultPriceMax : '');
 
