@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
 import {capitalize} from '../../../../../utils/common_utils';
@@ -11,10 +11,16 @@ function CarCardExtra({car}) {
     const history = useHistory();
     const toCarEditor = () => history.push(`/${ADMIN_APP_URL}/${CAR_EDIT_APP_URL}/${car.id}`);
 
-    const getCategoryDescription = () => car.categoryId ? `${car.categoryId.name} (${car.categoryId.description})` : 'не указана';
-    const getDescription = () => car.description || 'не указано';
-    const getCarTank = () => car.tank ? `${car.tank}%` : 'не указан';
-    const getColors = () => car.colors && car.colors.length > 0 ? car.colors.map(color => capitalize(color)) : ['не указаны'];
+    const getCategoryDescription = useCallback(
+        () => car.categoryId ? `${car.categoryId.name} (${car.categoryId.description})` : 'не указана',
+        [car]
+    );
+    const getColors = useCallback(
+        () => car.colors && car.colors.length > 0 ? car.colors.map(color => capitalize(color)) : ['не указаны'],
+        [car]
+    );
+    const getDescription = useCallback(() => car.description || 'не указано', [car]);
+    const getCarTank = useCallback(() => car.tank ? `${car.tank}%` : 'не указан', [car]);
 
     return (
         <div className="car_card_extra">
