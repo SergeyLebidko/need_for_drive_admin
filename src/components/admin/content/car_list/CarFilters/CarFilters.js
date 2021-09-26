@@ -67,7 +67,6 @@ function CarFilters() {
     };
     const handleTankSelect = value => setSelectedTank(value);
 
-    // Обработчик применения фильтров
     const handleApplyFilters = () => {
         const priceError = 'Допустимы только целые неотрицательные значения';
         const minError = priceMin !== '' && !isWholePositiveOrZero(priceMin);
@@ -83,11 +82,9 @@ function CarFilters() {
             [PRICE_MAX_FILTER_NAME]: priceMax,
             [TANK_FILTER_NAME]: selectedTank
         });
-
         history.push(`/${ADMIN_APP_URL}/${CAR_LIST_APP_URL}/?${params}`);
     }
 
-    // Обработчик сброса фильтров
     const handleResetFilters = () => {
         setSelectedCategory(NO_FILTER_VALUE);
         setPriceMin('');
@@ -95,7 +92,6 @@ function CarFilters() {
         setPriceMax('');
         setPriceMaxError(null);
         setSelectedTank(NO_FILTER_VALUE);
-
         history.push(`/${ADMIN_APP_URL}/${CAR_LIST_APP_URL}/?${PAGE_FILTER_NAME}=0`);
     }
 

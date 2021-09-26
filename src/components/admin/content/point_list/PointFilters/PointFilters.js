@@ -10,7 +10,7 @@ import {
     PAGE_FILTER_NAME
 } from '../../../../../constants/settings';
 import FilterControlBlock from '../../../../common/FilterControlBlock/FilterControlBlock';
-import {extractSearchParams} from '../../../../../utils/common_utils';
+import {createSearchString, extractSearchParams} from '../../../../../utils/common_utils';
 import {ADMIN_APP_URL, POINT_LIST_APP_URL} from '../../../../../constants/urls';
 import './PointFilters.scss';
 
@@ -32,15 +32,10 @@ function PointFilters() {
     const handleCitySelect = value => setSelectedCity(value);
 
     const handleApplyClick = () => {
-        const params = new URLSearchParams(location.search);
-        params.set(PAGE_FILTER_NAME, '0');
-
-        if (selectedCity === NO_FILTER_VALUE) {
-            params.delete(CITY_FILTER_NAME);
-        } else {
-            params.set(CITY_FILTER_NAME, selectedCity);
-        }
-
+        const params = createSearchString({
+            [PAGE_FILTER_NAME]: '0',
+            [CITY_FILTER_NAME]: selectedCity
+        });
         history.push(`/${ADMIN_APP_URL}/${POINT_LIST_APP_URL}?${params}`);
     }
 
