@@ -1,12 +1,17 @@
 @import '../../../../../styles/vars';
 @import '../../../../../styles/common_presets';
 @import '../../../../common/Selector/Selector';
+@import '../../../../common/FilterControlBlock/FilterControlBlock';
 
 .order_filters {
   padding: $step * 2;
   border-bottom: 1px solid $separator-color;
   display: flex;
   flex-direction: column;
+
+  .filter_control_block {
+    margin: $step 0 0 0;
+  }
 
   .selector {
     width: 100%;
@@ -28,11 +33,13 @@
     display: flex;
     flex-direction: column;
   }
+}
 
-  &__control_block {
-    display: flex;
-    flex-direction: column;
-    margin: $step 0 0 0;
+@media (min-width: $tablet-start) {
+  .order_filters {
+    .filter_control_block {
+      margin: 0;
+    }
   }
 }
 
@@ -40,10 +47,6 @@
   .order_filters {
     flex-direction: row;
     justify-content: space-between;
-
-    &__control_block {
-      margin: 0;
-    }
   }
 }
 
@@ -70,11 +73,6 @@
 
     &__selectors_block {
       flex-direction: row;
-    }
-
-    &__control_block {
-      flex-direction: row;
-      margin: 0;
     }
   }
 }

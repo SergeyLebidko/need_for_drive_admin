@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {useLocation, useHistory} from 'react-router-dom';
 import Selector from '../../../../common/Selector/Selector';
+import FilterControlBlock from '../../../../common/FilterControlBlock/FilterControlBlock';
 import {
     NO_FILTER_VALUE,
     PER_DAY,
@@ -132,10 +133,7 @@ function OrderFilters() {
                 <Selector items={citySelectorItems} handleSelect={handleCitySelect} value={selectedCity}/>
                 <Selector items={statusSelectorItems} handleSelect={handleStatusSelect} value={selectedStatus}/>
             </div>
-            <div className="order_filters__control_block">
-                <button className="button button_red" onClick={handleResetFilters}>Сброс</button>
-                <button className="button button_blue" onClick={handleApplyFilters}>Применить</button>
-            </div>
+            <FilterControlBlock handleApply={handleApplyFilters} handleReset={handleResetFilters}/>
         </div>
     );
 }
