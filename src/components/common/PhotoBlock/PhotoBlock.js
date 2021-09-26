@@ -8,12 +8,14 @@ function PhotoBlock({photoPath}) {
 
     useEffect(() => setPath(photoPath), [photoPath]);
 
+    const clearPath = () => setPath(null);
+
     if (path) return (
         <div className="photo_block">
             <img
                 src={path[0] === '/' ? `${DOMEN}${path}` : path}
                 className="photo_block__image"
-                onError={() => setPath(null)}
+                onError={clearPath}
             />
         </div>
     );
