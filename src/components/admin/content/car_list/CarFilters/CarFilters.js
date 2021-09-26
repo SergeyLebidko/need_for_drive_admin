@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 import {useSelector} from 'react-redux';
 import {getCatalog} from '../../../../../store/selectors';
 import {useHistory, useLocation} from 'react-router-dom';
@@ -42,21 +42,27 @@ function CarFilters() {
 
         const hasDefaultTankFind = tankSelectorItems.some(item => item.value === tank);
         setSelectedTank(hasDefaultTankFind ? tank : NO_FILTER_VALUE);
-    }, [location])
+    }, [location]);
 
-    // Готовим данные для селектора категорий
-    const categorySelectorItems = [{value: NO_FILTER_VALUE, name: 'Все категории'}];
-    categoryList.forEach(({id, name}) => categorySelectorItems.push({value: id, name}));
+    // Готовим данные для селекторов категории и уровня топлива
+    const categorySelectorItems = useMemo(() => {
+        return [{value: NO_FILTER_VALUE, name: 'Все категории'}, ...categoryList.map(({id, name}) => ({
+            value: id,
+            name
+        }))];
+    }, [categoryList]);
 
-    // Готовим данные для селектора уровня топлива
-    const tankSelectorItems = [{value: NO_FILTER_VALUE, name: 'Любой уровень топлива'}];
-    for (let level = 10; level <= 100; level += 10) tankSelectorItems.push({
-        value: '' + level,
-        name: `Не менее ${level}%`
-    });
+    const tankSelectorItems = useMemo(() => {
+        const levels = [];
+        for (let level = 10; level <= 100; level += 10) levels.push({
+            value: '' + level,
+            name: `Не менее ${level}%`
+        });
+        return [{value: NO_FILTER_VALUE, name: 'Любой уровень топлива'}, ...levels];
+    }, []);
 
-    // Обработчики выбора/ввода значений
     const handleCategorySelect = value => setSelectedCategory(value);
+    const handleTankSelect = value => setSelectedTank(value);
     const handleChangePriceFrom = event => {
         setPriceMin(event.target.value);
         setPriceMinError(null);
@@ -65,7 +71,6 @@ function CarFilters() {
         setPriceMax(event.target.value);
         setPriceMaxError(null);
     };
-    const handleTankSelect = value => setSelectedTank(value);
 
     const handleApplyFilters = () => {
         const priceError = 'Допустимы только целые неотрицательные значения';
@@ -94,6 +99,7 @@ function CarFilters() {
         setSelectedTank(NO_FILTER_VALUE);
         history.push(`/${ADMIN_APP_URL}/${CAR_LIST_APP_URL}/?${PAGE_FILTER_NAME}=0`);
     }
+
 
     return (
         <div className="car_filters">
