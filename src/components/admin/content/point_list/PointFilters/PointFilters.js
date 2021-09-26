@@ -9,9 +9,10 @@ import {
     NO_FILTER_VALUE,
     PAGE_FILTER_NAME
 } from '../../../../../constants/settings';
+import FilterControlBlock from '../../../../common/FilterControlBlock/FilterControlBlock';
+import {extractSearchParams} from '../../../../../utils/common_utils';
 import {ADMIN_APP_URL, POINT_LIST_APP_URL} from '../../../../../constants/urls';
 import './PointFilters.scss';
-import FilterControlBlock from "../../../../common/FilterControlBlock/FilterControlBlock";
 
 function PointFilters() {
     const [selectedCity, setSelectedCity] = useState(NO_FILTER_VALUE);
@@ -20,9 +21,8 @@ function PointFilters() {
     const location = useLocation();
 
     useEffect(() => {
-        const params = new URLSearchParams(location.search);
-        const defaultCity = params.get(CITY_FILTER_NAME);
-        setSelectedCity(defaultCity || NO_FILTER_VALUE);
+        const [city] = extractSearchParams(location, [CITY_FILTER_NAME]);
+        setSelectedCity(city || NO_FILTER_VALUE);
     }, [location]);
 
     const cityList = useSelector(getCatalog(CITY_LIST_CATALOG));

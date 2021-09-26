@@ -25,8 +25,8 @@ import {
     ORDER_LIST_APP_URL
 } from '../../../../../constants/urls';
 import {getCatalog} from '../../../../../store/selectors';
+import {extractSearchParams} from '../../../../../utils/common_utils';
 import './OrderFilters.scss';
-import {extractSearchParams} from "../../../../../utils/common_utils";
 
 function OrderFilters() {
     const location = useLocation();

@@ -15,7 +15,7 @@ import {
 } from '../../../../../constants/settings';
 import {NO_FILTER_VALUE} from '../../../../../constants/settings';
 import {ADMIN_APP_URL, CAR_LIST_APP_URL} from '../../../../../constants/urls';
-import {isWholePositiveOrZero} from '../../../../../utils/common_utils';
+import {extractSearchParams, isWholePositiveOrZero} from '../../../../../utils/common_utils';
 import './CarFilters.scss';
 
 function CarFilters() {
@@ -33,19 +33,15 @@ function CarFilters() {
 
     // Определяем начальные значения фильтров по параметрам из адресной строки
     useEffect(() => {
-        const params = new URLSearchParams(location.search);
+        const paramNames = [CATEGORY_FILTER_NAME, PRICE_MIN_FILTER_NAME, PRICE_MAX_FILTER_NAME, TANK_FILTER_NAME];
+        const [category, priceMin, priceMax, tank] = extractSearchParams(location, paramNames);
 
-        const defaultCategory = params.get(CATEGORY_FILTER_NAME);
-        const defaultPriceMin = params.get(PRICE_MIN_FILTER_NAME);
-        const defaultPriceMax = params.get(PRICE_MAX_FILTER_NAME);
-        const defaultTank = params.get(TANK_FILTER_NAME);
+        setSelectedCategory(category || NO_FILTER_VALUE);
+        setPriceMin(isWholePositiveOrZero(priceMin) ? '' + priceMin : '');
+        setPriceMax(isWholePositiveOrZero(priceMax) ? '' + priceMax : '');
 
-        setSelectedCategory(defaultCategory || NO_FILTER_VALUE);
-        setPriceMin(isWholePositiveOrZero(defaultPriceMin) ? '' + defaultPriceMin : '');
-        setPriceMax(isWholePositiveOrZero(defaultPriceMax) ? '' + defaultPriceMax : '');
-
-        const hasDefaultTankFind = tankSelectorItems.some(item => item.value === defaultTank);
-        setSelectedTank(hasDefaultTankFind ? defaultTank : NO_FILTER_VALUE);
+        const hasDefaultTankFind = tankSelectorItems.some(item => item.value === tank);
+        setSelectedTank(hasDefaultTankFind ? tank : NO_FILTER_VALUE);
     }, [location])
 
     // Готовим данные для селектора категорий
