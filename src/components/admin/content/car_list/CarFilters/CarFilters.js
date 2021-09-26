@@ -49,7 +49,7 @@ function CarFilters() {
 
     // Готовим данные для селектора категорий
     const categorySelectorItems = [{value: NO_FILTER_VALUE, name: 'Все категории'}];
-    for (const {id, name} of categoryList) categorySelectorItems.push({value: id, name});
+    categoryList.forEach(({id, name}) => categorySelectorItems.push({value: id, name}));
 
     // Готовим данные для селектора уровня топлива
     const tankSelectorItems = [{value: NO_FILTER_VALUE, name: 'Любой уровень топлива'}];
