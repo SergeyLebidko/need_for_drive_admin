@@ -40,7 +40,6 @@ function PointFilters() {
             params.set(CITY_FILTER_NAME, selectedCity);
         }
 
-        console.log(`${ADMIN_APP_URL}/${POINT_LIST_APP_URL}?${params}`)
         history.push(`/${ADMIN_APP_URL}/${POINT_LIST_APP_URL}?${params}`);
     }
 
