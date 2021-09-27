@@ -11,6 +11,8 @@
 
 [ссылка на запущенный сервис](https://hproger.ru/need_for_drive_admin/#/)
 
+Для входа в сервис можно использовать следующую пару лигин/пароль: sergey/sergey. Также можно зарегистрироваться самостоятельно.
+
 ![screenshot](screenshots/screen1.png)
 
 ![screenshot](screenshots/screen2.png)
