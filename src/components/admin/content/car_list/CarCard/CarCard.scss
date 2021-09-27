@@ -1,0 +1,41 @@
+@import '../../../../../styles/vars';
+@import '../../../../common/PhotoBlock/PhotoBlock';
+@import '../CarCardExtra/CarCardExtra';
+
+.car_card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: $step * 2;
+
+  .photo_block {
+    width: 100%;
+  }
+
+  .car_card_extra {
+    margin: $step 0 0 0;
+  }
+}
+
+@media (min-width: $tablet-start) {
+  .car_card {
+    flex-direction: row;
+
+    .photo_block {
+      width: 30%;
+    }
+
+    .car_card_extra {
+      flex: 1;
+      margin: 0 0 0 ($step * 2);
+    }
+  }
+}
+
+@media (min-width: $desktop-min-start) {
+  .car_card {
+    .photo_block {
+      width: 20%;
+    }
+  }
+}

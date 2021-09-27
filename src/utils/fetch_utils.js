@@ -15,7 +15,11 @@ import {
     SALT,
     SALT_SIZE,
     ACCESS_TOKEN,
-    REFRESH_TOKEN
+    REFRESH_TOKEN,
+    CATEGORY_FILTER_NAME,
+    PRICE_MIN_FILTER_NAME,
+    PRICE_MAX_FILTER_NAME,
+    TANK_FILTER_NAME
 } from '../constants/settings';
 import {
     DEFAULT_REQUEST_HEADERS,
@@ -27,7 +31,10 @@ import {
     CHECK_URL,
     REFRESH_URL,
     LOGOUT_URL,
-    REGISTER_URL
+    REGISTER_URL,
+    CAR_CATEGORY_URL,
+    POINT_URL,
+    RATE_URL
 } from '../constants/urls';
 import {extractDateParts, getRandomString} from './common_utils';
 import cookie from 'cookie_js';
@@ -221,14 +228,140 @@ export async function fetchStatusList() {
     return await executeFetch(STATUS_URL);
 }
 
-export async function fetchCarList() {
-    return await executeFetch(CAR_URL);
+export async function fetchCarList(page, categoryId, priceMin, priceMax, tank) {
+    let url = CAR_URL;
+
+    // Учитываем, что номер страницы может быть и равен нулю, поэтому явно проверяем его на значения null и undefined
+    const hasPage = page !== null && page !== undefined;
+    if (hasPage || categoryId || priceMin || priceMax || tank) {
+        const params = new URLSearchParams();
+        params.set(LIMIT_FILTER_NAME, '' + LIMIT);
+
+        if (hasPage) params.set(PAGE_FILTER_NAME, '' + page);
+        if (categoryId) params.set(CATEGORY_FILTER_NAME, '' + categoryId);
+        if (priceMin) params.set(`${PRICE_MIN_FILTER_NAME}[$gte]`, '' + priceMin);
+        if (priceMax) params.set(`${PRICE_MAX_FILTER_NAME}[$lte]`, '' + priceMax);
+        if (tank) params.set(`${TANK_FILTER_NAME}[$gte]`, '' + tank);
+        url = `${url}/?${params}`;
+    }
+
+    return await executeFetch(url);
+}
+
+export async function fetchPointList(page, cityId) {
+    let url = POINT_URL;
+    if (page || page === 0 || cityId) {
+        const params = new URLSearchParams();
+        params.set(LIMIT_FILTER_NAME, '' + LIMIT);
+        if (page || page === 0) params.set(PAGE_FILTER_NAME, page);
+        if (cityId) params.set(CITY_FILTER_NAME, cityId)
+        url += `?${params}`;
+    }
+    return await executeFetch(url);
 }
 
 export async function fetchCityList() {
     return await executeFetch(CITY_URL);
 }
 
+export async function fetchCarCategoryList() {
+    return await executeFetch(CAR_CATEGORY_URL);
+}
+
+export async function fetchRateList() {
+    return await executeFetch(RATE_URL);
+}
+
 export async function fetchUsername() {
     return await executeFetchWithRefresh(check);
+}
+
+export async function fetchOrder(orderId) {
+    return await executeFetchWithRefresh(executeFetch, `${ORDER_URL}/${orderId}`);
+}
+
+export async function removeOrderInBase(orderId) {
+    return await executeFetchWithRefresh(executeFetch, `${ORDER_URL}/${orderId}`, {method: 'DELETE'});
+}
+
+export async function updateOrderInBase(order) {
+    return await executeFetchWithRefresh(
+        executeFetch,
+        `${ORDER_URL}/${order.id}`,
+        {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(order)
+        }
+    );
+}
+
+export async function fetchCar(carId) {
+    return await executeFetch(`${CAR_URL}/${carId}`);
+}
+
+export async function removeCarInBase(carId) {
+    return await executeFetchWithRefresh(executeFetch, `${CAR_URL}/${carId}`, {method: 'DELETE'});
+}
+
+export async function saveCarInBase(car) {
+    const url = car.id ? `${CAR_URL}/${car.id}` : CAR_URL;
+
+    const body = new FormData();
+
+    // Обрабатываем сохранение обязательных полей
+    // Условные операторы используем для более легкого обнаружения ошибок сохранения
+    if (car.thumbnail instanceof File) body.append('thumbnail', car.thumbnail);
+    if (car.name) body.append('name', car.name);
+    if (car.categoryId) body.append('categoryId', car.categoryId.id);
+    if (car.priceMin) body.append('priceMin', car.priceMin);
+    if (car.priceMax) body.append('priceMax', car.priceMax);
+
+    // Обрабатываем сохранение необязательных полей
+    // При этом препятствуем появлению на бэкенде значений "null" или "undefined"
+    ['description', 'number', 'tank'].forEach(field => {
+        if (car[field] === null || car[field] === undefined) {
+            body.append(field, '');
+        } else {
+            body.append(field, car[field]);
+        }
+    });
+
+    // Обрабатываем сохранение массива цветов
+    for (const color of car.colors) body.append('colors', color);
+
+    const method = car.id ? 'PUT' : 'POST';
+    const options = {
+        method,
+        body
+    }
+
+    return await executeFetchWithRefresh(executeFetch, url, options);
+}
+
+export async function fetchPoint(pointId) {
+    return await executeFetch(`${POINT_URL}/${pointId}`);
+}
+
+export async function removePointInBase(pointId) {
+    return await executeFetchWithRefresh(executeFetch, `${POINT_URL}/${pointId}`, {method: 'DELETE'});
+}
+
+export async function savePointInBase(point) {
+    const url = point.id ? `${POINT_URL}/${point.id}` : POINT_URL;
+    const method = point.id ? 'PUT' : 'POST';
+
+    return await executeFetchWithRefresh(
+        executeFetch,
+        url,
+        {
+            method,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(point)
+        }
+    );
 }

@@ -1,9 +1,9 @@
 @import '../../../../../styles/vars';
-@import '../OrderCardPhoto/OrderCardPhoto';
+@import '../../../../common/PhotoBlock/PhotoBlock';
 @import '../OrderCardExtra/OrderCardExtra';
 @import '../OrderCardOptions/OrderCardOptions';
 @import '../OrderCardPrice/OrderCardPrice';
-@import '../OrderControlBlock/OrderControlBlock';
+@import '../../../../common/ListElementControl/ListElementControl';
 
 .order_card {
   display: flex;
@@ -16,7 +16,7 @@
     flex-direction: column;
     margin: 0 0 ($step * 4) 0;
 
-    .order_card_photo {
+    .photo_block {
       width: 100%;
       margin: 0 0 ($step * 2) 0;
     }
@@ -39,7 +39,7 @@
       margin: ($step * 2) 0;
     }
 
-    .order_control_block {
+    .list_element_control {
       width: 100%;
       display: flex;
       justify-content: center;
@@ -53,7 +53,7 @@
       flex-direction: row;
       margin-bottom: $step * 4;
 
-      .order_card_photo {
+      .photo_block {
         flex: 1;
       }
 
@@ -76,7 +76,7 @@
         margin: 0;
       }
 
-      .order_control_block {
+      .list_element_control {
         flex: 1;
         justify-content: flex-end;
       }
@@ -92,7 +92,7 @@
       flex-direction: row;
       flex: 4;
 
-      .order_card_photo {
+      .photo_block {
         flex: 1;
       }
 
@@ -116,7 +116,7 @@
         margin: 0;
       }
 
-      .order_control_block {
+      .list_element_control {
         flex: 1;
         justify-content: flex-end;
       }

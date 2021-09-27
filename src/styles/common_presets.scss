@@ -1,5 +1,49 @@
 @import './vars';
 
+// Пресет для блоков с контентом (список заказов, список машин и т.д.)
+@mixin content_mixin {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: $step * 2;
+  overflow: auto;
+
+  @media (min-width: $tablet-start) {
+    padding: $step * 4;
+  }
+
+  &::-webkit-scrollbar {
+    width: $step;
+    height: $step;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $gray-light;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: $gray;
+  }
+
+  &__caption {
+    font-size: 1.5em;
+    margin-bottom: $step * 2;
+
+    @media (min-width: $tablet-start) {
+      font-size: 2.5em;
+      margin-bottom: $step * 4;
+    }
+  }
+
+  &__content {
+    box-shadow: $main-shadow;
+    background-color: $white;
+    border-radius: $main-radius;
+  }
+}
+
 // Пресет для форм (логин, регистрация и т.п.)
 .form {
   background: $white;
@@ -10,7 +54,7 @@
   padding: $step * 2;
 }
 
-// Стили для полей ввода
+// Стили для полей ввода и селекторов
 .text_input {
   width: 100%;
   outline: none;
@@ -20,9 +64,36 @@
   padding: $step ($step * 2);
 }
 
-.text_input_error {
+.select_input {
+  appearance: none;
+  position: relative;
+  border: 1px solid $gray-light;
+  border-radius: $small-radius;
+  background-color: $white;
+  padding: $step ($step * 4) $step ($step * 2);
+  outline: none;
+  color: $gray;
+  background-image: url('../content/images/selector.svg');
+  background-repeat: no-repeat;
+  background-position: 90% 50%;
+  font-size: 1em;
+  width: 100%;
+}
+
+.select_option {
+  font-size: 1em;
+  color: $gray;
+}
+
+.text_input_error, .select_input_error, .file_input_error {
   border: 0.5px solid $red;
   box-shadow: $error_shadow;
+}
+
+.text_input_error_text, .select_input_error_text, .file_input_error_text {
+  color: $red;
+  margin-left: $step * 2;
+  font-size: 0.8em;
 }
 
 // Стили для обычных кнопок
@@ -68,6 +139,19 @@
 
   &:active {
     background-color: $red-high-light;
+  }
+}
+
+.button_silver {
+  background-color: $silver;
+  color: $black;
+
+  &:hover {
+    background-color: $silver-light;
+  }
+
+  &:active {
+    background-color: $silver-high-light;
   }
 }
 

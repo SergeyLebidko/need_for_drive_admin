@@ -1,0 +1,54 @@
+@import '../../../styles/vars';
+@import '../../../styles/common_presets';
+
+.editor_control_block {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  .button + .button {
+    margin-top: $step;
+  }
+}
+
+@media (min-width: $tablet-start) {
+  .editor_control_block {
+    flex-direction: row;
+
+    .button + .button {
+      margin-top: 0;
+    }
+
+    .button:nth-child(2) {
+      margin-left: $step;
+    }
+
+    .button:nth-child(3) {
+      margin-left: auto;
+    }
+  }
+}
+
+@media (min-width: $tablet-start) and (max-width: $tablet-end) {
+  .editor_control_block {
+    .button {
+      width: 12em;
+    }
+  }
+}
+
+@media (min-width: $desktop-min-start) and (max-width: $desktop-min-end) {
+  .editor_control_block {
+    .button {
+      width: 13em;
+    }
+  }
+}
+
+@media (min-width: $desktop-start) {
+  .editor_control_block {
+    .button {
+      width: 15em;
+    }
+  }
+}

@@ -1,0 +1,49 @@
+@import '../../../styles/vars';
+
+.popup_message {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 0;
+  width: 100%;
+  z-index: 100;
+  transition: all 200ms;
+  overflow: hidden;
+
+  &__text {
+    color: $white;
+    margin-right: auto;
+  }
+
+  svg {
+    width: 1em;
+    height: 1em;
+    margin-right: $step;
+    cursor: pointer;
+  }
+
+  svg path {
+    stroke: $white;
+    fill: $white;
+  }
+}
+
+.success_message {
+  background-color: $green;
+}
+
+.fail_message {
+  background-color: $red;
+}
+
+.popup_message_visible {
+  height: initial;
+  padding: $step * 2;
+}
+
+@media (min-width: $tablet-start) {
+  .popup_message_visible {
+    padding: ($step * 2) ($step * 4);
+  }
+}

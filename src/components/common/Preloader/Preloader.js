@@ -12,7 +12,7 @@ function Preloader({fullscreen}) {
         dots.push(<div key={index} className={`preloader__dot-${index + 1}`}/>);
     }
 
-    const preloaderClasses = classNames('preloader', {'fullscreen': fullscreen});
+    const preloaderClasses = classNames('preloader', {'preloader_fullscreen': fullscreen});
 
     return (
         <div className={preloaderClasses}>

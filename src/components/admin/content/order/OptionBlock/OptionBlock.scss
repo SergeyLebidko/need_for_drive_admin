@@ -1,0 +1,11 @@
+@import '../../../../../styles/vars';
+@import '../../../../common/CheckBox/CheckBox';
+
+.option_block {
+  display: flex;
+  flex-direction: column;
+
+  .check_box + .check_box {
+    margin-top: $step;
+  }
+}

@@ -1,0 +1,100 @@
+@import '../../../../../styles/vars';
+@import '../../../../common/ListElementControl/ListElementControl';
+@import '../../../../common/LineIndicator/LineIndicator';
+
+.car_card_extra {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+
+  .list_element_control {
+    margin-top: $step * 2;
+  }
+
+  &__name {
+    font-size: 1.1em;
+    padding-bottom: $step;
+    border-bottom: 1px dashed $separator-color;
+  }
+
+  &__number {
+    display: inline-block;
+    padding: 4px 10px;
+    border: 1px solid $black;
+    border-radius: 2px;
+    box-shadow: $main-shadow;
+    align-self: flex-start;
+    margin: 0 0 $step 0;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    margin-top: $step * 2;
+
+    article {
+      display: flex;
+      flex-direction: column;
+    }
+
+    article + article {
+      margin: ($step * 1.2) 0 0 0;
+    }
+  }
+
+  &__normal_text {
+    color: $gray;
+  }
+
+  &__strong_text {
+    color: $black;
+  }
+
+  &__normal_text, &__strong_text, &__number {
+    font-size: 0.9em;
+  }
+}
+
+@media (min-width: $tablet-start) {
+  .car_card_extra {
+    &__name {
+      font-size: 1.4em;
+    }
+  }
+}
+
+@media (min-width: $desktop-start) {
+  .car_card_extra {
+    .list_element_control {
+      margin-top: 0;
+    }
+
+    &__name {
+      font-size: 1.7em;
+    }
+
+    .line_indicator {
+      max-width: $step * 40;
+    }
+
+    &__number {
+      margin: 0 0 0 3px;
+    }
+
+    &__content {
+      flex-direction: row;
+
+      article {
+        display: block;
+      }
+
+      section {
+        flex: 1;
+      }
+
+      section + section {
+        margin: 0 ($step * 2) 0 $step;
+      }
+    }
+  }
+}

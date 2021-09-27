@@ -1,0 +1,44 @@
+@import '../../../../../styles/vars';
+@import '../../../../../styles/common_presets';
+@import '../CarInfo/CarInfo';
+
+.car_photo_chooser {
+  padding: $step * 2;
+
+  input[type=file] {
+    display: none;
+  }
+
+  .car_info {
+    margin: $step * 2;
+  }
+
+  &__file_selector {
+    margin: ($step * 2) 0 0 0;
+    display: flex;
+    border-radius: $small-radius;
+  }
+
+  &__file_name {
+    flex: 1;
+    border-top: 1px solid $gray-light;
+    border-left: 1px solid $gray-light;
+    border-bottom: 1px solid $gray-light;
+    border-radius: $small-radius 0 0 $small-radius;
+    padding: $step ($step * 2);
+    color: $gray;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__file_choose {
+    border: 1px solid $gray-light;
+    border-radius: 0 $small-radius $small-radius 0;
+    padding: $step ($step * 2);
+    background-color: $main-background;
+  }
+
+  &__file_name, &__file_choose {
+    cursor: pointer;
+  }
+}

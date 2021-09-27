@@ -1,0 +1,160 @@
+@import '../../../../../styles/vars';
+@import '../../../../../styles/common_presets';
+@import '../CarPhotoChooser/CarPhotoChooser';
+@import '../CarTankViewer/CarTankViewer';
+@import '../CarDescription/CarDescription';
+@import '../CarColors/CarColors';
+@import '../../../../common/EditorControlBlock/EditorControlBlock';
+
+.car {
+  @include content_mixin;
+
+  .editor_control_block {
+    margin-top: $step * 8;
+  }
+
+  .car_photo_chooser, {
+    border-bottom: 1px solid $separator-color;
+    border-right: none;
+  }
+
+  .car_tank_viewer {
+    border-bottom: 1px solid $separator-color;
+  }
+
+  .car_description {
+    flex: 1;
+  }
+
+  .car_colors {
+    margin-top: $step * 3;
+  }
+
+  &__content_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__content + &__content {
+    margin: ($step * 2) 0 0 0;
+  }
+
+  &__first_content_block {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &__second_content_block {
+    padding: $step * 2;
+    width: 100%;
+  }
+
+  &__description_block {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &__settings_caption {
+    font-size: 1.2em;
+  }
+
+  &__settings_block {
+    display: flex;
+    flex-direction: column;
+    margin-top: $step * 3;
+
+    > div + div {
+      margin: ($step * 3) 0 0 0;
+    }
+  }
+}
+
+@media (min-width: $tablet-start) and (max-width: $desktop-min-end) {
+  .car {
+    .car_photo_chooser {
+      flex: 1;
+      border-bottom: none;
+      border-right: 1px solid $separator-color;
+    }
+
+    &__description_block {
+      flex: 1;
+    }
+
+    &__first_content_block {
+      flex-direction: row;
+    }
+  }
+}
+
+@media (min-width: $tablet-start) {
+  .car {
+    .editor_control_block {
+      margin-top: $step * 12;
+    }
+
+    &__settings_block {
+      flex-direction: row;
+
+      > div + div {
+        margin: 0 0 0 $step;
+      }
+    }
+  }
+}
+
+@media (min-width: $desktop-start) {
+  .car {
+    &__content_wrapper {
+      flex-direction: row;
+    }
+
+    &__content + &__content {
+      margin: 0 0 0 ($step * 2);
+    }
+
+    &__first_content_block {
+      width: $step * 45;
+    }
+
+    &__second_content_block {
+      flex: 1;
+      max-width: $step * 105;
+    }
+  }
+}
+
+@media (min-width: $desktop-full) {
+  .car {
+    &__first_content_block {
+      width: $step * 55;
+    }
+  }
+}
+
+@media (min-width: $tablet-start) and (max-width: $tablet-end) {
+  .car {
+    .selector, .text_field, .car_colors {
+      width: 12em;
+    }
+  }
+}
+
+@media (min-width: $desktop-min-start) and (max-width: $desktop-min-end) {
+  .car {
+    .selector, .text_field, .car_colors {
+      width: 13em;
+    }
+  }
+}
+
+@media (min-width: $desktop-start) {
+  .car {
+    .selector, .text_field, .car_colors {
+      width: 15em;
+    }
+  }
+}

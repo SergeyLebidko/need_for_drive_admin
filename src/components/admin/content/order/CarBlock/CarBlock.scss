@@ -1,0 +1,68 @@
+@import '../../../../../styles/vars';
+@import '../../../../common/Selector/Selector';
+@import '../../../../common/CatalogSelector/CatalogSelector';
+@import '../../../../common/PhotoBlock/PhotoBlock';
+
+.car_block {
+  &__selectors {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .catalog_selector + .selector {
+    margin: $step 0 0 0;
+  }
+
+  .photo_block {
+    margin-top: $step * 2;
+  }
+}
+
+
+@media (min-width: $tablet-start) and (max-width: $tablet-end) {
+  .car_block {
+    .catalog_selector, .selector {
+      width: 12em;
+    }
+
+    .photo_block {
+      max-width: calc(24em + 8px);
+    }
+  }
+}
+
+@media (min-width: $desktop-min-start) and (max-width: $desktop-min-end) {
+  .car_block {
+    .catalog_selector, .selector {
+      width: 13em;
+    }
+
+    .photo_block {
+      max-width: calc(26em + 8px);
+    }
+  }
+}
+
+@media (min-width: $desktop-start) {
+  .car_block {
+    .catalog_selector, .selector {
+      width: 15em;
+    }
+
+    .photo_block {
+      max-width: calc(30em + 8px);
+    }
+  }
+}
+
+@media (min-width: $tablet-start) {
+  .car_block {
+    &__selectors {
+      flex-direction: row;
+    }
+
+    .catalog_selector + .selector {
+      margin: 0 0 0 $step;
+    }
+  }
+}

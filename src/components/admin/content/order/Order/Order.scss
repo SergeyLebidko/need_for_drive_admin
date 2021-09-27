@@ -1,0 +1,64 @@
+@import '../../../../../styles/vars';
+@import '../../../../../styles/common_presets';
+@import '../../../../common/EditorControlBlock/EditorControlBlock';
+@import '../../../../common/Selector/Selector';
+@import '../../../../common/TextField/TextField';
+
+.order {
+  @include content_mixin;
+
+  .editor_control_block {
+    margin-top: $step * 8;
+  }
+
+  &__content {
+    padding: $step * 2;
+    max-width: $step * 105;
+  }
+
+  &__settings_block {
+    > div + div {
+      margin-top: $step * 3;
+    }
+  }
+
+  &__caption {
+    font-size: 1.2em;
+  }
+}
+
+@media (min-width: $tablet-start) {
+  .order {
+    .editor_control_block {
+      margin-top: $step * 12;
+    }
+
+    &__caption {
+      font-size: 2.5em;
+    }
+  }
+}
+
+@media (min-width: $tablet-start) and (max-width: $tablet-end) {
+  .order {
+    .selector, .text_field {
+      width: 12em;
+    }
+  }
+}
+
+@media (min-width: $desktop-min-start) and (max-width: $desktop-min-end) {
+  .order {
+    .selector, .text_field {
+      width: 13em;
+    }
+  }
+}
+
+@media (min-width: $desktop-start) {
+  .order {
+    .selector, .text_field {
+      width: 15em;
+    }
+  }
+}

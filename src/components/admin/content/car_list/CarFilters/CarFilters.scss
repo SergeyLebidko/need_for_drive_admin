@@ -1,0 +1,62 @@
+@import '../../../../../styles/vars';
+@import '../../../../../styles/common_presets';
+@import '../../../../common/TextField/TextField';
+@import '../../../../common/Selector/Selector';
+@import '../../../../common/FilterControlBlock/FilterControlBlock';
+
+.car_filters {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: $step * 2;
+  border-bottom: 1px solid $separator-color;
+
+  .filter_control_block {
+    margin: $step 0 0 0;
+  }
+
+  &__conditions {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .button + .button, .text_field + .text_field, .selector + .text_field, .text_field + .selector {
+    margin: $step 0 0 0;
+  }
+}
+
+@media (min-width: $tablet-start) {
+  .car_filters {
+    flex-direction: row;
+    justify-content: space-between;
+
+    .filter_control_block {
+      margin: 0 0 0 $step;
+    }
+
+    &__conditions {
+      min-width: 25em;
+    }
+  }
+}
+
+@media (min-width: $desktop-start) {
+  .car_filters {
+    &__conditions, &__control {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    .selector {
+      width: 15em;
+    }
+
+    .button {
+      width: 12em;
+    }
+
+    .button + .button, .text_field + .text_field, .selector + .text_field, .text_field + .selector {
+      margin: 0 0 0 $step;
+    }
+  }
+}

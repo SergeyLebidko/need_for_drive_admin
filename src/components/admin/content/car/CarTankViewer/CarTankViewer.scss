@@ -1,0 +1,15 @@
+@import '../../../../../styles/vars';
+
+.car_tank_viewer {
+  padding: $step * 2;
+
+  &__value_block {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $step;
+
+    span {
+      color: $gray;
+    }
+  }
+}

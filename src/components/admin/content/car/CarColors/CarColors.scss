@@ -1,0 +1,42 @@
+@import '../../../../../styles/vars';
+@import '../../../../common/TextField/TextField';
+
+.car_colors {
+  width: 100%;
+
+  &__input_block {
+    display: flex;
+    align-items: flex-start;
+
+    button {
+      margin-left: $step;
+      padding: 3px 9px;
+      position: relative;
+      top: 19px;
+      font-size: 1.5em;
+      background-color: $white;
+      color: $gray-light;
+      border: 1px solid $gray-light;
+      border-radius: $small-radius;
+      cursor: pointer;
+
+      &:hover {
+        color: $gray;
+        border: 1px solid $gray;
+      }
+
+      &:active {
+        color: $black;
+        border: 1px solid $black;
+      }
+    }
+  }
+
+  &__colors_block {
+    margin-top: $step * 2;
+
+    li + li {
+      margin-top: $step;
+    }
+  }
+}

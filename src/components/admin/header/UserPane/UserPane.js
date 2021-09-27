@@ -1,13 +1,13 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import classNames from 'classnames';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import {ReactComponent as DownArrow} from '../../../../content/images/down.svg';
 import userPicture from '../../../../content/images/user.jpeg';
 import {getUsername} from '../../../../store/selectors';
 import {logout} from '../../../../utils/fetch_utils';
 import {LOGIN_APP_URL} from '../../../../constants/urls';
-import {setPreloader, setError} from '../../../../store/actionCreators';
+import {useGlobalPreloader, useGlobalError} from '../../../../store/hooks';
 import './UserPane.scss';
 
 function UserPane() {
@@ -16,11 +16,11 @@ function UserPane() {
     const history = useHistory();
     const popupTimer = useRef(null);
 
-    const dispatch = useDispatch();
-    const showPreloader = () => dispatch(setPreloader(true));
-    const hidePreloader = () => dispatch(setPreloader(false));
-    const showError = (description, handler) => dispatch(setError({description, handler}));
-    const hideError = () => dispatch(setError(false));
+    const [showGlobalPreloader, hideGlobalPreloader] = useGlobalPreloader();
+    const [showGlobalError, hideGlobalError] = useGlobalError();
+
+    // При размонтировании - сбрасываем таймер, чтобы предотвратить попытку обновления уже размонтированного компонента
+    useEffect(() => () => clearTimeout(popupTimer.current), []);
 
     const handleElementClick = () => setHasPopup(oldVal => !oldVal);
 
@@ -32,11 +32,11 @@ function UserPane() {
     const handlePaneOver = () => clearTimeout(popupTimer.current);
 
     const handleLogoutClick = () => {
-        showPreloader();
+        showGlobalPreloader();
         logout()
             .then(() => history.push(`/${LOGIN_APP_URL}`))
-            .catch(err => showError(err, hideError))
-            .finally(hidePreloader);
+            .catch(err => showGlobalError(err, hideGlobalError))
+            .finally(hideGlobalPreloader);
     }
 
     const popupClasses = classNames('user_pane__popup', {'visible_popup': hasPopup});
